@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "note": "Filled at BEM-B02. One entry per bundled dataset: id, name, source_url, license, license_url. Rendered in-app on the attribution screen; the ODbL share-alike question for OSM-derived data gets its ADR there.",
+  "datasets": []
+}

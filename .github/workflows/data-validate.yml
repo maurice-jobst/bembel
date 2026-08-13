@@ -1,0 +1,24 @@
+name: Data validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/**"
+      - "scripts/**"
+      - "Packages/BEMBELKit/Sources/BEMBELKit/Resources/**"
+      - ".github/workflows/data-validate.yml"
+  pull_request:
+    paths:
+      - "data/**"
+      - "scripts/**"
+      - "Packages/BEMBELKit/Sources/BEMBELKit/Resources/**"
+      - ".github/workflows/data-validate.yml"
+
+jobs:
+  validate:
+    name: Schema validation (stdlib only, no pip)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/validate_data.py
