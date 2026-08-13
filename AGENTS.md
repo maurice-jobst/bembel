@@ -10,10 +10,16 @@ No backend, no third-party dependencies, no analytics, German-first strings.
 
 ## Locked decisions — do not relitigate
 
-See docs/KICKOFF-PROMPT.md for the full list. Highlights: v1.0 is exactly five
-features (RMV departures + widgets, Schattenkarte, drinking water, rain radar,
-Stadtzustand); ship 22 March 2027; datasets bundled + refreshed via
-conditional GET; bundle ID prefix `de.mauricejobst`; MIT code licence.
+See docs/superpowers/specs/2026-08-13-hero-repositioning-design.md for the
+current scope (the original kickoff prompt is archived at
+docs/history/2026-06-kickoff-prompt.md). Highlights: the hero is the
+bembel-data community layer (Wasserhäuschen + Ebbelwei registers, rating
+funnel, provenance UX, data-linked stickers + kiosk visit stamps); v1.0 also
+ships the five original features (RMV departures + widgets, Schattenkarte,
+drinking water, rain radar, Stadtzustand) at full strength; ship 22 March
+2027; datasets bundled + refreshed via conditional GET; bundle ID prefix
+`de.mauricejobst`; MIT code licence; selection principles are data readiness
+first and AI-native development (ADR 0008).
 Decisions with rationale live in docs/adr/ — read before proposing changes to
 anything they cover.
 
