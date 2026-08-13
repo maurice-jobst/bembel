@@ -11,17 +11,44 @@ The App Store privacy label says "Data Not Collected" and it is true.
 Named after the Apfelwein jug: grey salt-glazed stoneware, cobalt diamond
 relief.
 
-## v1.0 — five features, nothing else
+## The hero: community data, wie Yelp — nur in GitHub
+
+BEMBEL's flagship is the **Wasserhäuschen-Register** (plus the
+**Ebbelwei-Wirtschaften register**), powered by
+[bembel-data](https://github.com/maurice-jobst/bembel-data):
+community-maintained datasets where entries and ratings are pull requests.
+
+- **Provenance over anonymity.** Every entry shows who verified it, when,
+  from which source — one tap to its full GitHub history. No anonymous
+  star soup.
+- **Ratings you can trust.** One rating per GitHub account, enforced by CI
+  (the rating file's name must match the PR author's login). As far as we
+  can tell, nobody has built this trust model out of GitHub primitives
+  before.
+- **The app is the funnel.** "Bewerten" in the app opens a prefilled
+  GitHub flow for that kiosk; contributors earn in-app sticker credit
+  (Datenspender) — no BEMBEL accounts, no backend, the privacy label
+  stays "Data Not Collected".
+
+Built mostly by AI, reviewed by humans — see
+[ADR 0008](docs/adr/0008-ai-native-selection-principle.md) for how that
+shapes technical choices.
+
+## v1.0
 
 | Feature | Data source |
 |---|---|
+| **Wasserhäuschen-Register** — ratings, Merkmale, provenance, rating funnel, coverage game | [bembel-data](https://github.com/maurice-jobst/bembel-data) (community, ODbL) |
+| **Ebbelwei-Wirtschaften register** | [bembel-data](https://github.com/maurice-jobst/bembel-data) |
+| Sticker — Datenspender/Verifizierer/Erste-Bewertung + Kiosk-Stempel | contributors.json + on-device visits |
 | RMV departures + Home/Lock Screen widgets | RMV Open Data API |
-| **Schattenkarte** — on-device shadow map with time scrubbing | Hessen LoD2 building model (DL-DE Zero) |
+| Schattenkarte — on-device shadow map with time scrubbing | Hessen LoD2 building model (DL-DE Zero) |
 | Free drinking water, with seasonal state engine | Frankfurt Geoportal, OSM, Refill |
-| Rain radar | DWD open data |
+| Rain radar | DWD open data (RADOLAN, parsed on-device) |
 | Stadtzustand — Main level, air quality, civil warnings | PEGELONLINE, HLNUG, NINA |
 
-Ship target: 22 March 2027 (World Water Day).
+Ship target: 22 March 2027 (World Water Day). Scope of record:
+[hero-repositioning spec](docs/superpowers/specs/2026-08-13-hero-repositioning-design.md).
 
 ## Architecture
 
@@ -64,12 +91,12 @@ runs natively on any machine and in CI without booting a simulator.
 
 ## Beyond 1.0
 
-v1.0 stays five features. The horizon is
+The horizon is
 [epic S — side quests](https://github.com/maurice-jobst/bembel/issues?q=label%3Aepic%3AS):
-a sticker album for visited hotspots, GrünGürtel walks, Wasserhäuschen and
-Ebbelwei registers fed by a community data repo
-([bembel-data](https://github.com/maurice-jobst/bembel-data) — reviews as
-pull requests), Baumkataster, Stolpersteine, and more.
+the full Sticker-Sammelalbum (city-hotspot geofences, Game Center, seasonal
+drops — the data-linked stickers ship in 1.0), GrünGürtel walks,
+Baumkataster, Stolpersteine, Blaulicht-Archiv, and more. English
+localization is v1.1.
 
 ## Team
 
