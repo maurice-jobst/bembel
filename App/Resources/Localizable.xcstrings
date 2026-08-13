@@ -146,7 +146,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kostenlos. Keine Werbung, kein Tracking, keine Konten, kein Backend."
+            "value": "Kostenlos. Keine Werbung, kein Tracking, kein eigenes Backend."
           }
         }
       }
@@ -346,7 +346,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Keine Konten, kein Tracking, kein Backend."
+            "value": "Kein Tracking, keine Werbung, kein eigenes Backend."
           }
         }
       }

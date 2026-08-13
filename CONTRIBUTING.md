@@ -13,9 +13,11 @@ Small team, strict habits. This file is the working agreement.
   yourself, comment, and close it via your PR (`Closes #N`) rather than
   editing BACKLOG.md's status. If they ever disagree, BACKLOG.md wins for
   scope/ACs, the issue wins for current status.
-- Issues carry an `epic:X` label, a `size:S/M/L` label, and a milestone
-  (M0–M3, matching BACKLOG.md's windows). `needs-decision`, `blocked`, and
-  `learning-goal` show up where BACKLOG.md flags them.
+- Issues carry an `epic:X` label, a `size:S/M/L` label, a lane label
+  (`area:app` / `area:data`), and a milestone (M0–M3 for v1.0, M4 for
+  post-1.0 side quests). `needs-decision`, `blocked`, and `learning-goal`
+  show up where BACKLOG.md flags them. Issue bodies are self-contained
+  briefs — pick one from your lane, assign yourself, start.
 - Locked product decisions are in
   [docs/KICKOFF-PROMPT.md](docs/KICKOFF-PROMPT.md) — don't relitigate them in
   PRs or issues.
@@ -34,6 +36,12 @@ Small team, strict habits. This file is the working agreement.
   `Config/Secrets.xcconfig` (gitignored); CI injects them from repository
   secrets. If you find a credential in a diff, stop the merge.
 - All user-facing strings go through `Localizable.xcstrings`, German first.
+- **Views never call a data source.** Features read the provider protocols in
+  `Packages/BEMBELKit` ([ADR 0007](docs/adr/0007-provider-seam.md)); live
+  implementations replace the `Sample…Provider`s behind the same protocol.
+  Changing a protocol is a cross-lane API change — both lanes review.
+- `make format` before pushing; CI runs `make format-check` (swift-format is
+  bundled with Xcode, nothing to install).
 - Tests where they earn their keep: data layer, region filter, decoders,
   deep-link parsing. Not SwiftUI view bodies.
 - Every curated data row carries a source URL, and payloads store facts only —
@@ -42,10 +50,12 @@ Small team, strict habits. This file is the working agreement.
 
 ## Lanes
 
-- **App lane** (frontend): `App/`, `Widgets/`, `Packages/BEMBELKit/`
-- **Data lane** (backend): `data/`, `scripts/`, `.github/`, and later the
-  LoD2 pipeline and operator-dataset harness
-- **Docs & decisions** (PM): `docs/`, backlog, ADR review
+- **App lane** (frontend, @cybeerboy): `App/`, `Widgets/`
+- **Data lane** (backend, @jaypikay + @monsdroid): `data/`, `scripts/`,
+  `.github/`, and later the LoD2 pipeline and operator-dataset harness
+- **Shared seam** (all): `Packages/BEMBELKit/` — domain models, provider
+  protocols, design system
+- **Docs & decisions** (PM, @maurice-jobst): `docs/`, backlog, ADR review
 
 Lanes are default ownership, not walls — cross-lane PRs just need the lane
 owner's review.

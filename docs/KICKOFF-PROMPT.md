@@ -8,7 +8,9 @@ You are helping me build **BEMBEL**, a free iPhone city app for the Frankfurt / 
 
 ## What it is
 
-A "city super app": open data that already exists but is unusable in practice, made accessible in one place. Modeled on the Franzbrötchen Hamburg Guide (a one-person iOS app). Free, no ads, no tracking, no accounts, no backend. Name is the Apfelwein jug — grey salt-glazed stoneware, cobalt diamond relief.
+A "city super app": open data that already exists but is unusable in practice, made accessible in one place. Modeled on the Franzbrötchen Hamburg Guide (a one-person iOS app). Free, no ads, no tracking, no BEMBEL backend and no BEMBEL accounts (Apple
+services and GitHub participation are opt-in — wording revised 2026-08-13,
+"no accounts" was never a locked decision). Name is the Apfelwein jug — grey salt-glazed stoneware, cobalt diamond relief.
 
 This is a portfolio and learning project. Optimise for **shipping something polished and distinctive**, not for feature count.
 
