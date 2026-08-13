@@ -3,13 +3,13 @@ import SwiftUI
 import WidgetKit
 
 /// Home-Screen departures: small (next departure large, two follow-ups) and
-/// medium (three-row board). Entries are sample fixtures until BEM-C04 wires
-/// the shared RMV provider through the App Group.
+/// medium (three-row board). Entries come from the kit's sample fixtures
+/// until BEM-C04 wires the shared RMV provider through the App Group.
 struct DeparturesWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(
             kind: "de.mauricejobst.bembel.departures",
-            provider: DeparturesProvider()
+            provider: DeparturesTimelineProvider()
         ) { entry in
             DeparturesWidgetView(entry: entry)
                 .containerBackground(BEMColor.saltGlaze, for: .widget)
@@ -21,33 +21,20 @@ struct DeparturesWidget: Widget {
 }
 
 struct DepartureEntry: TimelineEntry {
-    struct Row {
-        let line: String
-        let sBahn: Bool
-        let uBahn: Bool
-        let destination: String
-        let minutes: Int
-        let delayed: Bool
-    }
-
     let date: Date
-    let station: String
-    let distance: String
-    let rows: [Row]
+    let station: Station
+    let departures: [Departure]
 
-    static let sample = DepartureEntry(
-        date: .now,
-        station: "Willy-Brandt-Platz",
-        distance: "120 m",
-        rows: [
-            Row(line: "S8", sBahn: true, uBahn: false, destination: "Wiesbaden Hbf", minutes: 3, delayed: false),
-            Row(line: "S9", sBahn: true, uBahn: false, destination: "Hanau Hbf", minutes: 6, delayed: true),
-            Row(line: "U1", sBahn: false, uBahn: true, destination: "Südbahnhof", minutes: 7, delayed: false),
-        ]
-    )
+    static var sample: DepartureEntry {
+        DepartureEntry(
+            date: .now,
+            station: SampleDeparturesProvider.stations[0],
+            departures: SampleDeparturesProvider.board.departures
+        )
+    }
 }
 
-struct DeparturesProvider: TimelineProvider {
+struct DeparturesTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> DepartureEntry {
         .sample
     }
@@ -76,9 +63,9 @@ struct DeparturesWidgetView: View {
         VStack(alignment: .leading, spacing: 7) {
             header(showDistance: false)
 
-            if let next = entry.rows.first {
+            if let next = entry.departures.first {
                 HStack(alignment: .firstTextBaseline, spacing: 7) {
-                    WidgetLineBadge(row: next)
+                    WidgetLineBadge(line: next.line, kind: next.kind)
                     Text(verbatim: "\(next.minutes)′")
                         .font(BEMFont.boardLarge)
                         .foregroundStyle(next.delayed ? BEMColor.caution : BEMColor.ink)
@@ -93,13 +80,13 @@ struct DeparturesWidgetView: View {
             Spacer(minLength: 0)
 
             VStack(alignment: .leading, spacing: 3) {
-                ForEach(entry.rows.dropFirst().prefix(2), id: \.line) { row in
+                ForEach(entry.departures.dropFirst().prefix(2)) { departure in
                     HStack(spacing: 6) {
-                        Text(verbatim: row.line)
+                        Text(verbatim: departure.line)
                             .frame(width: 26, alignment: .leading)
-                        Text(verbatim: "\(row.minutes)′")
-                            .foregroundStyle(row.delayed ? BEMColor.caution : BEMColor.inkSecondary)
-                        Text(verbatim: row.destination)
+                        Text(verbatim: "\(departure.minutes)′")
+                            .foregroundStyle(departure.delayed ? BEMColor.caution : BEMColor.inkSecondary)
+                        Text(verbatim: departure.destination)
                             .lineLimit(1)
                     }
                     .font(.caption.monospacedDigit())
@@ -120,20 +107,21 @@ struct DeparturesWidgetView: View {
             }
 
             VStack(spacing: 0) {
-                ForEach(Array(entry.rows.prefix(3).enumerated()), id: \.element.line) { index, row in
+                let rows = Array(entry.departures.prefix(3))
+                ForEach(Array(rows.enumerated()), id: \.element.id) { index, departure in
                     HStack(spacing: 9) {
-                        WidgetLineBadge(row: row)
-                        Text(verbatim: row.destination)
+                        WidgetLineBadge(line: departure.line, kind: departure.kind)
+                        Text(verbatim: departure.destination)
                             .font(.footnote)
                             .foregroundStyle(BEMColor.ink)
                             .lineLimit(1)
                         Spacer()
-                        Text(verbatim: "\(row.minutes)′")
+                        Text(verbatim: "\(departure.minutes)′")
                             .font(.subheadline.weight(.semibold).monospacedDigit())
-                            .foregroundStyle(row.delayed ? BEMColor.caution : BEMColor.ink)
+                            .foregroundStyle(departure.delayed ? BEMColor.caution : BEMColor.ink)
                     }
                     .padding(.vertical, 5)
-                    if index < min(entry.rows.count, 3) - 1 {
+                    if index < rows.count - 1 {
                         Divider().overlay(BEMColor.glazeLine)
                     }
                 }
@@ -142,11 +130,14 @@ struct DeparturesWidgetView: View {
     }
 
     private func header(showDistance: Bool) -> some View {
-        HStack(spacing: 5) {
+        let title = [entry.station.name, showDistance ? entry.station.distanceLabel : nil]
+            .compactMap { $0 }
+            .joined(separator: " · ")
+        return HStack(spacing: 5) {
             Image(systemName: "tram.fill")
                 .font(.caption2)
                 .foregroundStyle(BEMColor.cobalt)
-            Text(verbatim: showDistance ? "\(entry.station) · \(entry.distance)" : entry.station)
+            Text(verbatim: title)
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(BEMColor.inkSecondary)
                 .lineLimit(1)
@@ -157,22 +148,29 @@ struct DeparturesWidgetView: View {
 /// Compact line badge, mirroring the app's styling: S fills cobaltDeep,
 /// U outlines cobalt, surface lines outline grey.
 struct WidgetLineBadge: View {
-    let row: DepartureEntry.Row
+    let line: String
+    let kind: LineKind
 
     var body: some View {
-        Text(verbatim: row.line)
+        Text(verbatim: line)
             .font(.system(.caption2, design: .rounded).weight(.bold).monospacedDigit())
-            .foregroundStyle(row.sBahn ? .white : (row.uBahn ? BEMColor.cobalt : BEMColor.inkSecondary))
+            .foregroundStyle(foreground)
             .frame(minWidth: 34, minHeight: 20)
             .background {
                 let shape = RoundedRectangle(cornerRadius: 5)
-                if row.sBahn {
-                    shape.fill(BEMColor.cobaltDeep)
-                } else if row.uBahn {
-                    shape.stroke(BEMColor.cobalt, lineWidth: 1.5)
-                } else {
-                    shape.stroke(BEMColor.glazeLine, lineWidth: 1)
+                switch kind {
+                case .sBahn: shape.fill(BEMColor.cobaltDeep)
+                case .uBahn: shape.stroke(BEMColor.cobalt, lineWidth: 1.5)
+                case .surface: shape.stroke(BEMColor.glazeLine, lineWidth: 1)
                 }
             }
+    }
+
+    private var foreground: Color {
+        switch kind {
+        case .sBahn: .white
+        case .uBahn: BEMColor.cobalt
+        case .surface: BEMColor.inkSecondary
+        }
     }
 }

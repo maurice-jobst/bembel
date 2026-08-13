@@ -61,26 +61,6 @@
         }
       }
     },
-    "city.warning.body": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Starke Wärmebelastung bis Freitag 20:00. Mittags Schatten suchen, Wasser mitnehmen."
-          }
-        }
-      }
-    },
-    "city.warning.title": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Amtliche Hitzewarnung"
-          }
-        }
-      }
-    },
     "departures.minutes %lld": {
       "localizations": {
         "de": {

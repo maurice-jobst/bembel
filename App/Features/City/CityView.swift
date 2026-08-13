@@ -2,32 +2,38 @@ import BEMBELKit
 import SwiftUI
 
 /// Stadtzustand: warnings, Main level, air quality — every card names its
-/// source and timestamp. Values are sample fixtures until PEGELONLINE,
-/// HLNUG and NINA are wired.
+/// source and timestamp. Renders whatever the injected `CityStatusProviding`
+/// returns.
 struct CityView: View {
     @Environment(Router.self) private var router
+    @Environment(\.dependencies) private var dependencies
+    @State private var model = CityModel()
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: BEMSpacing.m) {
-                    Text(verbatim: SampleData.cityTemperature)
-                        .font(.subheadline)
-                        .foregroundStyle(BEMColor.inkSecondary)
-                        .padding(.bottom, BEMSpacing.xs)
+                if let status = model.status {
+                    VStack(alignment: .leading, spacing: BEMSpacing.m) {
+                        Text(verbatim: status.temperatureLabel)
+                            .font(.subheadline)
+                            .foregroundStyle(BEMColor.inkSecondary)
+                            .padding(.bottom, BEMSpacing.xs)
 
-                    warningCard
-                    gaugeCard
-                    airCard
+                        if let warning = status.warning {
+                            warningCard(warning)
+                        }
+                        gaugeCard(status.gauge)
+                        airCard(status)
 
-                    DiamondRelief()
-                        .stroke(BEMColor.cobalt, lineWidth: 1.5)
-                        .frame(height: 34)
-                        .clipped()
-                        .opacity(0.35)
-                        .padding(.top, BEMSpacing.s)
+                        DiamondRelief()
+                            .stroke(BEMColor.cobalt, lineWidth: 1.5)
+                            .frame(height: 34)
+                            .clipped()
+                            .opacity(0.35)
+                            .padding(.top, BEMSpacing.s)
+                    }
+                    .padding(.horizontal, BEMSpacing.l)
                 }
-                .padding(.horizontal, BEMSpacing.l)
             }
             .background(BEMColor.saltGlaze)
             .navigationTitle("tab.city")
@@ -39,21 +45,24 @@ struct CityView: View {
                 }
             }
         }
+        .task {
+            await model.load(from: dependencies.cityStatus)
+        }
     }
 
-    private var warningCard: some View {
+    private func warningCard(_ warning: CityWarning) -> some View {
         HStack(alignment: .top, spacing: BEMSpacing.m) {
             Image(systemName: "exclamationmark.triangle.fill")
                 .font(.title3)
                 .foregroundStyle(BEMColor.caution)
             VStack(alignment: .leading, spacing: 2) {
-                Text("city.warning.title")
+                Text(verbatim: warning.title)
                     .font(.callout.weight(.semibold))
                     .foregroundStyle(BEMColor.ink)
-                Text("city.warning.body")
+                Text(verbatim: warning.body)
                     .font(.footnote)
                     .foregroundStyle(BEMColor.inkSecondary)
-                Text(verbatim: SampleData.warningStamp)
+                Text(verbatim: warning.stampLabel)
                     .font(.caption2.monospacedDigit())
                     .foregroundStyle(BEMColor.inkSecondary)
                     .padding(.top, 4)
@@ -73,7 +82,7 @@ struct CityView: View {
         )
     }
 
-    private var gaugeCard: some View {
+    private func gaugeCard(_ gauge: GaugeReading) -> some View {
         VStack(alignment: .leading, spacing: BEMSpacing.s + 2) {
             HStack {
                 Label {
@@ -85,34 +94,34 @@ struct CityView: View {
                         .foregroundStyle(BEMColor.cobalt)
                 }
                 Spacer()
-                Text(verbatim: SampleData.gaugeStation)
+                Text(verbatim: gauge.stationName)
                     .font(.footnote)
                     .foregroundStyle(BEMColor.inkSecondary)
             }
 
             HStack(alignment: .firstTextBaseline, spacing: BEMSpacing.s + 2) {
-                Text(verbatim: SampleData.gaugeLevel)
+                Text(verbatim: gauge.levelLabel)
                     .font(BEMFont.boardLarge)
                     .foregroundStyle(BEMColor.ink)
                 Text(verbatim: "m")
                     .font(.callout)
                     .foregroundStyle(BEMColor.inkSecondary)
                 HStack(spacing: 3) {
-                    Image(systemName: "arrow.down")
+                    Image(systemName: gauge.falling ? "arrow.down" : "arrow.up")
                         .font(.caption2.weight(.bold))
-                    Text(verbatim: SampleData.gaugeTrend)
+                    Text(verbatim: gauge.trendLabel)
                         .font(BEMFont.dataLabel)
                 }
-                .foregroundStyle(BEMColor.good)
+                .foregroundStyle(gauge.falling ? BEMColor.good : BEMColor.caution)
             }
 
-            Sparkline(values: SampleData.gaugeHistory)
+            Sparkline(values: gauge.history)
                 .frame(height: 52)
 
             HStack {
                 Text("city.gauge.axis")
                 Spacer()
-                Text("city.gauge.source \(SampleData.gaugeStamp)")
+                Text("city.gauge.source \(gauge.stampLabel)")
             }
             .font(.caption2.monospacedDigit())
             .foregroundStyle(BEMColor.inkSecondary)
@@ -122,7 +131,7 @@ struct CityView: View {
         .clipShape(RoundedRectangle(cornerRadius: BEMRadius.card))
     }
 
-    private var airCard: some View {
+    private func airCard(_ status: CityStatus) -> some View {
         VStack(alignment: .leading, spacing: BEMSpacing.m) {
             HStack {
                 Label {
@@ -138,7 +147,7 @@ struct CityView: View {
             }
 
             VStack(spacing: 9) {
-                ForEach(SampleData.airValues) { value in
+                ForEach(status.airValues) { value in
                     HStack(spacing: 10) {
                         Text(verbatim: value.name)
                             .font(.footnote)
@@ -153,7 +162,7 @@ struct CityView: View {
                             }
                         }
                         .frame(height: 6)
-                        Text(verbatim: value.reading)
+                        Text(verbatim: value.readingLabel)
                             .font(BEMFont.dataLabel)
                             .foregroundStyle(BEMColor.ink)
                             .frame(width: 84, alignment: .trailing)
@@ -162,7 +171,7 @@ struct CityView: View {
                 }
             }
 
-            Text(verbatim: SampleData.airStamp)
+            Text(verbatim: status.airStampLabel)
                 .font(.caption2.monospacedDigit())
                 .foregroundStyle(BEMColor.inkSecondary)
         }

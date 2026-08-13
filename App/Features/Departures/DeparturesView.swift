@@ -2,23 +2,28 @@ import BEMBELKit
 import SwiftUI
 
 /// Abfahrten: nearest stop resolved automatically, board with tabular
-/// digits. Sample data until BEM-C01 wires RMV.
+/// digits. Renders whatever the injected `DeparturesProviding` returns.
 struct DeparturesView: View {
     @Environment(Router.self) private var router
-    @State private var selectedStation = SampleData.station
+    @Environment(\.dependencies) private var dependencies
+    @State private var model = DeparturesModel()
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: BEMSpacing.m) {
-                    stationRow
+                    if let station = model.selectedStation {
+                        stationRow(station)
+                    }
                     stationChips
-                    board
-                    SourceLine(
-                        systemImage: "arrow.trianglehead.2.clockwise",
-                        text: Text("departures.source \(SampleData.departuresUpdated)")
-                    )
-                    .padding(.horizontal, BEMSpacing.xs)
+                    if let board = model.board {
+                        boardCard(board)
+                        SourceLine(
+                            systemImage: "arrow.trianglehead.2.clockwise",
+                            text: Text("departures.source \(board.updatedLabel)")
+                        )
+                        .padding(.horizontal, BEMSpacing.xs)
+                    }
                 }
                 .padding(.horizontal, BEMSpacing.l)
             }
@@ -32,39 +37,46 @@ struct DeparturesView: View {
                 }
             }
         }
+        .task {
+            await model.load(from: dependencies.departures)
+        }
     }
 
-    private var stationRow: some View {
+    private func stationRow(_ station: Station) -> some View {
         HStack(spacing: 6) {
             Image(systemName: "location.fill")
                 .font(.caption)
                 .foregroundStyle(BEMColor.cobalt)
-            Text(verbatim: selectedStation)
+            Text(verbatim: station.name)
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(BEMColor.ink)
-            Text(verbatim: SampleData.stationDistance)
-                .font(BEMFont.dataLabel)
-                .foregroundStyle(BEMColor.inkSecondary)
+            if let distance = station.distanceLabel {
+                Text(verbatim: distance)
+                    .font(BEMFont.dataLabel)
+                    .foregroundStyle(BEMColor.inkSecondary)
+            }
         }
     }
 
     private var stationChips: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: BEMSpacing.s) {
-                ForEach(SampleData.nearbyStations, id: \.self) { station in
-                    SelectionChip(title: Text(verbatim: station), isSelected: station == selectedStation) {
-                        selectedStation = station
+                ForEach(model.stations) { station in
+                    SelectionChip(title: Text(verbatim: station.name), isSelected: station == model.selectedStation) {
+                        Task {
+                            await model.select(station, from: dependencies.departures)
+                        }
                     }
                 }
             }
         }
     }
 
-    private var board: some View {
+    private func boardCard(_ board: DepartureBoard) -> some View {
         VStack(spacing: 0) {
-            ForEach(Array(SampleData.departures.enumerated()), id: \.element.id) { index, departure in
+            ForEach(Array(board.departures.enumerated()), id: \.element.id) { index, departure in
                 DepartureRow(departure: departure)
-                if index < SampleData.departures.count - 1 {
+                if index < board.departures.count - 1 {
                     Divider().overlay(BEMColor.glazeLine)
                 }
             }
@@ -75,7 +87,7 @@ struct DeparturesView: View {
 }
 
 struct DepartureRow: View {
-    let departure: SampleData.Departure
+    let departure: Departure
 
     var body: some View {
         HStack(spacing: BEMSpacing.m) {
