@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+build/
+
+# SwiftPM
+.build/
+.swiftpm/
+
+# Secrets — never committed; copy Config/Secrets.xcconfig.template
+Config/Secrets.xcconfig

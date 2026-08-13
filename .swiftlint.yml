@@ -1,0 +1,13 @@
+# Optional locally (make lint is a no-op without swiftlint installed).
+# Not run in CI yet — revisit when the codebase is big enough to earn it.
+included:
+  - App
+  - Widgets
+  - Packages/BEMBELKit/Sources
+  - Packages/BEMBELKit/Tests
+disabled_rules:
+  - todo
+  - line_length
+opt_in_rules:
+  - sorted_imports
+  - empty_count
