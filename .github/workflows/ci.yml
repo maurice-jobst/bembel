@@ -10,7 +10,7 @@ jobs:
     name: BEMBELKit tests (swift test, native macOS)
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Select Xcode 16.4
         run: sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
       - name: Toolchain versions
@@ -22,7 +22,7 @@ jobs:
     name: App build (iOS Simulator, unsigned)
     runs-on: macos-15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Select Xcode 16.4
         run: sudo xcode-select -s /Applications/Xcode_16.4.app/Contents/Developer
       - name: Secrets from template (no real values in CI)
