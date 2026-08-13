@@ -92,7 +92,7 @@ runs natively on any machine and in CI without booting a simulator.
 ## Beyond 1.0
 
 The horizon is
-[epic S — side quests](https://github.com/maurice-jobst/bembel/issues?q=label%3Aepic%3AS):
+[milestone M4 — side quests](https://github.com/maurice-jobst/bembel/milestone/5):
 the full Sticker-Sammelalbum (city-hotspot geofences, Game Center, seasonal
 drops — the data-linked stickers ship in 1.0), GrünGürtel walks,
 Baumkataster, Stolpersteine, Blaulicht-Archiv, and more. English

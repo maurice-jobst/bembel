@@ -1,4 +1,4 @@
-# BEMBEL — v1.0 Backlog (rev. 3)
+# BEMBEL — v1.0 Backlog (rev. 4 — hero repositioning 2026-08-13)
 
 Free Rhein-Main city app for iPhone. Portfolio-grade, no backend of our own.
 Feature selection rationale lives in `FEATURE-CATALOG.md`.

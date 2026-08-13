@@ -42,4 +42,5 @@ The collaboration-ready sample-data shell.
   accounts; Apple services (Game Center, iCloud) and GitHub participation
   are opt-in. Privacy label stays "Data Not Collected".
 
+[Unreleased]: https://github.com/maurice-jobst/bembel/compare/v0.1.0...HEAD
 [0.1.0]: https://github.com/maurice-jobst/bembel/releases/tag/v0.1.0
