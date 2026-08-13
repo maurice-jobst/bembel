@@ -3,8 +3,11 @@ import MapKit
 import SwiftUI
 
 /// Regenradar: Rhein-Main map, nowcast headline, 90-minute timeline.
-/// Rain cells and times are sample values until DWD RADOLAN is wired.
+/// Renders whatever the injected `RadarProviding` returns; the rain-cell
+/// overlay stays decorative until DWD RADOLAN tiles land (BEM-F01/F02).
 struct RadarView: View {
+    @Environment(\.dependencies) private var dependencies
+    @State private var model = RadarModel()
     @State private var position: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 50.11, longitude: 8.63),
@@ -20,23 +23,30 @@ struct RadarView: View {
                 .ignoresSafeArea()
 
             VStack(alignment: .leading, spacing: 0) {
-                topRow
+                if let nowcast = model.nowcast {
+                    topRow(nowcast)
+                }
                 Spacer()
                 legend
                     .padding(.bottom, BEMSpacing.m)
-                timelineCard
+                if let nowcast = model.nowcast {
+                    timelineCard(nowcast)
+                }
             }
             .padding(.horizontal, BEMSpacing.m)
         }
+        .task {
+            await model.load(from: dependencies.radar)
+        }
     }
 
-    private var topRow: some View {
+    private func topRow(_ nowcast: RadarNowcast) -> some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 1) {
-                Text(verbatim: SampleData.radarHeadline)
+                Text(verbatim: nowcast.headline)
                     .font(.body.weight(.bold))
                     .foregroundStyle(BEMColor.ink)
-                Text(verbatim: SampleData.radarDetail)
+                Text(verbatim: nowcast.detail)
                     .font(.footnote)
                     .foregroundStyle(BEMColor.inkSecondary)
             }
@@ -80,10 +90,11 @@ struct RadarView: View {
         }
     }
 
-    private var timelineCard: some View {
+    private func timelineCard(_ nowcast: RadarNowcast) -> some View {
         VStack(spacing: BEMSpacing.s + 2) {
             HStack(spacing: BEMSpacing.m) {
-                Button {} label: {
+                Button {
+                } label: {
                     Circle()
                         .fill(BEMColor.cobalt)
                         .frame(width: 40, height: 40)
@@ -98,14 +109,14 @@ struct RadarView: View {
 
                 VStack(alignment: .leading, spacing: 6) {
                     HStack(alignment: .firstTextBaseline, spacing: BEMSpacing.s) {
-                        Text(verbatim: SampleData.radarClock)
+                        Text(verbatim: nowcast.clockLabel)
                             .font(BEMFont.board)
                             .foregroundStyle(BEMColor.ink)
                         Text("radar.now")
                             .font(BEMFont.dataLabel)
                             .foregroundStyle(BEMColor.cobalt)
                     }
-                    timelineTrack
+                    timelineTrack(progress: nowcast.progress)
                 }
             }
 
@@ -123,7 +134,7 @@ struct RadarView: View {
             .font(.caption2.monospacedDigit())
             .foregroundStyle(BEMColor.inkSecondary)
 
-            SourceLine(systemImage: "arrow.trianglehead.2.clockwise", text: Text("radar.source \(SampleData.radarStamp)"))
+            SourceLine(systemImage: "arrow.trianglehead.2.clockwise", text: Text("radar.source \(nowcast.stampLabel)"))
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(14)
@@ -135,7 +146,7 @@ struct RadarView: View {
         .padding(.bottom, BEMSpacing.s)
     }
 
-    private var timelineTrack: some View {
+    private func timelineTrack(progress: Double) -> some View {
         GeometryReader { geo in
             let width = geo.size.width
             ZStack(alignment: .leading) {
@@ -144,12 +155,12 @@ struct RadarView: View {
                     .frame(height: 4)
                 Capsule()
                     .fill(BEMColor.cobaltDeep)
-                    .frame(width: width * 0.4, height: 4)
+                    .frame(width: width * progress, height: 4)
                 RoundedRectangle(cornerRadius: 2)
                     .fill(BEMColor.cobalt)
                     .frame(width: 3, height: 18)
                     .shadow(color: BEMColor.cobalt.opacity(0.8), radius: 5)
-                    .offset(x: width * 0.4)
+                    .offset(x: width * progress)
             }
             .frame(height: geo.size.height)
         }
@@ -179,7 +190,8 @@ struct SampleRainCells: View {
         }
     }
 
-    private func cell(x: Double, y: Double, size: Double, color: Color, opacity: Double, in canvas: CGSize) -> some View {
+    private func cell(x: Double, y: Double, size: Double, color: Color, opacity: Double, in canvas: CGSize) -> some View
+    {
         Ellipse()
             .fill(color)
             .opacity(opacity * 0.75)

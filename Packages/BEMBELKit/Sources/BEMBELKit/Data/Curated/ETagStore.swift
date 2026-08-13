@@ -8,10 +8,11 @@ struct ETagStore {
 
     init(directory: URL) {
         self.fileURL = directory.appending(path: "etags.json")
-        self.values = (try? JSONDecoder().decode(
-            [String: String].self,
-            from: Data(contentsOf: fileURL)
-        )) ?? [:]
+        self.values =
+            (try? JSONDecoder().decode(
+                [String: String].self,
+                from: Data(contentsOf: fileURL)
+            )) ?? [:]
     }
 
     func etag(for id: String) -> String? {

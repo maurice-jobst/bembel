@@ -1,8 +1,9 @@
 import SwiftUI
+
 #if canImport(UIKit)
-import UIKit
+    import UIKit
 #elseif canImport(AppKit)
-import AppKit
+    import AppKit
 #endif
 
 extension Color {
@@ -20,19 +21,21 @@ extension Color {
     /// package compiles for `swift test` on macOS (ADR 0004).
     init(light: UInt32, dark: UInt32) {
         #if canImport(UIKit)
-        self.init(uiColor: UIColor { traits in
-            traits.userInterfaceStyle == .dark
-                ? UIColor(Color(hex: dark))
-                : UIColor(Color(hex: light))
-        })
+            self.init(
+                uiColor: UIColor { traits in
+                    traits.userInterfaceStyle == .dark
+                        ? UIColor(Color(hex: dark))
+                        : UIColor(Color(hex: light))
+                })
         #elseif canImport(AppKit)
-        self.init(nsColor: NSColor(name: nil) { appearance in
-            appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
-                ? NSColor(Color(hex: dark))
-                : NSColor(Color(hex: light))
-        })
+            self.init(
+                nsColor: NSColor(name: nil) { appearance in
+                    appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+                        ? NSColor(Color(hex: dark))
+                        : NSColor(Color(hex: light))
+                })
         #else
-        self.init(hex: light)
+            self.init(hex: light)
         #endif
     }
 }

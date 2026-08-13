@@ -43,7 +43,7 @@ struct DeepLinkTests {
     @Test("Zoned shadow timestamp is parsed exactly")
     func zonedTimestamp() {
         let parsed = link("bembel://shadow?t=2027-06-21T15:00:00%2B02:00")
-        let expected = Date(timeIntervalSince1970: 1_813_582_800) // 2027-06-21 13:00 UTC
+        let expected = Date(timeIntervalSince1970: 1_813_582_800)  // 2027-06-21 13:00 UTC
         #expect(parsed == .shadow(at: expected))
     }
 

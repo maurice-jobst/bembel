@@ -1,6 +1,6 @@
 # BEMBEL — v1.0 Backlog (rev. 3)
 
-Free Rhein-Main city app for iPhone. Portfolio-grade, no backend, no accounts.
+Free Rhein-Main city app for iPhone. Portfolio-grade, no backend of our own.
 Feature selection rationale lives in `FEATURE-CATALOG.md`.
 
 **This file is the spec — the "why" and the acceptance criteria for each
@@ -18,14 +18,14 @@ below are a point-in-time note, not a live status — check the issue.
 | Positioning | The app for a city that keeps getting hotter — shade, water, air, trees |
 | Scope | Rhein-Main rings (`BEM-A04`). Shadow map is Frankfurt-only in v1.0 |
 | Platform | iPhone only, iOS 18.5+, SwiftUI |
-| Backend | None. Static JSON + remote refresh with ETag. Operator datasets are CI + PR |
-| Accounts | None |
+| Backend | None of our own. Static JSON + remote refresh with ETag. Operator datasets are CI + PR |
+| Accounts | No BEMBEL accounts. Apple services (Game Center, iCloud) opt-in — revised 2026-08-13, "no accounts" was never locked |
 | Base language | German, English v1.1, localisation scaffolding ships in v1.0 |
 | Target ship | **22 March 2027** — World Water Day, Trinkbrunnen season opening |
 
 **Selection principle:** data readiness first, then coolness × feasibility. Four of the five v1.0 features require zero curation.
 
-**NOT in v1.0** — voting, accounts, events calendar, parliament, elections, quizzes, stickers, Wasserhäuschen, Apfelwein list, Kreppel ranking, price barometers, shade routing, Android, iPad.
+**NOT in v1.0** — voting, events calendar, parliament, elections, quizzes, stickers, Wasserhäuschen, Apfelwein list, Kreppel ranking, price barometers, shade routing, Android, iPad. Several of these now live as post-1.0 side quests in [epic S](https://github.com/maurice-jobst/bembel/issues?q=label%3Aepic%3AS) (milestone M4); they remain out of v1.0.
 
 ---
 

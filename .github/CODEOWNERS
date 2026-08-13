@@ -1,18 +1,19 @@
-# Review routing per lane (see CONTRIBUTING.md).
-# Frontend and backend handles are TBD — uncomment and fill in when the team
-# is on GitHub. Until then everything routes to the PM.
+# Review routing per lane (see CONTRIBUTING.md). Lanes are default
+# ownership, not walls — cross-lane PRs just need the lane owner's review.
 
 * @maurice-jobst
 
 # App lane (frontend):
-# /App/            @frontend-handle
-# /Widgets/        @frontend-handle
-# /Packages/       @frontend-handle
+/App/            @cybeerboy
+/Widgets/        @cybeerboy
+
+# Shared seam — domain models, providers, design system:
+/Packages/       @cybeerboy @jaypikay @monsdroid
 
 # Data lane (backend):
-# /data/           @backend-handle
-# /scripts/        @backend-handle
-# /.github/        @backend-handle
+/data/           @jaypikay @monsdroid
+/scripts/        @jaypikay @monsdroid
+/.github/        @jaypikay @monsdroid
 
 # Docs & decisions (PM):
-# /docs/           @maurice-jobst
+/docs/           @maurice-jobst

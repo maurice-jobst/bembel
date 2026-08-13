@@ -4,19 +4,17 @@ import SwiftUI
 
 /// Schattenkarte: map with a cobalt-tinted shadow layer that follows the
 /// time scrubber. The scrubber sits on a sun-elevation curve (variant 1d of
-/// the design doc). The tint uses a crude solar model; the real LoD2 shadow
-/// index replaces both at BEM-D02.
+/// the design doc). The tint uses the kit's crude solar model; the real
+/// LoD2 shadow index replaces both at BEM-D02.
 struct ShadowView: View {
     @Environment(Router.self) private var router
-    @State private var minutes: Double = 885
+    @State private var model = ShadowModel()
     @State private var position: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 50.1109, longitude: 8.6714),
             span: MKCoordinateSpan(latitudeDelta: 0.012, longitudeDelta: 0.012)
         )
     )
-
-    private var sun: SunSample { SunModel.sample(atMinutes: minutes) }
 
     var body: some View {
         ZStack {
@@ -26,7 +24,7 @@ struct ShadowView: View {
                     // Stand-in for the LoD2 shadow raster: a flat cobalt wash
                     // whose weight follows the sun. BEM-D02 replaces this.
                     BEMColor.cobaltDeep
-                        .opacity(0.32 * (1 - Double(sun.elevation) / 58))
+                        .opacity(0.32 * (1 - Double(model.sun.elevation) / SunModel.peakElevation))
                         .allowsHitTesting(false)
                 }
                 .ignoresSafeArea()
@@ -67,17 +65,20 @@ struct ShadowView: View {
     }
 
     private var scrubberCard: some View {
-        VStack(spacing: BEMSpacing.s) {
+        @Bindable var model = model
+        return VStack(spacing: BEMSpacing.s) {
             HStack(alignment: .firstTextBaseline) {
-                Text(verbatim: SunModel.clockLabel(minutes: minutes))
+                Text(verbatim: SunModel.clockLabel(minutes: model.minutes))
                     .font(BEMFont.boardLarge)
                     .foregroundStyle(BEMColor.ink)
-                Text("shadow.sun \(sun.elevation) \(String(localized: sun.westward ? "shadow.direction.west" : "shadow.direction.east"))")
-                    .font(BEMFont.dataLabel)
-                    .foregroundStyle(BEMColor.inkSecondary)
+                Text(
+                    "shadow.sun \(model.sun.elevation) \(String(localized: model.sun.westward ? "shadow.direction.west" : "shadow.direction.east"))"
+                )
+                .font(BEMFont.dataLabel)
+                .foregroundStyle(BEMColor.inkSecondary)
                 Spacer()
                 Button {
-                    minutes = SunModel.nowMinutes()
+                    model.resetToNow()
                 } label: {
                     Text("shadow.now")
                         .font(.footnote.weight(.semibold))
@@ -89,7 +90,7 @@ struct ShadowView: View {
                 .buttonStyle(.plain)
             }
 
-            SunCurveScrubber(minutes: $minutes)
+            SunCurveScrubber(minutes: $model.minutes)
                 .frame(height: 58)
 
             HStack {
@@ -125,7 +126,9 @@ struct SunCurveScrubber: View {
             let height = geo.size.height
             let fraction = (minutes - SunModel.dayStart) / (SunModel.dayEnd - SunModel.dayStart)
             let x = fraction * width
-            let dotY = height - 2 - (Double(SunModel.sample(atMinutes: minutes).elevation) / 58) * (height - 10)
+            let dotY =
+                height - 2 - (Double(SunModel.sample(atMinutes: minutes).elevation) / SunModel.peakElevation)
+                * (height - 10)
 
             ZStack(alignment: .topLeading) {
                 curve(in: geo.size, closed: true)
@@ -188,36 +191,5 @@ struct SunCurveScrubber: View {
             path.closeSubpath()
         }
         return path
-    }
-}
-
-struct SunSample {
-    let elevation: Int
-    let westward: Bool
-}
-
-/// Crude solar model for Frankfurt in summer, elevation peaking early
-/// afternoon — enough to drive the UI honestly until real ephemeris and the
-/// LoD2 index land (BEM-D02).
-enum SunModel {
-    static let dayStart: Double = 330 // 05:30
-    static let dayEnd: Double = 1290 // 21:30
-
-    static func sample(atMinutes minutes: Double) -> SunSample {
-        let t = (minutes - 800) / 470
-        let elevation = max(2, Int((58 * (1 - t * t)).rounded()))
-        return SunSample(elevation: elevation, westward: minutes < 800)
-    }
-
-    static func clockLabel(minutes: Double) -> String {
-        let h = Int(minutes) / 60
-        let m = Int(minutes) % 60
-        return String(format: "%02d:%02d", h, m)
-    }
-
-    static func nowMinutes() -> Double {
-        let parts = Calendar.current.dateComponents([.hour, .minute], from: .now)
-        let mins = Double((parts.hour ?? 12) * 60 + (parts.minute ?? 0))
-        return min(max(mins, dayStart), dayEnd)
     }
 }

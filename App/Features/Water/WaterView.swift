@@ -3,11 +3,12 @@ import MapKit
 import SwiftUI
 
 /// Trinkwasser: fountain map with filter chips, detail as a persistent
-/// bottom card. Fountains are sample fixtures; the curated dataset replaces
-/// them (BEM-B tickets). The seasonal rule is real.
+/// bottom card. Renders whatever the injected `FountainProviding` returns;
+/// the seasonal rule lives in the kit and is real.
 struct WaterView: View {
+    @Environment(\.dependencies) private var dependencies
+    @State private var model = WaterModel()
     @State private var selectedFilter = WaterFilter.fountains
-    @State private var selectedFountain = SampleData.fountains[0]
     @State private var position: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 50.1122, longitude: 8.6780),
@@ -18,10 +19,10 @@ struct WaterView: View {
     var body: some View {
         ZStack {
             Map(position: $position) {
-                ForEach(SampleData.fountains) { fountain in
+                ForEach(model.fountains) { fountain in
                     Annotation(fountain.name, coordinate: fountain.coordinate) {
-                        FountainPin(featured: fountain.id == selectedFountain.id)
-                            .onTapGesture { selectedFountain = fountain }
+                        FountainPin(featured: fountain.id == model.selectedFountain?.id)
+                            .onTapGesture { model.selectedFountain = fountain }
                     }
                     .annotationTitles(.hidden)
                 }
@@ -33,9 +34,14 @@ struct WaterView: View {
                 searchRow
                 filterChips
                 Spacer()
-                FountainDetailCard(fountain: selectedFountain)
+                if let fountain = model.selectedFountain {
+                    FountainDetailCard(fountain: fountain)
+                }
             }
             .padding(.horizontal, BEMSpacing.m)
+        }
+        .task {
+            await model.load(from: dependencies.fountains)
         }
     }
 
@@ -112,7 +118,7 @@ struct FountainPin: View {
 }
 
 struct FountainDetailCard: View {
-    let fountain: SampleData.Fountain
+    let fountain: Fountain
     private let open = FountainSeason.isOpen()
 
     var body: some View {
@@ -127,7 +133,7 @@ struct FountainDetailCard: View {
                     Text(verbatim: fountain.name)
                         .font(.title3.weight(.bold))
                         .foregroundStyle(BEMColor.ink)
-                    Text("water.distance \(fountain.distance) \(fountain.walkMinutes)")
+                    Text("water.distance \(fountain.distanceLabel) \(fountain.walkMinutes)")
                         .font(BEMFont.dataLabel)
                         .foregroundStyle(BEMColor.inkSecondary)
                 }
@@ -139,7 +145,9 @@ struct FountainDetailCard: View {
             }
 
             VStack(spacing: 1) {
-                detailRow(icon: "calendar.badge.checkmark", label: "water.season", value: Text(open ? "water.season.range" : "water.season.from"))
+                detailRow(
+                    icon: "calendar.badge.checkmark", label: "water.season",
+                    value: Text(open ? "water.season.range" : "water.season.from"))
                 Divider().overlay(BEMColor.glazeLine)
                 detailRow(icon: "clock", label: "water.hours", value: Text("water.hours.always"))
                 Divider().overlay(BEMColor.glazeLine)
@@ -195,7 +203,8 @@ struct FountainDetailCard: View {
     }
 
     private func squareAction(icon: String, label: LocalizedStringKey) -> some View {
-        Button {} label: {
+        Button {
+        } label: {
             Image(systemName: icon)
                 .font(.body.weight(.medium))
                 .foregroundStyle(BEMColor.cobalt)
@@ -204,17 +213,5 @@ struct FountainDetailCard: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(Text(label))
-    }
-}
-
-/// The real seasonal rule: city fountains run from World Water Day
-/// (22 March) until they're winterized at the end of September.
-enum FountainSeason {
-    static func isOpen(on date: Date = .now, calendar: Calendar = .current) -> Bool {
-        let parts = calendar.dateComponents([.month, .day], from: date)
-        guard let month = parts.month, let day = parts.day else { return false }
-        if month < 3 || month > 9 { return false }
-        if month == 3 { return day >= 22 }
-        return true
     }
 }

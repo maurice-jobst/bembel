@@ -5,12 +5,7 @@ import SwiftUI
 
 /// RMV line badge. S-Bahn lines fill cobaltDeep, U-Bahn lines outline in
 /// cobalt, everything else (tram, bus) outlines in the hairline grey.
-enum LineKind {
-    case sBahn
-    case uBahn
-    case surface
-}
-
+/// `LineKind` itself lives in the kit next to `Departure`.
 struct LineBadge: View {
     let line: String
     let kind: LineKind

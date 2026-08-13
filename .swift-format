@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "lineLength": 120,
+  "indentation": {
+    "spaces": 4
+  },
+  "maximumBlankLines": 1,
+  "respectsExistingLineBreaks": true,
+  "lineBreakBeforeEachArgument": false,
+  "prioritizeKeepingFunctionOutputTogether": true,
+  "rules": {
+    "AllPublicDeclarationsHaveDocumentation": false,
+    "NoBlockComments": true,
+    "OrderedImports": true,
+    "UseLetInEveryBoundCaseVariable": true,
+    "UseShorthandTypeNames": true
+  }
+}
