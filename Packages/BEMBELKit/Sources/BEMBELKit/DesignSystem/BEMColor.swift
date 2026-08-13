@@ -11,6 +11,9 @@ public enum BEMColor {
     // Cobalt — accent, interactive elements, the diamond relief
     public static let cobalt = Color(light: 0x1D4E9E, dark: 0x5B8DEF)
     public static let cobaltDeep = Color(light: 0x143A78, dark: 0x3E6BC4)
+    /// Text and glyphs sitting on a cobalt fill: light cobalt is dark enough
+    /// for near-white, dark-mode cobalt is bright enough for near-black.
+    public static let inkOnCobalt = Color(light: 0xF8F8F6, dark: 0x101318)
 
     // Ink — text
     public static let ink = Color(light: 0x1A1A1C, dark: 0xF2F2F4)

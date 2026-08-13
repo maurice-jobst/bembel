@@ -13,5 +13,8 @@ public enum BEMFont {
     /// Departure boards and measurements: tabular digits so columns of
     /// times/values don't jitter as they update.
     public static let board = Font.system(.title3, design: .rounded).weight(.semibold).monospacedDigit()
+    /// Hero measurements: the shadow-map clock, the Pegel reading, the
+    /// widget's next-departure countdown.
+    public static let boardLarge = Font.system(.title, design: .rounded).weight(.semibold).monospacedDigit()
     public static let dataLabel = Font.footnote.monospacedDigit()
 }

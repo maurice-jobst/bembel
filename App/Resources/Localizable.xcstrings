@@ -1,156 +1,726 @@
 {
-  "sourceLanguage" : "de",
-  "strings" : {
-    "placeholder.message" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dieses Feature kommt in einem späteren Meilenstein."
+  "sourceLanguage": "de",
+  "strings": {
+    "action.locate": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf meinen Standort zentrieren"
           }
         }
       }
     },
-    "placeholder.title" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "In Arbeit"
+    "city.air.good": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gut"
           }
         }
       }
     },
-    "ring.frankfurt" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Frankfurt"
+    "city.air.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luftqualität"
           }
         }
       }
     },
-    "ring.kernraum" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kernraum"
+    "city.gauge.axis": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "vor 7 Tagen"
           }
         }
       }
     },
-    "ring.rheinmain" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rhein-Main"
+    "city.gauge.source %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PEGELONLINE · %@"
           }
         }
       }
     },
-    "settings.done" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fertig"
+    "city.gauge.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Main-Pegel"
           }
         }
       }
     },
-    "settings.region.footer" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bestimmt, welche Orte in kuratierten Datensätzen erscheinen. Abfahrten gelten immer für das ganze RMV-Gebiet."
+    "city.warning.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Starke Wärmebelastung bis Freitag 20:00. Mittags Schatten suchen, Wasser mitnehmen."
           }
         }
       }
     },
-    "settings.region.header" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Region"
+    "city.warning.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Amtliche Hitzewarnung"
           }
         }
       }
     },
-    "settings.region.picker" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Region"
+    "departures.minutes %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld′"
           }
         }
       }
     },
-    "settings.title" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einstellungen"
+    "departures.source %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RMV · aktualisiert %@"
           }
         }
       }
     },
-    "tab.city" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stadt"
+    "onboarding.claim": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schatten, Wasser, Luft — für eine Stadt, die heißer wird."
           }
         }
       }
     },
-    "tab.departures" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abfahrten"
+    "onboarding.continue": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiter"
           }
         }
       }
     },
-    "tab.radar" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Regen"
+    "onboarding.location.allow": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standort erlauben"
           }
         }
       }
     },
-    "tab.shadow" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schatten"
+    "onboarding.location.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für die nächste Haltestelle und den nächsten Brunnen. Bleibt auf dem Gerät — es gibt niemanden, der ihn bekommen könnte."
           }
         }
       }
     },
-    "tab.water" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wasser"
+    "onboarding.location.skip": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Standort weiter"
+          }
+        }
+      }
+    },
+    "onboarding.location.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standort nur beim Benutzen"
+          }
+        }
+      }
+    },
+    "onboarding.promise": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kostenlos. Keine Werbung, kein Tracking, keine Konten, kein Backend."
+          }
+        }
+      }
+    },
+    "onboarding.region.subtitle": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bestimmt, welche Orte du siehst. Später jederzeit änderbar."
+          }
+        }
+      }
+    },
+    "onboarding.region.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wie weit soll's gehen?"
+          }
+        }
+      }
+    },
+    "onboarding.rest.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RMV, DWD, Pegel, Luft, Warnungen — an einer Stelle."
+          }
+        }
+      }
+    },
+    "onboarding.rest.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abfahrten, Regen, Stadtzustand"
+          }
+        }
+      }
+    },
+    "onboarding.ring.frankfurt": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stadtgebiet. Die Schattenkarte gibt's nur hier."
+          }
+        }
+      }
+    },
+    "onboarding.ring.kernraum": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regionalverband FrankfurtRheinMain."
+          }
+        }
+      }
+    },
+    "onboarding.ring.rheinmain": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Metropolregion. Mehr Haltestellen, längere Listen."
+          }
+        }
+      }
+    },
+    "onboarding.shadow.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wo um 15:00 Schatten liegt — auf die Minute gerechnet, offline."
+          }
+        }
+      }
+    },
+    "onboarding.shadow.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schattenkarte"
+          }
+        }
+      }
+    },
+    "onboarding.water.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeder Brunnen der Stadt, mit Saison und Uhrzeit."
+          }
+        }
+      }
+    },
+    "onboarding.water.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trinkwasser"
+          }
+        }
+      }
+    },
+    "radar.legend.unit": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mm/h"
+          }
+        }
+      }
+    },
+    "radar.now": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jetzt"
+          }
+        }
+      }
+    },
+    "radar.play": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Radarfilm abspielen"
+          }
+        }
+      }
+    },
+    "radar.source %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DWD RADOLAN · %@"
+          }
+        }
+      }
+    },
+    "ring.frankfurt": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frankfurt"
+          }
+        }
+      }
+    },
+    "ring.kernraum": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kernraum"
+          }
+        }
+      }
+    },
+    "ring.rheinmain": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rhein-Main"
+          }
+        }
+      }
+    },
+    "settings.done": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fertig"
+          }
+        }
+      }
+    },
+    "settings.privacy": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Konten, kein Tracking, kein Backend."
+          }
+        }
+      }
+    },
+    "settings.region.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bestimmt, welche Orte in kuratierten Datensätzen erscheinen. Abfahrten gelten immer für das ganze RMV-Gebiet."
+          }
+        }
+      }
+    },
+    "settings.region.header": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Region"
+          }
+        }
+      }
+    },
+    "settings.region.picker": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Region"
+          }
+        }
+      }
+    },
+    "settings.sources": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenquellen & Lizenzen"
+          }
+        }
+      }
+    },
+    "settings.sources.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Angaben stammen aus offenen Daten; jede Fläche in der App nennt Quelle und Stand."
+          }
+        }
+      }
+    },
+    "settings.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen"
+          }
+        }
+      }
+    },
+    "shadow.direction.east": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schatten nach Osten"
+          }
+        }
+      }
+    },
+    "shadow.direction.west": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schatten nach Westen"
+          }
+        }
+      }
+    },
+    "shadow.now": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jetzt"
+          }
+        }
+      }
+    },
+    "shadow.scrubber": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uhrzeit"
+          }
+        }
+      }
+    },
+    "shadow.sun %lld %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonne %lld° · %@"
+          }
+        }
+      }
+    },
+    "tab.city": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stadt"
+          }
+        }
+      }
+    },
+    "tab.departures": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abfahrten"
+          }
+        }
+      }
+    },
+    "tab.radar": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regen"
+          }
+        }
+      }
+    },
+    "tab.shadow": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schatten"
+          }
+        }
+      }
+    },
+    "tab.water": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wasser"
+          }
+        }
+      }
+    },
+    "water.bookmark": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merken"
+          }
+        }
+      }
+    },
+    "water.distance %@ %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$lld Min zu Fuß"
+          }
+        }
+      }
+    },
+    "water.filter.fountains": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trinkbrunnen"
+          }
+        }
+      }
+    },
+    "water.filter.open": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur geöffnete"
+          }
+        }
+      }
+    },
+    "water.filter.refill": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refill"
+          }
+        }
+      }
+    },
+    "water.hours": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betriebszeit"
+          }
+        }
+      }
+    },
+    "water.hours.always": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "durchgehend"
+          }
+        }
+      }
+    },
+    "water.quality": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wasser"
+          }
+        }
+      }
+    },
+    "water.quality.drinking": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trinkwasserqualität"
+          }
+        }
+      }
+    },
+    "water.route": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Route"
+          }
+        }
+      }
+    },
+    "water.search": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brunnen suchen"
+          }
+        }
+      }
+    },
+    "water.season": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saison"
+          }
+        }
+      }
+    },
+    "water.season.from": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ab 22. März"
+          }
+        }
+      }
+    },
+    "water.season.note": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brunnen werden im Oktober gegen Frost abgestellt; die Saison beginnt am Weltwassertag, 22. März. Historische Brunnen kommen nach Ostern zurück und laufen 10:00–22:00."
+          }
+        }
+      }
+    },
+    "water.season.range": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "22. März – 30. Sept"
+          }
+        }
+      }
+    },
+    "water.share": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teilen"
+          }
+        }
+      }
+    },
+    "water.source": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle: Geoportal Frankfurt · OSM (ODbL)"
+          }
+        }
+      }
+    },
+    "water.status.closed": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abgestellt"
+          }
+        }
+      }
+    },
+    "water.status.open": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Läuft"
           }
         }
       }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

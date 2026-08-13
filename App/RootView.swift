@@ -3,45 +3,39 @@ import SwiftUI
 
 struct RootView: View {
     @Environment(Router.self) private var router
+    @AppStorage(OnboardingState.completedKey, store: AppGroup.defaults)
+    private var onboardingCompleted = false
 
     var body: some View {
         @Bindable var router = router
-        TabView(selection: $router.selectedTab) {
-            ForEach(BEMTab.allCases) { tab in
-                NavigationStack {
-                    FeaturePlaceholderView(tab: tab)
-                        .navigationTitle(tab.titleKey)
-                        .toolbar {
-                            ToolbarItem(placement: .topBarTrailing) {
-                                Button("settings.title", systemImage: "gear") {
-                                    router.isPresentingSettings = true
-                                }
-                            }
+        if !onboardingCompleted {
+            OnboardingView()
+        } else {
+            TabView(selection: $router.selectedTab) {
+                ForEach(BEMTab.allCases) { tab in
+                    screen(for: tab)
+                        .tabItem {
+                            Label(tab.titleKey, systemImage: tab.systemImage)
                         }
+                        .tag(tab)
                 }
-                .tabItem {
-                    Label(tab.titleKey, systemImage: tab.systemImage)
-                }
-                .tag(tab)
+            }
+            .tint(BEMColor.cobalt)
+            .sheet(isPresented: $router.isPresentingSettings) {
+                SettingsView()
             }
         }
-        .tint(BEMColor.cobalt)
-        .sheet(isPresented: $router.isPresentingSettings) {
-            SettingsView()
-        }
     }
-}
 
-struct FeaturePlaceholderView: View {
-    let tab: BEMTab
-
-    var body: some View {
-        ContentUnavailableView {
-            Label("placeholder.title", systemImage: tab.systemImage)
-        } description: {
-            Text("placeholder.message")
+    @ViewBuilder
+    private func screen(for tab: BEMTab) -> some View {
+        switch tab {
+        case .departures: DeparturesView()
+        case .shadow: ShadowView()
+        case .water: WaterView()
+        case .radar: RadarView()
+        case .city: CityView()
         }
-        .background(BEMColor.saltGlaze)
     }
 }
 
