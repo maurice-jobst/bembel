@@ -21,12 +21,72 @@
         }
       }
     },
+    "ring.frankfurt" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frankfurt"
+          }
+        }
+      }
+    },
+    "ring.kernraum" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kernraum"
+          }
+        }
+      }
+    },
+    "ring.rheinmain" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rhein-Main"
+          }
+        }
+      }
+    },
     "settings.done" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fertig"
+          }
+        }
+      }
+    },
+    "settings.region.footer" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bestimmt, welche Orte in kuratierten Datensätzen erscheinen. Abfahrten gelten immer für das ganze RMV-Gebiet."
+          }
+        }
+      }
+    },
+    "settings.region.header" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Region"
+          }
+        }
+      }
+    },
+    "settings.region.picker" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Region"
           }
         }
       }

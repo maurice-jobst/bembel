@@ -14,7 +14,7 @@ let package = Package(
         .library(name: "BEMBELKit", targets: ["BEMBELKit"])
     ],
     targets: [
-        .target(name: "BEMBELKit"),
+        .target(name: "BEMBELKit", resources: [.process("Resources")]),
         .testTarget(name: "BEMBELKitTests", dependencies: ["BEMBELKit"]),
     ]
 )

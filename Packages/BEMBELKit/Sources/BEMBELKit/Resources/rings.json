@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "status": "provisional",
+  "definition": "frankfurt = AGS 06412000; kernraum = Regionalverband FrankfurtRheinMain member municipalities; rheinmain = Metropolregion FrankfurtRheinMain",
+  "source": "hand-seeded 2026-08-13 with unambiguous major cities only; full table comes from scripts/generate_rings.py against the Destatis Gemeindeverzeichnis",
+  "municipalities": [
+    { "ags": "06412000", "name": "Frankfurt am Main", "ring": "frankfurt" },
+    { "ags": "06413000", "name": "Offenbach am Main", "ring": "kernraum" },
+    { "ags": "06435014", "name": "Hanau", "ring": "kernraum" },
+    { "ags": "06411000", "name": "Darmstadt", "ring": "rheinmain" },
+    { "ags": "06414000", "name": "Wiesbaden", "ring": "rheinmain" },
+    { "ags": "07315000", "name": "Mainz", "ring": "rheinmain" },
+    { "ags": "09661000", "name": "Aschaffenburg", "ring": "rheinmain" }
+  ]
+}
