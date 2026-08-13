@@ -71,9 +71,11 @@ struct ShadowView: View {
                 Text(verbatim: SunModel.clockLabel(minutes: model.minutes))
                     .font(BEMFont.boardLarge)
                     .foregroundStyle(BEMColor.ink)
-                Text("shadow.sun \(model.sun.elevation) \(String(localized: model.sun.westward ? "shadow.direction.west" : "shadow.direction.east"))")
-                    .font(BEMFont.dataLabel)
-                    .foregroundStyle(BEMColor.inkSecondary)
+                Text(
+                    "shadow.sun \(model.sun.elevation) \(String(localized: model.sun.westward ? "shadow.direction.west" : "shadow.direction.east"))"
+                )
+                .font(BEMFont.dataLabel)
+                .foregroundStyle(BEMColor.inkSecondary)
                 Spacer()
                 Button {
                     model.resetToNow()
@@ -124,7 +126,9 @@ struct SunCurveScrubber: View {
             let height = geo.size.height
             let fraction = (minutes - SunModel.dayStart) / (SunModel.dayEnd - SunModel.dayStart)
             let x = fraction * width
-            let dotY = height - 2 - (Double(SunModel.sample(atMinutes: minutes).elevation) / SunModel.peakElevation) * (height - 10)
+            let dotY =
+                height - 2 - (Double(SunModel.sample(atMinutes: minutes).elevation) / SunModel.peakElevation)
+                * (height - 10)
 
             ZStack(alignment: .topLeading) {
                 curve(in: geo.size, closed: true)

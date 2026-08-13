@@ -12,7 +12,8 @@ public enum AppGroup {
     /// it returns a suite whose writes go nowhere.
     // UserDefaults is documented thread-safe; it just predates Sendable.
     public nonisolated(unsafe) static let defaults: UserDefaults = {
-        let hasContainer = FileManager.default
+        let hasContainer =
+            FileManager.default
             .containerURL(forSecurityApplicationGroupIdentifier: identifier) != nil
         guard hasContainer, let suite = UserDefaults(suiteName: identifier) else {
             return .standard

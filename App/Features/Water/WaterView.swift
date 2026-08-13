@@ -145,7 +145,9 @@ struct FountainDetailCard: View {
             }
 
             VStack(spacing: 1) {
-                detailRow(icon: "calendar.badge.checkmark", label: "water.season", value: Text(open ? "water.season.range" : "water.season.from"))
+                detailRow(
+                    icon: "calendar.badge.checkmark", label: "water.season",
+                    value: Text(open ? "water.season.range" : "water.season.from"))
                 Divider().overlay(BEMColor.glazeLine)
                 detailRow(icon: "clock", label: "water.hours", value: Text("water.hours.always"))
                 Divider().overlay(BEMColor.glazeLine)
@@ -201,7 +203,8 @@ struct FountainDetailCard: View {
     }
 
     private func squareAction(icon: String, label: LocalizedStringKey) -> some View {
-        Button {} label: {
+        Button {
+        } label: {
             Image(systemName: icon)
                 .font(.body.weight(.medium))
                 .foregroundStyle(BEMColor.cobalt)

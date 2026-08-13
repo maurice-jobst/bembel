@@ -15,7 +15,7 @@ struct AGSTests {
         #expect(AGS(rawValue: "064120000") == nil)
         #expect(AGS(rawValue: "0641200a") == nil)
         #expect(AGS(rawValue: "") == nil)
-        #expect(AGS(rawValue: "0641200٠") == nil) // Arabic-Indic zero
+        #expect(AGS(rawValue: "0641200٠") == nil)  // Arabic-Indic zero
     }
 
     @Test("Decoding a malformed key throws instead of admitting it")
@@ -32,7 +32,7 @@ struct RegionTableTests {
     private let frankfurt = AGS(rawValue: "06412000")!
     private let offenbach = AGS(rawValue: "06413000")!
     private let mainz = AGS(rawValue: "07315000")!
-    private let unknown = AGS(rawValue: "05315000")! // Köln — not Rhein-Main
+    private let unknown = AGS(rawValue: "05315000")!  // Köln — not Rhein-Main
 
     @Test("Rings are ordered inside-out")
     func ringOrdering() {

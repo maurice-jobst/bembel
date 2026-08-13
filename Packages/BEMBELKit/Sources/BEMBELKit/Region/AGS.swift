@@ -6,7 +6,8 @@ public struct AGS: Hashable, Sendable, RawRepresentable, Codable, CustomStringCo
     public let rawValue: String
 
     public init?(rawValue: String) {
-        guard rawValue.utf8.count == 8, rawValue.utf8.allSatisfy({ $0 >= UInt8(ascii: "0") && $0 <= UInt8(ascii: "9") }) else {
+        guard rawValue.utf8.count == 8, rawValue.utf8.allSatisfy({ $0 >= UInt8(ascii: "0") && $0 <= UInt8(ascii: "9") })
+        else {
             return nil
         }
         self.rawValue = rawValue

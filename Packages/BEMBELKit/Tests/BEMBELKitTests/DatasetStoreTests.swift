@@ -20,17 +20,20 @@ struct DatasetStoreTests {
         manifest: DatasetManifest? = nil,
         directory: URL? = nil
     ) throws -> (store: DatasetStore, directory: URL) {
-        let dir = directory ?? FileManager.default.temporaryDirectory
+        let dir =
+            directory
+            ?? FileManager.default.temporaryDirectory
             .appending(path: "bembel-tests-\(UUID().uuidString)")
         let config = URLSessionConfiguration.ephemeral
         config.protocolClasses = [MockURLProtocol.self]
         config.urlCache = nil
         let store = try DatasetStore(
-            manifest: manifest ?? DatasetManifest(
-                version: 1,
-                baseURL: URL(string: "https://mock.test/")!,
-                datasets: ["testdata": .init(path: "testdata.json")]
-            ),
+            manifest: manifest
+                ?? DatasetManifest(
+                    version: 1,
+                    baseURL: URL(string: "https://mock.test/")!,
+                    datasets: ["testdata": .init(path: "testdata.json")]
+                ),
             bundle: .module,
             directory: dir,
             session: URLSession(configuration: config)

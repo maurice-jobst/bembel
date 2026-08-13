@@ -14,8 +14,8 @@ public struct SunSample: Sendable {
 /// afternoon — enough to drive the UI honestly until real ephemeris and the
 /// LoD2 shadow index land (BEM-D02/D03).
 public enum SunModel {
-    public static let dayStart: Double = 330 // 05:30
-    public static let dayEnd: Double = 1290 // 21:30
+    public static let dayStart: Double = 330  // 05:30
+    public static let dayEnd: Double = 1290  // 21:30
     /// Solar noon of the model (13:20) — elevation peaks, shadows flip east.
     public static let peakMinutes: Double = 800
     /// Peak elevation in degrees; also normalizes the scrubber curve.

@@ -93,7 +93,8 @@ struct RadarView: View {
     private func timelineCard(_ nowcast: RadarNowcast) -> some View {
         VStack(spacing: BEMSpacing.s + 2) {
             HStack(spacing: BEMSpacing.m) {
-                Button {} label: {
+                Button {
+                } label: {
                     Circle()
                         .fill(BEMColor.cobalt)
                         .frame(width: 40, height: 40)
@@ -189,7 +190,8 @@ struct SampleRainCells: View {
         }
     }
 
-    private func cell(x: Double, y: Double, size: Double, color: Color, opacity: Double, in canvas: CGSize) -> some View {
+    private func cell(x: Double, y: Double, size: Double, color: Color, opacity: Double, in canvas: CGSize) -> some View
+    {
         Ellipse()
             .fill(color)
             .opacity(opacity * 0.75)
