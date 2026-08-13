@@ -1,15 +1,2383 @@
 {
   "version": 1,
-  "status": "provisional",
-  "definition": "frankfurt = AGS 06412000; kernraum = Regionalverband FrankfurtRheinMain member municipalities; rheinmain = Metropolregion FrankfurtRheinMain",
-  "source": "hand-seeded 2026-08-13 with unambiguous major cities only; full table comes from scripts/generate_rings.py against the Destatis Gemeindeverzeichnis",
+  "status": "generated",
+  "definition": "frankfurt = AGS 06412000; kernraum = the 80 named Regionalverband FrankfurtRheinMain member municipalities; rheinmain = every municipality within the Metropolregion FrankfurtRheinMain's 18 Landkreise + kreisfreie Städte",
+  "source": "scripts/generate_rings.py from Destatis GV100AD (region-frankfurt.de membership lists, retrieved 2026-08-13; see script header for the open kreisfreie-Städte count question)",
   "municipalities": [
-    { "ags": "06412000", "name": "Frankfurt am Main", "ring": "frankfurt" },
-    { "ags": "06413000", "name": "Offenbach am Main", "ring": "kernraum" },
-    { "ags": "06435014", "name": "Hanau", "ring": "kernraum" },
-    { "ags": "06411000", "name": "Darmstadt", "ring": "rheinmain" },
-    { "ags": "06414000", "name": "Wiesbaden", "ring": "rheinmain" },
-    { "ags": "07315000", "name": "Mainz", "ring": "rheinmain" },
-    { "ags": "09661000", "name": "Aschaffenburg", "ring": "rheinmain" }
+    {
+      "ags": "06411000",
+      "name": "Darmstadt, Wissenschaftsstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06412000",
+      "name": "Frankfurt am Main, Stadt",
+      "ring": "frankfurt"
+    },
+    {
+      "ags": "06413000",
+      "name": "Offenbach am Main, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06414000",
+      "name": "Wiesbaden, Landeshauptstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06415000",
+      "name": "Hanau, Brüder-Grimm-Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06431001",
+      "name": "Abtsteinach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431002",
+      "name": "Bensheim, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431003",
+      "name": "Biblis",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431004",
+      "name": "Birkenau",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431005",
+      "name": "Bürstadt, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431006",
+      "name": "Einhausen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431007",
+      "name": "Fürth",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431008",
+      "name": "Gorxheimertal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431009",
+      "name": "Grasellenbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431010",
+      "name": "Groß-Rohrheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431011",
+      "name": "Heppenheim (Bergstraße), Kreisstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431012",
+      "name": "Hirschhorn (Neckar), Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431013",
+      "name": "Lampertheim, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431014",
+      "name": "Lautertal (Odenwald)",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431015",
+      "name": "Lindenfels, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431016",
+      "name": "Lorsch, Karolingerstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431017",
+      "name": "Mörlenbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431018",
+      "name": "Neckarsteinach, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431019",
+      "name": "Rimbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431020",
+      "name": "Viernheim, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431021",
+      "name": "Wald-Michelbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431022",
+      "name": "Zwingenberg, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06431200",
+      "name": "Michelbuch, gemfr. Gebiet",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432001",
+      "name": "Alsbach-Hähnlein",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432002",
+      "name": "Babenhausen, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432003",
+      "name": "Bickenbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432004",
+      "name": "Dieburg, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432005",
+      "name": "Eppertshausen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432006",
+      "name": "Erzhausen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432007",
+      "name": "Fischbachtal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432008",
+      "name": "Griesheim, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432009",
+      "name": "Groß-Bieberau, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432010",
+      "name": "Groß-Umstadt, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432011",
+      "name": "Groß-Zimmern",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432012",
+      "name": "Messel",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432013",
+      "name": "Modautal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432014",
+      "name": "Mühltal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432015",
+      "name": "Münster (Hessen)",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432016",
+      "name": "Ober-Ramstadt, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432017",
+      "name": "Otzberg",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432018",
+      "name": "Pfungstadt, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432019",
+      "name": "Reinheim, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432020",
+      "name": "Roßdorf",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432021",
+      "name": "Schaafheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432022",
+      "name": "Seeheim-Jugenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06432023",
+      "name": "Weiterstadt, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06433001",
+      "name": "Biebesheim am Rhein",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06433002",
+      "name": "Bischofsheim",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06433003",
+      "name": "Büttelborn",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06433004",
+      "name": "Gernsheim, Schöfferstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06433005",
+      "name": "Ginsheim-Gustavsburg, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06433006",
+      "name": "Groß-Gerau, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06433007",
+      "name": "Kelsterbach, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06433008",
+      "name": "Mörfelden-Walldorf, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06433009",
+      "name": "Nauheim",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06433010",
+      "name": "Raunheim, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06433011",
+      "name": "Riedstadt, Büchnerstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06433012",
+      "name": "Rüsselsheim am Main, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06433013",
+      "name": "Stockstadt am Rhein",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06433014",
+      "name": "Trebur",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06434001",
+      "name": "Bad Homburg v. d. Höhe, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06434002",
+      "name": "Friedrichsdorf, Philipp-Reis-Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06434003",
+      "name": "Glashütten",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06434004",
+      "name": "Grävenwiesbach",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06434005",
+      "name": "Königstein im Taunus, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06434006",
+      "name": "Kronberg im Taunus, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06434007",
+      "name": "Neu-Anspach, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06434008",
+      "name": "Oberursel (Taunus), Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06434009",
+      "name": "Schmitten im Taunus",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06434010",
+      "name": "Steinbach (Taunus), Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06434011",
+      "name": "Usingen, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06434012",
+      "name": "Wehrheim",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06434013",
+      "name": "Weilrod",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435001",
+      "name": "Bad Orb, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435002",
+      "name": "Bad Soden-Salmünster, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435003",
+      "name": "Biebergemünd",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435004",
+      "name": "Birstein",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435005",
+      "name": "Brachttal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435006",
+      "name": "Bruchköbel, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435007",
+      "name": "Erlensee, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435008",
+      "name": "Flörsbachtal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435009",
+      "name": "Freigericht",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435010",
+      "name": "Gelnhausen, Barbarossastadt, Kreisstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435011",
+      "name": "Großkrotzenburg",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435012",
+      "name": "Gründau",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435013",
+      "name": "Hammersbach",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435015",
+      "name": "Hasselroth",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435016",
+      "name": "Jossgrund",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435017",
+      "name": "Langenselbold, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435018",
+      "name": "Linsengericht",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435019",
+      "name": "Maintal, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435020",
+      "name": "Neuberg",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435021",
+      "name": "Nidderau, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435022",
+      "name": "Niederdorfelden",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435023",
+      "name": "Rodenbach",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435024",
+      "name": "Ronneburg",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435025",
+      "name": "Schlüchtern, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435026",
+      "name": "Schöneck",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06435027",
+      "name": "Sinntal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435028",
+      "name": "Steinau an der Straße, Brüder-Grimm-Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435029",
+      "name": "Wächtersbach, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06435200",
+      "name": "Gutsbezirk Spessart, gemfr. Gebiet",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06436001",
+      "name": "Bad Soden am Taunus, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06436002",
+      "name": "Eppstein, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06436003",
+      "name": "Eschborn, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06436004",
+      "name": "Flörsheim am Main, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06436005",
+      "name": "Hattersheim am Main, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06436006",
+      "name": "Hochheim am Main, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06436007",
+      "name": "Hofheim am Taunus, Kreisstadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06436008",
+      "name": "Kelkheim (Taunus), Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06436009",
+      "name": "Kriftel",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06436010",
+      "name": "Liederbach am Taunus",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06436011",
+      "name": "Schwalbach am Taunus, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06436012",
+      "name": "Sulzbach (Taunus)",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06437001",
+      "name": "Bad König, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06437003",
+      "name": "Brensbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06437004",
+      "name": "Breuberg, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06437005",
+      "name": "Brombachtal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06437006",
+      "name": "Erbach, Kreisstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06437007",
+      "name": "Fränkisch-Crumbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06437009",
+      "name": "Höchst i. Odw.",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06437010",
+      "name": "Lützelbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06437011",
+      "name": "Michelstadt, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06437012",
+      "name": "Mossautal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06437013",
+      "name": "Reichelsheim (Odenwald)",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06437016",
+      "name": "Oberzent, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06438001",
+      "name": "Dietzenbach, Kreisstadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06438002",
+      "name": "Dreieich, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06438003",
+      "name": "Egelsbach",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06438004",
+      "name": "Hainburg",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06438005",
+      "name": "Heusenstamm, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06438006",
+      "name": "Langen (Hessen), Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06438007",
+      "name": "Mainhausen",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06438008",
+      "name": "Mühlheim am Main, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06438009",
+      "name": "Neu-Isenburg, Hugenotten- und Waldenserstadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06438010",
+      "name": "Obertshausen, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06438011",
+      "name": "Rodgau, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06438012",
+      "name": "Rödermark, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06438013",
+      "name": "Seligenstadt, Einhardstadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06439001",
+      "name": "Aarbergen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439002",
+      "name": "Bad Schwalbach, Kreisstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439003",
+      "name": "Eltville am Rhein, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439004",
+      "name": "Geisenheim, Hochschulstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439005",
+      "name": "Heidenrod",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439006",
+      "name": "Hohenstein",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439007",
+      "name": "Hünstetten",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439008",
+      "name": "Idstein, Hochschulstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439009",
+      "name": "Kiedrich",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439010",
+      "name": "Lorch, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439011",
+      "name": "Niedernhausen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439012",
+      "name": "Oestrich-Winkel, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439013",
+      "name": "Rüdesheim am Rhein, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439014",
+      "name": "Schlangenbad",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439015",
+      "name": "Taunusstein, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439016",
+      "name": "Waldems",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06439017",
+      "name": "Walluf",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06440001",
+      "name": "Altenstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06440002",
+      "name": "Bad Nauheim, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440003",
+      "name": "Bad Vilbel, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440004",
+      "name": "Büdingen, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06440005",
+      "name": "Butzbach, Friedrich-Ludwig-Weidig-Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440006",
+      "name": "Echzell",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440007",
+      "name": "Florstadt, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440008",
+      "name": "Friedberg (Hessen), Kreisstadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440009",
+      "name": "Gedern, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06440010",
+      "name": "Glauburg",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440011",
+      "name": "Hirzenhain",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06440012",
+      "name": "Karben, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440013",
+      "name": "Kefenrod",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06440014",
+      "name": "Limeshain",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440015",
+      "name": "Münzenberg, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440016",
+      "name": "Nidda, Johannes-Pistorius-Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440017",
+      "name": "Niddatal, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440018",
+      "name": "Ober-Mörlen",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440019",
+      "name": "Ortenberg, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06440020",
+      "name": "Ranstadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440021",
+      "name": "Reichelsheim (Wetterau), Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440022",
+      "name": "Rockenberg",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440023",
+      "name": "Rosbach v. d. Höhe, Stadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440024",
+      "name": "Wölfersheim",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06440025",
+      "name": "Wöllstadt",
+      "ring": "kernraum"
+    },
+    {
+      "ags": "06531001",
+      "name": "Allendorf (Lumda), Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531002",
+      "name": "Biebertal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531003",
+      "name": "Buseck",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531004",
+      "name": "Fernwald",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531005",
+      "name": "Gießen, Universitätsstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531006",
+      "name": "Grünberg, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531007",
+      "name": "Heuchelheim a. d. Lahn",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531008",
+      "name": "Hungen, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531009",
+      "name": "Langgöns",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531010",
+      "name": "Laubach, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531011",
+      "name": "Lich, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531012",
+      "name": "Linden, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531013",
+      "name": "Lollar, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531014",
+      "name": "Pohlheim, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531015",
+      "name": "Rabenau",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531016",
+      "name": "Reiskirchen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531017",
+      "name": "Staufenberg, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06531018",
+      "name": "Wettenberg",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533001",
+      "name": "Beselich",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533002",
+      "name": "Brechen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533003",
+      "name": "Bad Camberg, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533004",
+      "name": "Dornburg",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533005",
+      "name": "Elbtal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533006",
+      "name": "Elz",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533007",
+      "name": "Hadamar, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533008",
+      "name": "Hünfelden",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533009",
+      "name": "Limburg a. d. Lahn, Kreisstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533010",
+      "name": "Löhnberg",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533011",
+      "name": "Mengerskirchen, Marktflecken",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533012",
+      "name": "Merenberg, Marktflecken",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533013",
+      "name": "Runkel, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533014",
+      "name": "Selters (Taunus)",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533015",
+      "name": "Villmar, Marktflecken",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533016",
+      "name": "Waldbrunn (Westerwald)",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533017",
+      "name": "Weilburg, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533018",
+      "name": "Weilmünster, Marktflecken",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06533019",
+      "name": "Weinbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535001",
+      "name": "Alsfeld, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535002",
+      "name": "Antrifttal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535003",
+      "name": "Feldatal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535004",
+      "name": "Freiensteinau",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535005",
+      "name": "Gemünden (Felda)",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535006",
+      "name": "Grebenau, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535007",
+      "name": "Grebenhain",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535008",
+      "name": "Herbstein, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535009",
+      "name": "Homberg (Ohm), Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535010",
+      "name": "Kirtorf, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535011",
+      "name": "Lauterbach (Hessen), Kreisstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535012",
+      "name": "Lautertal (Vogelsberg)",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535013",
+      "name": "Mücke",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535014",
+      "name": "Romrod, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535015",
+      "name": "Schlitz, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535016",
+      "name": "Schotten, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535017",
+      "name": "Schwalmtal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535018",
+      "name": "Ulrichstein, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06535019",
+      "name": "Wartenberg",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631001",
+      "name": "Bad Salzschlirf",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631002",
+      "name": "Burghaun, Marktgemeinde",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631003",
+      "name": "Dipperz",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631004",
+      "name": "Ebersburg",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631005",
+      "name": "Ehrenberg (Rhön)",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631006",
+      "name": "Eichenzell",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631007",
+      "name": "Eiterfeld, Marktgemeinde",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631008",
+      "name": "Flieden",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631009",
+      "name": "Fulda, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631010",
+      "name": "Gersfeld (Rhön), Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631011",
+      "name": "Großenlüder",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631012",
+      "name": "Hilders, Marktgemeinde",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631013",
+      "name": "Hofbieber",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631014",
+      "name": "Hosenfeld",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631015",
+      "name": "Hünfeld, Konrad-Zuse-Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631016",
+      "name": "Kalbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631017",
+      "name": "Künzell",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631018",
+      "name": "Neuhof",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631019",
+      "name": "Nüsttal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631020",
+      "name": "Petersberg",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631021",
+      "name": "Poppenhausen (Wasserkuppe)",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631022",
+      "name": "Rasdorf, Point-Alpha-Gemeinde",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "06631023",
+      "name": "Tann (Rhön), Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07315000",
+      "name": "Mainz, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07319000",
+      "name": "Worms, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331001",
+      "name": "Albig",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331002",
+      "name": "Alsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331003",
+      "name": "Alzey, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331004",
+      "name": "Armsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331005",
+      "name": "Bechenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331006",
+      "name": "Bechtheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331007",
+      "name": "Bechtolsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331008",
+      "name": "Bermersheim vor der Höhe",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331009",
+      "name": "Bermersheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331010",
+      "name": "Biebelnheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331011",
+      "name": "Hochborn",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331012",
+      "name": "Bornheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331014",
+      "name": "Dintesheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331015",
+      "name": "Dittelsheim-Heßloch",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331017",
+      "name": "Eckelsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331018",
+      "name": "Eich",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331019",
+      "name": "Ensheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331020",
+      "name": "Eppelsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331021",
+      "name": "Erbes-Büdesheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331022",
+      "name": "Esselborn",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331023",
+      "name": "Flörsheim-Dalsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331024",
+      "name": "Flomborn",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331025",
+      "name": "Flonheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331026",
+      "name": "Framersheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331027",
+      "name": "Freimersheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331028",
+      "name": "Frettenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331029",
+      "name": "Gabsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331030",
+      "name": "Gau-Bickelheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331031",
+      "name": "Gau-Heppenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331032",
+      "name": "Gau-Odernheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331033",
+      "name": "Gau-Weinheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331034",
+      "name": "Gimbsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331035",
+      "name": "Gumbsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331036",
+      "name": "Gundersheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331037",
+      "name": "Gundheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331038",
+      "name": "Hamm am Rhein",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331039",
+      "name": "Hangen-Weisheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331041",
+      "name": "Hohen-Sülzen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331042",
+      "name": "Kettenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331043",
+      "name": "Lonsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331044",
+      "name": "Mauchenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331045",
+      "name": "Mettenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331046",
+      "name": "Mölsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331047",
+      "name": "Mörstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331048",
+      "name": "Monsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331049",
+      "name": "Monzernheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331050",
+      "name": "Nack",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331051",
+      "name": "Nieder-Wiesen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331052",
+      "name": "Ober-Flörsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331053",
+      "name": "Offenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331054",
+      "name": "Offstein",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331055",
+      "name": "Osthofen, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331056",
+      "name": "Partenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331058",
+      "name": "Saulheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331059",
+      "name": "Schornsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331060",
+      "name": "Siefersheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331061",
+      "name": "Spiesheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331062",
+      "name": "Stein-Bockenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331063",
+      "name": "Sulzheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331064",
+      "name": "Udenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331065",
+      "name": "Vendersheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331066",
+      "name": "Wachenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331067",
+      "name": "Wahlheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331068",
+      "name": "Wallertheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331070",
+      "name": "Wendelsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331071",
+      "name": "Westhofen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331072",
+      "name": "Wöllstein",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331073",
+      "name": "Wörrstadt, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07331075",
+      "name": "Wonsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339001",
+      "name": "Appenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339002",
+      "name": "Aspisheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339003",
+      "name": "Bacharach, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339004",
+      "name": "Badenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339005",
+      "name": "Bingen am Rhein, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339006",
+      "name": "Bodenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339007",
+      "name": "Breitscheid",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339008",
+      "name": "Bubenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339009",
+      "name": "Budenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339010",
+      "name": "Dalheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339011",
+      "name": "Dexheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339012",
+      "name": "Dienheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339013",
+      "name": "Dolgesheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339015",
+      "name": "Eimsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339016",
+      "name": "Engelstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339017",
+      "name": "Essenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339018",
+      "name": "Friesenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339019",
+      "name": "Gau-Algesheim, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339020",
+      "name": "Gau-Bischofsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339021",
+      "name": "Gensingen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339022",
+      "name": "Grolsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339024",
+      "name": "Guntersblum",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339025",
+      "name": "Hahnheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339026",
+      "name": "Harxheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339028",
+      "name": "Hillesheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339029",
+      "name": "Horrweiler",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339030",
+      "name": "Ingelheim am Rhein, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339031",
+      "name": "Jugenheim in Rheinhessen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339032",
+      "name": "Klein-Winternheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339033",
+      "name": "Köngernheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339034",
+      "name": "Lörzweiler",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339035",
+      "name": "Ludwigshöhe",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339036",
+      "name": "Manubach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339037",
+      "name": "Mommenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339038",
+      "name": "Münster-Sarmsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339039",
+      "name": "Nackenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339040",
+      "name": "Niederheimbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339041",
+      "name": "Nieder-Hilbersheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339042",
+      "name": "Nieder-Olm, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339043",
+      "name": "Nierstein, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339044",
+      "name": "Oberdiebach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339045",
+      "name": "Oberheimbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339046",
+      "name": "Ober-Hilbersheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339047",
+      "name": "Ober-Olm",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339048",
+      "name": "Ockenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339049",
+      "name": "Oppenheim, Stadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339050",
+      "name": "Sankt Johann",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339051",
+      "name": "Schwabenheim an der Selz",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339053",
+      "name": "Selzen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339054",
+      "name": "Sörgenloch",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339056",
+      "name": "Sprendlingen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339057",
+      "name": "Stadecken-Elsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339058",
+      "name": "Trechtingshausen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339059",
+      "name": "Uelversheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339060",
+      "name": "Undenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339062",
+      "name": "Waldalgesheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339063",
+      "name": "Weiler bei Bingen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339064",
+      "name": "Weinolsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339065",
+      "name": "Welgesheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339066",
+      "name": "Wintersheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339067",
+      "name": "Zornheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339068",
+      "name": "Zotzenheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339201",
+      "name": "Dorn-Dürkheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "07339202",
+      "name": "Wolfsheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09661000",
+      "name": "Aschaffenburg",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671111",
+      "name": "Alzenau, St",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671112",
+      "name": "Bessenbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671113",
+      "name": "Blankenbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671114",
+      "name": "Karlstein a.Main",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671119",
+      "name": "Geiselbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671120",
+      "name": "Glattbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671121",
+      "name": "Goldbach, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671122",
+      "name": "Großostheim, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671124",
+      "name": "Haibach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671126",
+      "name": "Heigenbrücken",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671127",
+      "name": "Heimbuchenthal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671128",
+      "name": "Heinrichsthal",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671130",
+      "name": "Hösbach, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671133",
+      "name": "Johannesberg",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671134",
+      "name": "Kahl a.Main",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671135",
+      "name": "Kleinkahl",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671136",
+      "name": "Kleinostheim",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671138",
+      "name": "Krombach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671139",
+      "name": "Laufach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671140",
+      "name": "Mainaschaff",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671141",
+      "name": "Mespelbrunn",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671143",
+      "name": "Mömbris, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671148",
+      "name": "Rothenbuch",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671150",
+      "name": "Sailauf",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671152",
+      "name": "Schöllkrippen, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671153",
+      "name": "Sommerkahl",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671155",
+      "name": "Stockstadt a.Main, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671156",
+      "name": "Waldaschaff",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671157",
+      "name": "Weibersbrunn",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671159",
+      "name": "Westerngrund",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671160",
+      "name": "Dammbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671162",
+      "name": "Wiesen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671451",
+      "name": "Forst Hain i.Spessart",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671453",
+      "name": "Heinrichsthaler Forst",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671456",
+      "name": "Rohrbrunner Forst",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671457",
+      "name": "Rothenbucher Forst",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671458",
+      "name": "Sailaufer Forst",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671459",
+      "name": "Schöllkrippener Forst",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671460",
+      "name": "Waldaschaffer Forst",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09671461",
+      "name": "Wiesener Forst",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676111",
+      "name": "Altenbuch",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676112",
+      "name": "Amorbach, St",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676116",
+      "name": "Bürgstadt, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676117",
+      "name": "Collenberg",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676118",
+      "name": "Dorfprozelten",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676119",
+      "name": "Eichenbühl",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676121",
+      "name": "Elsenfeld, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676122",
+      "name": "Erlenbach a.Main, St",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676123",
+      "name": "Eschau, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676124",
+      "name": "Faulbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676125",
+      "name": "Großheubach, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676126",
+      "name": "Großwallstadt",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676128",
+      "name": "Hausen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676131",
+      "name": "Kirchzell, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676132",
+      "name": "Kleinheubach, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676133",
+      "name": "Kleinwallstadt, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676134",
+      "name": "Klingenberg a.Main, St",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676135",
+      "name": "Laudenbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676136",
+      "name": "Leidersbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676139",
+      "name": "Miltenberg, St",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676140",
+      "name": "Mömlingen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676141",
+      "name": "Mönchberg, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676143",
+      "name": "Neunkirchen",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676144",
+      "name": "Niedernberg",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676145",
+      "name": "Obernburg a.Main, St",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676151",
+      "name": "Röllbach",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676153",
+      "name": "Rüdenau",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676156",
+      "name": "Schneeberg, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676158",
+      "name": "Stadtprozelten, St",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676160",
+      "name": "Sulzbach a.Main, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676165",
+      "name": "Weilbach, M",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676169",
+      "name": "Wörth a.Main, St",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676452",
+      "name": "Forstwald",
+      "ring": "rheinmain"
+    },
+    {
+      "ags": "09676455",
+      "name": "Hohe Wart",
+      "ring": "rheinmain"
+    }
   ]
 }
