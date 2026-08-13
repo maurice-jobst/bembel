@@ -3,15 +3,15 @@ import SwiftUI
 
 @main
 struct BEMBELApp: App {
+    @State private var router = Router()
+
     var body: some Scene {
         WindowGroup {
-            // Placeholder until the navigation shell lands (BEM-A03).
-            VStack(spacing: 12) {
-                Image(systemName: "cup.and.saucer.fill")
-                    .font(.largeTitle)
-                Text(verbatim: "BEMBEL")
-                    .font(.title.weight(.bold))
-            }
+            RootView()
+                .environment(router)
+                .onOpenURL { url in
+                    router.handle(url)
+                }
         }
     }
 }
