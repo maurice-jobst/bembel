@@ -4,6 +4,18 @@ All notable changes to BEMBEL. Format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versions follow
 [SemVer](https://semver.org) with 0.x meaning "pre-App-Store".
 
+## [Unreleased]
+
+### Changed
+
+- Repositioned around the bembel-data hero: Wasserhäuschen + Ebbelwei
+  registers, rating funnel, provenance UX, and data-linked stickers join
+  the v1.0 scope (spec 2026-08-13); Schattenkarte remains a full v1.0
+  feature without the "signature" framing.
+- ADR 0008: "best for AI-native development" selection principle; radar
+  will parse RADOLAN directly (no Bright Sky dependency).
+- KICKOFF-PROMPT retired to docs/history/.
+
 ## [0.1.0] — 2026-08-13
 
 The collaboration-ready sample-data shell.
