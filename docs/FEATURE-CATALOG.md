@@ -12,7 +12,7 @@ Rot = how fast the feature decays if nobody maintains it.
 | Feature | Source | Access | Effort | Rot |
 |---|---|---|---|---|
 | **RMV departures** | RMV open data portal | REST, free key, registration lag | M | none |
-| **Rain radar** | DWD `opendata.dwd.de` (GeoNutzV) or Bright Sky | Open, no key | M | none |
+| **Rain radar** | DWD `opendata.dwd.de` (GeoNutzV), RADOLAN parsed on-device (ADR 0008) | Open, no key | M | none |
 | **Free drinking water** | Frankfurt Geoportal `Trink_Erfrischungsbrunnen` + OSM `amenity=drinking_water` + Refill partners | WFS/GeoJSON | S | slow |
 | **Main water level** | PEGELONLINE (WSV) | REST, no key, no registration | S | none |
 | **Civil warnings** | NINA / warnung.bund.de | Public JSON | S | none |

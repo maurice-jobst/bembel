@@ -1,3 +1,9 @@
+> **Historical document (retired 2026-08-13).** Describes the original
+> project shape: five locked v1.0 features, Schattenkarte as signature
+> feature, mid-January ship target. Superseded by
+> `docs/superpowers/specs/2026-08-13-hero-repositioning-design.md`
+> (bembel-data hero, ship 2027-03-22). Kept unedited below for context.
+
 # Kickoff prompt — BEMBEL
 
 Paste into a fresh session with `BACKLOG.md` in the repo root.

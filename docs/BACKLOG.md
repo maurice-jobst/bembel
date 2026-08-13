@@ -1,4 +1,4 @@
-# BEMBEL — v1.0 Backlog (rev. 3)
+# BEMBEL — v1.0 Backlog (rev. 4 — hero repositioning 2026-08-13)
 
 Free Rhein-Main city app for iPhone. Portfolio-grade, no backend of our own.
 Feature selection rationale lives in `FEATURE-CATALOG.md`.
@@ -23,9 +23,11 @@ below are a point-in-time note, not a live status — check the issue.
 | Base language | German, English v1.1, localisation scaffolding ships in v1.0 |
 | Target ship | **22 March 2027** — World Water Day, Trinkbrunnen season opening |
 
-**Selection principle:** data readiness first, then coolness × feasibility. Four of the five v1.0 features require zero curation.
+**Selection principles:** data readiness first, then coolness × feasibility; and best for AI-native development (ADR 0008 — deterministic, fixture-testable, no hosted service in the critical path). Four of the five classic features require zero curation.
 
-**NOT in v1.0** — voting, events calendar, parliament, elections, quizzes, stickers, Wasserhäuschen, Apfelwein list, Kreppel ranking, price barometers, shade routing, Android, iPad. Several of these now live as post-1.0 side quests in [epic S](https://github.com/maurice-jobst/bembel/issues?q=label%3Aepic%3AS) (milestone M4); they remain out of v1.0.
+**Hero (added 2026-08-13):** the bembel-data community layer is v1.0's flagship — Wasserhäuschen-Register + Ebbelwei-Wirtschaften register (read-only + rating funnel; write-side stays GitHub), provenance UX, Merkmale-first navigation, coverage game, and data-linked stickers (Datenspender/Verifizierer/Erste-Bewertung) + kiosk visit stamps. Pulled forward from epic S: `BEM-S04`, `BEM-S05`, `BEM-S11`, and the data-linked slice of `BEM-S01`. Scope of record: [hero-repositioning spec](superpowers/specs/2026-08-13-hero-repositioning-design.md). The Schattenkarte keeps its full scope; only the "signature feature" framing moved.
+
+**NOT in v1.0** — voting, events calendar, parliament, elections, quizzes, the full Sticker-Sammelalbum (hotspot geofences, Game Center, seasonal drops), Kreppel ranking, price barometers, shade routing, Android, iPad. These live as post-1.0 side quests in [epic S](https://github.com/maurice-jobst/bembel/issues?q=label%3Aepic%3AS) (milestone M4).
 
 ---
 
@@ -35,7 +37,7 @@ below are a point-in-time note, not a live status — check the issue.
 |---|---|---|
 | **M0 — Skeleton** | Aug–Oct 2026 | App builds, navigates, renders one dataset on a map. CI green. |
 | **M1 — Pipeline & geometry** | Oct–Dec 2026 | Data pipeline live. LoD2 extraction produces a loadable building index. |
-| **M2 — Features** | Dec 2026–Feb 2027 | All five v1.0 features functional. Widget on home screen. |
+| **M2 — Features** | Dec 2026–Feb 2027 | All v1.0 features functional (five classic + hero layer). Widget on home screen. |
 | **M3 — Ship** | Mar 2027 | TestFlight → App Store by 22 March. Press sent. |
 
 ---
@@ -137,7 +139,7 @@ Designed states for: no location permission, no network, RMV down, no departures
 
 ## EPIC D — Schattenkarte
 
-The signature feature. Everything here is geometry; nothing rots.
+Everything here is geometry; nothing rots. Full scope unchanged by the 2026-08-13 hero repositioning.
 
 <a id="bem-d01"></a>
 ### BEM-D01 — LoD2 acquisition · `size:M` · M1
@@ -189,8 +191,8 @@ Distance sort, Apple Maps handoff, type filter, ring filter free from `BEM-A04`.
 ## EPIC F — Rain radar
 
 <a id="bem-f01"></a>
-### BEM-F01 — Radar client · `size:M` · M2 · `needs-decision`
-DWD `opendata.dwd.de` under GeoNutzV, or Bright Sky's JSON wrapper. RADOLAN parsing is the better learning outcome; the wrapper is the better use of the calendar. Write the ADR, then pick.
+### BEM-F01 — Radar client · `size:M` · M2
+**Decided 2026-08-13 (ADR 0008):** parse DWD RADOLAN composites directly on-device, with checked-in binary fixtures for tests — no Bright Sky dependency (hosted service in the critical path of a no-backend app).
 
 <a id="bem-f02"></a>
 ### BEM-F02 — Animated overlay · `size:L` · M2
@@ -257,6 +259,6 @@ List: Journal Frankfurt, Frankfurt-Tipp, Hessenschau, FAZ Rhein-Main, Merkurist,
 ## Open decisions
 
 1. **`BEM-D02` bundle budget.** 15 MB of building geometry for Frankfurt city is the working assumption. If extraction blows past it, the fallback is on-demand region download — decide before M2, not during.
-2. **`BEM-F01`** RADOLAN vs. wrapper.
+2. ~~**`BEM-F01`** RADOLAN vs. wrapper.~~ Resolved 2026-08-13: RADOLAN direct (ADR 0008).
 3. **`BEM-H03`** tip jar, yes or no.
 4. **`data/` licence.** OSM-derived layers likely carry ODbL share-alike. LoD2-derived layers do not (dl-de/zero). Keeping those pipelines separate preserves your freedom on the shadow data — and an openly published Frankfurt shadow-geometry dataset may be a stronger portfolio artefact than the app around it.

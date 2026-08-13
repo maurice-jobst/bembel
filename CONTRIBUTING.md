@@ -19,8 +19,9 @@ Small team, strict habits. This file is the working agreement.
   show up where BACKLOG.md flags them. Issue bodies are self-contained
   briefs — pick one from your lane, assign yourself, start.
 - Locked product decisions are in
-  [docs/KICKOFF-PROMPT.md](docs/KICKOFF-PROMPT.md) — don't relitigate them in
-  PRs or issues.
+  [the hero-repositioning spec](docs/superpowers/specs/2026-08-13-hero-repositioning-design.md)
+  (the original kickoff prompt is archived under `docs/history/`) — don't
+  relitigate them in PRs or issues.
 - Any decision that would be expensive to reverse gets an ADR in `docs/adr/`
   before or with the PR that implements it.
 - `main` requires the three CI checks green before merge (once the repo is
