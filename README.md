@@ -35,7 +35,11 @@ Ship target: 22 March 2027 (World Water Day).
 - German is the base language; all strings go through String Catalogs.
 
 Decisions that would be expensive to reverse are recorded in
-[docs/adr/](docs/adr/). The backlog lives in [docs/BACKLOG.md](docs/BACKLOG.md).
+[docs/adr/](docs/adr/). The backlog lives in [docs/BACKLOG.md](docs/BACKLOG.md)
+as the spec; day-to-day status is tracked in
+[GitHub Issues](https://github.com/maurice-jobst/bembel/issues) and
+[Milestones](https://github.com/maurice-jobst/bembel/milestones)
+(M0 Skeleton → M1 Pipeline & geometry → M2 Features → M3 Ship).
 
 ## Building
 

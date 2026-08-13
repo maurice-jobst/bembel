@@ -1,6 +1,6 @@
 ## Ticket
 
-BEM-XXX — <!-- link the backlog entry -->
+Closes #<!-- issue number --> (BEM-XXX — see [docs/BACKLOG.md](../docs/BACKLOG.md) for the spec)
 
 ## What & why
 

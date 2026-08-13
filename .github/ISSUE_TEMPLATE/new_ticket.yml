@@ -1,0 +1,42 @@
+name: New backlog ticket
+description: Propose a new BEM-XXX ticket not yet in docs/BACKLOG.md
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For v1.0 scope, check `docs/KICKOFF-PROMPT.md` first — if it's not one
+        of the five locked features, it's probably v1.1+ (see
+        `docs/BACKLOG.md` § "v1.1 and beyond") or out of scope entirely.
+        Once accepted, this gets a `BEM-XXX` id and a matching entry in
+        BACKLOG.md's spec.
+  - type: textarea
+    id: what
+    attributes:
+      label: What and why
+    validations:
+      required: true
+  - type: textarea
+    id: ac
+    attributes:
+      label: Acceptance criteria
+      placeholder: How would you know this is done?
+  - type: dropdown
+    id: epic
+    attributes:
+      label: Epic
+      options:
+        - "A — Foundation"
+        - "B — Data pipeline"
+        - "C — Departures"
+        - "D — Schattenkarte"
+        - "E — Free drinking water"
+        - "F — Rain radar"
+        - "G — Stadtzustand"
+        - "H — Ship"
+        - New epic / v1.1+
+  - type: dropdown
+    id: size
+    attributes:
+      label: Rough size
+      options: ["S", "M", "L"]

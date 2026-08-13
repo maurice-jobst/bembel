@@ -5,12 +5,26 @@ Small team, strict habits. This file is the working agreement.
 ## Workflow
 
 - Single `main`, PR-based. One commit per ticket where feasible, message
-  prefixed with the ticket ID: `BEM-A05: curated dataset store`.
-- Tickets live in [docs/BACKLOG.md](docs/BACKLOG.md). Locked product decisions
-  are in [docs/KICKOFF-PROMPT.md](docs/KICKOFF-PROMPT.md) — don't relitigate
-  them in PRs.
+  prefixed with the ticket ID: `BEM-A05: curated dataset split`.
+- **Two surfaces per ticket, not one:** [docs/BACKLOG.md](docs/BACKLOG.md) is
+  the spec — scope, rationale, acceptance criteria. The matching
+  [GitHub Issue](https://github.com/maurice-jobst/bembel/issues) (same
+  `BEM-XXX` id in the title) is where work actually gets tracked — assign
+  yourself, comment, and close it via your PR (`Closes #N`) rather than
+  editing BACKLOG.md's status. If they ever disagree, BACKLOG.md wins for
+  scope/ACs, the issue wins for current status.
+- Issues carry an `epic:X` label, a `size:S/M/L` label, and a milestone
+  (M0–M3, matching BACKLOG.md's windows). `needs-decision`, `blocked`, and
+  `learning-goal` show up where BACKLOG.md flags them.
+- Locked product decisions are in
+  [docs/KICKOFF-PROMPT.md](docs/KICKOFF-PROMPT.md) — don't relitigate them in
+  PRs or issues.
 - Any decision that would be expensive to reverse gets an ADR in `docs/adr/`
   before or with the PR that implements it.
+- `main` requires the three CI checks green before merge (once the repo is
+  public — GitHub Free doesn't support branch protection on private repos;
+  run `scripts/apply_branch_protection.sh` right after flipping visibility).
+  Force-pushes and deletions on `main` are blocked once that's on.
 
 ## Rules
 

@@ -1,0 +1,35 @@
+name: Bug report
+description: Something in the shipped app or data is wrong
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you expected instead, and what actually occurred.
+    validations:
+      required: true
+  - type: input
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: Open app → tab X → ...
+  - type: input
+    id: device
+    attributes:
+      label: Device / iOS version
+      placeholder: iPhone 15, iOS 18.5
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Departures
+        - Schattenkarte
+        - Drinking water
+        - Rain radar
+        - Stadtzustand
+        - Data / attribution
+        - Other / not sure
+    validations:
+      required: true
