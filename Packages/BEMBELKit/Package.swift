@@ -15,6 +15,10 @@ let package = Package(
     ],
     targets: [
         .target(name: "BEMBELKit", resources: [.process("Resources")]),
-        .testTarget(name: "BEMBELKitTests", dependencies: ["BEMBELKit"]),
+        .testTarget(
+            name: "BEMBELKitTests",
+            dependencies: ["BEMBELKit"],
+            resources: [.process("Fixtures")]
+        ),
     ]
 )

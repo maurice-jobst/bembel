@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "baseURL": "https://data.invalid/bembel/",
+  "datasets": {
+    "rings": { "path": "rings.json" }
+  }
+}

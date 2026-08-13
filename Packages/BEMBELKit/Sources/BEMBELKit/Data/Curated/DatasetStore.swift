@@ -1,0 +1,127 @@
+import Foundation
+
+/// Offline-first store for curated datasets.
+///
+/// Read path: override file in the store directory if a refresh ever
+/// succeeded, else the bundled snapshot. The app therefore always has data,
+/// even if the network never answers once.
+///
+/// Refresh path: conditional GET with `If-None-Match`. A 200 must decode as
+/// the dataset's payload type before it replaces anything — a malformed
+/// publish can never break an installed app.
+public actor DatasetStore {
+    private let manifest: DatasetManifest
+    private let bundle: Bundle
+    private let directory: URL
+    private let session: URLSession
+    private var etags: ETagStore
+
+    public init(
+        manifest: DatasetManifest,
+        bundle: Bundle,
+        directory: URL,
+        session: URLSession = .shared
+    ) throws {
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        self.manifest = manifest
+        self.bundle = bundle
+        self.directory = directory
+        self.session = session
+        self.etags = ETagStore(directory: directory)
+    }
+
+    /// Store over the Kit's bundled datasets, overrides in App Support.
+    public static func makeDefault(session: URLSession = .shared) throws -> DatasetStore {
+        let support = try FileManager.default.url(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: true
+        )
+        return try DatasetStore(
+            manifest: DatasetManifest.bundled(in: .module),
+            bundle: .module,
+            directory: support.appending(path: "Datasets", directoryHint: .isDirectory),
+            session: session
+        )
+    }
+
+    public func payload<D: CuratedDataset>(for dataset: D.Type) throws -> D.Payload {
+        try JSONDecoder().decode(D.Payload.self, from: currentData(for: D.id))
+    }
+
+    @discardableResult
+    public func refresh<D: CuratedDataset>(_ dataset: D.Type) async -> RefreshOutcome {
+        guard
+            let entry = manifest.datasets[D.id],
+            let url = URL(string: entry.path, relativeTo: manifest.baseURL)
+        else { return .notInManifest }
+
+        var request = URLRequest(url: url)
+        if let etag = etags.etag(for: D.id) {
+            request.setValue(etag, forHTTPHeaderField: "If-None-Match")
+        }
+
+        let data: Data
+        let response: URLResponse
+        do {
+            (data, response) = try await session.data(for: request)
+        } catch {
+            return .transportFailure
+        }
+        guard let http = response as? HTTPURLResponse else { return .transportFailure }
+
+        switch http.statusCode {
+        case 200:
+            guard (try? JSONDecoder().decode(D.Payload.self, from: data)) != nil else {
+                return .invalidPayload
+            }
+            do {
+                try data.write(to: overrideURL(for: D.id), options: .atomic)
+            } catch {
+                return .storageFailure
+            }
+            if let etag = http.value(forHTTPHeaderField: "ETag") {
+                etags.set(etag, for: D.id)
+            }
+            return .updated
+        case 304:
+            return .notModified
+        default:
+            return .serverError(http.statusCode)
+        }
+    }
+
+    private func overrideURL(for id: String) -> URL {
+        directory.appending(path: "\(id).json")
+    }
+
+    private func currentData(for id: String) throws -> Data {
+        if let override = try? Data(contentsOf: overrideURL(for: id)) {
+            return override
+        }
+        guard
+            let url = bundle.url(forResource: id, withExtension: "json"),
+            let bundled = try? Data(contentsOf: url)
+        else {
+            throw DatasetError.missingBundledResource(id)
+        }
+        return bundled
+    }
+}
+
+public enum RefreshOutcome: Equatable, Sendable {
+    case updated
+    case notModified
+    /// 200 whose body doesn't decode — the old data stays authoritative.
+    case invalidPayload
+    case serverError(Int)
+    /// Offline, DNS failure, timeout — anything below HTTP.
+    case transportFailure
+    case storageFailure
+    case notInManifest
+}
+
+public enum DatasetError: Error, Sendable {
+    case missingBundledResource(String)
+}
