@@ -41,3 +41,6 @@ anything they cover.
   no tests on SwiftUI view bodies, no TDD ceremony.
 - Curated data rows: source URL mandatory, facts only, enforced by
   `scripts/validate_data.py`, not by convention.
+- The Orte tab (`App/Features/Places/`) carries all three place datasets behind
+  one segmented control — there is no Water feature folder any more (ADR 0009).
+  `BEMTab` has five cases; adding a sixth pushes iPhone into a "More" overflow.

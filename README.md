@@ -40,6 +40,10 @@ community-maintained datasets where entries and ratings are pull requests.
   GitHub flow for that kiosk; contributors earn in-app sticker credit
   (Datenspender) — no BEMBEL accounts, no backend, the privacy label
   stays "Data Not Collected".
+- **Built and shipped.** Both registers live in the **Orte** tab (position
+  one, ADR 0009) with Merkmale as the navigation, a provenance byline on
+  every entry, the coverage game per Stadtteil, and the Sammlung with
+  data-linked stickers plus opt-in kiosk visit stamps.
 
 ## 📱 v1.0
 
