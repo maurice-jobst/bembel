@@ -1,0 +1,10 @@
+version: 2
+updates:
+  # No app dependencies (ADR: no third-party dependencies), so the only
+  # thing to keep current is the Actions themselves.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci"
