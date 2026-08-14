@@ -29,12 +29,9 @@ struct FountainPin: View {
     }
 
     private var fill: Color {
-        switch (state.hasWater, fountain.tested) {
-        case (false, _): BEMColor.inkSecondary
+        guard state.hasWater else { return BEMColor.inkSecondary }
         // Water now, but nobody samples it: not the same green as a tested one.
-        case (true, false), (true, .none): BEMColor.caution
-        case (true, .some(true)): BEMColor.good
-        }
+        return fountain.tested == true ? BEMColor.good : BEMColor.caution
     }
 }
 
