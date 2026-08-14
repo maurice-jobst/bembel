@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BEBE00000000000000000091 /* BEMBELKit in Frameworks */ = {isa = PBXBuildFile; productRef = BEBE00000000000000000082 /* BEMBELKit */; };
+		BEBE00000000000000000092 /* BEMBELKit in Frameworks */ = {isa = PBXBuildFile; productRef = BEBE00000000000000000083 /* BEMBELKit */; };
+		BEBE00000000000000000093 /* BEMBELWidgets.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = BEBE00000000000000000026 /* BEMBELWidgets.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BEBE00000000000000000072 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BEBE00000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BEBE00000000000000000032;
+			remoteInfo = BEMBELWidgets;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BEBE00000000000000000044 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				BEBE00000000000000000093 /* BEMBELWidgets.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BEBE00000000000000000021 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
+		BEBE00000000000000000022 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		BEBE00000000000000000023 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		BEBE00000000000000000024 /* Secrets.xcconfig.template */ = {isa = PBXFileReference; lastKnownFileType = text; path = Secrets.xcconfig.template; sourceTree = "<group>"; };
+		BEBE00000000000000000025 /* BEMBEL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BEMBEL.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEBE00000000000000000026 /* BEMBELWidgets.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BEMBELWidgets.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BEBE00000000000000000015 /* Exceptions for "App" folder in "BEMBEL" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BEBE00000000000000000031 /* BEMBEL */;
+		};
+		BEBE00000000000000000016 /* Exceptions for "Widgets" folder in "BEMBELWidgets" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = BEBE00000000000000000032 /* BEMBELWidgets */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		BEBE00000000000000000011 /* App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BEBE00000000000000000015 /* Exceptions for "App" folder in "BEMBEL" target */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		BEBE00000000000000000012 /* Widgets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BEBE00000000000000000016 /* Exceptions for "Widgets" folder in "BEMBELWidgets" target */,
+			);
+			path = Widgets;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BEBE00000000000000000043 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEBE00000000000000000091 /* BEMBELKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEBE00000000000000000047 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEBE00000000000000000092 /* BEMBELKit in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BEBE00000000000000000010 = {
+			isa = PBXGroup;
+			children = (
+				BEBE00000000000000000011 /* App */,
+				BEBE00000000000000000012 /* Widgets */,
+				BEBE00000000000000000013 /* Config */,
+				BEBE00000000000000000014 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BEBE00000000000000000013 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				BEBE00000000000000000021 /* Shared.xcconfig */,
+				BEBE00000000000000000022 /* Debug.xcconfig */,
+				BEBE00000000000000000023 /* Release.xcconfig */,
+				BEBE00000000000000000024 /* Secrets.xcconfig.template */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		BEBE00000000000000000014 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BEBE00000000000000000025 /* BEMBEL.app */,
+				BEBE00000000000000000026 /* BEMBELWidgets.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BEBE00000000000000000031 /* BEMBEL */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEBE00000000000000000052 /* Build configuration list for PBXNativeTarget "BEMBEL" */;
+			buildPhases = (
+				BEBE00000000000000000041 /* Sources */,
+				BEBE00000000000000000043 /* Frameworks */,
+				BEBE00000000000000000042 /* Resources */,
+				BEBE00000000000000000044 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BEBE00000000000000000071 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BEBE00000000000000000011 /* App */,
+			);
+			name = BEMBEL;
+			packageProductDependencies = (
+				BEBE00000000000000000082 /* BEMBELKit */,
+			);
+			productName = BEMBEL;
+			productReference = BEBE00000000000000000025 /* BEMBEL.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BEBE00000000000000000032 /* BEMBELWidgets */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BEBE00000000000000000053 /* Build configuration list for PBXNativeTarget "BEMBELWidgets" */;
+			buildPhases = (
+				BEBE00000000000000000045 /* Sources */,
+				BEBE00000000000000000047 /* Frameworks */,
+				BEBE00000000000000000046 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BEBE00000000000000000012 /* Widgets */,
+			);
+			name = BEMBELWidgets;
+			packageProductDependencies = (
+				BEBE00000000000000000083 /* BEMBELKit */,
+			);
+			productName = BEMBELWidgets;
+			productReference = BEBE00000000000000000026 /* BEMBELWidgets.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BEBE00000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				minimizedProjectReferenceProxies = 1;
+				preferredProjectObjectVersion = 77;
+			};
+			buildConfigurationList = BEBE00000000000000000051 /* Build configuration list for PBXProject "BEMBEL" */;
+			developmentRegion = de;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				de,
+				en,
+				Base,
+			);
+			mainGroup = BEBE00000000000000000010;
+			packageReferences = (
+				BEBE00000000000000000081 /* XCLocalSwiftPackageReference "Packages/BEMBELKit" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = BEBE00000000000000000014 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BEBE00000000000000000031 /* BEMBEL */,
+				BEBE00000000000000000032 /* BEMBELWidgets */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BEBE00000000000000000042 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEBE00000000000000000046 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BEBE00000000000000000041 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BEBE00000000000000000045 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BEBE00000000000000000071 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BEBE00000000000000000032 /* BEMBELWidgets */;
+			targetProxy = BEBE00000000000000000072 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BEBE00000000000000000061 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BEBE00000000000000000022 /* Debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BEBE00000000000000000062 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BEBE00000000000000000023 /* Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BEBE00000000000000000063 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = App/BEMBEL.entitlements;
+				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BEMBEL;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BEMBEL_BUNDLE_ID_PREFIX).bembel";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BEBE00000000000000000064 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = App/BEMBEL.entitlements;
+				INFOPLIST_FILE = App/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BEMBEL;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BEMBEL_BUNDLE_ID_PREFIX).bembel";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BEBE00000000000000000065 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Widgets/BEMBELWidgets.entitlements;
+				INFOPLIST_FILE = Widgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BEMBEL;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BEMBEL_BUNDLE_ID_PREFIX).bembel.widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		BEBE00000000000000000066 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = Widgets/BEMBELWidgets.entitlements;
+				INFOPLIST_FILE = Widgets/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BEMBEL;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BEMBEL_BUNDLE_ID_PREFIX).bembel.widgets";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BEBE00000000000000000051 /* Build configuration list for PBXProject "BEMBEL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEBE00000000000000000061 /* Debug */,
+				BEBE00000000000000000062 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEBE00000000000000000052 /* Build configuration list for PBXNativeTarget "BEMBEL" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEBE00000000000000000063 /* Debug */,
+				BEBE00000000000000000064 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BEBE00000000000000000053 /* Build configuration list for PBXNativeTarget "BEMBELWidgets" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BEBE00000000000000000065 /* Debug */,
+				BEBE00000000000000000066 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		BEBE00000000000000000081 /* XCLocalSwiftPackageReference "Packages/BEMBELKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/BEMBELKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BEBE00000000000000000082 /* BEMBELKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BEMBELKit;
+		};
+		BEBE00000000000000000083 /* BEMBELKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = BEMBELKit;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = BEBE00000000000000000001 /* Project object */;
+}

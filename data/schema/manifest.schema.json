@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/maurice-jobst/bembel/data/schema/manifest.schema.json",
+  "title": "BEMBEL curated-dataset manifest",
+  "description": "Index of published curated datasets; the app refreshes against baseURL + path with conditional GET. scripts/validate_data.py implements these checks plus existence of every referenced file.",
+  "type": "object",
+  "required": ["version", "baseURL", "datasets"],
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "baseURL": { "type": "string", "pattern": "^https://.*/$" },
+    "datasets": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": { "pattern": "^[a-z][a-z0-9_]*$" },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["path"],
+        "additionalProperties": false,
+        "properties": {
+          "path": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

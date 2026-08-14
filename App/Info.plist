@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>BEMBEL nutzt deinen Standort für die nächste Haltestelle, den nächsten Brunnen und — wenn du Kiosk-Stempel einschaltest — um zu merken, an welchem Wasserhäuschen du warst. Alles bleibt auf dem Gerät.</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>de.mauricejobst.bembel</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>bembel</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

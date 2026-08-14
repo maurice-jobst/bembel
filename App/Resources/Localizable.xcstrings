@@ -1,0 +1,1246 @@
+{
+  "sourceLanguage": "de",
+  "strings": {
+    "action.locate": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf meinen Standort zentrieren"
+          }
+        }
+      }
+    },
+    "city.air.good": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "gut"
+          }
+        }
+      }
+    },
+    "city.air.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Luftqualität"
+          }
+        }
+      }
+    },
+    "city.gauge.axis": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "vor 7 Tagen"
+          }
+        }
+      }
+    },
+    "city.gauge.source %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PEGELONLINE · %@"
+          }
+        }
+      }
+    },
+    "city.gauge.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Main-Pegel"
+          }
+        }
+      }
+    },
+    "coverage.empty": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Abdeckungsdaten. Sobald Einträge Stadtteile tragen, zeigen wir hier den Stand."
+          }
+        }
+      }
+    },
+    "coverage.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geprüft heißt: jemand hat die Angaben an der Quelle oder vor Ort bestätigt. Graue Pins auf der Karte warten noch darauf."
+          }
+        }
+      }
+    },
+    "coverage.progress %lld %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld von %lld geprüft"
+          }
+        }
+      }
+    },
+    "coverage.report": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einen fehlenden Ort melden"
+          }
+        }
+      }
+    },
+    "coverage.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abdeckung"
+          }
+        }
+      }
+    },
+    "departures.minutes %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld′"
+          }
+        }
+      }
+    },
+    "departures.source %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RMV · aktualisiert %@"
+          }
+        }
+      }
+    },
+    "entry.action.rate": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bewerten"
+          }
+        }
+      }
+    },
+    "entry.action.rate.open": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf GitHub bewerten"
+          }
+        }
+      }
+    },
+    "entry.action.route": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Route"
+          }
+        }
+      }
+    },
+    "entry.candidate.action": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf GitHub verifizieren"
+          }
+        }
+      }
+    },
+    "entry.candidate.cta": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch niemand hat diesen Ort geprüft. Warst du da? Hilf mit."
+          }
+        }
+      }
+    },
+    "entry.provenance.editor %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zuletzt bearbeitet von @%@"
+          }
+        }
+      }
+    },
+    "entry.provenance.history": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Änderungen auf GitHub"
+          }
+        }
+      }
+    },
+    "entry.provenance.unverified": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch nicht geprüft"
+          }
+        }
+      }
+    },
+    "entry.provenance.verified %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geprüft am %@"
+          }
+        }
+      }
+    },
+    "entry.rating.count %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Bewertungen"
+          }
+        }
+      }
+    },
+    "entry.rating.none": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Bewertung"
+          }
+        }
+      }
+    },
+    "entry.rating.stars %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Sterne"
+          }
+        }
+      }
+    },
+    "entry.sources": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle öffnen"
+          }
+        }
+      }
+    },
+    "funnel.hint": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Bewerten“ öffnet GitHub. Deine Bewertung ist ein Pull Request aus deinem Account: kein BEMBEL-Konto, keine Daten für uns."
+          }
+        }
+      }
+    },
+    "merkmal.baenke-draussen": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bänke draußen"
+          }
+        }
+      }
+    },
+    "merkmal.ebbelwei": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ebbelwei"
+          }
+        }
+      }
+    },
+    "merkmal.eigenkelterei": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eigenkelterei"
+          }
+        }
+      }
+    },
+    "merkmal.eigenmarke": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eigenmarke"
+          }
+        }
+      }
+    },
+    "merkmal.garten": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garten"
+          }
+        }
+      }
+    },
+    "merkmal.handkaes": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Handkäs"
+          }
+        }
+      }
+    },
+    "merkmal.historisch": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historisch"
+          }
+        }
+      }
+    },
+    "merkmal.kunst": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunst"
+          }
+        }
+      }
+    },
+    "merkmal.schoppen-vom-fass": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schoppen vom Fass"
+          }
+        }
+      }
+    },
+    "merkmal.sitzplaetze": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzplätze"
+          }
+        }
+      }
+    },
+    "merkmal.spaet-offen": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spät offen"
+          }
+        }
+      }
+    },
+    "merkmal.spaeti": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Späti"
+          }
+        }
+      }
+    },
+    "merkmal.trinkhalle-klassisch": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klassische Trinkhalle"
+          }
+        }
+      }
+    },
+    "onboarding.claim": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schatten, Wasser, Luft für eine Stadt, die heißer wird."
+          }
+        }
+      }
+    },
+    "onboarding.continue": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weiter"
+          }
+        }
+      }
+    },
+    "onboarding.location.allow": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standort erlauben"
+          }
+        }
+      }
+    },
+    "onboarding.location.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Für die nächste Haltestelle und den nächsten Brunnen. Bleibt auf dem Gerät. Niemand sonst bekommt ihn."
+          }
+        }
+      }
+    },
+    "onboarding.location.skip": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ohne Standort weiter"
+          }
+        }
+      }
+    },
+    "onboarding.location.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standort nur beim Benutzen"
+          }
+        }
+      }
+    },
+    "onboarding.promise": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kostenlos. Keine Werbung, kein Tracking, kein eigenes Backend."
+          }
+        }
+      }
+    },
+    "onboarding.region.subtitle": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bestimmt, welche Orte du siehst. Später jederzeit änderbar."
+          }
+        }
+      }
+    },
+    "onboarding.region.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wie weit soll's gehen?"
+          }
+        }
+      }
+    },
+    "onboarding.rest.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "RMV, DWD, Pegel, Luft, Warnungen an einer Stelle."
+          }
+        }
+      }
+    },
+    "onboarding.rest.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abfahrten, Regen, Stadtzustand"
+          }
+        }
+      }
+    },
+    "onboarding.ring.frankfurt": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stadtgebiet. Die Schattenkarte gibt's nur hier."
+          }
+        }
+      }
+    },
+    "onboarding.ring.kernraum": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regionalverband FrankfurtRheinMain."
+          }
+        }
+      }
+    },
+    "onboarding.ring.rheinmain": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Metropolregion. Mehr Haltestellen, längere Listen."
+          }
+        }
+      }
+    },
+    "onboarding.shadow.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wo um 15:00 Schatten liegt, auf die Minute gerechnet, offline."
+          }
+        }
+      }
+    },
+    "onboarding.shadow.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schattenkarte"
+          }
+        }
+      }
+    },
+    "onboarding.water.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeder Brunnen der Stadt, mit Saison und Uhrzeit."
+          }
+        }
+      }
+    },
+    "onboarding.water.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trinkwasser"
+          }
+        }
+      }
+    },
+    "places.merkmale.a11y": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach Merkmalen filtern"
+          }
+        }
+      }
+    },
+    "places.merkmale.all": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle"
+          }
+        }
+      }
+    },
+    "places.register.ebbelwei": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ebbelwei"
+          }
+        }
+      }
+    },
+    "places.register.picker": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Register"
+          }
+        }
+      }
+    },
+    "places.register.trinkbrunnen": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brunnen"
+          }
+        }
+      }
+    },
+    "places.register.wasserhaeuschen": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wasserhäuschen"
+          }
+        }
+      }
+    },
+    "radar.legend.unit": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mm/h"
+          }
+        }
+      }
+    },
+    "radar.now": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jetzt"
+          }
+        }
+      }
+    },
+    "radar.play": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Radarfilm abspielen"
+          }
+        }
+      }
+    },
+    "radar.source %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "DWD RADOLAN · %@"
+          }
+        }
+      }
+    },
+    "ring.frankfurt": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Frankfurt"
+          }
+        }
+      }
+    },
+    "ring.kernraum": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kernraum"
+          }
+        }
+      }
+    },
+    "ring.rheinmain": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rhein-Main"
+          }
+        }
+      }
+    },
+    "settings.data.entries": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einträge"
+          }
+        }
+      }
+    },
+    "settings.data.generated": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stand"
+          }
+        }
+      }
+    },
+    "settings.data.header": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenstand bembel-data"
+          }
+        }
+      }
+    },
+    "settings.data.unavailable": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Daten geladen"
+          }
+        }
+      }
+    },
+    "settings.data.version": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schema-Version"
+          }
+        }
+      }
+    },
+    "settings.done": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fertig"
+          }
+        }
+      }
+    },
+    "settings.github.field": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub-Benutzername"
+          }
+        }
+      }
+    },
+    "settings.github.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur auf diesem Gerät. BEMBEL nutzt ihn, um deine Beiträge in bembel-data wiederzuerkennen und Sticker freizuschalten. Er sendet nichts und prüft nichts."
+          }
+        }
+      }
+    },
+    "settings.github.header": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitmachen"
+          }
+        }
+      }
+    },
+    "settings.privacy": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Tracking, keine Werbung, kein eigenes Backend."
+          }
+        }
+      }
+    },
+    "settings.region.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bestimmt, welche Orte in kuratierten Datensätzen erscheinen. Abfahrten gelten immer für das ganze RMV-Gebiet."
+          }
+        }
+      }
+    },
+    "settings.region.header": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Region"
+          }
+        }
+      }
+    },
+    "settings.region.picker": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Region"
+          }
+        }
+      }
+    },
+    "settings.sources": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenquellen & Lizenzen"
+          }
+        }
+      }
+    },
+    "settings.sources.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Angaben stammen aus offenen Daten; jede Fläche in der App nennt Quelle und Stand."
+          }
+        }
+      }
+    },
+    "settings.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einstellungen"
+          }
+        }
+      }
+    },
+    "settings.visits.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erkennt auf dem Gerät, wenn du an einem Wasserhäuschen bist, und schaltet den Stempel frei. Kein Standort verlässt das Telefon."
+          }
+        }
+      }
+    },
+    "settings.visits.toggle": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiosk-Stempel sammeln"
+          }
+        }
+      }
+    },
+    "shadow.direction.east": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schatten nach Osten"
+          }
+        }
+      }
+    },
+    "shadow.direction.west": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schatten nach Westen"
+          }
+        }
+      }
+    },
+    "shadow.now": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jetzt"
+          }
+        }
+      }
+    },
+    "shadow.scrubber": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uhrzeit"
+          }
+        }
+      }
+    },
+    "shadow.sun %lld %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonne %lld° · %@"
+          }
+        }
+      }
+    },
+    "stickers.contributions": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beiträge"
+          }
+        }
+      }
+    },
+    "stickers.datenspender": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenspender"
+          }
+        }
+      }
+    },
+    "stickers.erste-bewertung": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erste Bewertung"
+          }
+        }
+      }
+    },
+    "stickers.locked.hint": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trag deinen GitHub-Benutzernamen in den Einstellungen ein, damit wir deine Beiträge wiedererkennen."
+          }
+        }
+      }
+    },
+    "stickers.stamps": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiosk-Stempel"
+          }
+        }
+      }
+    },
+    "stickers.stamps.empty": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch kein Stempel. Schalte sie in den Einstellungen ein und geh raus."
+          }
+        }
+      }
+    },
+    "stickers.stamps.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BEMBEL erstellt Stempel auf dem Gerät. Sie bleiben dort."
+          }
+        }
+      }
+    },
+    "stickers.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Sammlung"
+          }
+        }
+      }
+    },
+    "stickers.unlocked.hint": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BEMBEL schaltet Sticker frei, sobald bembel-data deinen Beitrag merged."
+          }
+        }
+      }
+    },
+    "stickers.verifizierer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifizierer"
+          }
+        }
+      }
+    },
+    "tab.city": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stadt"
+          }
+        }
+      }
+    },
+    "tab.departures": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abfahrten"
+          }
+        }
+      }
+    },
+    "tab.places": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orte"
+          }
+        }
+      }
+    },
+    "tab.radar": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regen"
+          }
+        }
+      }
+    },
+    "tab.shadow": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schatten"
+          }
+        }
+      }
+    },
+    "water.bookmark": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merken"
+          }
+        }
+      }
+    },
+    "water.distance %@ %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ · %2$lld Min zu Fuß"
+          }
+        }
+      }
+    },
+    "water.hours": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Betriebszeit"
+          }
+        }
+      }
+    },
+    "water.hours.always": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "durchgehend"
+          }
+        }
+      }
+    },
+    "water.quality": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wasser"
+          }
+        }
+      }
+    },
+    "water.quality.drinking": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trinkwasserqualität"
+          }
+        }
+      }
+    },
+    "water.route": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Route"
+          }
+        }
+      }
+    },
+    "water.season": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saison"
+          }
+        }
+      }
+    },
+    "water.season.from": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ab 22. März"
+          }
+        }
+      }
+    },
+    "water.season.note": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ab Oktober sind Brunnen wegen Frost abgestellt; die Saison beginnt am Weltwassertag, 22. März. Historische Brunnen kommen nach Ostern zurück und laufen 10:00–22:00."
+          }
+        }
+      }
+    },
+    "water.season.range": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "22. März – 30. Sept"
+          }
+        }
+      }
+    },
+    "water.share": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Teilen"
+          }
+        }
+      }
+    },
+    "water.source": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle: Geoportal Frankfurt · OSM (ODbL)"
+          }
+        }
+      }
+    },
+    "water.status.closed": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abgestellt"
+          }
+        }
+      }
+    },
+    "water.status.open": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Läuft"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

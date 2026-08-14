@@ -1,0 +1,236 @@
+{
+  "commit": "aaf4dc1",
+  "contributors": [
+    {
+      "entries": 6,
+      "firstRatings": [],
+      "login": "maurice-jobst",
+      "ratings": 0,
+      "verifications": 0
+    }
+  ],
+  "coverage": [
+    {
+      "candidates": 1,
+      "district": "Bahnhofsviertel",
+      "verified": 0
+    },
+    {
+      "candidates": 1,
+      "district": "Bornheim",
+      "verified": 0
+    },
+    {
+      "candidates": 3,
+      "district": "Sachsenhausen-Nord",
+      "verified": 0
+    },
+    {
+      "candidates": 1,
+      "district": "Sachsenhausen-Süd",
+      "verified": 0
+    }
+  ],
+  "entries": [
+    {
+      "address": {
+        "city": "Frankfurt am Main",
+        "postalCode": "60385",
+        "street": "Berger Straße 260"
+      },
+      "district": "Bornheim",
+      "id": "apfelwein-solzer",
+      "kind": "ebbelwei",
+      "latitude": 50.1284287,
+      "longitude": 8.7111799,
+      "merkmale": [
+        "eigenkelterei",
+        "garten"
+      ],
+      "name": "Apfelwein Solzer",
+      "note": "Seit 1893 von der Familie Solzer geführt, mit selbstgekeltertem Apfelwein und Sommergarten an der Berger Straße.",
+      "openingHours": null,
+      "provenance": {
+        "fileURL": "https://github.com/maurice-jobst/bembel-data/blob/main/data/ebbelwei/apfelwein-solzer.json",
+        "historyURL": "https://github.com/maurice-jobst/bembel-data/commits/main/data/ebbelwei/apfelwein-solzer.json",
+        "lastChangedAt": "2026-08-14T09:05:28+02:00",
+        "lastEditor": "maurice-jobst",
+        "verifiedAt": null
+      },
+      "rating": null,
+      "since": 1893,
+      "sources": [
+        "https://www.apfelwein-solzer.de/",
+        "https://www.openstreetmap.org/node/1130970911"
+      ],
+      "verified": false
+    },
+    {
+      "address": {
+        "city": "Frankfurt am Main",
+        "postalCode": "60594",
+        "street": "Schweizer Straße 71"
+      },
+      "district": "Sachsenhausen-Nord",
+      "id": "apfelwein-wagner",
+      "kind": "ebbelwei",
+      "latitude": 50.1005013,
+      "longitude": 8.681986,
+      "merkmale": [],
+      "name": "Apfelwein Wagner",
+      "note": "Seit 1931 im Familienbesitz geführtes Traditionslokal auf der Schweizer Straße.",
+      "openingHours": null,
+      "provenance": {
+        "fileURL": "https://github.com/maurice-jobst/bembel-data/blob/main/data/ebbelwei/apfelwein-wagner.json",
+        "historyURL": "https://github.com/maurice-jobst/bembel-data/commits/main/data/ebbelwei/apfelwein-wagner.json",
+        "lastChangedAt": "2026-08-14T09:05:28+02:00",
+        "lastEditor": "maurice-jobst",
+        "verifiedAt": null
+      },
+      "rating": null,
+      "since": 1931,
+      "sources": [
+        "https://www.apfelwein-wagner.com/",
+        "https://www.openstreetmap.org/node/12067930916"
+      ],
+      "verified": false
+    },
+    {
+      "address": {
+        "city": "Frankfurt am Main",
+        "postalCode": "60594",
+        "street": "Dreieichstraße 29"
+      },
+      "district": "Sachsenhausen-Nord",
+      "id": "zum-eichkatzerl",
+      "kind": "ebbelwei",
+      "latitude": 50.1051652,
+      "longitude": 8.6925683,
+      "merkmale": [
+        "garten",
+        "historisch"
+      ],
+      "name": "Zum Eichkatzerl",
+      "note": "Erste Presseerwähnung 1880 als Heckenwirtschaft; Sommergarten mit 120 Plätzen.",
+      "openingHours": null,
+      "provenance": {
+        "fileURL": "https://github.com/maurice-jobst/bembel-data/blob/main/data/ebbelwei/zum-eichkatzerl.json",
+        "historyURL": "https://github.com/maurice-jobst/bembel-data/commits/main/data/ebbelwei/zum-eichkatzerl.json",
+        "lastChangedAt": "2026-08-14T09:05:28+02:00",
+        "lastEditor": "maurice-jobst",
+        "verifiedAt": null
+      },
+      "rating": null,
+      "since": null,
+      "sources": [
+        "https://www.eichkatzerl.de/",
+        "https://www.openstreetmap.org/node/2683677757"
+      ],
+      "verified": false
+    },
+    {
+      "address": {
+        "city": "Frankfurt am Main",
+        "postalCode": "60594",
+        "street": "Schweizer Straße 67"
+      },
+      "district": "Sachsenhausen-Nord",
+      "id": "zum-gemalten-haus",
+      "kind": "ebbelwei",
+      "latitude": 50.1007042,
+      "longitude": 8.6818571,
+      "merkmale": [
+        "handkaes"
+      ],
+      "name": "Zum Gemalten Haus",
+      "note": "Apfelweinlokal auf der Schweizer Straße in Sachsenhausen, seit 1936.",
+      "openingHours": null,
+      "provenance": {
+        "fileURL": "https://github.com/maurice-jobst/bembel-data/blob/main/data/ebbelwei/zum-gemalten-haus.json",
+        "historyURL": "https://github.com/maurice-jobst/bembel-data/commits/main/data/ebbelwei/zum-gemalten-haus.json",
+        "lastChangedAt": "2026-08-14T09:05:28+02:00",
+        "lastEditor": "maurice-jobst",
+        "verifiedAt": null
+      },
+      "rating": null,
+      "since": 1936,
+      "sources": [
+        "https://www.zumgemaltenhaus.de/",
+        "https://www.openstreetmap.org/node/504316685"
+      ],
+      "verified": false
+    },
+    {
+      "address": {
+        "city": "Frankfurt am Main",
+        "postalCode": "60598",
+        "street": "Schwarzsteinkautweg 17"
+      },
+      "district": "Sachsenhausen-Süd",
+      "id": "zur-buchscheer",
+      "kind": "ebbelwei",
+      "latitude": 50.0846042,
+      "longitude": 8.6720766,
+      "merkmale": [
+        "eigenkelterei",
+        "garten",
+        "handkaes",
+        "historisch"
+      ],
+      "name": "Zur Buchscheer",
+      "note": "Familienbetrieb seit 1876, Apfelwein aus eigener Kelterei.",
+      "openingHours": null,
+      "provenance": {
+        "fileURL": "https://github.com/maurice-jobst/bembel-data/blob/main/data/ebbelwei/zur-buchscheer.json",
+        "historyURL": "https://github.com/maurice-jobst/bembel-data/commits/main/data/ebbelwei/zur-buchscheer.json",
+        "lastChangedAt": "2026-08-14T09:05:28+02:00",
+        "lastEditor": "maurice-jobst",
+        "verifiedAt": null
+      },
+      "rating": null,
+      "since": 1876,
+      "sources": [
+        "https://buchscheer.de/",
+        "https://www.openstreetmap.org/node/12228343394"
+      ],
+      "verified": false
+    },
+    {
+      "address": {
+        "city": "Frankfurt am Main",
+        "postalCode": "60329",
+        "street": "Münchener Straße 32"
+      },
+      "district": "Bahnhofsviertel",
+      "id": "yok-yok",
+      "kind": "wasserhaeuschen",
+      "latitude": 50.10761,
+      "longitude": 8.66833,
+      "merkmale": [
+        "eigenmarke",
+        "kunst",
+        "spaeti"
+      ],
+      "name": "City Kiosk Yok-Yok",
+      "note": "Bahnhofsviertel-Institution von Nazim Alemdar, mit eigenem YokYok-Bier und zweitem Standort in der Fahrgasse.",
+      "openingHours": null,
+      "provenance": {
+        "fileURL": "https://github.com/maurice-jobst/bembel-data/blob/main/data/wasserhaeuschen/yok-yok.json",
+        "historyURL": "https://github.com/maurice-jobst/bembel-data/commits/main/data/wasserhaeuschen/yok-yok.json",
+        "lastChangedAt": "2026-08-13T22:26:22+02:00",
+        "lastEditor": "maurice-jobst",
+        "verifiedAt": null
+      },
+      "rating": null,
+      "since": null,
+      "sources": [
+        "https://frankfurt.de/service-und-rathaus/presse/texte-und-kampagnen/wir-lieben-das-viertel/nazim-alemdar-kiosk-yok-yok",
+        "https://www.gewerbeverein-bahnhofsviertel-frankfurt.de/kiosk-yok-yok",
+        "https://www.openstreetmap.org/search?query=M%C3%BCnchener%20Stra%C3%9Fe%2032%2C%2060329%20Frankfurt"
+      ],
+      "verified": false
+    }
+  ],
+  "generatedAt": "2026-08-14T09:05:28+02:00",
+  "schemaVersion": 1
+}

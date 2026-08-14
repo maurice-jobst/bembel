@@ -1,0 +1,23 @@
+name: Data validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/**"
+      - "scripts/**"
+      - "Packages/BEMBELKit/Sources/BEMBELKit/Resources/**"
+      - ".github/workflows/data-validate.yml"
+  # No paths filter on pull_request: this is a required status check, and a
+  # required check that never reports leaves every unrelated PR pinned on
+  # "expected" forever. validate_data.py is stdlib and runs in a second, so
+  # paying for it on a docs-only PR is cheaper than the deadlock.
+  pull_request:
+
+jobs:
+  validate:
+    name: Schema validation (stdlib only, no pip)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - run: python3 scripts/validate_data.py
