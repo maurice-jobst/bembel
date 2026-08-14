@@ -54,7 +54,7 @@ public actor DatasetStore {
     public func refresh<D: CuratedDataset>(_ dataset: D.Type) async -> RefreshOutcome {
         guard
             let entry = manifest.datasets[D.id],
-            let url = URL(string: entry.path, relativeTo: manifest.baseURL)
+            let url = entry.url ?? URL(string: entry.path, relativeTo: manifest.baseURL)
         else { return .notInManifest }
 
         var request = URLRequest(url: url)

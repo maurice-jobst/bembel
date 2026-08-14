@@ -1,0 +1,58 @@
+{
+  "commit": "e36a978",
+  "contributors": [
+    {
+      "entries": 1,
+      "firstRatings": [],
+      "login": "maurice-jobst",
+      "ratings": 0,
+      "verifications": 0
+    }
+  ],
+  "coverage": [
+    {
+      "candidates": 1,
+      "district": "Bahnhofsviertel",
+      "verified": 0
+    }
+  ],
+  "entries": [
+    {
+      "address": {
+        "city": "Frankfurt am Main",
+        "postalCode": "60329",
+        "street": "Münchener Straße 32"
+      },
+      "district": "Bahnhofsviertel",
+      "id": "yok-yok",
+      "kind": "wasserhaeuschen",
+      "latitude": 50.10761,
+      "longitude": 8.66833,
+      "merkmale": [
+        "eigenmarke",
+        "kunst",
+        "spaeti"
+      ],
+      "name": "City Kiosk Yok-Yok",
+      "note": "Bahnhofsviertel-Institution von Nazim Alemdar, mit eigenem YokYok-Bier und zweitem Standort in der Fahrgasse.",
+      "openingHours": null,
+      "provenance": {
+        "fileURL": "https://github.com/maurice-jobst/bembel-data/blob/main/data/wasserhaeuschen/yok-yok.json",
+        "historyURL": "https://github.com/maurice-jobst/bembel-data/commits/main/data/wasserhaeuschen/yok-yok.json",
+        "lastChangedAt": "2026-08-13T22:26:22+02:00",
+        "lastEditor": "maurice-jobst",
+        "verifiedAt": null
+      },
+      "rating": null,
+      "since": null,
+      "sources": [
+        "https://frankfurt.de/service-und-rathaus/presse/texte-und-kampagnen/wir-lieben-das-viertel/nazim-alemdar-kiosk-yok-yok",
+        "https://www.gewerbeverein-bahnhofsviertel-frankfurt.de/kiosk-yok-yok",
+        "https://www.openstreetmap.org/search?query=M%C3%BCnchener%20Stra%C3%9Fe%2032%2C%2060329%20Frankfurt"
+      ],
+      "verified": false
+    }
+  ],
+  "generatedAt": "2026-08-13T22:28:58+02:00",
+  "schemaVersion": 1
+}

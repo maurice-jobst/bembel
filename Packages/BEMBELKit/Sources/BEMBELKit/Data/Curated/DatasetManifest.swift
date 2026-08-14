@@ -6,10 +6,16 @@ import Foundation
 /// refresh attempts fail loudly-but-gracefully instead of hitting something.
 public struct DatasetManifest: Codable, Sendable {
     public struct Entry: Codable, Hashable, Sendable {
+        /// Relative to `baseURL`, and the name of the bundled snapshot.
         public let path: String
+        /// Absolute source, overriding `baseURL + path`. Datasets published by
+        /// another repo — bembel-data — live at their own host; `path` still
+        /// names the bundled snapshot that answers offline and on first launch.
+        public let url: URL?
 
-        public init(path: String) {
+        public init(path: String, url: URL? = nil) {
             self.path = path
+            self.url = url
         }
     }
 

@@ -97,6 +97,10 @@ def check_manifest(doc, label: str) -> None:
         for root, root_label in ((REPO / "data", "data/"), (KIT_RESOURCES, "Kit Resources/")):
             if not (root / path).is_file():
                 err(f"{where}: '{path}' does not exist under {root_label}")
+        if "url" in entry:
+            url = entry["url"]
+            if not isinstance(url, str) or not url.startswith("https://"):
+                err(f"{where}: 'url' must be an https URL, got {url!r}")
 
 
 def check_attribution(doc, label: str) -> None:
@@ -180,6 +184,7 @@ def main() -> int:
     check_operator_datasets()
     check_mirror("rings.json")
     check_mirror("manifest.json")
+    check_mirror("bembeldata.json")
 
     if errors:
         print(f"FAIL — {len(errors)} problem(s):", file=sys.stderr)
