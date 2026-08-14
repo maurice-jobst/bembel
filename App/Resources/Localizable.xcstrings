@@ -711,12 +711,92 @@
         }
       }
     },
+    "settings.data.entries": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einträge"
+          }
+        }
+      }
+    },
+    "settings.data.generated": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stand"
+          }
+        }
+      }
+    },
+    "settings.data.header": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenstand bembel-data"
+          }
+        }
+      }
+    },
+    "settings.data.unavailable": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Daten geladen"
+          }
+        }
+      }
+    },
+    "settings.data.version": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schema-Version"
+          }
+        }
+      }
+    },
     "settings.done": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
             "value": "Fertig"
+          }
+        }
+      }
+    },
+    "settings.github.field": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub-Benutzername"
+          }
+        }
+      }
+    },
+    "settings.github.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nur auf diesem Gerät. BEMBEL nutzt ihn, um deine Beiträge in bembel-data wiederzuerkennen und Sticker freizuschalten — es wird nichts gesendet und nichts geprüft."
+          }
+        }
+      }
+    },
+    "settings.github.header": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitmachen"
           }
         }
       }
@@ -791,6 +871,26 @@
         }
       }
     },
+    "settings.visits.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erkennt auf dem Gerät, wenn du an einem Wasserhäuschen bist, und schaltet den Stempel frei. Kein Standort verlässt das Telefon."
+          }
+        }
+      }
+    },
+    "settings.visits.toggle": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiosk-Stempel sammeln"
+          }
+        }
+      }
+    },
     "shadow.direction.east": {
       "localizations": {
         "de": {
@@ -837,6 +937,106 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sonne %lld° · %@"
+          }
+        }
+      }
+    },
+    "stickers.contributions": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beiträge"
+          }
+        }
+      }
+    },
+    "stickers.datenspender": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenspender"
+          }
+        }
+      }
+    },
+    "stickers.erste-bewertung": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erste Bewertung"
+          }
+        }
+      }
+    },
+    "stickers.locked.hint": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trag deinen GitHub-Benutzernamen in den Einstellungen ein, damit wir deine Beiträge wiedererkennen."
+          }
+        }
+      }
+    },
+    "stickers.stamps": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiosk-Stempel"
+          }
+        }
+      }
+    },
+    "stickers.stamps.empty": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch kein Stempel. Schalte sie in den Einstellungen ein und geh raus."
+          }
+        }
+      }
+    },
+    "stickers.stamps.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stempel entstehen auf dem Gerät und bleiben dort."
+          }
+        }
+      }
+    },
+    "stickers.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Sammlung"
+          }
+        }
+      }
+    },
+    "stickers.unlocked.hint": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Freigeschaltet wird, was in bembel-data unter deinem Account gemerged ist."
+          }
+        }
+      }
+    },
+    "stickers.verifizierer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verifizierer"
           }
         }
       }

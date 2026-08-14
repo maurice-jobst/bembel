@@ -10,6 +10,7 @@ struct PlacesView: View {
     @Environment(Router.self) private var router
     @State private var model = PlacesModel()
     @State private var isShowingCoverage = false
+    @State private var isShowingAlbum = false
     @AppStorage(StickerState.visitDetectionKey, store: AppGroup.defaults) private var visitDetection = false
     @State private var visitMonitor = KioskVisitMonitor()
     @State private var position: MapCameraPosition = .region(
@@ -23,8 +24,11 @@ struct PlacesView: View {
         ZStack {
             map
             VStack(spacing: BEMSpacing.m) {
-                HStack {
+                HStack(spacing: BEMSpacing.s) {
                     Spacer()
+                    GlassCircleButton(systemImage: "seal", accessibilityLabel: "stickers.title") {
+                        isShowingAlbum = true
+                    }
                     GlassCircleButton(systemImage: "chart.bar.doc.horizontal", accessibilityLabel: "coverage.title") {
                         isShowingCoverage = true
                     }
@@ -59,6 +63,9 @@ struct PlacesView: View {
         }
         .sheet(isPresented: $isShowingCoverage) {
             CoverageView(model: model)
+        }
+        .sheet(isPresented: $isShowingAlbum) {
+            StickerAlbumView(model: model)
         }
     }
 

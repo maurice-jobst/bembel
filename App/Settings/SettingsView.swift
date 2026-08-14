@@ -5,6 +5,8 @@ struct SettingsView: View {
     @Environment(\.dismiss) private var dismiss
     @AppStorage(RegionSettings.selectedRingKey, store: AppGroup.defaults)
     private var selectedRingRaw = RegionSettings.defaultRing.rawValue
+    @AppStorage(StickerState.loginKey, store: AppGroup.defaults) private var githubLogin = ""
+    @AppStorage(StickerState.visitDetectionKey, store: AppGroup.defaults) private var visitDetection = false
 
     var body: some View {
         NavigationStack {
@@ -21,6 +23,22 @@ struct SettingsView: View {
                     Text("settings.region.header")
                 } footer: {
                     Text("settings.region.footer")
+                }
+
+                Section {
+                    TextField("settings.github.field", text: $githubLogin)
+                        .textInputAutocapitalization(.never)
+                        .autocorrectionDisabled()
+                } header: {
+                    Text("settings.github.header")
+                } footer: {
+                    Text("settings.github.footer")
+                }
+
+                Section {
+                    Toggle("settings.visits.toggle", isOn: $visitDetection)
+                } footer: {
+                    Text("settings.visits.footer")
                 }
 
                 Section {
@@ -45,7 +63,11 @@ struct SettingsView: View {
 /// Every dataset the app touches, with provider and licence. Grows with the
 /// feature tickets; the validator enforces the same rule for curated data.
 struct DataSourcesView: View {
+    @Environment(\.dependencies) private var dependencies
+    @State private var snapshot: RegisterSnapshot?
+
     private static let sources: [(name: String, licence: String)] = [
+        ("bembel-data (Community)", "ODbL"),
         ("RMV Open Data", "CC BY 4.0"),
         ("Hessen LoD2 (HVBG)", "Datenlizenz Deutschland 2.0"),
         ("Geoportal Frankfurt", "Datenlizenz Deutschland 2.0"),
@@ -58,6 +80,27 @@ struct DataSourcesView: View {
 
     var body: some View {
         List {
+            Section {
+                if let snapshot, snapshot.schemaVersion > 0 {
+                    LabeledContent("settings.data.version") {
+                        Text(verbatim: String(snapshot.schemaVersion))
+                    }
+                    if let generatedAt = snapshot.generatedAt {
+                        LabeledContent("settings.data.generated") {
+                            Text(generatedAt, format: .dateTime.day().month(.abbreviated).year())
+                        }
+                    }
+                    LabeledContent("settings.data.entries") {
+                        Text(verbatim: String(snapshot.entries.count))
+                    }
+                } else {
+                    Text("settings.data.unavailable")
+                        .foregroundStyle(BEMColor.inkSecondary)
+                }
+            } header: {
+                Text("settings.data.header")
+            }
+
             Section {
                 ForEach(Self.sources, id: \.name) { source in
                     VStack(alignment: .leading, spacing: 2) {
@@ -74,6 +117,9 @@ struct DataSourcesView: View {
         }
         .navigationTitle("settings.sources")
         .navigationBarTitleDisplayMode(.inline)
+        .task {
+            snapshot = try? await dependencies.register.snapshot()
+        }
     }
 }
 
