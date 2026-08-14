@@ -11,5 +11,8 @@ build/
 .build/
 .swiftpm/
 
+# Python (the stdlib-only data validator and its tests)
+__pycache__/
+
 # Secrets — never committed; copy Config/Secrets.xcconfig.template
 Config/Secrets.xcconfig

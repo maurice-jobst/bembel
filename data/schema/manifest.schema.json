@@ -17,7 +17,12 @@
         "required": ["path"],
         "additionalProperties": false,
         "properties": {
-          "path": { "type": "string", "minLength": 1 }
+          "path": { "type": "string", "minLength": 1 },
+          "url": {
+            "type": "string",
+            "pattern": "^https://",
+            "description": "Absolute override, winning over baseURL + path — how a dataset published on a foreign host (bembel-data's dist branch) is reached. Optional; without it the app resolves path against baseURL."
+          }
         }
       }
     }
