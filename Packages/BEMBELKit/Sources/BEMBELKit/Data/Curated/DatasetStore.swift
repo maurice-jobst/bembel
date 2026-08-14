@@ -50,12 +50,12 @@ public actor DatasetStore {
         // An override that no longer decodes (written by an older app version,
         // then the payload type evolved) must not brick the dataset forever —
         // fall back to the bundled snapshot, which ships with this decoder.
-        if let override = try? Data(contentsOf: overrideURL(for: D.id)),
+        if let override = try? Data(contentsOf: overrideURL(for: D.filename)),
             let payload = try? JSONDecoder().decode(D.Payload.self, from: override)
         {
             return payload
         }
-        return try JSONDecoder().decode(D.Payload.self, from: bundledData(for: D.id))
+        return try JSONDecoder().decode(D.Payload.self, from: bundledData(for: D.self))
     }
 
     @discardableResult
@@ -85,7 +85,7 @@ public actor DatasetStore {
                 return .invalidPayload
             }
             do {
-                try data.write(to: overrideURL(for: D.id), options: .atomic)
+                try data.write(to: overrideURL(for: D.filename), options: .atomic)
             } catch {
                 return .storageFailure
             }
@@ -100,16 +100,16 @@ public actor DatasetStore {
         }
     }
 
-    private func overrideURL(for id: String) -> URL {
-        directory.appending(path: "\(id).json")
+    private func overrideURL(for filename: String) -> URL {
+        directory.appending(path: filename)
     }
 
-    private func bundledData(for id: String) throws -> Data {
+    private func bundledData<D: CuratedDataset>(for dataset: D.Type) throws -> Data {
         guard
-            let url = bundle.url(forResource: id, withExtension: "json"),
+            let url = bundle.url(forResource: D.id, withExtension: D.fileExtension),
             let bundled = try? Data(contentsOf: url)
         else {
-            throw DatasetError.missingBundledResource(id)
+            throw DatasetError.missingBundledResource(D.filename)
         }
         return bundled
     }

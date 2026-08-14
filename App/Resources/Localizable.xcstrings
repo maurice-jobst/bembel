@@ -1131,6 +1131,86 @@
         }
       }
     },
+    "water.hours.historic": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10:00–22:00"
+          }
+        }
+      }
+    },
+    "water.hours.shop": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffnungszeiten des Ladens"
+          }
+        }
+      }
+    },
+    "water.kind.historisch": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historisch"
+          }
+        }
+      }
+    },
+    "water.kind.mainova": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mainova"
+          }
+        }
+      }
+    },
+    "water.kind.refill": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refill"
+          }
+        }
+      }
+    },
+    "water.kind.sonstige": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonstige"
+          }
+        }
+      }
+    },
+    "water.kind.stadt": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Städtisch"
+          }
+        }
+      }
+    },
+    "water.kinds.a11y": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brunnenarten filtern"
+          }
+        }
+      }
+    },
     "water.quality": {
       "localizations": {
         "de": {
@@ -1146,7 +1226,37 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Trinkwasserqualität"
+            "value": "beprobt"
+          }
+        }
+      }
+    },
+    "water.quality.unknown": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "unbekannt"
+          }
+        }
+      }
+    },
+    "water.quality.untested": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "nicht beprobt"
+          }
+        }
+      }
+    },
+    "water.quality.untested.note": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieser Brunnen führt Trinkwasser, wird aber nicht regelmäßig beprobt — die Stadt nennt ihn deshalb Erfrischungs- und nicht Trinkbrunnen."
           }
         }
       }
@@ -1167,6 +1277,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "Saison"
+          }
+        }
+      }
+    },
+    "water.season.easter": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ab Ostern"
           }
         }
       }
@@ -1201,6 +1321,16 @@
         }
       }
     },
+    "water.season.shop": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ganzjährig"
+          }
+        }
+      }
+    },
     "water.share": {
       "localizations": {
         "de": {
@@ -1216,7 +1346,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Quelle: Geoportal Frankfurt · OSM (ODbL)"
+            "value": "Quelle: Stadt Frankfurt (dl-de/by-2-0) · OpenStreetMap (ODbL)"
           }
         }
       }
@@ -1231,12 +1361,72 @@
         }
       }
     },
+    "water.status.easter": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ab Ostern"
+          }
+        }
+      }
+    },
+    "water.status.later": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "öffnet 10 Uhr"
+          }
+        }
+      }
+    },
     "water.status.open": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
             "value": "Läuft"
+          }
+        }
+      }
+    },
+    "water.status.outofservice": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Außer Betrieb"
+          }
+        }
+      }
+    },
+    "water.status.tomorrow": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "morgen wieder"
+          }
+        }
+      }
+    },
+    "water.status.unknown": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ladenzeiten"
+          }
+        }
+      }
+    },
+    "water.status.winter": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abgestellt"
           }
         }
       }

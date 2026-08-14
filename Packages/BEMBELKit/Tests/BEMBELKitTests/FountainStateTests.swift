@@ -146,7 +146,7 @@ struct FountainStateTests {
     func fountainState() {
         let historic = Fountain(
             id: "goldener-brunnen", name: "Goldener Brunnen", latitude: 50.11, longitude: 8.68,
-            distanceLabel: "220 m", walkMinutes: 3, kind: .historisch, tested: false)
+            kind: .historisch, tested: false)
         #expect(historic.state(at: at(2026, 7, 15, 9), calendar: calendar) != .running)
         #expect(historic.state(at: at(2026, 7, 15, 12), calendar: calendar) == .running)
         #expect(historic.tested == false)

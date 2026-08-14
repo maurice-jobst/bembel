@@ -12,7 +12,7 @@ struct AppDependencies {
     static let shared = AppDependencies()
 
     var departures: any DeparturesProviding = SampleDeparturesProvider()
-    var fountains: any FountainProviding = SampleFountainProvider()
+    var fountains: any FountainProviding = AppDependencies.liveFountains()
     var radar: any RadarProviding = SampleRadarProvider()
     var cityStatus: any CityStatusProviding = SampleCityStatusProvider()
     var register: any RegisterProviding = AppDependencies.liveRegister()
@@ -24,6 +24,14 @@ struct AppDependencies {
     static func liveRegister() -> any RegisterProviding {
         if let live = try? BembelDataRegisterProvider.makeDefault() { return live }
         return SampleRegisterProvider()
+    }
+
+    /// Same branch, same reason: a broken Application Support directory must
+    /// not cost the user the Trinkbrunnen layer, and the bundled dataset is
+    /// already offline-complete.
+    static func liveFountains() -> any FountainProviding {
+        if let live = try? FountainDatasetProvider.makeDefault() { return live }
+        return SampleFountainProvider()
     }
 }
 
