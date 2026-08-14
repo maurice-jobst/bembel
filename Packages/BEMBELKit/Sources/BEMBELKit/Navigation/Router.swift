@@ -15,6 +15,11 @@ public final class Router {
     /// `nil` means "now". Consumed by the Schattenkarte feature (BEM-E03).
     public var shadowDate: Date?
 
+    /// An entry a deep link asked for, not yet handed to the Orte tab. Orte
+    /// clears it once it has taken ownership, so the same link opening twice
+    /// is two distinct nil→id transitions and never a dropped no-op change.
+    public var pendingEntryID: String?
+
     public init() {}
 
     public func open(_ link: DeepLink) {
@@ -23,6 +28,10 @@ public final class Router {
             selectedTab = tab
         case .places(let register):
             if let register { selectedRegister = register }
+            selectedTab = .places
+        case .entry(let register, let id):
+            selectedRegister = register
+            pendingEntryID = id
             selectedTab = .places
         case .shadow(let date):
             shadowDate = date

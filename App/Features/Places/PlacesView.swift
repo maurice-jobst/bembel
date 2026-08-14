@@ -19,6 +19,10 @@ struct PlacesView: View {
             span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         )
     )
+    /// Where the user is actually looking. `position.region` only answers for
+    /// camera positions this view set itself — after a pan it is stale, and
+    /// both the visit monitor and the widget digest need the real centre.
+    @State private var visibleCenter = PlacesView.frankfurtCenter
 
     var body: some View {
         ZStack {
@@ -54,17 +58,45 @@ struct PlacesView: View {
             }
             let entries = VisitMonitor.candidates(
                 from: model.snapshot.entries(in: .wasserhaeuschen),
-                near: position.region?.center ?? PlacesView.frankfurtCenter
+                near: visibleCenter
             )
             guard !entries.isEmpty else { return }
             await visitMonitor.start(for: entries) { entryID in
                 StickerState.recordVisit(entryID: entryID)
             }
         }
+        // Same keying rule as the monitor: data plus a coarse centre, so a pan
+        // across the street does not rewrite the widget's payload.
+        .task(id: digestKey) {
+            model.publishCandidateDigest(near: visibleCenter)
+        }
         // `initial: true` covers the cold-start deep link — the router may
         // already carry a register before this view ever appears.
         .onChange(of: router.selectedRegister, initial: true) { _, new in
             model.select(register: new)
+        }
+        // Consumed, not observed: the id is handed over once and cleared, so
+        // opening the same link twice is two distinct nil→id transitions.
+        .onChange(of: router.pendingEntryID, initial: true) { _, pending in
+            guard let pending else { return }
+            model.focus(entryID: pending)
+            router.pendingEntryID = nil
+        }
+        .onChange(of: model.focus) { _, focus in
+            guard let focus else { return }
+            // The entry may live in another register than the link named.
+            router.selectedRegister = model.selectedRegister
+            withAnimation {
+                position = .region(
+                    MKCoordinateRegion(
+                        center: focus.coordinate,
+                        span: MKCoordinateSpan(latitudeDelta: 0.006, longitudeDelta: 0.006)
+                    )
+                )
+            }
+        }
+        .onMapCameraChange(frequency: .onEnd) { context in
+            visibleCenter = context.region.center
         }
         .sheet(isPresented: $isShowingCoverage) {
             CoverageView(model: model)
@@ -124,6 +156,14 @@ struct PlacesView: View {
 
     private var visitMonitorKey: String {
         visitDetection ? "on-\(model.snapshot.entries.count)" : "off"
+    }
+
+    /// ~100 m of pan resolution. Finer than that is churn: the digest exists to
+    /// name a candidate worth walking to, not to track the camera.
+    private var digestKey: String {
+        let latitude = (visibleCenter.latitude * 1000).rounded()
+        let longitude = (visibleCenter.longitude * 1000).rounded()
+        return "\(model.snapshot.entries.count)-\(latitude)-\(longitude)"
     }
 
     static let frankfurtCenter = CLLocationCoordinate2D(latitude: 50.1122, longitude: 8.6780)
