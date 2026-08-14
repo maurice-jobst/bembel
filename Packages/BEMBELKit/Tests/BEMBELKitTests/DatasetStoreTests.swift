@@ -112,6 +112,28 @@ struct DatasetStoreTests {
         #expect(await store.refresh(TestDataset.self) == .serverError(503))
     }
 
+    @Test("An entry's absolute url wins over baseURL — foreign-host datasets")
+    func absoluteURLOverridesBase() async throws {
+        let manifest = DatasetManifest(
+            version: 2,
+            baseURL: URL(string: "https://mock.test/")!,
+            datasets: [
+                "testdata": .init(
+                    path: "testdata.json",
+                    url: URL(string: "https://raw.example.test/dist/bembel-data.json")!
+                )
+            ]
+        )
+        let (store, _) = try makeStore(manifest: manifest)
+        MockURLProtocol.handler = { request in
+            #expect(request.url?.absoluteString == "https://raw.example.test/dist/bembel-data.json")
+            return (200, ["ETag": "\"v9\""], Data(#"{"version": 9, "items": ["remote"]}"#.utf8))
+        }
+        #expect(await store.refresh(TestDataset.self) == .updated)
+        let payload = try await store.payload(for: TestDataset.self)
+        #expect(payload == TestPayload(version: 9, items: ["remote"]))
+    }
+
     @Test("A dataset missing from the manifest is a distinct outcome")
     func notInManifest() async throws {
         let empty = DatasetManifest(

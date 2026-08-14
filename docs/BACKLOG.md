@@ -22,10 +22,12 @@ below are a point-in-time note, not a live status — check the issue.
 | Accounts | No BEMBEL accounts. Apple services (Game Center, iCloud) opt-in — revised 2026-08-13, "no accounts" was never locked |
 | Base language | German, English v1.1, localisation scaffolding ships in v1.0 |
 | Target ship | **22 March 2027** — World Water Day, Trinkbrunnen season opening |
+| Navigation | Five tabs. Orte (Wasserhäuschen · Ebbelwei · Trinkbrunnen) first — ADR 0009 |
 
 **Selection principles:** data readiness first, then coolness × feasibility; and best for AI-native development (ADR 0008 — deterministic, fixture-testable, no hosted service in the critical path). Four of the five classic features require zero curation.
 
 **Hero (added 2026-08-13):** the bembel-data community layer is v1.0's flagship — Wasserhäuschen-Register + Ebbelwei-Wirtschaften register (read-only + rating funnel; write-side stays GitHub), provenance UX, Merkmale-first navigation, coverage game, and data-linked stickers (Datenspender/Verifizierer/Erste-Bewertung) + kiosk visit stamps. Pulled forward from epic S: `BEM-S04`, `BEM-S05`, `BEM-S11`, and the data-linked slice of `BEM-S01`. Scope of record: [hero-repositioning spec](superpowers/specs/2026-08-13-hero-repositioning-design.md). The Schattenkarte keeps its full scope; only the "signature feature" framing moved.
+**Delivered 2026-08-14 (Phase 1b):** register loader (`BEM-S11`), both registers in the Orte tab with Merkmale navigation and provenance bylines (`BEM-S04`), rating/verify/report funnel, coverage game, data-linked stickers + opt-in kiosk stamps (`BEM-S01` slice). Plan of record: [2026-08-13-phase-1b-hero-app.md](superpowers/plans/2026-08-13-phase-1b-hero-app.md).
 
 **NOT in v1.0** — voting, events calendar, parliament, elections, quizzes, the full Sticker-Sammelalbum (hotspot geofences, Game Center, seasonal drops), Kreppel ranking, price barometers, shade routing, Android, iPad. These live as post-1.0 side quests in [epic S](https://github.com/maurice-jobst/bembel/issues?q=label%3Aepic%3AS) (milestone M4).
 
@@ -185,6 +187,7 @@ Date rules, no API: off from October; season opens 22 March; historic fountains 
 <a id="bem-e03"></a>
 ### BEM-E03 — Map, list, detail · `size:M` · M2
 Distance sort, Apple Maps handoff, type filter, ring filter free from `BEM-A04`.
+The fountain map now lives as the Trinkbrunnen segment of the Orte tab (ADR 0009) — same scope, new home in `App/Features/Places/`.
 
 ---
 

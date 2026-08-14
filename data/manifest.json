@@ -1,7 +1,11 @@
 {
-  "version": 1,
+  "version": 2,
   "baseURL": "https://data.invalid/bembel/",
   "datasets": {
-    "rings": { "path": "rings.json" }
+    "rings": { "path": "rings.json" },
+    "bembeldata": {
+      "path": "bembeldata.json",
+      "url": "https://raw.githubusercontent.com/maurice-jobst/bembel-data/dist/bembel-data.json"
+    }
   }
 }

@@ -6,7 +6,23 @@ All notable changes to BEMBEL. Format follows
 
 ## [Unreleased]
 
+### Added
+
+- Wasserhäuschen- und Ebbelwei-Register aus bembel-data: Karte, Merkmale-Navigation,
+  Detailkarte mit Provenienz-Zeile (geprüft am, letzte Bearbeitung, Link in die
+  Git-Historie).
+- In-App-Trichter: „Bewerten“, „verifizieren“ und „Ort melden“ öffnen vorausgefüllte
+  GitHub-Flows — ohne Konto, ohne Token, ohne Backend.
+- Abdeckungsspiel: ungeprüfte Einträge als graue Kandidaten, Fortschritt je Stadtteil.
+- Sticker: Datenspender, Verifizierer, Erste Bewertung (über den GitHub-Benutzernamen
+  aus den Einstellungen) sowie Kiosk-Stempel per opt-in Standorterkennung auf dem Gerät.
+- BEM-S11-Loader: gebündelter Snapshot, Conditional GET gegen das veröffentlichte
+  bembel-data-Bundle, Datenstand in den Einstellungen.
+
 ### Changed
+
+- Der Trinkwasser-Tab ist im neuen **Orte**-Tab aufgegangen (ADR 0009); Trinkbrunnen
+  bleiben unverändert im Funktionsumfang. `bembel://water` funktioniert weiter.
 
 - Repositioned around the bembel-data hero: Wasserhäuschen + Ebbelwei
   registers, rating funnel, provenance UX, and data-linked stickers join

@@ -39,6 +39,11 @@ ratings arrive as pull requests.
 - **The app is the funnel.** "Bewerten" opens a prefilled GitHub flow for that
   kiosk, and contributors earn in-app sticker credit (Datenspender). No BEMBEL
   accounts, no backend, and the privacy label stays "Data Not Collected".
+- **Built and shipped.** Both registers live in the **Orte** tab, first in the
+  tab bar ([ADR 0009](docs/adr/0009-registers-in-one-places-tab.md)): Merkmale
+  as the navigation, a provenance byline on every entry, coverage per
+  Stadtteil, and the Sammlung with data-linked stickers and opt-in kiosk visit
+  stamps.
 
 ## 📱 v1.0
 

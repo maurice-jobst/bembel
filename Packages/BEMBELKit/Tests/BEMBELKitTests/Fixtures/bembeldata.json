@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-13T18:04:11+00:00",
+  "commit": "0912f28",
+  "contributors": [
+    { "login": "maurice-jobst", "entries": 1, "verifications": 1, "ratings": 0, "firstRatings": [] },
+    { "login": "cybeerboy", "entries": 0, "verifications": 0, "ratings": 1, "firstRatings": ["yok-yok"] }
+  ],
+  "entries": [
+    {
+      "id": "yok-yok",
+      "kind": "wasserhaeuschen",
+      "name": "City Kiosk Yok-Yok",
+      "address": { "street": "Münchener Straße 32", "postalCode": "60329", "city": "Frankfurt am Main" },
+      "district": "Bahnhofsviertel",
+      "latitude": 50.10761,
+      "longitude": 8.66833,
+      "openingHours": null,
+      "since": null,
+      "merkmale": ["eigenmarke", "kunst", "spaeti", "brandneues-merkmal"],
+      "note": "Bahnhofsviertel-Institution.",
+      "sources": ["https://example.org/yok-yok"],
+      "verified": true,
+      "provenance": {
+        "lastEditor": "maurice-jobst",
+        "lastChangedAt": "2026-08-13T12:00:00+00:00",
+        "verifiedAt": "2026-08-13T12:00:00+00:00",
+        "historyURL": "https://github.com/maurice-jobst/bembel-data/commits/main/data/wasserhaeuschen/yok-yok.json",
+        "fileURL": "https://github.com/maurice-jobst/bembel-data/blob/main/data/wasserhaeuschen/yok-yok.json"
+      },
+      "rating": {
+        "average": 5.0,
+        "count": 1,
+        "ratings": [{ "login": "cybeerboy", "stars": 5, "date": "2026-08-01", "comment": "Nachts um drei die letzte Rettung." }]
+      }
+    },
+    {
+      "id": "zum-gemalten-haus",
+      "kind": "ebbelwei",
+      "name": "Zum Gemalten Haus",
+      "address": { "street": "Schweizer Straße 67", "postalCode": "60594", "city": "Frankfurt am Main" },
+      "district": null,
+      "latitude": 50.1017,
+      "longitude": 8.6836,
+      "openingHours": null,
+      "since": 1922,
+      "merkmale": ["garten", "historisch"],
+      "note": null,
+      "sources": ["https://example.org/gemaltes-haus"],
+      "verified": false,
+      "provenance": {
+        "lastEditor": null,
+        "lastChangedAt": "2026-08-12T09:30:00+00:00",
+        "verifiedAt": null,
+        "historyURL": "https://github.com/maurice-jobst/bembel-data/commits/main/data/ebbelwei/zum-gemalten-haus.json",
+        "fileURL": "https://github.com/maurice-jobst/bembel-data/blob/main/data/ebbelwei/zum-gemalten-haus.json"
+      },
+      "rating": null
+    },
+    {
+      "id": "unbekanntes-register",
+      "kind": "kreppel",
+      "name": "Aus der Zukunft",
+      "address": { "street": "Zeil 1", "postalCode": "60313", "city": "Frankfurt am Main" },
+      "district": null,
+      "latitude": 50.1148,
+      "longitude": 8.6836,
+      "openingHours": null,
+      "since": null,
+      "merkmale": [],
+      "note": null,
+      "sources": [],
+      "verified": true,
+      "provenance": {
+        "lastEditor": null,
+        "lastChangedAt": null,
+        "verifiedAt": null,
+        "historyURL": "https://github.com/maurice-jobst/bembel-data/commits/main/data/kreppel/unbekanntes-register.json",
+        "fileURL": "https://github.com/maurice-jobst/bembel-data/blob/main/data/kreppel/unbekanntes-register.json"
+      },
+      "rating": null
+    }
+  ]
+}

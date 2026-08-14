@@ -7,7 +7,8 @@ import Observation
 @MainActor
 @Observable
 public final class Router {
-    public var selectedTab: BEMTab = .departures
+    public var selectedTab: BEMTab = .places
+    public var selectedRegister: PlaceRegister = .wasserhaeuschen
     public var isPresentingSettings = false
 
     /// Requested scrub time for the shadow map, set via deep link.
@@ -20,6 +21,9 @@ public final class Router {
         switch link {
         case .tab(let tab):
             selectedTab = tab
+        case .places(let register):
+            if let register { selectedRegister = register }
+            selectedTab = .places
         case .shadow(let date):
             shadowDate = date
             selectedTab = .shadow

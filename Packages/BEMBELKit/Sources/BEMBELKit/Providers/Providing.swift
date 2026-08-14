@@ -21,3 +21,10 @@ public protocol RadarProviding: Sendable {
 public protocol CityStatusProviding: Sendable {
     func status() async throws -> CityStatus
 }
+
+public protocol RegisterProviding: Sendable {
+    /// The whole published bundle. Registers are small (hundreds of entries)
+    /// and the UI slices them by register and Merkmal locally — paging here
+    /// would be speculative generality.
+    func snapshot() async throws -> RegisterSnapshot
+}
