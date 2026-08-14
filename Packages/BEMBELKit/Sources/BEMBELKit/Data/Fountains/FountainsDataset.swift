@@ -83,10 +83,6 @@ public actor FountainDatasetProvider: FountainProviding {
         self.defaults = defaults
     }
 
-    public static func makeDefault() throws -> FountainDatasetProvider {
-        FountainDatasetProvider(store: try DatasetStore.makeDefault())
-    }
-
     public func fountains() async throws -> [Fountain] {
         if let cached { return cached }
         if shouldRefresh {
