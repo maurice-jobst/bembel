@@ -14,8 +14,6 @@ struct DeepLinkTests {
     func hostAliases() {
         #expect(link("bembel://departures") == .tab(.departures))
         #expect(link("bembel://abfahrten") == .tab(.departures))
-        #expect(link("bembel://water") == .tab(.water))
-        #expect(link("bembel://wasser") == .tab(.water))
         #expect(link("bembel://radar") == .tab(.radar))
         #expect(link("bembel://regen") == .tab(.radar))
         #expect(link("bembel://city") == .tab(.city))
@@ -24,9 +22,26 @@ struct DeepLinkTests {
         #expect(link("bembel://einstellungen") == .settings)
     }
 
+    @Test("Orte opens with and without a preselected register")
+    func placesLinks() {
+        #expect(link("bembel://places") == .places(nil))
+        #expect(link("bembel://orte") == .places(nil))
+        #expect(link("bembel://kiosk") == .places(.wasserhaeuschen))
+        #expect(link("bembel://wasserhaeuschen") == .places(.wasserhaeuschen))
+        #expect(link("bembel://ebbelwei") == .places(.ebbelwei))
+        #expect(link("bembel://apfelwein") == .places(.ebbelwei))
+    }
+
+    @Test("The old water hosts still land somewhere sensible")
+    func legacyWaterAliases() {
+        #expect(link("bembel://water") == .places(.trinkbrunnen))
+        #expect(link("bembel://wasser") == .places(.trinkbrunnen))
+        #expect(link("bembel://brunnen") == .places(.trinkbrunnen))
+    }
+
     @Test("Scheme and host are case-insensitive")
     func caseInsensitivity() {
-        #expect(link("BEMBEL://WASSER") == .tab(.water))
+        #expect(link("BEMBEL://WASSER") == .places(.trinkbrunnen))
         #expect(link("Bembel://Schatten") == .shadow(at: nil))
     }
 

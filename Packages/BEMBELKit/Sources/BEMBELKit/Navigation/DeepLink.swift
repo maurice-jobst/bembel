@@ -4,14 +4,19 @@ import Foundation
 /// yields a `DeepLink` or `nil`, never a trap — deep links are hostile input.
 ///
 /// Grammar (hosts accept German aliases):
+///   bembel://places     | orte
+///   bembel://kiosk      | wasserhaeuschen
+///   bembel://ebbelwei   | apfelwein
+///   bembel://water      | wasser | brunnen   (legacy: opens Orte on Trinkbrunnen)
 ///   bembel://departures | abfahrten
 ///   bembel://shadow     | schatten     [?t=ISO-8601, naive times = Europe/Berlin]
-///   bembel://water      | wasser
 ///   bembel://radar      | regen
 ///   bembel://city       | stadt
 ///   bembel://settings   | einstellungen
 public enum DeepLink: Hashable, Sendable {
     case tab(BEMTab)
+    /// Orte, optionally preselecting one register's segment.
+    case places(PlaceRegister?)
     case shadow(at: Date?)
     case settings
 
@@ -24,8 +29,14 @@ public enum DeepLink: Hashable, Sendable {
         switch components.host?.lowercased() {
         case "departures", "abfahrten":
             return .tab(.departures)
-        case "water", "wasser":
-            return .tab(.water)
+        case "places", "orte":
+            return .places(nil)
+        case "kiosk", "wasserhaeuschen":
+            return .places(.wasserhaeuschen)
+        case "ebbelwei", "apfelwein":
+            return .places(.ebbelwei)
+        case "water", "wasser", "brunnen":
+            return .places(.trinkbrunnen)
         case "radar", "regen":
             return .tab(.radar)
         case "city", "stadt":

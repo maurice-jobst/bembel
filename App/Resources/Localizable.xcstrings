@@ -261,6 +261,46 @@
         }
       }
     },
+    "places.register.ebbelwei": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ebbelwei"
+          }
+        }
+      }
+    },
+    "places.register.picker": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Register"
+          }
+        }
+      }
+    },
+    "places.register.trinkbrunnen": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brunnen"
+          }
+        }
+      }
+    },
+    "places.register.wasserhaeuschen": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wasserhäuschen"
+          }
+        }
+      }
+    },
     "radar.legend.unit": {
       "localizations": {
         "de": {
@@ -481,6 +521,16 @@
         }
       }
     },
+    "tab.places": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Orte"
+          }
+        }
+      }
+    },
     "tab.radar": {
       "localizations": {
         "de": {
@@ -501,16 +551,6 @@
         }
       }
     },
-    "tab.water": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wasser"
-          }
-        }
-      }
-    },
     "water.bookmark": {
       "localizations": {
         "de": {
@@ -527,36 +567,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$@ · %2$lld Min zu Fuß"
-          }
-        }
-      }
-    },
-    "water.filter.fountains": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Trinkbrunnen"
-          }
-        }
-      }
-    },
-    "water.filter.open": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nur geöffnete"
-          }
-        }
-      }
-    },
-    "water.filter.refill": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Refill"
           }
         }
       }
@@ -607,16 +617,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Route"
-          }
-        }
-      }
-    },
-    "water.search": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Brunnen suchen"
           }
         }
       }

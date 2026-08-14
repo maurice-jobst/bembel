@@ -9,6 +9,16 @@ struct AppDependencies {
     var fountains: any FountainProviding = SampleFountainProvider()
     var radar: any RadarProviding = SampleRadarProvider()
     var cityStatus: any CityStatusProviding = SampleCityStatusProvider()
+    var register: any RegisterProviding = AppDependencies.liveRegister()
+
+    /// `??` cannot bridge the two concrete types into `any RegisterProviding`,
+    /// so this stays an explicit branch. Live by default, sample only if
+    /// construction fails — a broken Application Support directory must not
+    /// take the hero down.
+    static func liveRegister() -> any RegisterProviding {
+        if let live = try? BembelDataRegisterProvider.makeDefault() { return live }
+        return SampleRegisterProvider()
+    }
 }
 
 extension EnvironmentValues {

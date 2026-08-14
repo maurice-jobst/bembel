@@ -30,9 +30,9 @@ struct RootView: View {
     @ViewBuilder
     private func screen(for tab: BEMTab) -> some View {
         switch tab {
+        case .places: PlacesView()
         case .departures: DeparturesView()
         case .shadow: ShadowView()
-        case .water: WaterView()
         case .radar: RadarView()
         case .city: CityView()
         }
@@ -42,9 +42,9 @@ struct RootView: View {
 extension BEMTab {
     var titleKey: LocalizedStringKey {
         switch self {
+        case .places: "tab.places"
         case .departures: "tab.departures"
         case .shadow: "tab.shadow"
-        case .water: "tab.water"
         case .radar: "tab.radar"
         case .city: "tab.city"
         }
@@ -52,9 +52,9 @@ extension BEMTab {
 
     var systemImage: String {
         switch self {
+        case .places: "mappin.and.ellipse"
         case .departures: "tram.fill"
         case .shadow: "building.2.fill"
-        case .water: "drop.fill"
         case .radar: "cloud.rain.fill"
         case .city: "gauge.with.dots.needle.50percent"
         }
