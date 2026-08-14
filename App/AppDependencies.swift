@@ -5,6 +5,12 @@ import SwiftUI
 /// providers until the live ones land (epics C–G); previews and tests
 /// override individual providers as needed.
 struct AppDependencies {
+    /// One instance for the whole app. The `@Entry` default expression is
+    /// re-evaluated on environment reads, so it must hand out this shared
+    /// value — otherwise every view gets its own provider actors and the
+    /// register cache never hits across views.
+    static let shared = AppDependencies()
+
     var departures: any DeparturesProviding = SampleDeparturesProvider()
     var fountains: any FountainProviding = SampleFountainProvider()
     var radar: any RadarProviding = SampleRadarProvider()
@@ -22,5 +28,5 @@ struct AppDependencies {
 }
 
 extension EnvironmentValues {
-    @Entry var dependencies = AppDependencies()
+    @Entry var dependencies = AppDependencies.shared
 }

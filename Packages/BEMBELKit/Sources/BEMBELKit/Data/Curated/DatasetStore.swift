@@ -47,7 +47,15 @@ public actor DatasetStore {
     }
 
     public func payload<D: CuratedDataset>(for dataset: D.Type) throws -> D.Payload {
-        try JSONDecoder().decode(D.Payload.self, from: currentData(for: D.id))
+        // An override that no longer decodes (written by an older app version,
+        // then the payload type evolved) must not brick the dataset forever —
+        // fall back to the bundled snapshot, which ships with this decoder.
+        if let override = try? Data(contentsOf: overrideURL(for: D.id)),
+            let payload = try? JSONDecoder().decode(D.Payload.self, from: override)
+        {
+            return payload
+        }
+        return try JSONDecoder().decode(D.Payload.self, from: bundledData(for: D.id))
     }
 
     @discardableResult
@@ -96,10 +104,7 @@ public actor DatasetStore {
         directory.appending(path: "\(id).json")
     }
 
-    private func currentData(for id: String) throws -> Data {
-        if let override = try? Data(contentsOf: overrideURL(for: id)) {
-            return override
-        }
+    private func bundledData(for id: String) throws -> Data {
         guard
             let url = bundle.url(forResource: id, withExtension: "json"),
             let bundled = try? Data(contentsOf: url)

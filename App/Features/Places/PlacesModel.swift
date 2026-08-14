@@ -7,10 +7,11 @@ import Observation
 final class PlacesModel {
     private(set) var snapshot = RegisterSnapshot.empty
     private(set) var fountains: [Fountain] = []
+    /// Surfaced by BEM-C06's failure states; until then it just isn't lost.
     private(set) var lastError: Error?
-    private(set) var isLoading = false
-    /// One load per tab lifetime. Not "is the snapshot empty" — an empty
-    /// register is a legitimate result and must not retrigger the load.
+    /// One *successful* load per tab lifetime. Not "is the snapshot empty" —
+    /// an empty register is a legitimate result and must not retrigger the
+    /// load — but a cancelled or failed load must stay retryable.
     private var hasLoaded = false
 
     var selectedRegister: PlaceRegister = .wasserhaeuschen
@@ -41,20 +42,25 @@ final class PlacesModel {
 
     func load(register: any RegisterProviding, fountains fountainProvider: any FountainProviding) async {
         guard !hasLoaded else { return }
-        hasLoaded = true
-        isLoading = true
-        defer { isLoading = false }
+        // The two sources are independent — load them concurrently so a slow
+        // register refresh cannot hold up the Trinkbrunnen segment.
+        async let snapshotLoad = register.snapshot()
+        async let fountainLoad = fountainProvider.fountains()
+        var succeeded = true
         do {
-            snapshot = try await register.snapshot()
+            snapshot = try await snapshotLoad
         } catch {
             lastError = error
+            succeeded = false
         }
         do {
-            fountains = try await fountainProvider.fountains()
+            fountains = try await fountainLoad
             selectedFountain = fountains.first(where: \.featured) ?? fountains.first
         } catch {
             lastError = error
+            succeeded = false
         }
+        hasLoaded = succeeded
     }
 
     func toggle(_ merkmal: Merkmal) {

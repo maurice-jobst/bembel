@@ -30,15 +30,7 @@ struct EntryDetailCard: View {
             actions
             sources
         }
-        .padding(.horizontal, BEMSpacing.l)
-        .padding(.top, BEMSpacing.s)
-        .padding(.bottom, BEMSpacing.l)
-        .background(BEMColor.saltGlaze, in: RoundedRectangle(cornerRadius: BEMRadius.card))
-        .overlay(
-            RoundedRectangle(cornerRadius: BEMRadius.card)
-                .stroke(BEMColor.glazeLine.opacity(0.6), lineWidth: 0.5)
-        )
-        .padding(.bottom, BEMSpacing.s)
+        .bemDetailCard()
         .sheet(isPresented: $isRating) {
             RatingSheet(entry: entry, login: login)
                 .presentationDetents([.medium])
@@ -138,19 +130,11 @@ struct EntryDetailCard: View {
             CobaltButton(title: Text("entry.action.rate"), systemImage: "star") {
                 isRating = true
             }
-            Button {
+            SquareActionButton(systemImage: "location.north.fill", accessibilityLabel: "entry.action.route") {
                 let item = MKMapItem(placemark: MKPlacemark(coordinate: entry.coordinate))
                 item.name = entry.name
                 item.openInMaps()
-            } label: {
-                Image(systemName: "location.north.fill")
-                    .font(.body.weight(.medium))
-                    .foregroundStyle(BEMColor.cobalt)
-                    .frame(width: 48, height: 48)
-                    .overlay(RoundedRectangle(cornerRadius: BEMRadius.control).stroke(BEMColor.glazeLine, lineWidth: 1))
             }
-            .buttonStyle(.plain)
-            .accessibilityLabel(Text("entry.action.route"))
         }
     }
 

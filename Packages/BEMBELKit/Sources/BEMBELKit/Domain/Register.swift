@@ -279,9 +279,4 @@ public struct RegisterSnapshot: Hashable, Sendable {
             }
             .map(\.key)
     }
-
-    public func contributor(login: String) -> Contributor? {
-        let wanted = login.lowercased()
-        return contributors.first { $0.login.lowercased() == wanted }
-    }
 }

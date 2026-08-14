@@ -78,21 +78,13 @@ struct FountainDetailCard: View {
                     item.name = fountain.name
                     item.openInMaps()
                 }
-                squareAction(icon: "bookmark", label: "water.bookmark")
-                squareAction(icon: "square.and.arrow.up", label: "water.share")
+                SquareActionButton(systemImage: "bookmark", accessibilityLabel: "water.bookmark")
+                SquareActionButton(systemImage: "square.and.arrow.up", accessibilityLabel: "water.share")
             }
 
             SourceLine(systemImage: "link", text: Text("water.source"))
         }
-        .padding(.horizontal, BEMSpacing.l)
-        .padding(.top, BEMSpacing.s)
-        .padding(.bottom, BEMSpacing.l)
-        .background(BEMColor.saltGlaze, in: RoundedRectangle(cornerRadius: BEMRadius.card))
-        .overlay(
-            RoundedRectangle(cornerRadius: BEMRadius.card)
-                .stroke(BEMColor.glazeLine.opacity(0.6), lineWidth: 0.5)
-        )
-        .padding(.bottom, BEMSpacing.s)
+        .bemDetailCard()
     }
 
     private func detailRow(icon: String, label: LocalizedStringKey, value: Text) -> some View {
@@ -114,16 +106,4 @@ struct FountainDetailCard: View {
         .background(BEMColor.saltGlazeElevated)
     }
 
-    private func squareAction(icon: String, label: LocalizedStringKey) -> some View {
-        Button {
-        } label: {
-            Image(systemName: icon)
-                .font(.body.weight(.medium))
-                .foregroundStyle(BEMColor.cobalt)
-                .frame(width: 48, height: 48)
-                .overlay(RoundedRectangle(cornerRadius: BEMRadius.control).stroke(BEMColor.glazeLine, lineWidth: 1))
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(Text(label))
-    }
 }

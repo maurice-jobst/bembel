@@ -33,6 +33,8 @@ public enum VisitMonitor {
     /// *what* to monitor is `VisitMonitor.candidates`, and that is tested.
     @MainActor
     public final class KioskVisitMonitor {
+        private static let monitorName = "de.mauricejobst.bembel.kiosks"
+
         private var monitor: CLMonitor?
         private var task: Task<Void, Never>?
 
@@ -41,8 +43,9 @@ public enum VisitMonitor {
         /// Starts monitoring the given entries. `onVisit` fires once per entry
         /// per install — `StickerState.recordVisit` is the idempotence gate.
         public func start(for entries: [RegisterEntry], onVisit: @escaping @MainActor (String) -> Void) async {
-            stop()
-            let monitor = await CLMonitor("de.mauricejobst.bembel.kiosks")
+            task?.cancel()
+            task = nil
+            let monitor = await CLMonitor(Self.monitorName)
             self.monitor = monitor
 
             for identifier in await monitor.identifiers {
@@ -70,9 +73,26 @@ public enum VisitMonitor {
             }
         }
 
+        /// Tears the monitoring down completely: CLMonitor conditions persist
+        /// across launches under the monitor's name, so an opt-out must remove
+        /// them — cancelling the event loop alone would leave the geofences
+        /// registered against the user's explicit choice.
         public func stop() {
             task?.cancel()
             task = nil
+            let held = monitor
+            monitor = nil
+            Task {
+                let monitor: CLMonitor
+                if let held {
+                    monitor = held
+                } else {
+                    monitor = await CLMonitor(Self.monitorName)
+                }
+                for identifier in await monitor.identifiers {
+                    await monitor.remove(identifier)
+                }
+            }
         }
     }
 #endif

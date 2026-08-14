@@ -15,7 +15,7 @@ struct PlacesView: View {
     @State private var visitMonitor = KioskVisitMonitor()
     @State private var position: MapCameraPosition = .region(
         MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 50.1122, longitude: 8.6780),
+            center: PlacesView.frankfurtCenter,
             span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
         )
     )
@@ -45,20 +45,25 @@ struct PlacesView: View {
         .task {
             await model.load(register: dependencies.register, fountains: dependencies.fountains)
         }
-        .task(id: visitDetection) {
+        // Keyed on toggle *and* data: re-arms once the snapshot arrives, and
+        // an empty snapshot never wipes previously registered conditions.
+        .task(id: visitMonitorKey) {
             guard visitDetection else {
                 visitMonitor.stop()
                 return
             }
             let entries = VisitMonitor.candidates(
                 from: model.snapshot.entries(in: .wasserhaeuschen),
-                near: position.region?.center ?? CLLocationCoordinate2D(latitude: 50.1122, longitude: 8.6780)
+                near: position.region?.center ?? PlacesView.frankfurtCenter
             )
+            guard !entries.isEmpty else { return }
             await visitMonitor.start(for: entries) { entryID in
                 StickerState.recordVisit(entryID: entryID)
             }
         }
-        .onChange(of: router.selectedRegister) { _, new in
+        // `initial: true` covers the cold-start deep link — the router may
+        // already carry a register before this view ever appears.
+        .onChange(of: router.selectedRegister, initial: true) { _, new in
             model.select(register: new)
         }
         .sheet(isPresented: $isShowingCoverage) {
@@ -104,9 +109,24 @@ struct PlacesView: View {
         .labelsHidden()
     }
 
+    /// The router is the single source of truth for the selected register —
+    /// segment taps write back to it, so a later deep link to the "same"
+    /// value cannot be silently dropped by an unchanged-value `onChange`.
     private var registerBinding: Binding<PlaceRegister> {
-        Binding(get: { model.selectedRegister }, set: { model.select(register: $0) })
+        Binding(
+            get: { model.selectedRegister },
+            set: { new in
+                model.select(register: new)
+                router.selectedRegister = new
+            }
+        )
     }
+
+    private var visitMonitorKey: String {
+        visitDetection ? "on-\(model.snapshot.entries.count)" : "off"
+    }
+
+    static let frankfurtCenter = CLLocationCoordinate2D(latitude: 50.1122, longitude: 8.6780)
 
     @ViewBuilder
     private var detailCard: some View {

@@ -104,9 +104,11 @@ extension BembelDataBundle {
     private static func entry(_ wire: Entry) -> RegisterEntry? {
         guard
             let register = PlaceRegister(rawValue: wire.kind), register.isCommunity,
-            let historyURL = URL(string: wire.provenance.historyURL),
-            let fileURL = URL(string: wire.provenance.fileURL)
+            let historyURL = URL(string: wire.provenance.historyURL)
         else { return nil }
+        // Nothing renders fileURL yet — a malformed value must not cost the
+        // whole entry, so it degrades to the history link instead of guarding.
+        let fileURL = URL(string: wire.provenance.fileURL) ?? historyURL
 
         return RegisterEntry(
             id: wire.id,
@@ -148,18 +150,31 @@ extension BembelDataBundle {
         )
     }
 
-    /// Accepts both shapes bembel-data emits: full ISO-8601 timestamps from
-    /// git (`%aI`) and plain `YYYY-MM-DD` rating dates.
-    static func date(_ raw: String?) -> Date? {
-        guard let raw else { return nil }
+    // One formatter each for the whole decode — this runs 3× per entry plus
+    // once per rating, and formatter construction dominates the parse cost.
+    // Both classes are documented thread-safe; they just predate Sendable
+    // (same justification as AppGroup.defaults).
+    private nonisolated(unsafe) static let isoDate: ISO8601DateFormatter = {
         let iso = ISO8601DateFormatter()
         iso.formatOptions = [.withInternetDateTime]
-        if let date = iso.date(from: raw) { return date }
+        return iso
+    }()
 
+    private nonisolated(unsafe) static let dayOnlyDate: DateFormatter = {
         let dayOnly = DateFormatter()
         dayOnly.locale = Locale(identifier: "en_US_POSIX")
         dayOnly.timeZone = TimeZone(identifier: "Europe/Berlin")
         dayOnly.dateFormat = "yyyy-MM-dd"
-        return dayOnly.date(from: raw)
+        return dayOnly
+    }()
+
+    /// Accepts both shapes bembel-data emits: full ISO-8601 timestamps from
+    /// git (`%aI`) and plain `YYYY-MM-DD` rating dates.
+    static func date(_ raw: String?) -> Date? {
+        guard let raw else { return nil }
+        // Rating dates are always day-only by contract — try that first so
+        // they don't pay for a guaranteed-miss ISO attempt.
+        if raw.count == 10 { return dayOnlyDate.date(from: raw) }
+        return isoDate.date(from: raw) ?? dayOnlyDate.date(from: raw)
     }
 }

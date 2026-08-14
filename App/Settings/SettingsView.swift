@@ -60,11 +60,30 @@ struct SettingsView: View {
     }
 }
 
+/// Data-state rows read view-model state, not a provider — the ADR 0007 seam
+/// applies to Settings exactly as it does to the feature tabs.
+@MainActor
+@Observable
+final class DataSourcesModel {
+    private(set) var snapshot: RegisterSnapshot?
+    /// Surfaced by BEM-C06's failure states; until then it just isn't lost.
+    private(set) var lastError: Error?
+
+    func load(from provider: any RegisterProviding) async {
+        guard snapshot == nil else { return }
+        do {
+            snapshot = try await provider.snapshot()
+        } catch {
+            lastError = error
+        }
+    }
+}
+
 /// Every dataset the app touches, with provider and licence. Grows with the
 /// feature tickets; the validator enforces the same rule for curated data.
 struct DataSourcesView: View {
     @Environment(\.dependencies) private var dependencies
-    @State private var snapshot: RegisterSnapshot?
+    @State private var model = DataSourcesModel()
 
     private static let sources: [(name: String, licence: String)] = [
         ("bembel-data (Community)", "ODbL"),
@@ -81,7 +100,7 @@ struct DataSourcesView: View {
     var body: some View {
         List {
             Section {
-                if let snapshot, snapshot.schemaVersion > 0 {
+                if let snapshot = model.snapshot, snapshot.schemaVersion > 0 {
                     LabeledContent("settings.data.version") {
                         Text(verbatim: String(snapshot.schemaVersion))
                     }
@@ -118,7 +137,7 @@ struct DataSourcesView: View {
         .navigationTitle("settings.sources")
         .navigationBarTitleDisplayMode(.inline)
         .task {
-            snapshot = try? await dependencies.register.snapshot()
+            await model.load(from: dependencies.register)
         }
     }
 }

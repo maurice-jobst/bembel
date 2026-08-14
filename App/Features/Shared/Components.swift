@@ -141,3 +141,47 @@ struct SourceLine: View {
         .foregroundStyle(BEMColor.inkSecondary)
     }
 }
+
+// MARK: - Square action
+
+/// 48pt secondary-action button used in the detail cards' action rows.
+struct SquareActionButton: View {
+    let systemImage: String
+    let accessibilityLabel: LocalizedStringKey
+    var action: () -> Void = {}
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.body.weight(.medium))
+                .foregroundStyle(BEMColor.cobalt)
+                .frame(width: 48, height: 48)
+                .overlay(RoundedRectangle(cornerRadius: BEMRadius.control).stroke(BEMColor.glazeLine, lineWidth: 1))
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(Text(accessibilityLabel))
+    }
+}
+
+// MARK: - Detail card chrome
+
+/// The bottom detail-card shell shared by every place segment. One modifier,
+/// so the cards cannot drift apart inside the same surface.
+struct DetailCardChrome: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(.horizontal, BEMSpacing.l)
+            .padding(.top, BEMSpacing.s)
+            .padding(.bottom, BEMSpacing.l)
+            .background(BEMColor.saltGlaze, in: RoundedRectangle(cornerRadius: BEMRadius.card))
+            .overlay(
+                RoundedRectangle(cornerRadius: BEMRadius.card)
+                    .stroke(BEMColor.glazeLine.opacity(0.6), lineWidth: 0.5)
+            )
+            .padding(.bottom, BEMSpacing.s)
+    }
+}
+
+extension View {
+    func bemDetailCard() -> some View { modifier(DetailCardChrome()) }
+}
