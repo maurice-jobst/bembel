@@ -118,18 +118,6 @@ extension PlaceRegister {
     }
 }
 
-// Stubs until Task 7 creates the real files — kept two lines so this task
-// builds standalone.
-struct MerkmalBar: View {
-    @Bindable var model: PlacesModel
-    var body: some View { EmptyView() }
-}
-
-struct EntryDetailCard: View {
-    let entry: RegisterEntry
-    var body: some View { EmptyView() }
-}
-
 #Preview {
     PlacesView()
         .environment(Router())

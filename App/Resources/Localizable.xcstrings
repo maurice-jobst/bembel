@@ -81,6 +81,256 @@
         }
       }
     },
+    "entry.action.rate": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bewerten"
+          }
+        }
+      }
+    },
+    "entry.action.rate.open": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf GitHub bewerten"
+          }
+        }
+      }
+    },
+    "entry.action.route": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Route"
+          }
+        }
+      }
+    },
+    "entry.provenance.editor %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zuletzt bearbeitet von @%@"
+          }
+        }
+      }
+    },
+    "entry.provenance.history": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Änderungen auf GitHub"
+          }
+        }
+      }
+    },
+    "entry.provenance.unverified": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch nicht geprüft"
+          }
+        }
+      }
+    },
+    "entry.provenance.verified %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geprüft am %@"
+          }
+        }
+      }
+    },
+    "entry.rating.count %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Bewertungen"
+          }
+        }
+      }
+    },
+    "entry.rating.none": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Bewertung"
+          }
+        }
+      }
+    },
+    "entry.rating.stars %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Sterne"
+          }
+        }
+      }
+    },
+    "entry.sources": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quelle öffnen"
+          }
+        }
+      }
+    },
+    "funnel.hint": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "„Bewerten“ öffnet GitHub. Deine Bewertung ist ein Pull Request aus deinem Account — kein BEMBEL-Konto, keine Daten für uns."
+          }
+        }
+      }
+    },
+    "merkmal.baenke-draussen": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bänke draußen"
+          }
+        }
+      }
+    },
+    "merkmal.ebbelwei": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ebbelwei"
+          }
+        }
+      }
+    },
+    "merkmal.eigenkelterei": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eigenkelterei"
+          }
+        }
+      }
+    },
+    "merkmal.eigenmarke": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eigenmarke"
+          }
+        }
+      }
+    },
+    "merkmal.garten": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garten"
+          }
+        }
+      }
+    },
+    "merkmal.handkaes": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Handkäs"
+          }
+        }
+      }
+    },
+    "merkmal.historisch": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Historisch"
+          }
+        }
+      }
+    },
+    "merkmal.kunst": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunst"
+          }
+        }
+      }
+    },
+    "merkmal.schoppen-vom-fass": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schoppen vom Fass"
+          }
+        }
+      }
+    },
+    "merkmal.sitzplaetze": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sitzplätze"
+          }
+        }
+      }
+    },
+    "merkmal.spaet-offen": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spät offen"
+          }
+        }
+      }
+    },
+    "merkmal.spaeti": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Späti"
+          }
+        }
+      }
+    },
+    "merkmal.trinkhalle-klassisch": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klassische Trinkhalle"
+          }
+        }
+      }
+    },
     "onboarding.claim": {
       "localizations": {
         "de": {
@@ -257,6 +507,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Trinkwasser"
+          }
+        }
+      }
+    },
+    "places.merkmale.a11y": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach Merkmalen filtern"
+          }
+        }
+      }
+    },
+    "places.merkmale.all": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle"
           }
         }
       }
