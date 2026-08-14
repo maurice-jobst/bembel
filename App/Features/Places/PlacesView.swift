@@ -10,6 +10,8 @@ struct PlacesView: View {
     @Environment(Router.self) private var router
     @State private var model = PlacesModel()
     @State private var isShowingCoverage = false
+    @AppStorage(StickerState.visitDetectionKey, store: AppGroup.defaults) private var visitDetection = false
+    @State private var visitMonitor = KioskVisitMonitor()
     @State private var position: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 50.1122, longitude: 8.6780),
@@ -38,6 +40,19 @@ struct PlacesView: View {
         }
         .task {
             await model.load(register: dependencies.register, fountains: dependencies.fountains)
+        }
+        .task(id: visitDetection) {
+            guard visitDetection else {
+                visitMonitor.stop()
+                return
+            }
+            let entries = VisitMonitor.candidates(
+                from: model.snapshot.entries(in: .wasserhaeuschen),
+                near: position.region?.center ?? CLLocationCoordinate2D(latitude: 50.1122, longitude: 8.6780)
+            )
+            await visitMonitor.start(for: entries) { entryID in
+                StickerState.recordVisit(entryID: entryID)
+            }
         }
         .onChange(of: router.selectedRegister) { _, new in
             model.select(register: new)

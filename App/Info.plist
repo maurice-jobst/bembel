@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>BEMBEL nutzt deinen Standort nur für die nächste Haltestelle und den nächsten Brunnen. Er bleibt auf dem Gerät.</string>
+	<string>BEMBEL nutzt deinen Standort für die nächste Haltestelle, den nächsten Brunnen und — wenn du Kiosk-Stempel einschaltest — um zu merken, an welchem Wasserhäuschen du warst. Alles bleibt auf dem Gerät.</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
