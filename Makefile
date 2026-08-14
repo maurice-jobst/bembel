@@ -1,4 +1,4 @@
-.PHONY: build test validate format format-check lint
+.PHONY: build test validate test-data format format-check lint
 
 FORMAT_PATHS = App Widgets Packages/BEMBELKit/Sources Packages/BEMBELKit/Tests
 
@@ -12,6 +12,10 @@ test:
 
 validate:
 	python3 scripts/validate_data.py
+
+# The validator's own tests: every rule gets watched failing at least once.
+test-data:
+	cd scripts && python3 -m unittest discover -p 'test_*.py' -v
 
 format:
 	xcrun swift-format format --in-place --recursive $(FORMAT_PATHS)
