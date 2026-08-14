@@ -12,8 +12,8 @@ while standing on a street corner. BEMBEL puts it in one place.
 ![Privacy: Data Not Collected](https://img.shields.io/badge/privacy-Data%20Not%20Collected-6f42c1?style=flat-square)
 ![Ship target: 22 March 2027](https://img.shields.io/badge/v1.0-22%20March%202027-orange?style=flat-square)
 
-<!-- At the v1.0 public flip: add the CI and data-validation status badges.
-     shields.io and GitHub's own badge.svg cannot read a private repo. -->
+[![CI](https://github.com/maurice-jobst/bembel/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/maurice-jobst/bembel/actions/workflows/ci.yml)
+[![Data validation](https://github.com/maurice-jobst/bembel/actions/workflows/data-validate.yml/badge.svg?branch=main)](https://github.com/maurice-jobst/bembel/actions/workflows/data-validate.yml)
 
 No ads, no tracking, no BEMBEL backend, no BEMBEL accounts. Apple services
 (Game Center, iCloud) and GitHub participation are opt-in. The App Store
