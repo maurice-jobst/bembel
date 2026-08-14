@@ -13,7 +13,7 @@ struct AppDependencies {
 
     var departures: any DeparturesProviding = SampleDeparturesProvider()
     var fountains: any FountainProviding = AppDependencies.liveFountains()
-    var radar: any RadarProviding = SampleRadarProvider()
+    var radar: any RadarProviding = RadolanRadarProvider()
     var cityStatus: any CityStatusProviding = SampleCityStatusProvider()
     var register: any RegisterProviding = AppDependencies.liveRegister()
 

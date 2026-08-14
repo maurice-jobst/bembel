@@ -1,0 +1,5 @@
+module CBZip2 {
+    umbrella header "include/shim.h"
+    link "bz2"
+    export *
+}

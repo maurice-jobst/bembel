@@ -14,7 +14,14 @@ let package = Package(
         .library(name: "BEMBELKit", targets: ["BEMBELKit"])
     ],
     targets: [
-        .target(name: "BEMBELKit", resources: [.process("Resources")]),
+        // System bzip2 (libbz2 ships in every Apple SDK). DWD publishes the
+        // RADOLAN composites bzip2-compressed, and Apple's Compression
+        // framework covers zlib/lzfse/lz4/lzma but not bzip2 — this shim is
+        // what keeps BEM-F01 free of third-party packages.
+        // The modulemap's `link "bz2"` is advisory for a plain target, so the
+        // linker flag lives here where it travels to every dependent.
+        .target(name: "CBZip2", linkerSettings: [.linkedLibrary("bz2")]),
+        .target(name: "BEMBELKit", dependencies: ["CBZip2"], resources: [.process("Resources")]),
         .testTarget(
             name: "BEMBELKitTests",
             dependencies: ["BEMBELKit"],
