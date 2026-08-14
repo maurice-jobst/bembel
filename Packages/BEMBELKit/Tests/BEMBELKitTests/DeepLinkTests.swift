@@ -39,6 +39,54 @@ struct DeepLinkTests {
         #expect(link("bembel://brunnen") == .places(.trinkbrunnen))
     }
 
+    @Test("A single path component names one entry in the host's register")
+    func entryLinks() {
+        #expect(link("bembel://kiosk/yok-yok") == .entry(register: .wasserhaeuschen, id: "yok-yok"))
+        #expect(link("bembel://wasserhaeuschen/yok-yok") == .entry(register: .wasserhaeuschen, id: "yok-yok"))
+        #expect(link("bembel://ebbelwei/zur-buchscheer") == .entry(register: .ebbelwei, id: "zur-buchscheer"))
+        #expect(link("bembel://apfelwein/zur-buchscheer") == .entry(register: .ebbelwei, id: "zur-buchscheer"))
+        #expect(link("bembel://brunnen/lorem") == .entry(register: .trinkbrunnen, id: "lorem"))
+    }
+
+    @Test("Entry ids are percent-decoded")
+    func percentDecoding() {
+        #expect(link("bembel://kiosk/caf%C3%A9-nizza") == .entry(register: .wasserhaeuschen, id: "café-nizza"))
+    }
+
+    @Test("Trailing slashes are not a different link")
+    func trailingSlash() {
+        #expect(link("bembel://kiosk/") == .places(.wasserhaeuschen))
+        #expect(link("bembel://kiosk/yok-yok/") == .entry(register: .wasserhaeuschen, id: "yok-yok"))
+    }
+
+    @Test("Only register hosts take an id, and only one level deep")
+    func entryLinkRejection() {
+        // Nothing on screen could resolve a register-less entry id.
+        #expect(link("bembel://places/yok-yok") == nil)
+        #expect(link("bembel://orte/yok-yok") == nil)
+        #expect(link("bembel://kiosk/yok-yok/extra") == nil)
+        #expect(link("bembel://settings/yok-yok") == nil)
+        #expect(link("bembel://radar/yok-yok") == nil)
+        #expect(link("bembel://shadow/2027-06-21") == nil)
+        #expect(link("bembel://kiosk/\(String(repeating: "a", count: 129))") == nil)
+    }
+
+    @Test("Emitted entry URLs parse back to what they were built from")
+    func urlRoundTrip() throws {
+        for register in PlaceRegister.allCases {
+            let url = try #require(DeepLink.url(register: register, entryID: "yok-yok"))
+            #expect(DeepLink.parse(url) == .entry(register: register, id: "yok-yok"))
+        }
+        let unicode = try #require(DeepLink.url(register: .ebbelwei, entryID: "café-nizza"))
+        #expect(DeepLink.parse(unicode) == .entry(register: .ebbelwei, id: "café-nizza"))
+    }
+
+    @Test("An id the grammar would reject never becomes a URL")
+    func urlRefusesBadIDs() {
+        #expect(DeepLink.url(register: .wasserhaeuschen, entryID: "") == nil)
+        #expect(DeepLink.url(register: .wasserhaeuschen, entryID: String(repeating: "a", count: 129)) == nil)
+    }
+
     @Test("Scheme and host are case-insensitive")
     func caseInsensitivity() {
         #expect(link("BEMBEL://WASSER") == .places(.trinkbrunnen))

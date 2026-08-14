@@ -1,6 +1,20 @@
 import BEMBELKit
+import CoreLocation
 import Foundation
 import Observation
+import WidgetKit
+
+/// What the map should centre on, and why. Equatable so a repeated request for
+/// the same place is one event, not a camera that keeps re-snapping.
+struct MapFocus: Equatable {
+    let id: String
+    let latitude: Double
+    let longitude: Double
+
+    var coordinate: CLLocationCoordinate2D {
+        CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+}
 
 @MainActor
 @Observable
@@ -14,12 +28,19 @@ final class PlacesModel {
     /// load — but a cancelled or failed load must stay retryable.
     private var hasLoaded = false
 
+    /// An entry a deep link asked for that the current data cannot resolve
+    /// yet. Held until the first successful load answers the question one way
+    /// or the other, then dropped — a link naming an entry this bundle does
+    /// not carry must not lie in wait and hijack a later refresh.
+    private var pendingEntryID: String?
+
     var selectedRegister: PlaceRegister = .wasserhaeuschen
     /// Merkmale-first navigation: an empty set means "everything", and the
     /// chips are generated from the data, never from a hardcoded list.
     var selectedMerkmale: Set<Merkmal> = []
     var selectedEntry: RegisterEntry?
     var selectedFountain: Fountain?
+    private(set) var focus: MapFocus?
 
     var availableMerkmale: [Merkmal] {
         snapshot.merkmale(in: selectedRegister)
@@ -55,12 +76,27 @@ final class PlacesModel {
         }
         do {
             fountains = try await fountainLoad
-            selectedFountain = fountains.first(where: \.featured) ?? fountains.first
+            // Only pick a default when the standing choice went away, so a
+            // refresh cannot yank the card out from under the user.
+            if selectedFountain == nil || !fountains.contains(where: { $0.id == selectedFountain?.id }) {
+                selectedFountain = fountains.first(where: \.featured) ?? fountains.first
+            }
         } catch {
             lastError = error
             succeeded = false
         }
         hasLoaded = succeeded
+        resolvePendingEntry()
+    }
+
+    /// Pull-to-refresh: the user is telling us the staleness window is wrong
+    /// for this moment, so the provider's cache goes first and the read path
+    /// runs again from the source.
+    func refresh(register: any RegisterProviding, fountains fountainProvider: any FountainProviding) async {
+        await register.invalidate()
+        hasLoaded = false
+        lastError = nil
+        await load(register: register, fountains: fountainProvider)
     }
 
     func toggle(_ merkmal: Merkmal) {
@@ -78,5 +114,43 @@ final class PlacesModel {
         selectedRegister = register
         selectedMerkmale = []
         selectedEntry = nil
+    }
+
+    /// Deep-link entry point. The register in the URL is a hint, not a
+    /// constraint: ids are unique across the published bundle, so finding the
+    /// entry under a different register is a better answer than "not found".
+    func focus(entryID: String) {
+        pendingEntryID = entryID
+        resolvePendingEntry()
+    }
+
+    private func resolvePendingEntry() {
+        guard let id = pendingEntryID else { return }
+
+        if let entry = snapshot.entries.first(where: { $0.id == id }) {
+            selectedRegister = entry.register
+            // A standing Merkmal filter from the previous register could hide
+            // the very entry the link asked for.
+            selectedMerkmale = []
+            selectedEntry = entry
+            focus = MapFocus(id: entry.id, latitude: entry.latitude, longitude: entry.longitude)
+            pendingEntryID = nil
+        } else if let fountain = fountains.first(where: { $0.id == id }) {
+            selectedRegister = .trinkbrunnen
+            selectedFountain = fountain
+            focus = MapFocus(id: fountain.id, latitude: fountain.latitude, longitude: fountain.longitude)
+            pendingEntryID = nil
+        } else if hasLoaded {
+            pendingEntryID = nil
+        }
+    }
+
+    /// Hands the widget the nearest unverified entries. Called from the map,
+    /// which is the only place that knows where the user is looking.
+    func publishCandidateDigest(near center: CLLocationCoordinate2D) {
+        guard hasLoaded else { return }
+        let digest = CandidateDigest.make(from: snapshot, near: center)
+        guard CandidateDigestStore.save(digest) else { return }
+        WidgetCenter.shared.reloadTimelines(ofKind: WidgetKind.nearestCandidate)
     }
 }

@@ -33,7 +33,11 @@ public enum VisitMonitor {
     /// *what* to monitor is `VisitMonitor.candidates`, and that is tested.
     @MainActor
     public final class KioskVisitMonitor {
-        private static let monitorName = "de.mauricejobst.bembel.kiosks"
+        /// Alphanumerics only. `CLMonitor(_:)` validates the name in ObjC and
+        /// raises `NSInternalInconsistencyException` on anything else — a
+        /// reverse-DNS name kills the app on the first `stop()`, which is every
+        /// cold start with visit detection off. Not catchable from Swift.
+        private static let monitorName = "bembelkiosks"
 
         private var monitor: CLMonitor?
         private var task: Task<Void, Never>?

@@ -6,6 +6,7 @@ import SwiftUI
 /// hotspots, Game Center, seasonal drops) is M4.
 struct StickerAlbumView: View {
     let model: PlacesModel
+    @Environment(\.dependencies) private var dependencies
     @Environment(\.dismiss) private var dismiss
     @AppStorage(StickerState.loginKey, store: AppGroup.defaults) private var login = ""
 
@@ -49,6 +50,12 @@ struct StickerAlbumView: View {
                 } footer: {
                     Text("stickers.stamps.footer")
                 }
+            }
+            // Contributor tallies are recomputed in bembel-data's CI, so the
+            // sticker that unlocks on a merged PR arrives with the next bundle
+            // — pulling here is how you check without waiting out staleness.
+            .refreshable {
+                await model.refresh(register: dependencies.register, fountains: dependencies.fountains)
             }
             .navigationTitle("stickers.title")
             .navigationBarTitleDisplayMode(.inline)

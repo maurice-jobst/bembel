@@ -6,6 +6,7 @@ import SwiftUI
 /// empty state instead of a fake zero.
 struct CoverageView: View {
     let model: PlacesModel
+    @Environment(\.dependencies) private var dependencies
     @Environment(\.dismiss) private var dismiss
 
     private var totals: (verified: Int, total: Int) {
@@ -53,6 +54,12 @@ struct CoverageView: View {
                         }
                     }
                 }
+            }
+            // The coverage numbers are the reason to pull: a merged PR in
+            // bembel-data moves them, and waiting out the 6 h staleness window
+            // to see your own contribution land is the wrong feeling.
+            .refreshable {
+                await model.refresh(register: dependencies.register, fountains: dependencies.fountains)
             }
             .navigationTitle("coverage.title")
             .navigationBarTitleDisplayMode(.inline)

@@ -16,6 +16,16 @@ public enum PlaceRegister: String, CaseIterable, Codable, Hashable, Identifiable
     public static let community: [PlaceRegister] = [.wasserhaeuschen, .ebbelwei]
 
     public var isCommunity: Bool { Self.community.contains(self) }
+
+    /// The host `DeepLink.url(register:entryID:)` writes. Parsing accepts every
+    /// alias; emitting picks one, so links the app hands out stay comparable.
+    public var canonicalHost: String {
+        switch self {
+        case .wasserhaeuschen: "kiosk"
+        case .ebbelwei: "ebbelwei"
+        case .trinkbrunnen: "brunnen"
+        }
+    }
 }
 
 /// A Merkmal is an *open* vocabulary. bembel-data may publish a tag this build

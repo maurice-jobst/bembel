@@ -27,4 +27,14 @@ public protocol RegisterProviding: Sendable {
     /// and the UI slices them by register and Merkmal locally — paging here
     /// would be speculative generality.
     func snapshot() async throws -> RegisterSnapshot
+
+    /// Drop whatever is cached so the next `snapshot()` goes back to the
+    /// source. Pull-to-refresh is the only caller: a user who pulls is telling
+    /// us the staleness window is wrong for this moment.
+    func invalidate() async
+}
+
+extension RegisterProviding {
+    /// A provider that answers from fixtures has nothing to invalidate.
+    public func invalidate() async {}
 }

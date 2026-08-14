@@ -8,7 +8,7 @@ import WidgetKit
 struct DeparturesWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(
-            kind: "de.mauricejobst.bembel.departures",
+            kind: WidgetKind.departures,
             provider: DeparturesTimelineProvider()
         ) { entry in
             DeparturesWidgetView(entry: entry)
