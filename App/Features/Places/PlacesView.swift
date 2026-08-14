@@ -9,6 +9,7 @@ struct PlacesView: View {
     @Environment(\.dependencies) private var dependencies
     @Environment(Router.self) private var router
     @State private var model = PlacesModel()
+    @State private var isShowingCoverage = false
     @State private var position: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 50.1122, longitude: 8.6780),
@@ -20,6 +21,12 @@ struct PlacesView: View {
         ZStack {
             map
             VStack(spacing: BEMSpacing.m) {
+                HStack {
+                    Spacer()
+                    GlassCircleButton(systemImage: "chart.bar.doc.horizontal", accessibilityLabel: "coverage.title") {
+                        isShowingCoverage = true
+                    }
+                }
                 registerPicker
                 if model.selectedRegister.isCommunity {
                     MerkmalBar(model: model)
@@ -34,6 +41,9 @@ struct PlacesView: View {
         }
         .onChange(of: router.selectedRegister) { _, new in
             model.select(register: new)
+        }
+        .sheet(isPresented: $isShowingCoverage) {
+            CoverageView(model: model)
         }
     }
 

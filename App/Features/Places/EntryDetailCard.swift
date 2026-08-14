@@ -26,6 +26,7 @@ struct EntryDetailCard: View {
             }
             ratings
             ProvenanceByline(provenance: entry.provenance, verified: entry.verified)
+            if entry.isCandidate { candidateCallout }
             actions
             sources
         }
@@ -111,6 +112,25 @@ struct EntryDetailCard: View {
                 .font(BEMFont.dataLabel)
                 .foregroundStyle(BEMColor.inkSecondary)
         }
+    }
+
+    private var candidateCallout: some View {
+        VStack(alignment: .leading, spacing: BEMSpacing.s) {
+            Text("entry.candidate.cta")
+                .font(.footnote.weight(.medium))
+                .foregroundStyle(BEMColor.ink)
+            Link(destination: RatingFunnel.verify(entryID: entry.id, name: entry.name) ?? RatingFunnel.repository) {
+                HStack(spacing: 4) {
+                    Text("entry.candidate.action")
+                    Image(systemName: "arrow.up.right")
+                }
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(BEMColor.cobalt)
+            }
+        }
+        .padding(BEMSpacing.m)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(BEMColor.saltGlazeElevated, in: RoundedRectangle(cornerRadius: BEMRadius.control))
     }
 
     private var actions: some View {

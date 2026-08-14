@@ -61,6 +61,56 @@
         }
       }
     },
+    "coverage.empty": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Abdeckungsdaten — sobald Einträge Stadtteile tragen, steht hier, wie weit wir sind."
+          }
+        }
+      }
+    },
+    "coverage.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geprüft heißt: jemand hat die Angaben an der Quelle oder vor Ort bestätigt. Graue Pins auf der Karte warten noch darauf."
+          }
+        }
+      }
+    },
+    "coverage.progress %lld %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld von %lld geprüft"
+          }
+        }
+      }
+    },
+    "coverage.report": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Einen fehlenden Ort melden"
+          }
+        }
+      }
+    },
+    "coverage.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abdeckung"
+          }
+        }
+      }
+    },
     "departures.minutes %lld": {
       "localizations": {
         "de": {
@@ -107,6 +157,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "Route"
+          }
+        }
+      }
+    },
+    "entry.candidate.action": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf GitHub verifizieren"
+          }
+        }
+      }
+    },
+    "entry.candidate.cta": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch niemand hat diesen Ort geprüft. Hilf mit — warst du da?"
           }
         }
       }
