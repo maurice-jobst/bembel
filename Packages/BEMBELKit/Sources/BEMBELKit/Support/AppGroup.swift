@@ -21,3 +21,11 @@ public enum AppGroup {
         return suite
     }()
 }
+
+extension Bundle {
+    /// The kit's own resource bundle. `@testable` tests need this: inside the
+    /// test target `Bundle.module` resolves to the *test* target's fixtures,
+    /// so asserting anything about a shipped resource needs the real one —
+    /// otherwise the only way to test the bundled layer is a third copy of it.
+    static var kitResources: Bundle { .module }
+}

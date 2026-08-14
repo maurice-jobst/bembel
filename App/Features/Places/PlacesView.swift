@@ -13,6 +13,9 @@ struct PlacesView: View {
     @State private var isShowingAlbum = false
     @AppStorage(StickerState.visitDetectionKey, store: AppGroup.defaults) private var visitDetection = false
     @State private var visitMonitor = KioskVisitMonitor()
+    @State private var location = UserLocation()
+    @AppStorage(RegionSettings.selectedRingKey, store: AppGroup.defaults)
+    private var selectedRingRaw = RegionSettings.defaultRing.rawValue
     @State private var position: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: PlacesView.frankfurtCenter,
@@ -40,6 +43,8 @@ struct PlacesView: View {
                 registerPicker
                 if model.selectedRegister.isCommunity {
                     MerkmalBar(model: model)
+                } else {
+                    FountainKindBar(model: model)
                 }
                 Spacer()
                 detailCard
@@ -48,6 +53,15 @@ struct PlacesView: View {
         }
         .task {
             await model.load(register: dependencies.register, fountains: dependencies.fountains)
+            location.refresh()
+        }
+        // The ring lives in Settings and is shared with the widgets; reading it
+        // here means switching it re-filters map and list with no relaunch.
+        .onChange(of: selectedRingRaw, initial: true) { _, raw in
+            model.selectedRing = Ring(rawValue: raw) ?? RegionSettings.defaultRing
+        }
+        .onChange(of: location.fix, initial: true) { _, fix in
+            model.userCoordinate = fix?.coordinate
         }
         // Keyed on toggle *and* data: re-arms once the snapshot arrives, and
         // an empty snapshot never wipes previously registered conditions.
@@ -110,10 +124,13 @@ struct PlacesView: View {
     private var map: some View {
         Map(position: $position) {
             if model.selectedRegister == .trinkbrunnen {
-                ForEach(model.fountains) { fountain in
-                    Annotation(fountain.name, coordinate: fountain.coordinate) {
-                        FountainPin(featured: fountain.id == model.selectedFountain?.id)
-                            .onTapGesture { model.selectedFountain = fountain }
+                ForEach(model.visibleFountains) { ranked in
+                    Annotation(ranked.fountain.name, coordinate: ranked.fountain.coordinate) {
+                        FountainPin(
+                            fountain: ranked.fountain,
+                            selected: ranked.id == model.selectedFountain?.id
+                        )
+                        .onTapGesture { model.selectedFountain = ranked.fountain }
                     }
                     .annotationTitles(.hidden)
                 }
@@ -171,8 +188,8 @@ struct PlacesView: View {
     @ViewBuilder
     private var detailCard: some View {
         if model.selectedRegister == .trinkbrunnen {
-            if let fountain = model.selectedFountain {
-                FountainDetailCard(fountain: fountain)
+            if let ranked = model.visibleFountains.first(where: { $0.id == model.selectedFountain?.id }) {
+                FountainDetailCard(ranked: ranked)
             }
         } else if let entry = model.selectedEntry {
             EntryDetailCard(entry: entry)

@@ -6,6 +6,19 @@ public protocol CuratedDataset: Sendable {
     associatedtype Payload: Decodable & Sendable
 
     /// Stable identifier — also the manifest key and the bundled resource
-    /// filename (`<id>.json`).
+    /// name.
     static var id: String { get }
+
+    /// Extension of the bundled resource. Defaults to `json`; the curated
+    /// point layers are `geojson`, and the suffix is what tells a reader which
+    /// shape a file is in before opening it.
+    static var fileExtension: String { get }
+}
+
+extension CuratedDataset {
+    public static var fileExtension: String { "json" }
+
+    /// `<id>.<ext>` — the bundled filename, the override filename, and what the
+    /// manifest's `path` points at.
+    public static var filename: String { "\(id).\(fileExtension)" }
 }

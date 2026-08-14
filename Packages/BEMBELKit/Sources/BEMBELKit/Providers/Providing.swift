@@ -12,6 +12,15 @@ public protocol DeparturesProviding: Sendable {
 
 public protocol FountainProviding: Sendable {
     func fountains() async throws -> [Fountain]
+
+    /// Same contract as `RegisterProviding.invalidate()` — pull-to-refresh
+    /// tells us the staleness window is wrong for this moment.
+    func invalidate() async
+}
+
+extension FountainProviding {
+    /// A provider that answers from fixtures has nothing to invalidate.
+    public func invalidate() async {}
 }
 
 public protocol RadarProviding: Sendable {

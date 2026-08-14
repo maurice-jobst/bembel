@@ -38,9 +38,18 @@ final class PlacesModel {
     /// Merkmale-first navigation: an empty set means "everything", and the
     /// chips are generated from the data, never from a hardcoded list.
     var selectedMerkmale: Set<Merkmal> = []
+    /// Same rule for the Trinkbrunnen segment: empty means "every kind".
+    var selectedKinds: Set<FountainKind> = []
     var selectedEntry: RegisterEntry?
     var selectedFountain: Fountain?
     private(set) var focus: MapFocus?
+
+    /// Where the user is, when they have said we may know. `nil` is a
+    /// supported answer everywhere it appears.
+    var userCoordinate: CLLocationCoordinate2D?
+    /// The ring the user picked in Settings. Filtering happens here rather than
+    /// in the provider so switching rings needs no reload (BEM-A04 AC).
+    var selectedRing: Ring = RegionSettings.defaultRing
 
     var availableMerkmale: [Merkmal] {
         snapshot.merkmale(in: selectedRegister)
@@ -61,6 +70,41 @@ final class PlacesModel {
         snapshot.coverage.sorted { $0.district < $1.district }
     }
 
+    /// Fountains in the selected ring — a ring selection includes every inner
+    /// ring, so "Rhein-Main" also shows Frankfurt's.
+    private var fountainsInRing: [Fountain] {
+        fountains.filter { $0.ring <= selectedRing }
+    }
+
+    /// The kinds actually present in the current ring, in the order the enum
+    /// declares them. Generated from the data like the Merkmal chips: a ring
+    /// with no Refill partner must not offer a Refill filter that empties the
+    /// map.
+    var availableKinds: [FountainKind] {
+        let present = Set(fountainsInRing.map(\.kind))
+        return FountainKind.allCases.filter(present.contains)
+    }
+
+    /// Nearest first when we know where the user is, alphabetical when we do
+    /// not — never a fabricated distance (ADR 0007 / BEM-E03 AC).
+    var visibleFountains: [RankedFountain] {
+        let filtered = fountainsInRing.filter { selectedKinds.isEmpty || selectedKinds.contains($0.kind) }
+        return FountainRanking.ranked(filtered, from: userCoordinate)
+    }
+
+    func toggle(_ kind: FountainKind) {
+        if selectedKinds.contains(kind) {
+            selectedKinds.remove(kind)
+        } else {
+            selectedKinds.insert(kind)
+        }
+        // A filter that hides the open card leaves the user staring at a
+        // detail for something no longer on the map.
+        if let selected = selectedFountain, !visibleFountains.contains(where: { $0.id == selected.id }) {
+            selectedFountain = nil
+        }
+    }
+
     func load(register: any RegisterProviding, fountains fountainProvider: any FountainProviding) async {
         guard !hasLoaded else { return }
         // The two sources are independent — load them concurrently so a slow
@@ -76,10 +120,11 @@ final class PlacesModel {
         }
         do {
             fountains = try await fountainLoad
-            // Only pick a default when the standing choice went away, so a
-            // refresh cannot yank the card out from under the user.
-            if selectedFountain == nil || !fountains.contains(where: { $0.id == selectedFountain?.id }) {
-                selectedFountain = fountains.first(where: \.featured) ?? fountains.first
+            // Drop a standing selection only when it left the data; picking a
+            // default is the *view's* job now, because "which one is nearest"
+            // depends on the user's position, not on the dataset.
+            if let selected = selectedFountain, !fountains.contains(where: { $0.id == selected.id }) {
+                selectedFountain = nil
             }
         } catch {
             lastError = error
@@ -94,6 +139,7 @@ final class PlacesModel {
     /// runs again from the source.
     func refresh(register: any RegisterProviding, fountains fountainProvider: any FountainProviding) async {
         await register.invalidate()
+        await fountainProvider.invalidate()
         hasLoaded = false
         lastError = nil
         await load(register: register, fountains: fountainProvider)

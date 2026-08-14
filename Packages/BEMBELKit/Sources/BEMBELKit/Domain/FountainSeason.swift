@@ -19,6 +19,8 @@ public enum FountainState: Hashable, Sendable {
     /// carries. Saying "closed" would be a guess and saying "open" would be a
     /// worse one.
     case unknown
+    /// The operator says this one is switched off — not seasonal, broken.
+    case outOfService
 
     public var hasWater: Bool { self == .running }
 }
