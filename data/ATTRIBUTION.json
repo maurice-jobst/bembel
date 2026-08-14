@@ -1,5 +1,24 @@
 {
   "version": 1,
-  "note": "Filled at BEM-B02. One entry per bundled dataset: id, name, source_url, license, license_url. Rendered in-app on the attribution screen; the ODbL share-alike question for OSM-derived data gets its ADR there.",
-  "datasets": []
+  "note": "One entry per bundled dataset. Rendered in-app on the attribution screen; scripts/validate_data.py requires id, name, source_url, license and license_url on every row.",
+  "datasets": [
+    {
+      "id": "fountains-ffm",
+      "name": "Trink- und Erfrischungsbrunnen Frankfurt am Main",
+      "source_url": "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen",
+      "license": "Datenlizenz Deutschland Namensnennung 2.0",
+      "license_url": "https://www.govdata.de/dl-de/by-2-0",
+      "attribution": "Quelle: Stadt Frankfurt am Main, www.frankfurt.de",
+      "note": "Klimareferat. Erfrischungsbrunnen fuehren Trinkwasser, werden aber nicht beprobt — im Datensatz als geprueft=false gefuehrt."
+    },
+    {
+      "id": "fountains-osm",
+      "name": "OpenStreetMap — amenity=drinking_water",
+      "source_url": "https://www.openstreetmap.org/copyright",
+      "license": "Open Database License (ODbL) 1.0",
+      "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "© OpenStreetMap-Mitwirkende",
+      "note": "Share-alike: abgeleitete Zeilen bleiben ueber osm_id identifizierbar."
+    }
+  ]
 }

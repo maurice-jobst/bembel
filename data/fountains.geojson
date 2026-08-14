@@ -1,0 +1,1827 @@
+{
+  "version": 1,
+  "id": "fountains",
+  "type": "FeatureCollection",
+  "generator": "scripts/generate_fountains.py",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "ffm-eb-1",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6627885,
+          50.1183964
+        ]
+      },
+      "properties": {
+        "name": "Bacchusbrunnen/ Westendbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-10",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6812846,
+          50.1099594
+        ]
+      },
+      "properties": {
+        "name": "Schöppenbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-11",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.685364,
+          50.1070218
+        ]
+      },
+      "properties": {
+        "name": "Dreikönigsbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-14",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6906116,
+          50.105542
+        ]
+      },
+      "properties": {
+        "name": "Klappergassbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-15",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6908113,
+          50.1053393
+        ]
+      },
+      "properties": {
+        "name": "Klapperbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-16",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6902666,
+          50.1047588
+        ]
+      },
+      "properties": {
+        "name": "Affenbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-17",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6925083,
+          50.1009064
+        ]
+      },
+      "properties": {
+        "name": "Quirinsbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-18",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6913993,
+          50.1052275
+        ]
+      },
+      "properties": {
+        "name": "Frau-Rauscher-Brunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-19",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6908207,
+          50.1061319
+        ]
+      },
+      "properties": {
+        "name": "Heiliger-Georg-Brunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-2",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6653192,
+          50.1207779
+        ]
+      },
+      "properties": {
+        "name": "Altkönigsbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-21",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6742348,
+          50.1011903
+        ]
+      },
+      "properties": {
+        "name": "Rotkäppchenbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-24",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5848661,
+          50.110459
+        ]
+      },
+      "properties": {
+        "name": "Selzerbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-26",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5468609,
+          50.1029418
+        ]
+      },
+      "properties": {
+        "name": "Wandbrunnen am Dalbergplatz",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-27",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5460886,
+          50.0999881
+        ]
+      },
+      "properties": {
+        "name": "Brüningbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-3",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6824459,
+          50.1104867
+        ]
+      },
+      "properties": {
+        "name": "Minervabrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-30",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5766566,
+          50.0803527
+        ]
+      },
+      "properties": {
+        "name": "Kaffee-Brünnchen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-33",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6783997,
+          50.0749049
+        ]
+      },
+      "properties": {
+        "name": "Königsbrünnchen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-4",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6788112,
+          50.1135722
+        ]
+      },
+      "properties": {
+        "name": "Goldener Brunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/13369858622"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null,
+        "osm_id": 13369858622,
+        "saisonal": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-5",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6839003,
+          50.1107994
+        ]
+      },
+      "properties": {
+        "name": "Stoltzedenkmalbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-6",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6811243,
+          50.1131026
+        ]
+      },
+      "properties": {
+        "name": "Wandbrunnen an der Liebfrauenkirche",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-7",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6855681,
+          50.1100329
+        ]
+      },
+      "properties": {
+        "name": "Freiheitsbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-eb-9",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6865217,
+          50.110799
+        ]
+      },
+      "properties": {
+        "name": "Atlas-/ Kugelbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS"
+        ],
+        "art": "historisch",
+        "geprueft": false,
+        "inBetrieb": null
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-12",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6896164,
+          50.106688
+        ]
+      },
+      "properties": {
+        "name": "Bäckerbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/9021352445"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": false,
+        "osm_id": 9021352445,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-13",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6898672,
+          50.1058642
+        ]
+      },
+      "properties": {
+        "name": "Paradiesbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/9021352442"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 9021352442,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-20",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6919169,
+          50.1057592
+        ]
+      },
+      "properties": {
+        "name": "Hirschbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/9021352438"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": false,
+        "osm_id": 9021352438,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-22",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.7068899,
+          50.1256239
+        ]
+      },
+      "properties": {
+        "name": "Bornheimer Brunnen/Brunnen am Uhrtürmchen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/5385267639"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 5385267639,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-23",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.711335,
+          50.1286965
+        ]
+      },
+      "properties": {
+        "name": "Hoher Brunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/1659162104"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 1659162104,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-25",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5643579,
+          50.1000551
+        ]
+      },
+      "properties": {
+        "name": "Gußeiserne Schwengelpumpe",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/13928654078"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 13928654078,
+        "saisonal": true,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-28",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.4909175,
+          50.0950079
+        ]
+      },
+      "properties": {
+        "name": "Froschbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/2305468794"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 2305468794
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-29",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5184733,
+          50.080402
+        ]
+      },
+      "properties": {
+        "name": "Ranzenplatzbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/2356064188"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 2356064188,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-31",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.7715973,
+          50.1225377
+        ]
+      },
+      "properties": {
+        "name": "Jean-Pauli-Brunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/2418023356"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 2418023356,
+        "saisonal": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-32",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.724363,
+          50.100812
+        ]
+      },
+      "properties": {
+        "name": "Oberräder Gärtnerpumpe",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/4968852393"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 4968852393,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-34",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6804409,
+          50.1136832
+        ]
+      },
+      "properties": {
+        "name": "Mainovabrunnen an der Liebfrauenstraße/Zeil",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/4410622565"
+        ],
+        "art": "mainova",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 4410622565,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-35",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.673817,
+          50.1146846
+        ]
+      },
+      "properties": {
+        "name": "Mainovabrunnen an der Fressgasse",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/4764180883"
+        ],
+        "art": "mainova",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 4764180883,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-36",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6999153,
+          50.1366626
+        ]
+      },
+      "properties": {
+        "name": "Mainovabrunnen im Wasserpark",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/5036824623"
+        ],
+        "art": "mainova",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 5036824623,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-37",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6655771,
+          50.1106365
+        ]
+      },
+      "properties": {
+        "name": "Mainovabrunnen François-Mitterrand-Platz",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/9881477125"
+        ],
+        "art": "mainova",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 9881477125,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-38",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6656804,
+          50.1076216
+        ]
+      },
+      "properties": {
+        "name": "Mainovabrunnen Kaiserstraße",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/9881477124"
+        ],
+        "art": "mainova",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 9881477124,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-39",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6979147,
+          50.1158688
+        ]
+      },
+      "properties": {
+        "name": "Brunnen Zoo",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/12193218409"
+        ],
+        "art": "mainova",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 12193218409,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-40",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6818405,
+          50.1109931
+        ]
+      },
+      "properties": {
+        "name": "Brunnen am Paulsplatz",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/11975338489"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 11975338489,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-41",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.7096308,
+          50.1079767
+        ]
+      },
+      "properties": {
+        "name": "Brunnen im Hafenpark",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/11745472724"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 11745472724,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-42",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.7050645,
+          50.1302203
+        ]
+      },
+      "properties": {
+        "name": "Brunnen im Günthersburgpark",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/12409430607"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 12409430607,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-43",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6854308,
+          50.1000345
+        ]
+      },
+      "properties": {
+        "name": "Brunnen Diesterwegplatz",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/11341401166"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 11341401166,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-44",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6398958,
+          50.1411859
+        ]
+      },
+      "properties": {
+        "name": "Brunnen Volkspark Niddatal",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/11405085797"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 11405085797,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-45",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5426338,
+          50.1018045
+        ]
+      },
+      "properties": {
+        "name": "Brunnen Bahnhof Höchst",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/11084217003"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 11084217003,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-46",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6995743,
+          50.1109465
+        ]
+      },
+      "properties": {
+        "name": "Brunnen Paul-Arnsberg-Platz",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/12409430606"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 12409430606,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-47",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.7664349,
+          50.1365644
+        ]
+      },
+      "properties": {
+        "name": "Brunnen Heinrich-Kraft-Park",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/11872199126"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 11872199126,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-48",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6634305,
+          50.1048838
+        ]
+      },
+      "properties": {
+        "name": "Mainovabrunnen Hauptbahnhof",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/12176098799"
+        ],
+        "art": "mainova",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 12176098799,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-49",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.7064774,
+          50.1292038
+        ]
+      },
+      "properties": {
+        "name": "Brunnen Agaplesion Bethanien Krankenhaus",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/14042007741"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 14042007741,
+        "rollstuhlgerecht": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-51",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.7653421,
+          50.1238372
+        ]
+      },
+      "properties": {
+        "name": "Brunnen Spielplatz Konstanzer Straße",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/13754514033"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 13754514033,
+        "saisonal": true,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-52",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6523572,
+          50.088019
+        ]
+      },
+      "properties": {
+        "name": "Brunnen Rennbahnpark",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/13928686118"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 13928686118,
+        "saisonal": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "ffm-tb-8",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6860375,
+          50.1117454
+        ]
+      },
+      "properties": {
+        "name": "Löwenbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen?REQUEST=GetCapabilities&SERVICE=WFS",
+          "https://www.openstreetmap.org/node/1851928711"
+        ],
+        "art": "stadt",
+        "geprueft": true,
+        "inBetrieb": true,
+        "osm_id": 1851928711,
+        "rollstuhlgerecht": true,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-10941658512",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6881565,
+          50.1856913
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/10941658512"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 10941658512
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-11536980026",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5664313,
+          50.0488049
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/11536980026"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 11536980026,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-12229484203",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5745772,
+          50.0479865
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/12229484203"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 12229484203
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-13805573055",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.577086,
+          50.0301597
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/13805573055"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 13805573055
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-13805573058",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5761296,
+          50.0304341
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/13805573058"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 13805573058
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-13805573063",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5725232,
+          50.0314565
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/13805573063"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 13805573063
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-13805573064",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5738443,
+          50.0312566
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/13805573064"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 13805573064
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-13875445408",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.58149,
+          50.0496199
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/13875445408"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 13875445408
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-262512460",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.6781108,
+          50.0743793
+        ]
+      },
+      "properties": {
+        "name": "Königsbrünnchen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/262512460"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 262512460
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-4407993967",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5648697,
+          50.0444441
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/4407993967"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 4407993967
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-5982755943",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5673795,
+          50.0466501
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/5982755943"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 5982755943,
+        "flaschenfuellung": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-6936369985",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5683448,
+          50.0479207
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/6936369985"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 6936369985,
+        "rollstuhlgerecht": true
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-7046400989",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.571614,
+          50.0468427
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/7046400989"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 7046400989
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-7046400992",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.575475,
+          50.0480632
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/7046400992"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 7046400992
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-7046400993",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5759658,
+          50.0478497
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/7046400993",
+          "https://www.openstreetmap.org/node/7046400994"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 7046400993
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-7046400995",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5729041,
+          50.0487778
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/7046400995"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 7046400995
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-7046400996",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5749828,
+          50.0504624
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/7046400996"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 7046400996
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-7046400997",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.576509,
+          50.0501559
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/7046400997"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 7046400997
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-7046400998",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5799358,
+          50.0493681
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/7046400998"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 7046400998
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-7046400999",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5823683,
+          50.0500335
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/7046400999"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 7046400999
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-7046401005",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5686671,
+          50.0487288
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/7046401005"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 7046401005
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "osm-7046401009",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.5677605,
+          50.049112
+        ]
+      },
+      "properties": {
+        "name": "Trinkbrunnen",
+        "ags": "06412000",
+        "ring": "frankfurt",
+        "updated": "2026-08-14",
+        "sources": [
+          "https://www.openstreetmap.org/node/7046401009"
+        ],
+        "art": "sonstige",
+        "geprueft": null,
+        "inBetrieb": null,
+        "osm_id": 7046401009
+      }
+    }
+  ]
+}
