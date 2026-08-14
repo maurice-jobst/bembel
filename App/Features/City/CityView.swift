@@ -12,7 +12,7 @@ struct CityView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                if let status = model.status {
+                if let status = model.status.value {
                     VStack(alignment: .leading, spacing: BEMSpacing.m) {
                         Text(verbatim: status.temperatureLabel)
                             .font(.subheadline)

@@ -65,17 +65,12 @@ struct SettingsView: View {
 @MainActor
 @Observable
 final class DataSourcesModel {
-    private(set) var snapshot: RegisterSnapshot?
-    /// Surfaced by BEM-C06's failure states; until then it just isn't lost.
-    private(set) var lastError: Error?
+    private(set) var snapshot: Loadable<RegisterSnapshot> = .idle
 
     func load(from provider: any RegisterProviding) async {
-        guard snapshot == nil else { return }
-        do {
-            snapshot = try await provider.snapshot()
-        } catch {
-            lastError = error
-        }
+        guard !snapshot.hasLoaded else { return }
+        snapshot = .loading
+        snapshot = await .result { try await provider.snapshot() }
     }
 }
 
@@ -100,7 +95,7 @@ struct DataSourcesView: View {
     var body: some View {
         List {
             Section {
-                if let snapshot = model.snapshot, snapshot.schemaVersion > 0 {
+                if let snapshot = model.snapshot.value, snapshot.schemaVersion > 0 {
                     LabeledContent("settings.data.version") {
                         Text(verbatim: String(snapshot.schemaVersion))
                     }
