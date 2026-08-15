@@ -1,46 +1,29 @@
 import Foundation
 
-/// Live register provider: bundled snapshot first, conditional GET against
-/// the published bembel-data bundle when the cached copy ages out. A failed
-/// refresh is not an error the UI ever sees — the read path always answers.
-public actor BembelDataRegisterProvider: RegisterProviding {
-    private static let staleness = Staleness(maxAge: 6 * 60 * 60)
-    private static let lastRefreshKey = "bembeldata.lastRefreshedAt"
+/// Live register provider: the published bembel-data bundle, cached and
+/// conditionally refreshed by `CachedDatasetProvider`. All this type adds is
+/// the freshness window and the payload → domain mapping.
+public struct BembelDataRegisterProvider: RegisterProviding {
+    /// Six hours. The publisher rebuilds `dist` on merge, and a contributor who
+    /// lands an entry over lunch should see it the same afternoon.
+    private static let maxAge: TimeInterval = 6 * 60 * 60
 
-    private let store: DatasetStore
-    private let defaults: UserDefaults
-    private var cached: RegisterSnapshot?
+    private let base: CachedDatasetProvider<BembelDataDataset, RegisterSnapshot>
 
     public init(store: DatasetStore, defaults: UserDefaults = AppGroup.defaults) {
-        self.store = store
-        self.defaults = defaults
+        base = CachedDatasetProvider(
+            BembelDataDataset.self,
+            store: store,
+            maxAge: Self.maxAge,
+            clock: RefreshClock(id: BembelDataDataset.id, defaults: defaults)
+        ) { $0.snapshot() }
     }
 
     public func snapshot() async throws -> RegisterSnapshot {
-        if let cached { return cached }
-        if shouldRefresh {
-            // The outcome is deliberately ignored: the read path below falls
-            // back to the last good data anyway, and any completed attempt —
-            // 304, 5xx or offline — resets the clock rather than hammering
-            // the host once per view appearance.
-            await store.refresh(BembelDataDataset.self)
-            defaults.set(Date().timeIntervalSince1970, forKey: Self.lastRefreshKey)
-        }
-        let snapshot = try await store.payload(for: BembelDataDataset.self).snapshot()
-        cached = snapshot
-        return snapshot
+        try await base.value()
     }
 
-    /// Drops the in-memory cache so the next read re-reads from disk and may
-    /// refresh again — used by pull-to-refresh.
-    public func invalidate() {
-        cached = nil
-        defaults.removeObject(forKey: Self.lastRefreshKey)
-    }
-
-    private var shouldRefresh: Bool {
-        let stamp = defaults.double(forKey: Self.lastRefreshKey)
-        guard stamp > 0 else { return true }
-        return Self.staleness.isStale(fetchedAt: Date(timeIntervalSince1970: stamp))
+    public func invalidate() async {
+        await base.invalidate()
     }
 }
