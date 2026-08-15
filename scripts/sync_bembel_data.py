@@ -15,8 +15,8 @@ import sys
 import urllib.request
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
-KIT_RESOURCES = REPO / "Packages" / "BEMBELKit" / "Sources" / "BEMBELKit" / "Resources"
+from bembel_paths import mirrored
+
 SOURCE = "https://raw.githubusercontent.com/maurice-jobst/bembel-data/dist/bembel-data.json"
 REQUIRED = {"schemaVersion", "entries", "contributors"}
 
@@ -43,7 +43,7 @@ def main() -> int:
         print(f"FAIL — bundle is missing {sorted(missing)}; refusing to ship it", file=sys.stderr)
         return 1
 
-    for target in (REPO / "data" / "bembeldata.json", KIT_RESOURCES / "bembeldata.json"):
+    for target in mirrored("bembeldata.json"):
         target.write_bytes(raw)
 
     print(
