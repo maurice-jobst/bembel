@@ -40,11 +40,9 @@ import sys
 import unicodedata
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
-OUTPUTS = [
-    REPO / "data" / "rings.json",
-    REPO / "Packages" / "BEMBELKit" / "Sources" / "BEMBELKit" / "Resources" / "rings.json",
-]
+from bembel_paths import mirrored
+
+OUTPUTS = mirrored("rings.json")
 
 FRANKFURT_AGS = "06412000"
 

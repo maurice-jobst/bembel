@@ -22,8 +22,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
-KIT_RESOURCES = REPO / "Packages" / "BEMBELKit" / "Sources" / "BEMBELKit" / "Resources"
+from bembel_paths import DATA, KIT_RESOURCES, REPO, mirrored
 
 AGS_RE = re.compile(r"^\d{8}$")
 DATASET_ID_RE = re.compile(r"^[a-z][a-z0-9_]*$")
@@ -109,7 +108,7 @@ def check_manifest(doc, label: str) -> None:
         path = entry["path"]
         if path.startswith("/") or ".." in path:
             err(f"{where}: 'path' must be relative and traversal-free, got {path!r}")
-        for root, root_label in ((REPO / "data", "data/"), (KIT_RESOURCES, "Kit Resources/")):
+        for root, root_label in ((DATA, "data/"), (KIT_RESOURCES, "Kit Resources/")):
             if not (root / path).is_file():
                 err(f"{where}: '{path}' does not exist under {root_label}")
         if "url" in entry:
@@ -270,7 +269,7 @@ def check_geojson(doc, label: str, rings: dict[str, str]) -> None:
 def check_geojson_datasets(rings: dict[str, str]) -> None:
     """Every curated layer under data/, plus its bundled twin. The directory
     holds none yet — the rules are already binding (same stance as BEM-B04)."""
-    for path in sorted((REPO / "data").glob("*.geojson")):
+    for path in sorted(DATA.glob("*.geojson")):
         name = path.name
         check_geojson(load(path), f"data/{name}", rings)
         bundled = KIT_RESOURCES / name
@@ -292,7 +291,7 @@ def is_fact_scalar(value) -> bool:
 def check_operator_datasets() -> None:
     """BEM-B04 harness rules. The directory appears with the first operator
     dataset; the rules are already binding."""
-    opdir = REPO / "data" / "operator"
+    opdir = DATA / "operator"
     if not opdir.is_dir():
         return
     for path in sorted(opdir.glob("*.json")):
@@ -324,7 +323,7 @@ def check_operator_datasets() -> None:
 
 
 def check_mirror(name: str) -> None:
-    a, b = REPO / "data" / name, KIT_RESOURCES / name
+    a, b = mirrored(name)
     if a.is_file() and b.is_file() and a.read_bytes() != b.read_bytes():
         err(
             f"data/{name} and BEMBELKit Resources/{name} differ — "
@@ -333,12 +332,12 @@ def check_mirror(name: str) -> None:
 
 
 def main() -> int:
-    rings_doc = load(REPO / "data" / "rings.json")
+    rings_doc = load(DATA / "rings.json")
     check_rings(rings_doc, "data/rings.json")
     check_rings(load(KIT_RESOURCES / "rings.json"), "Kit Resources/rings.json")
-    check_manifest(load(REPO / "data" / "manifest.json"), "data/manifest.json")
+    check_manifest(load(DATA / "manifest.json"), "data/manifest.json")
     check_manifest(load(KIT_RESOURCES / "manifest.json"), "Kit Resources/manifest.json")
-    check_attribution(load(REPO / "data" / "ATTRIBUTION.json"), "data/ATTRIBUTION.json")
+    check_attribution(load(DATA / "ATTRIBUTION.json"), "data/ATTRIBUTION.json")
     check_operator_datasets()
     check_geojson_datasets(rings_index(rings_doc))
     check_mirror("rings.json")

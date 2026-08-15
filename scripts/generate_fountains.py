@@ -46,10 +46,9 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import date
-from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
-KIT_RESOURCES = REPO / "Packages" / "BEMBELKit" / "Sources" / "BEMBELKit" / "Resources"
+from bembel_paths import DATA, REPO, mirrored
+
 DATASET_ID = "fountains"
 FILENAME = f"{DATASET_ID}.geojson"
 
@@ -300,7 +299,7 @@ def carry_updated(features: list[dict]) -> int:
     did someone last run the build". Without this, every rebuild restamps all
     73 rows and the diff of a data PR stops showing what actually moved.
     """
-    existing = REPO / "data" / FILENAME
+    existing = DATA / FILENAME
     if not existing.is_file():
         return 0
     try:
@@ -333,7 +332,7 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    rings_doc = json.loads((REPO / "data" / "rings.json").read_text(encoding="utf-8"))
+    rings_doc = json.loads((DATA / "rings.json").read_text(encoding="utf-8"))
     rings = {row["ags"]: row["ring"] for row in rings_doc["municipalities"]}
     unknown = [ags for ags in args.ags if ags not in rings]
     if unknown:
@@ -368,7 +367,7 @@ def main() -> int:
         "features": features,
     }
     text = json.dumps(document, ensure_ascii=False, indent=2) + "\n"
-    for target in (REPO / "data" / FILENAME, KIT_RESOURCES / FILENAME):
+    for target in mirrored(FILENAME):
         target.write_text(text, encoding="utf-8")
         print(f"✓ {target.relative_to(REPO)}")
 
