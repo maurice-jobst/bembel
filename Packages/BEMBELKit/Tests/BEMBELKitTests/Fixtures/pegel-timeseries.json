@@ -1,0 +1,11 @@
+{
+  "shortname": "W",
+  "longname": "WASSERSTAND ROHDATEN",
+  "unit": "cm",
+  "equidistance": 15,
+  "gaugeZero": {
+    "unit": "m. ü. NHN",
+    "value": 90.626,
+    "validFrom": "2019-11-01"
+  }
+}

@@ -82,6 +82,25 @@ struct CityView: View {
         )
     }
 
+    /// A steady river gets its own arrow and the neutral ink. Reusing the
+    /// falling arrow would read as "going down" and reusing its green tint
+    /// would read as reassurance, neither of which the data says.
+    private static func trendSymbol(_ trend: GaugeTrend) -> String {
+        switch trend {
+        case .rising: "arrow.up"
+        case .falling: "arrow.down"
+        case .steady: "arrow.right"
+        }
+    }
+
+    private static func trendTint(_ trend: GaugeTrend) -> Color {
+        switch trend {
+        case .rising: BEMColor.caution
+        case .falling: BEMColor.good
+        case .steady: BEMColor.inkSecondary
+        }
+    }
+
     private func gaugeCard(_ gauge: GaugeReading) -> some View {
         VStack(alignment: .leading, spacing: BEMSpacing.s + 2) {
             HStack {
@@ -107,12 +126,12 @@ struct CityView: View {
                     .font(.callout)
                     .foregroundStyle(BEMColor.inkSecondary)
                 HStack(spacing: 3) {
-                    Image(systemName: gauge.falling ? "arrow.down" : "arrow.up")
+                    Image(systemName: Self.trendSymbol(gauge.trend))
                         .font(.caption2.weight(.bold))
                     Text(verbatim: gauge.trendLabel)
                         .font(BEMFont.dataLabel)
                 }
-                .foregroundStyle(gauge.falling ? BEMColor.good : BEMColor.caution)
+                .foregroundStyle(Self.trendTint(gauge.trend))
             }
 
             Sparkline(values: gauge.history)

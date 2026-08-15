@@ -10,13 +10,19 @@ public struct SampleCityStatusProvider: CityStatusProviding {
             body: "Bis Donnerstag 19 Uhr. Viel trinken, Mittagssonne meiden.",
             stampLabel: "NINA · 09:12"
         ),
+        // Previews and the offline fallback only. The live card reads
+        // PEGELONLINE (BEM-G01) — note that this fabricated 3,42 m was never a
+        // plausible Osthafen level; the real gauge sat at 1,58 m the day it was
+        // wired up.
         gauge: GaugeReading(
-            levelLabel: "3,42",
-            trendLabel: "4 cm / 24 h",
-            falling: true,
+            levelLabel: "1,58",
+            trendLabel: "6 cm / 24 h",
+            trend: .rising,
             stationName: "Osthafen",
             stampLabel: "10:45",
-            history: [20, 17, 22, 16, 12, 18, 26, 22, 28, 33, 30, 36]
+            history: [20, 17, 22, 16, 12, 18, 26, 22, 28, 33, 30, 36],
+            stateMnwMhw: .normal,
+            stateNswHsw: .normal
         ),
         airValues: [
             AirValue(name: "NO₂", readingLabel: "21 µg/m³", fraction: 0.26, elevated: false),
