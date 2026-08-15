@@ -67,45 +67,31 @@ extension FountainCollection {
     }
 }
 
-/// Live fountains: the bundled layer, refreshed by conditional GET when the
-/// cached copy ages out. Like the register provider, a failed refresh is never
-/// an error the UI sees — the read path always answers from the last good copy.
-public actor FountainDatasetProvider: FountainProviding {
-    private static let staleness = Staleness(maxAge: 24 * 60 * 60)
-    private static let lastRefreshKey = "fountains.lastRefreshedAt"
+/// Live fountains: the bundled layer, cached and conditionally refreshed by
+/// `CachedDatasetProvider`. All this type adds is the freshness window and the
+/// payload → domain mapping.
+public struct FountainDatasetProvider: FountainProviding {
+    /// A day. This layer changes a few times a season — the city adds a
+    /// fountain, or the sampling status of one flips — so anything shorter is
+    /// a request that reliably answers 304.
+    private static let maxAge: TimeInterval = 24 * 60 * 60
 
-    private let store: DatasetStore
-    private let defaults: UserDefaults
-    private var cached: [Fountain]?
+    private let base: CachedDatasetProvider<FountainsDataset, [Fountain]>
 
     public init(store: DatasetStore, defaults: UserDefaults = AppGroup.defaults) {
-        self.store = store
-        self.defaults = defaults
+        base = CachedDatasetProvider(
+            FountainsDataset.self,
+            store: store,
+            maxAge: Self.maxAge,
+            clock: RefreshClock(id: FountainsDataset.id, defaults: defaults)
+        ) { $0.fountains() }
     }
 
     public func fountains() async throws -> [Fountain] {
-        if let cached { return cached }
-        if shouldRefresh {
-            // Outcome ignored on purpose: the read below falls back to the last
-            // good data anyway, and any completed attempt resets the clock
-            // rather than hammering the host once per view appearance. A day is
-            // the right window — this layer changes a few times a season.
-            await store.refresh(FountainsDataset.self)
-            defaults.set(Date().timeIntervalSince1970, forKey: Self.lastRefreshKey)
-        }
-        let fountains = try await store.payload(for: FountainsDataset.self).fountains()
-        cached = fountains
-        return fountains
+        try await base.value()
     }
 
-    public func invalidate() {
-        cached = nil
-        defaults.removeObject(forKey: Self.lastRefreshKey)
-    }
-
-    private var shouldRefresh: Bool {
-        let stamp = defaults.double(forKey: Self.lastRefreshKey)
-        guard stamp > 0 else { return true }
-        return Self.staleness.isStale(fetchedAt: Date(timeIntervalSince1970: stamp))
+    public func invalidate() async {
+        await base.invalidate()
     }
 }

@@ -19,7 +19,7 @@ private enum OtherDataset: CuratedDataset {
     static let id = "otherdata"
 }
 
-/// Serialized because the mock handler is shared static state.
+/// Serialized because these tests share one mock host between themselves.
 @Suite("Curated dataset store", .serialized)
 struct DatasetStoreTests {
     private func makeStore(
@@ -57,7 +57,7 @@ struct DatasetStoreTests {
     @Test("200 validates, stores the override, and future reads see it — across store instances")
     func fresh200() async throws {
         let (store, dir) = try makeStore()
-        MockURLProtocol.handler = { request in
+        MockURLProtocol.setHandler(host: "mock.test") { request in
             #expect(request.value(forHTTPHeaderField: "If-None-Match") == nil)
             return (200, ["ETag": "\"v2\""], Data(#"{"version": 2, "items": ["fresh"]}"#.utf8))
         }
@@ -75,12 +75,12 @@ struct DatasetStoreTests {
     @Test("The stored ETag is sent and a 304 leaves data untouched")
     func etagRoundTrip() async throws {
         let (store, _) = try makeStore()
-        MockURLProtocol.handler = { _ in
+        MockURLProtocol.setHandler(host: "mock.test") { _ in
             (200, ["ETag": "\"v2\""], Data(#"{"version": 2, "items": ["fresh"]}"#.utf8))
         }
         #expect(await store.refresh(TestDataset.self) == .updated)
 
-        MockURLProtocol.handler = { request in
+        MockURLProtocol.setHandler(host: "mock.test") { request in
             #expect(request.value(forHTTPHeaderField: "If-None-Match") == "\"v2\"")
             return (304, [:], Data())
         }
@@ -92,7 +92,7 @@ struct DatasetStoreTests {
     @Test("A malformed 200 never replaces good data")
     func malformedPayload() async throws {
         let (store, _) = try makeStore()
-        MockURLProtocol.handler = { _ in
+        MockURLProtocol.setHandler(host: "mock.test") { _ in
             (200, [:], Data("{definitely not the schema".utf8))
         }
         #expect(await store.refresh(TestDataset.self) == .invalidPayload)
@@ -103,7 +103,7 @@ struct DatasetStoreTests {
     @Test("Offline refresh degrades to the bundled snapshot")
     func offline() async throws {
         let (store, _) = try makeStore()
-        MockURLProtocol.handler = { _ in
+        MockURLProtocol.setHandler(host: "mock.test") { _ in
             throw URLError(.notConnectedToInternet)
         }
         #expect(await store.refresh(TestDataset.self) == .transportFailure)
@@ -114,7 +114,7 @@ struct DatasetStoreTests {
     @Test("Server errors are reported, not retried into")
     func serverError() async throws {
         let (store, _) = try makeStore()
-        MockURLProtocol.handler = { _ in (503, [:], Data()) }
+        MockURLProtocol.setHandler(host: "mock.test") { _ in (503, [:], Data()) }
         #expect(await store.refresh(TestDataset.self) == .serverError(503))
     }
 
@@ -131,7 +131,9 @@ struct DatasetStoreTests {
             ]
         )
         let (store, _) = try makeStore(manifest: manifest)
-        MockURLProtocol.handler = { request in
+        // Registered on the *absolute* host: reaching this handler at all is
+        // half the assertion.
+        MockURLProtocol.setHandler(host: "raw.example.test") { request in
             #expect(request.url?.absoluteString == "https://raw.example.test/dist/bembel-data.json")
             return (200, ["ETag": "\"v9\""], Data(#"{"version": 9, "items": ["remote"]}"#.utf8))
         }
@@ -155,19 +157,19 @@ struct DatasetStoreTests {
         // provider that asks for one.
         let (second, _) = try makeStore(manifest: manifest, directory: dir)
 
-        MockURLProtocol.handler = { _ in
+        MockURLProtocol.setHandler(host: "mock.test") { _ in
             (200, ["ETag": "\"v2\""], Data(#"{"version": 2, "items": ["fresh"]}"#.utf8))
         }
         #expect(await first.refresh(TestDataset.self) == .updated)
 
-        MockURLProtocol.handler = { _ in
+        MockURLProtocol.setHandler(host: "mock.test") { _ in
             (200, ["ETag": "\"o1\""], Data(#"{"version": 1, "items": ["other"]}"#.utf8))
         }
         #expect(await second.refresh(OtherDataset.self) == .updated)
 
         // The first store's ETag must still be on disk, so its next refresh is
         // conditional and can come back 304.
-        MockURLProtocol.handler = { request in
+        MockURLProtocol.setHandler(host: "mock.test") { request in
             #expect(request.value(forHTTPHeaderField: "If-None-Match") == "\"v2\"")
             return (304, [:], Data())
         }
@@ -188,14 +190,30 @@ struct DatasetStoreTests {
 }
 
 final class MockURLProtocol: URLProtocol {
-    nonisolated(unsafe) static var handler: (@Sendable (URLRequest) throws -> (Int, [String: String], Data))?
+    typealias Handler = @Sendable (URLRequest) throws -> (Int, [String: String], Data)
+
+    /// Keyed by host, because top-level suites run in parallel and `.serialized`
+    /// only orders a suite against itself. A single global handler let one
+    /// suite answer another suite's request — which reads as a real failure in
+    /// whichever test lost the race.
+    nonisolated(unsafe) private static var handlers: [String: Handler] = [:]
+    private static let lock = NSLock()
+
+    static func setHandler(host: String, _ handler: @escaping Handler) {
+        lock.withLock { handlers[host] = handler }
+    }
+
+    private static func handler(for request: URLRequest) -> Handler? {
+        guard let host = request.url?.host() else { return nil }
+        return lock.withLock { handlers[host] }
+    }
 
     override class func canInit(with request: URLRequest) -> Bool { true }
     override class func canonicalRequest(for request: URLRequest) -> URLRequest { request }
     override func stopLoading() {}
 
     override func startLoading() {
-        guard let handler = Self.handler else {
+        guard let handler = Self.handler(for: request) else {
             client?.urlProtocol(self, didFailWithError: URLError(.unsupportedURL))
             return
         }
