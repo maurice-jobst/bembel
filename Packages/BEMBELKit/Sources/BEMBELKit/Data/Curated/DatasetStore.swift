@@ -14,7 +14,7 @@ public actor DatasetStore {
     private let bundle: Bundle
     private let directory: URL
     private let session: URLSession
-    private var etags: ETagStore
+    private let etags: ETagStore
 
     public init(
         manifest: DatasetManifest,

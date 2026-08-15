@@ -13,6 +13,12 @@ private enum TestDataset: CuratedDataset {
     static let id = "testdata"
 }
 
+/// A second dataset, so one store's refresh can be observed against another's.
+private enum OtherDataset: CuratedDataset {
+    typealias Payload = TestPayload
+    static let id = "otherdata"
+}
+
 /// Serialized because the mock handler is shared static state.
 @Suite("Curated dataset store", .serialized)
 struct DatasetStoreTests {
@@ -132,6 +138,41 @@ struct DatasetStoreTests {
         #expect(await store.refresh(TestDataset.self) == .updated)
         let payload = try await store.payload(for: TestDataset.self)
         #expect(payload == TestPayload(version: 9, items: ["remote"]))
+    }
+
+    @Test("Two stores over one directory do not clobber each other's ETags")
+    func etagsSurviveASecondStore() async throws {
+        let manifest = DatasetManifest(
+            version: 1,
+            baseURL: URL(string: "https://mock.test/")!,
+            datasets: [
+                "testdata": .init(path: "testdata.json"),
+                "otherdata": .init(path: "otherdata.json"),
+            ]
+        )
+        let (first, dir) = try makeStore(manifest: manifest)
+        // Same directory, as `DatasetStore.makeDefault()` hands out to every
+        // provider that asks for one.
+        let (second, _) = try makeStore(manifest: manifest, directory: dir)
+
+        MockURLProtocol.handler = { _ in
+            (200, ["ETag": "\"v2\""], Data(#"{"version": 2, "items": ["fresh"]}"#.utf8))
+        }
+        #expect(await first.refresh(TestDataset.self) == .updated)
+
+        MockURLProtocol.handler = { _ in
+            (200, ["ETag": "\"o1\""], Data(#"{"version": 1, "items": ["other"]}"#.utf8))
+        }
+        #expect(await second.refresh(OtherDataset.self) == .updated)
+
+        // The first store's ETag must still be on disk, so its next refresh is
+        // conditional and can come back 304.
+        MockURLProtocol.handler = { request in
+            #expect(request.value(forHTTPHeaderField: "If-None-Match") == "\"v2\"")
+            return (304, [:], Data())
+        }
+        let (reopened, _) = try makeStore(manifest: manifest, directory: dir)
+        #expect(await reopened.refresh(TestDataset.self) == .notModified)
     }
 
     @Test("A dataset missing from the manifest is a distinct outcome")

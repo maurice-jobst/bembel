@@ -16,10 +16,6 @@ public actor BembelDataRegisterProvider: RegisterProviding {
         self.defaults = defaults
     }
 
-    public static func makeDefault() throws -> BembelDataRegisterProvider {
-        BembelDataRegisterProvider(store: try DatasetStore.makeDefault())
-    }
-
     public func snapshot() async throws -> RegisterSnapshot {
         if let cached { return cached }
         if shouldRefresh {
