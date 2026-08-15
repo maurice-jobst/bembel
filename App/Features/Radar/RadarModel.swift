@@ -5,16 +5,11 @@ import Observation
 @MainActor
 @Observable
 final class RadarModel {
-    private(set) var nowcast: RadarNowcast?
-    /// Surfaced by BEM-C06's failure states; until then it just isn't lost.
-    private(set) var lastError: Error?
+    private(set) var nowcast: Loadable<RadarNowcast> = .idle
 
     func load(from provider: any RadarProviding) async {
-        guard nowcast == nil else { return }
-        do {
-            nowcast = try await provider.nowcast()
-        } catch {
-            lastError = error
-        }
+        guard !nowcast.hasLoaded else { return }
+        nowcast = .loading
+        nowcast = await .result { try await provider.nowcast() }
     }
 }

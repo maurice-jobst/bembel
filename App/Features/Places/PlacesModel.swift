@@ -19,14 +19,20 @@ struct MapFocus: Equatable {
 @MainActor
 @Observable
 final class PlacesModel {
-    private(set) var snapshot = RegisterSnapshot.empty
-    private(set) var fountains: [Fountain] = []
-    /// Surfaced by BEM-C06's failure states; until then it just isn't lost.
-    private(set) var lastError: Error?
-    /// One *successful* load per tab lifetime. Not "is the snapshot empty" —
-    /// an empty register is a legitimate result and must not retrigger the
-    /// load — but a cancelled or failed load must stay retryable.
-    private var hasLoaded = false
+    /// The two sources are tracked separately, so BEM-C06 can say which one
+    /// failed — a dead bembel-data host must not read as "no Trinkbrunnen".
+    private(set) var registerState: Loadable<RegisterSnapshot> = .idle
+    private(set) var fountainState: Loadable<[Fountain]> = .idle
+
+    /// The rest of the model reads the data, not the state. An unanswered or
+    /// failed source degrades to empty here; the states carry the why.
+    var snapshot: RegisterSnapshot { registerState.value ?? .empty }
+    var fountains: [Fountain] { fountainState.value ?? [] }
+
+    /// One *successful* load of both sources per tab lifetime. Not "is the
+    /// snapshot empty" — an empty register is a legitimate result and must not
+    /// retrigger the load — but a cancelled or failed load stays retryable.
+    private var hasLoaded: Bool { registerState.hasLoaded && fountainState.hasLoaded }
 
     /// An entry a deep link asked for that the current data cannot resolve
     /// yet. Held until the first successful load answers the question one way
@@ -109,28 +115,21 @@ final class PlacesModel {
         guard !hasLoaded else { return }
         // The two sources are independent — load them concurrently so a slow
         // register refresh cannot hold up the Trinkbrunnen segment.
-        async let snapshotLoad = register.snapshot()
-        async let fountainLoad = fountainProvider.fountains()
-        var succeeded = true
-        do {
-            snapshot = try await snapshotLoad
-        } catch {
-            lastError = error
-            succeeded = false
+        async let snapshotLoad = Loadable<RegisterSnapshot>.result { try await register.snapshot() }
+        async let fountainLoad = Loadable<[Fountain]>.result { try await fountainProvider.fountains() }
+        registerState = await snapshotLoad
+        fountainState = await fountainLoad
+
+        // Drop a standing selection only when it left the *loaded* data;
+        // picking a default is the view's job, because "which one is nearest"
+        // depends on the user's position, not on the dataset. A failed load
+        // has said nothing about the selection and must not clear it.
+        if let loaded = fountainState.value,
+            let selected = selectedFountain,
+            !loaded.contains(where: { $0.id == selected.id })
+        {
+            selectedFountain = nil
         }
-        do {
-            fountains = try await fountainLoad
-            // Drop a standing selection only when it left the data; picking a
-            // default is the *view's* job now, because "which one is nearest"
-            // depends on the user's position, not on the dataset.
-            if let selected = selectedFountain, !fountains.contains(where: { $0.id == selected.id }) {
-                selectedFountain = nil
-            }
-        } catch {
-            lastError = error
-            succeeded = false
-        }
-        hasLoaded = succeeded
         resolvePendingEntry()
     }
 
@@ -140,8 +139,8 @@ final class PlacesModel {
     func refresh(register: any RegisterProviding, fountains fountainProvider: any FountainProviding) async {
         await register.invalidate()
         await fountainProvider.invalidate()
-        hasLoaded = false
-        lastError = nil
+        registerState = .idle
+        fountainState = .idle
         await load(register: register, fountains: fountainProvider)
     }
 

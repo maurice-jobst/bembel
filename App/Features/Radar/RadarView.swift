@@ -23,13 +23,13 @@ struct RadarView: View {
                 .ignoresSafeArea()
 
             VStack(alignment: .leading, spacing: 0) {
-                if let nowcast = model.nowcast {
+                if let nowcast = model.nowcast.value {
                     topRow(nowcast)
                 }
                 Spacer()
                 legend
                     .padding(.bottom, BEMSpacing.m)
-                if let nowcast = model.nowcast {
+                if let nowcast = model.nowcast.value {
                     timelineCard(nowcast)
                 }
             }

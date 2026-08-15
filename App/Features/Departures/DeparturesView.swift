@@ -16,7 +16,7 @@ struct DeparturesView: View {
                         stationRow(station)
                     }
                     stationChips
-                    if let board = model.board {
+                    if let board = model.board.value {
                         boardCard(board)
                         SourceLine(
                             systemImage: "arrow.trianglehead.2.clockwise",
@@ -61,7 +61,7 @@ struct DeparturesView: View {
     private var stationChips: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: BEMSpacing.s) {
-                ForEach(model.stations) { station in
+                ForEach(model.stations.value ?? []) { station in
                     SelectionChip(title: Text(verbatim: station.name), isSelected: station == model.selectedStation) {
                         Task {
                             await model.select(station, from: dependencies.departures)
