@@ -52,11 +52,7 @@ struct RadarView: View {
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: BEMRadius.card))
-            .overlay(
-                RoundedRectangle(cornerRadius: BEMRadius.card)
-                    .stroke(BEMColor.glazeLine.opacity(0.5), lineWidth: 0.5)
-            )
+            .bemGlassCard()
 
             Spacer()
 
@@ -75,8 +71,9 @@ struct RadarView: View {
         }
         .padding(.horizontal, 11)
         .padding(.vertical, 9)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 12))
-        .overlay(RoundedRectangle(cornerRadius: 12).stroke(BEMColor.glazeLine.opacity(0.5), lineWidth: 0.5))
+        // Was a hardcoded 12, which matches no token. This is a small floating
+        // control, so it takes the control radius rather than the card one.
+        .bemGlassCard(cornerRadius: BEMRadius.control)
     }
 
     private func legendRow(color: Color, value: String) -> some View {
@@ -138,11 +135,7 @@ struct RadarView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
         .padding(14)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: BEMRadius.card))
-        .overlay(
-            RoundedRectangle(cornerRadius: BEMRadius.card)
-                .stroke(BEMColor.glazeLine.opacity(0.5), lineWidth: 0.5)
-        )
+        .bemGlassCard()
         .padding(.bottom, BEMSpacing.s)
     }
 
