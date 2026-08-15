@@ -14,7 +14,9 @@ struct AppDependencies {
     var departures: any DeparturesProviding = SampleDeparturesProvider()
     var fountains: any FountainProviding = AppDependencies.liveFountains()
     var radar: any RadarProviding = RadolanRadarProvider()
-    var cityStatus: any CityStatusProviding = SampleCityStatusProvider()
+    /// Live Main level (BEM-G01); air and warnings are still sample inside it
+    /// until BEM-G02/G03.
+    var cityStatus: any CityStatusProviding = LiveCityStatusProvider()
     var register: any RegisterProviding = AppDependencies.liveRegister()
 
     /// `??` cannot bridge the two concrete types into `any RegisterProviding`,
