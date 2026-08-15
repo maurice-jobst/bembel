@@ -50,8 +50,7 @@ struct ShadowView: View {
             }
             .padding(.horizontal, 13)
             .padding(.vertical, 9)
-            .background(.ultraThinMaterial, in: .capsule)
-            .overlay(Capsule().stroke(BEMColor.glazeLine.opacity(0.5), lineWidth: 0.5))
+            .bemGlass(in: .capsule)
 
             Spacer()
 
@@ -106,11 +105,7 @@ struct ShadowView: View {
         .padding(.horizontal, 14)
         .padding(.top, BEMSpacing.m)
         .padding(.bottom, 14)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: BEMRadius.card))
-        .overlay(
-            RoundedRectangle(cornerRadius: BEMRadius.card)
-                .stroke(BEMColor.glazeLine.opacity(0.5), lineWidth: 0.5)
-        )
+        .bemGlassCard()
         .padding(.bottom, BEMSpacing.s)
     }
 }

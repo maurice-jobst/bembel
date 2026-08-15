@@ -49,8 +49,7 @@ struct GlassCircleButton: View {
                 .font(.body.weight(.medium))
                 .foregroundStyle(BEMColor.cobalt)
                 .frame(width: 40, height: 40)
-                .background(.ultraThinMaterial, in: .circle)
-                .overlay(Circle().stroke(BEMColor.glazeLine.opacity(0.5), lineWidth: 0.5))
+                .bemGlass(in: .circle)
         }
         .accessibilityLabel(accessibilityLabel)
     }
@@ -160,6 +159,38 @@ struct SquareActionButton: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(Text(accessibilityLabel))
+    }
+}
+
+// MARK: - Glass chrome
+
+/// Frosted panel floating over a map: `ultraThinMaterial` behind it, a hairline
+/// of `glazeLine` around it. Every surface that sits *on* the map wears this —
+/// radar readout and legend, the Schatten controls, the round map buttons — so
+/// it is one modifier, not a pair of lines copied per call site. Copying is how
+/// the legend ended up on a corner radius that matches no token.
+struct GlassChrome<S: InsettableShape>: ViewModifier {
+    let shape: S
+    /// The hairline is barely there on purpose; it separates glass from map
+    /// without drawing a border the eye reads as a frame.
+    var lineOpacity: Double = 0.5
+
+    func body(content: Content) -> some View {
+        content
+            .background(.ultraThinMaterial, in: shape)
+            .overlay(shape.stroke(BEMColor.glazeLine.opacity(lineOpacity), lineWidth: 0.5))
+    }
+}
+
+extension View {
+    /// Glass panel with the card corner radius. Pass a token, never a number.
+    func bemGlassCard(cornerRadius: CGFloat = BEMRadius.card) -> some View {
+        modifier(GlassChrome(shape: RoundedRectangle(cornerRadius: cornerRadius)))
+    }
+
+    /// Same chrome on any other shape — the capsule controls, the round buttons.
+    func bemGlass(in shape: some InsettableShape, lineOpacity: Double = 0.5) -> some View {
+        modifier(GlassChrome(shape: shape, lineOpacity: lineOpacity))
     }
 }
 
