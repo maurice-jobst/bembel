@@ -153,8 +153,9 @@ struct DatasetStoreTests {
             ]
         )
         let (first, dir) = try makeStore(manifest: manifest)
-        // Same directory, as `DatasetStore.makeDefault()` hands out to every
-        // provider that asks for one.
+        // Same directory: every `DatasetStore.makeDefault()` call builds a new
+        // store over the same path, so two of them is a shape the type has to
+        // survive even now that the app deliberately shares one.
         let (second, _) = try makeStore(manifest: manifest, directory: dir)
 
         MockURLProtocol.setHandler(host: "mock.test") { _ in
