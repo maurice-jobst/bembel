@@ -222,6 +222,12 @@ def main() -> int:
     parser.add_argument("--stamp", action="store_true", help="rewrite verified_at when nothing failed")
     args = parser.parse_args()
 
+    if args.stamp and args.tier:
+        # Stamping writes verified_at across the registry, so a partial run
+        # would date sources it never called — the exact lie the field exists
+        # to prevent.
+        parser.error("--stamp needs a full run; drop --tier")
+
     registry = json.loads(REGISTRY.read_text(encoding="utf-8"))
 
     gaps = coverage_gaps(registry)
