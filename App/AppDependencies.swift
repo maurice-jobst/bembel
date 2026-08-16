@@ -21,10 +21,30 @@ struct AppDependencies {
     var departures: any DeparturesProviding = SampleDeparturesProvider()
     var fountains: any FountainProviding = AppDependencies.liveFountains()
     var radar: any RadarProviding = RadolanRadarProvider()
-    /// Live Main level (BEM-G01); air and warnings are still sample inside it
-    /// until BEM-G02/G03.
-    var cityStatus: any CityStatusProviding = LiveCityStatusProvider()
+    /// One property per Stadtzustand upstream, not one aggregate: they fail
+    /// independently and the screen says which one did. The Main level is live
+    /// (BEM-G01); temperature, air (BEM-G02) and warnings (BEM-G03) are still
+    /// sample, and each becomes live on its own ticket without touching the
+    /// others.
+    var temperature: any TemperatureProviding = SampleTemperatureProvider()
+    var gauge: any GaugeProviding = PegelOnlineProvider()
+    var air: any AirQualityProviding = SampleAirQualityProvider()
+    var cityWarnings: any CityWarningProviding = SampleCityWarningProvider()
     var register: any RegisterProviding = AppDependencies.liveRegister()
+
+    var citySources: CitySources {
+        #if DEBUG
+            let failing = DebugFailingSource.requested
+            return CitySources(
+                temperature: failing.contains("temperature") ? DebugFailingSource() : temperature,
+                gauge: failing.contains("gauge") ? DebugFailingSource() : gauge,
+                air: failing.contains("air") ? DebugFailingSource() : air,
+                warnings: failing.contains("warnings") ? DebugFailingSource() : cityWarnings
+            )
+        #else
+            return CitySources(temperature: temperature, gauge: gauge, air: air, warnings: cityWarnings)
+        #endif
+    }
 
     /// `??` cannot bridge the two concrete types into `any RegisterProviding`,
     /// so this stays an explicit branch. Live by default, sample only if the

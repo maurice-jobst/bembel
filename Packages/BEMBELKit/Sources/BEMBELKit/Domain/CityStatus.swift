@@ -99,6 +99,17 @@ public struct GaugeReading: Sendable {
     }
 }
 
+/// Ambient temperature for the screen's header line. Its own type because it
+/// is its own upstream — DWD by way of Bright Sky, per `data/sources.json` —
+/// and not a field on a reading it would otherwise share a failure with.
+public struct TemperatureReading: Sendable, Equatable {
+    public let label: String
+
+    public init(label: String) {
+        self.label = label
+    }
+}
+
 /// One pollutant bar (HLNUG).
 public struct AirValue: Identifiable, Sendable {
     public var id: String { name }
@@ -116,25 +127,17 @@ public struct AirValue: Identifiable, Sendable {
     }
 }
 
-/// Everything the Stadtzustand screen renders.
-public struct CityStatus: Sendable {
-    public let temperatureLabel: String
-    public let warning: CityWarning?
-    public let gauge: GaugeReading
-    public let airValues: [AirValue]
-    public let airStampLabel: String
+/// One air-quality reading: the bars plus the station and clock they came from.
+///
+/// The stamp travels with the values rather than beside them, because a stamp
+/// left over from a previous successful load next to bars that failed to
+/// refresh is a lie the type should not be able to express.
+public struct AirQuality: Sendable {
+    public let values: [AirValue]
+    public let stampLabel: String
 
-    public init(
-        temperatureLabel: String,
-        warning: CityWarning?,
-        gauge: GaugeReading,
-        airValues: [AirValue],
-        airStampLabel: String
-    ) {
-        self.temperatureLabel = temperatureLabel
-        self.warning = warning
-        self.gauge = gauge
-        self.airValues = airValues
-        self.airStampLabel = airStampLabel
+    public init(values: [AirValue], stampLabel: String) {
+        self.values = values
+        self.stampLabel = stampLabel
     }
 }

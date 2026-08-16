@@ -2,40 +2,41 @@ import BEMBELKit
 import SwiftUI
 
 /// Stadtzustand: warnings, Main level, air quality — every card names its
-/// source and timestamp. Renders whatever the injected `CityStatusProviding`
-/// returns.
+/// source and timestamp.
+///
+/// Each card renders its own source's state. There is deliberately no
+/// screen-level "loading" or "error" branch: the four upstreams are unrelated,
+/// and a screen-wide state would mean the warning card disappearing because a
+/// river gauge timed out.
 struct CityView: View {
     @Environment(Router.self) private var router
     @Environment(\.dependencies) private var dependencies
     @State private var model = CityModel()
 
+    private var sources: CitySources { dependencies.citySources }
+
     var body: some View {
         NavigationStack {
             ScrollView {
-                if let status = model.status.value {
-                    VStack(alignment: .leading, spacing: BEMSpacing.m) {
-                        Text(verbatim: status.temperatureLabel)
-                            .font(.subheadline)
-                            .foregroundStyle(BEMColor.inkSecondary)
-                            .padding(.bottom, BEMSpacing.xs)
+                VStack(alignment: .leading, spacing: BEMSpacing.m) {
+                    temperatureLine
+                        .padding(.bottom, BEMSpacing.xs)
 
-                        if let warning = status.warning {
-                            warningCard(warning)
-                        }
-                        gaugeCard(status.gauge)
-                        airCard(status)
+                    warningSection
+                    gaugeSection
+                    airSection
 
-                        DiamondRelief()
-                            .stroke(BEMColor.cobalt, lineWidth: 1.5)
-                            .frame(height: 34)
-                            .clipped()
-                            .opacity(0.35)
-                            .padding(.top, BEMSpacing.s)
-                    }
-                    .padding(.horizontal, BEMSpacing.l)
+                    DiamondRelief()
+                        .stroke(BEMColor.cobalt, lineWidth: 1.5)
+                        .frame(height: 34)
+                        .clipped()
+                        .opacity(0.35)
+                        .padding(.top, BEMSpacing.s)
                 }
+                .padding(.horizontal, BEMSpacing.l)
             }
             .background(BEMColor.saltGlaze)
+            .refreshable { await model.refresh(from: sources) }
             .navigationTitle("tab.city")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -46,9 +47,96 @@ struct CityView: View {
             }
         }
         .task {
-            await model.load(from: dependencies.cityStatus)
+            await model.load(from: sources)
         }
     }
+
+    // MARK: - Sections
+
+    /// The header line degrades to a sentence rather than vanishing. A missing
+    /// temperature is the least consequential failure on this screen, so it
+    /// gets a line and not a card — but it still says so, because a header that
+    /// silently disappears reads as a layout bug.
+    @ViewBuilder private var temperatureLine: some View {
+        Group {
+            switch model.temperatureState {
+            case .idle, .loading:
+                Text("city.loading")
+            case .loaded(let reading):
+                Text(verbatim: reading.label)
+            case .failed:
+                Text("city.temperature.unavailable")
+            }
+        }
+        .font(.subheadline)
+        .foregroundStyle(BEMColor.inkSecondary)
+    }
+
+    @ViewBuilder private var warningSection: some View {
+        switch model.warningState {
+        case .idle, .loading:
+            SourceLoadingCard(title: "city.warnings.title", icon: "exclamationmark.triangle")
+        case .loaded(let warnings):
+            // An empty list is an answer, and it is the reassuring one. Saying
+            // it out loud is what keeps "nothing is wrong" distinguishable from
+            // "we could not find out". Written as a plain branch rather than a
+            // `case … where`: CI runs an older Swift than the dev machines and
+            // has already rejected one pattern match this one accepted.
+            if warnings.isEmpty {
+                allClearRow
+            } else {
+                ForEach(warnings, id: \.self) { warningCard($0) }
+            }
+        case .failed:
+            SourceFailureCard(
+                title: "city.warnings.title",
+                icon: "exclamationmark.triangle",
+                sourceName: "NINA"
+            ) {
+                await model.retryWarnings(from: sources)
+            }
+        }
+    }
+
+    @ViewBuilder private var gaugeSection: some View {
+        switch model.gaugeState {
+        case .idle, .loading:
+            SourceLoadingCard(title: "city.gauge.title", icon: "water.waves")
+        case .loaded(let gauge):
+            gaugeCard(gauge)
+        case .failed:
+            SourceFailureCard(title: "city.gauge.title", icon: "water.waves", sourceName: "PEGELONLINE") {
+                await model.retryGauge(from: sources)
+            }
+        }
+    }
+
+    @ViewBuilder private var airSection: some View {
+        switch model.airState {
+        case .idle, .loading:
+            SourceLoadingCard(title: "city.air.title", icon: "wind")
+        case .loaded(let air):
+            airCard(air)
+        case .failed:
+            SourceFailureCard(title: "city.air.title", icon: "wind", sourceName: "HLNUG") {
+                await model.retryAir(from: sources)
+            }
+        }
+    }
+
+    private var allClearRow: some View {
+        HStack(spacing: BEMSpacing.s) {
+            Image(systemName: "checkmark.shield")
+                .foregroundStyle(BEMColor.good)
+            Text("city.warnings.none")
+                .font(.footnote)
+                .foregroundStyle(BEMColor.inkSecondary)
+            Spacer()
+        }
+        .accessibilityElement(children: .combine)
+    }
+
+    // MARK: - Loaded cards
 
     private func warningCard(_ warning: CityWarning) -> some View {
         HStack(alignment: .top, spacing: BEMSpacing.m) {
@@ -73,9 +161,7 @@ struct CityView: View {
                 .foregroundStyle(BEMColor.inkSecondary)
                 .padding(.top, 4)
         }
-        .padding(14)
-        .background(BEMColor.saltGlazeElevated)
-        .clipShape(RoundedRectangle(cornerRadius: BEMRadius.card))
+        .bemStatusCard()
         .overlay(
             RoundedRectangle(cornerRadius: BEMRadius.card)
                 .stroke(BEMColor.caution.opacity(0.35), lineWidth: 1)
@@ -145,12 +231,10 @@ struct CityView: View {
             .font(.caption2.monospacedDigit())
             .foregroundStyle(BEMColor.inkSecondary)
         }
-        .padding(14)
-        .background(BEMColor.saltGlazeElevated)
-        .clipShape(RoundedRectangle(cornerRadius: BEMRadius.card))
+        .bemStatusCard()
     }
 
-    private func airCard(_ status: CityStatus) -> some View {
+    private func airCard(_ air: AirQuality) -> some View {
         VStack(alignment: .leading, spacing: BEMSpacing.m) {
             HStack {
                 Label {
@@ -166,7 +250,7 @@ struct CityView: View {
             }
 
             VStack(spacing: 9) {
-                ForEach(status.airValues) { value in
+                ForEach(air.values) { value in
                     HStack(spacing: 10) {
                         Text(verbatim: value.name)
                             .font(.footnote)
@@ -190,13 +274,11 @@ struct CityView: View {
                 }
             }
 
-            Text(verbatim: status.airStampLabel)
+            Text(verbatim: air.stampLabel)
                 .font(.caption2.monospacedDigit())
                 .foregroundStyle(BEMColor.inkSecondary)
         }
-        .padding(14)
-        .background(BEMColor.saltGlazeElevated)
-        .clipShape(RoundedRectangle(cornerRadius: BEMRadius.card))
+        .bemStatusCard()
     }
 }
 
@@ -232,4 +314,58 @@ struct Sparkline: View {
             }
         }
     }
+}
+
+// MARK: - Previews
+
+// Failing sources come from `DebugFailingSource`, the same hook the simulator
+// uses via `-BEMFailSources`. One way to fail, so what a preview shows and what
+// a running app shows cannot drift apart.
+
+private struct QuietWarnings: CityWarningProviding {
+    func warnings() async throws -> [CityWarning] { [] }
+}
+
+private func previewDependencies(
+    temperature: any TemperatureProviding = SampleTemperatureProvider(),
+    gauge: any GaugeProviding = SampleGaugeProvider(),
+    air: any AirQualityProviding = SampleAirQualityProvider(),
+    warnings: any CityWarningProviding = SampleCityWarningProvider()
+) -> AppDependencies {
+    var dependencies = AppDependencies()
+    dependencies.temperature = temperature
+    dependencies.gauge = gauge
+    dependencies.air = air
+    dependencies.cityWarnings = warnings
+    return dependencies
+}
+
+#Preview("Alles geladen") {
+    CityView()
+        .environment(Router())
+        .environment(\.dependencies, previewDependencies())
+}
+
+#Preview("Pegel tot, Warnung lebt") {
+    // The state this whole split exists for: PEGELONLINE is down and the
+    // civil-protection warning is still on screen.
+    CityView()
+        .environment(Router())
+        .environment(\.dependencies, previewDependencies(gauge: DebugFailingSource()))
+}
+
+#Preview("Keine Warnung in Kraft") {
+    CityView()
+        .environment(Router())
+        .environment(\.dependencies, previewDependencies(warnings: QuietWarnings()))
+}
+
+#Preview("Alle Quellen tot") {
+    let failing = DebugFailingSource()
+    CityView()
+        .environment(Router())
+        .environment(
+            \.dependencies,
+            previewDependencies(temperature: failing, gauge: failing, air: failing, warnings: failing)
+        )
 }
