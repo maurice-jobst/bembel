@@ -39,9 +39,14 @@ jobs:
           python3 scripts/verify_sources.py | tee report.txt
           echo "status=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
 
-      # One issue, reopened and commented rather than a fresh one every Monday.
-      # An alert that arrives weekly regardless of whether anything changed is
-      # an alert nobody reads (LESSONS §E1).
+      # Fires only when the sweep exits non-zero, which it does for tier 1–2 and
+      # for a source it cannot reach at all — not for a slow tier-4 host, which
+      # is vendored at build time and nothing calls at runtime. The first real
+      # run of this job filed an issue for a GrünGürtel timeout; that is the
+      # alert people learn to ignore.
+      #
+      # One issue, commented rather than a fresh one every Monday, for the same
+      # reason (LESSONS §E1).
       - name: Report a broken source
         if: steps.verify.outputs.status != '0'
         env:
