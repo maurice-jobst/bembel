@@ -1,0 +1,75 @@
+name: Source liveness
+
+# The registry in data/sources.json records a verification date per upstream.
+# Without a sweep, that date is a claim about the past that quietly becomes
+# false — a city rebuilds a WFS, a layer empties out, and nobody finds out
+# until the feature that depends on it ships (LESSONS §E6).
+#
+# Deliberately NOT a required check and NOT run on pull_request: it reaches
+# eight public sector hosts, so it is slow and it fails for reasons that have
+# nothing to do with the change under review. A network flake must never be
+# able to block a merge.
+
+on:
+  schedule:
+    - cron: "17 6 * * 1" # Mondays, 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sources-liveness
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Verify every keyless upstream
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write # only to file or update the one report issue below
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Call every registered source
+        id: verify
+        run: |
+          set +e
+          python3 scripts/verify_sources.py | tee report.txt
+          echo "status=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
+
+      # One issue, reopened and commented rather than a fresh one every Monday.
+      # An alert that arrives weekly regardless of whether anything changed is
+      # an alert nobody reads (LESSONS §E1).
+      - name: Report a broken source
+        if: steps.verify.outputs.status != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE: "Source liveness: a registered upstream stopped answering"
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          {
+            echo "The weekly sweep over \`data/sources.json\` found a source that no longer"
+            echo "answers, or whose feature count collapsed to zero."
+            echo
+            echo "Fix the upstream entry, or move it to \`deprecated\` with the reason and a"
+            echo "replacement. Do not silence the check."
+            echo
+            echo "[Full run]($RUN_URL)"
+            echo
+            echo '```'
+            grep -E '^(FAIL|DRIFT)|failure\(s\)' report.txt || tail -20 report.txt
+            echo '```'
+          } > body.md
+
+          EXISTING=$(gh issue list --state open --search "$TITLE in:title" --json number --jq '.[0].number')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body-file body.md
+          else
+            gh issue create --title "$TITLE" --body-file body.md --label "area:data"
+          fi
+
+      - name: Fail the run so the badge goes red too
+        if: steps.verify.outputs.status != '0'
+        run: exit 1

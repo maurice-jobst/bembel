@@ -5,6 +5,17 @@ on:
     branches: [main]
   pull_request:
 
+# Nothing here writes to the repo. Stating that explicitly means a compromised
+# action in the tree cannot use the default token to push or comment.
+permissions:
+  contents: read
+
+# Superseded pushes on a branch stop costing macOS runner minutes. main is
+# excluded by the group key so a merge always builds to completion.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
 jobs:
   kit-tests:
     name: BEMBELKit tests (swift test, native macOS)

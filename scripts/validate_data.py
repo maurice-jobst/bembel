@@ -7,6 +7,9 @@ Enforced here, not in any prompt (locked decision):
   - every curated GeoJSON feature carries id, name, ags, ring, sources[] and
     updated, and its ags/ring pair agrees with rings.json
   - payloads store facts only — scalars and lists of scalars, no prose blobs
+  - every upstream is registered in data/sources.json, and an entry whose
+    fields contradict its tier is rejected (a keyless tier that needs a key,
+    a "no API exists" tier that carries an endpoint)
 
 Also enforced: data/rings.json and data/manifest.json are byte-identical to
 their bundled copies in BEMBELKit/Resources, so app and published data can
@@ -117,6 +120,123 @@ def check_manifest(doc, label: str) -> None:
                 err(f"{where}: 'url' must be an https URL, got {url!r}")
 
 
+def check_sources(doc, label: str) -> None:
+    """data/sources.json — every upstream the app reads, and every upstream it
+    looked for and did not find.
+
+    This is not shipped data and is not mirrored into the bundle; ATTRIBUTION
+    stays the licence record for what ships. What is enforced here is the part
+    a JSON Schema cannot state: a tier is a claim about cost of access, so an
+    entry whose fields contradict its tier is wrong even though every field is
+    individually well-formed. Liveness is a separate concern — that is
+    scripts/verify_sources.py, which runs against the network.
+    """
+    if doc is None:
+        return
+    if not isinstance(doc.get("version"), int):
+        err(f"{label}: 'version' must be an integer")
+    check_iso_date(doc.get("updated"), f"{label}: 'updated'")
+
+    tiers = doc.get("tiers")
+    if not isinstance(tiers, dict) or {"1", "2", "3", "4", "5"} - tiers.keys():
+        err(f"{label}: 'tiers' must explain tiers 1 through 5 — JSON has no comments to hide the legend in")
+
+    rows = doc.get("sources")
+    if not isinstance(rows, list) or not rows:
+        err(f"{label}: 'sources' must be a non-empty list")
+        return
+
+    seen: set[str] = set()
+    for i, row in enumerate(rows):
+        where = f"{label}: sources[{i}]"
+        if not isinstance(row, dict):
+            err(f"{where}: not an object")
+            continue
+
+        source_id = row.get("id")
+        if not isinstance(source_id, str) or not DATASET_ID_RE.match(source_id):
+            err(f"{where}: 'id' must match {DATASET_ID_RE.pattern}, got {source_id!r}")
+        elif source_id in seen:
+            err(f"{where}: duplicate id {source_id!r}")
+        else:
+            seen.add(source_id)
+            where = f"{label}: sources[{i}] ({source_id})"
+
+        if not isinstance(row.get("name"), str) or not row["name"].strip():
+            err(f"{where}: 'name' must be a non-empty string")
+
+        tier = row.get("tier")
+        if tier not in (1, 2, 3, 4, 5):
+            err(f"{where}: 'tier' must be 1–5, got {tier!r}")
+            continue
+
+        auth = row.get("auth", "none")
+        if tier in (1, 2) and auth != "none":
+            err(
+                f"{where}: tier {tier} means keyless by definition, but 'auth' is {auth!r} — "
+                "either the entry is really tier 3 or the auth note is stale"
+            )
+        if tier == 3 and auth == "none":
+            err(f"{where}: tier 3 means onboarding is required, so 'auth' must say what it costs")
+
+        if tier == 5:
+            # A tier-5 entry is a recorded absence. Giving it an endpoint makes
+            # it a tier-1..4 entry that the verifier will never check, because
+            # it skips tier 5 — the one shape that rots invisibly.
+            if not isinstance(row.get("finding"), str) or not row["finding"].strip():
+                err(f"{where}: tier 5 records that no API was found — 'finding' must say what the search turned up")
+            check_iso_date(row.get("searched_at"), f"{where}: 'searched_at'")
+            for field in ("protocol", "base", "url", "feeds", "services", "discovery"):
+                if field in row:
+                    err(f"{where}: tier 5 means there is nothing to call, but it carries {field!r}")
+        else:
+            check_iso_date(row.get("verified_at"), f"{where}: 'verified_at'")
+
+        for field in ("base", "url", "discovery", "catalogue", "portal"):
+            value = row.get(field)
+            if value is not None and (not isinstance(value, str) or not value.startswith("https://")):
+                err(f"{where}: '{field}' must be an https URL, got {value!r}")
+
+        for field in ("feeds", "services"):
+            group = row.get(field)
+            if group is None:
+                continue
+            if not isinstance(group, dict):
+                err(f"{where}: '{field}' must be an object of name → endpoint, not a bare list")
+                continue
+            for name, value in group.items():
+                if isinstance(value, str) and not value.startswith("https://"):
+                    err(f"{where}: {field}['{name}'] must be an https URL, got {value!r}")
+
+        gotchas = row.get("gotchas")
+        if gotchas is not None and (
+            not isinstance(gotchas, list) or not all(is_fact_scalar(g) and g for g in gotchas)
+        ):
+            err(f"{where}: 'gotchas' must be a list of one-line strings (≤{MAX_STRING_LEN} chars)")
+
+    for i, row in enumerate(doc.get("deprecated") or []):
+        where = f"{label}: deprecated[{i}]"
+        if not isinstance(row, dict):
+            err(f"{where}: not an object")
+            continue
+        if not isinstance(row.get("status"), str) or not row["status"].strip():
+            err(f"{where}: 'status' must say why it is dead — a bare id teaches nobody anything")
+        check_iso_date(row.get("verified_at"), f"{where}: 'verified_at'")
+        for replacement in row.get("replacement") or []:
+            if replacement not in seen:
+                err(f"{where}: replacement {replacement!r} is not a source id in this registry")
+
+
+def check_iso_date(value, where: str) -> None:
+    if not isinstance(value, str) or not ISO_DATE_RE.match(value):
+        err(f"{where} must be a YYYY-MM-DD date, got {value!r}")
+        return
+    try:
+        date.fromisoformat(value)
+    except ValueError:
+        err(f"{where} is not a real date: {value!r}")
+
+
 def check_attribution(doc, label: str) -> None:
     if doc is None:
         return
@@ -198,14 +318,7 @@ def check_feature_properties(props, where: str, rings: dict[str, str]) -> None:
     elif ags and rings.get(ags) and rings[ags] != ring:
         err(f"{where}: ring {ring!r} contradicts rings.json, which puts {ags} in {rings[ags]!r}")
 
-    updated = props.get("updated")
-    if not isinstance(updated, str) or not ISO_DATE_RE.match(updated):
-        err(f"{where}: 'updated' must be a YYYY-MM-DD date, got {updated!r}")
-    else:
-        try:
-            date.fromisoformat(updated)
-        except ValueError:
-            err(f"{where}: 'updated' is not a real date: {updated!r}")
+    check_iso_date(props.get("updated"), f"{where}: 'updated'")
 
     sources = props.get("sources")
     if not isinstance(sources, list) or not sources:
@@ -338,6 +451,7 @@ def main() -> int:
     check_manifest(load(DATA / "manifest.json"), "data/manifest.json")
     check_manifest(load(KIT_RESOURCES / "manifest.json"), "Kit Resources/manifest.json")
     check_attribution(load(DATA / "ATTRIBUTION.json"), "data/ATTRIBUTION.json")
+    check_sources(load(DATA / "sources.json"), "data/sources.json")
     check_operator_datasets()
     check_geojson_datasets(rings_index(rings_doc))
     check_mirror("rings.json")

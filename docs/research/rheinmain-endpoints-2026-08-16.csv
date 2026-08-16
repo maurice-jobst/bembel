@@ -1,0 +1,638 @@
+org,dataset,format,url
+frankfurt-am-main,WFS Gestaltungssatzungen Frankfurt am Main,WFS,https://planas.frankfurt.de/wfs/gestaltungssatzungen?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,WFS Hochhäuser Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/Hochhaeuser?request=GetCapabilities&service=WFS
+frankfurt-am-main,"WFS verkehrsrelevante Baustellen, Lichtsignalanlagen, LSA mit Akustik und Verkehrsmeldungen",WFS,https://geowebdienste.frankfurt.de/Baustellen?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,WFS Verkehrsmengen Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/Verkehrsmengen?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,WFS Bebauungspläne Frankfurt am Main - Geltungsbereiche,WFS,https://planas.frankfurt.de/wfs/bebauungsplaene_geltungsbereiche?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,WFS Amtliche Adressen Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/SGK_Adressen?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Parken in der Stadt Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/Parken?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,Biotopkartierung 2023 (WFS) Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/Biotopkartierung_2023_WFS?request=GetCapabilities&service=WFS
+frankfurt-am-main,Biotopkartierung 2020 (WFS) Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/Biotopkartierung_2020_WFS?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Landtagswahl 2013 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Landtagswahl_2013?request=GetCapabilities&service=WFS
+frankfurt-am-main,Biotopkartierung 2021 (WFS) Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/Biotopkartierung_2021_WFS?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Seveso-Abstandszonen Frankfurt am Main,WFS,https://planas.frankfurt.de/wfs/seveso_abstandszonen?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,WFS Verwaltungseinheiten Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Verwaltungseinheiten?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Landtagswahl 2023 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Landtagswahl_2023?request=GetCapabilities&service=WFS
+frankfurt-am-main,Naturdenkmale (WFS) Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Naturdenkmale?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Bürgerentscheid 2015 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Buergerentscheid_2015?request=GetCapabilities&service=WFS
+frankfurt-am-main,Biotopkartierung 2019 (WFS) Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/Biotopkartierung_2019_WFS?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Stadtgebietsgliederung – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Stadtgebietsgliederung?request=GetCapabilities&service=WFS
+frankfurt-am-main,GrünGürtel (WFS) Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_GruenGuertel?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Gewässer Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/SGK_Gewaesser?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Erhaltungssatzungen Frankfurt am Main,WFS,https://planas.frankfurt.de/wfs/erhaltungssatzungen?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,WFS Wahlgebietsgliederung Oberbürgermeisterwahl 2018 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Oberbuergermeisterwahl_2018?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Bundestagswahl 2017 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Bundestagswahl_2017?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Europawahl 2014 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Europawahl_2014?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Vorkaufssatzungen Frankfurt am Main,WFS,https://planas.frankfurt.de/wfs/vorkaufssatzungen?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,WFS Vorbehaltsgebiete Frankfurt am Main,WFS,https://planas.frankfurt.de/wfs/vorbehaltsgebiete?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,WFS Bebauungspläne Frankfurt am Main (rechtsverbindlich) - Flächennutzung,WFS,https://planas.frankfurt.de/wfs/bebauungsplaene_rv_flaechennutzung?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,WFS Veränderungssperren Frankfurt am Main,WFS,https://planas.frankfurt.de/wfs/veraenderungssperren?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,WFS Entwicklungsmaßnahmen Frankfurt am Main,WFS,https://planas.frankfurt.de/wfs/entwicklungsmasznahmen?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,Geschützte Landschaftsbestandteile (WFS) Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Geschuetzte_Landschaftsbestandteile?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Kommunalwahl 2021 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Kommunalwahl_2021?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Bundestagswahl 2013 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Bundestagswahl_2013?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Adressen – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/Adressdienst?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Bürgerentscheid 2022 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Buergerentscheid_2022?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Wahlgebietsgliederung?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Kommunalwahl 2016 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Kommunalwahl_2016?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Flurstuecke Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/SGK_Flurstuecke?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Landtagswahl 2018 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Landtagswahl_2018?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Rad,WFS,https://geowebdienste.frankfurt.de/Rad?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Europawahl 2024 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Europawahl_2024?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Kommunalwahl 2026 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Kommunalwahl_2026?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Bundestagswahl 2021 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Bundestagswahl_2021?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Umfragebezirksgliederung – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Umfragebezirksgliederung?request=GetCapabilities&service=WFS
+frankfurt-am-main,GrünGürtel Freizeit und Erholung (WFS) Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_GruenGuertel_Freizeit?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Oberbürgermeisterwahl 2023 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Oberbuergermeisterwahl_2023?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Europawahl 2019 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Europawahl_2019?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Wahlgebietsgliederung Bundestagswahl 2025 – Frankfurt am Main,WFS,https://geowebdienste.frankfurt.de/WFS_Bundestagswahl_2025?request=GetCapabilities&service=WFS
+frankfurt-am-main,WFS Stellplatzsatzung Frankfurt am Main,WFS,https://planas.frankfurt.de/wfs/stellplatzsatzung?service=WFS&version=1.1.0&request=GetCapabilities
+frankfurt-am-main,Gäste aus Europa,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-gaeste_aus_europa/content.csv
+frankfurt-am-main,Gasverbrauch,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-gasverbrauch/content.csv
+frankfurt-am-main,Krankenhäuser,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-krankenhaeuser/content.csv
+frankfurt-am-main,Aus den Krankenhäusern entlassene oder gestorbene vollstationäre Patientinnen und Patienten,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-aus_den_krankenhaeusern_entlassene_oder_gestorbene_vollstationaere_patientinnen_und_patienten/content.csv
+frankfurt-am-main,Gestorbene nach Todesursachen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-gestorbene_nach_todesursachen/content.csv
+frankfurt-am-main,Bundestagswahl 2025 Wahlbezirksgliederung,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bundestagswahl_2025_wahlbezirksgliederung/content.csv
+frankfurt-am-main,Beschäftigtendichte Stadtteile (Wohnort) ab 2012_Dashboard,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-beschaeftigtendichte_stadtteile_wohnort_ab_2012_dashboard/content.csv
+frankfurt-am-main,Umweltplakette Personenkraftwagen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-umweltplakette_personenkraftwagen/content.csv
+frankfurt-am-main,Renten,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-renten/content.csv
+frankfurt-am-main,Arbeitslose (Wohnort) (Stadtbezirke) ab 2012,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-arbeitslose_wohnort_stadtbezirke_ab_2012/content.csv
+frankfurt-am-main,Niedergelassene Vertragsärztinnen und -ärzte sowie Vertragszahnärztinnen und -zahnärzte (Stadtteile),CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-niedergelassene_vertragsaerztinnen_und_-aerzte_sowie_vertragszahnaerztinnen_und_-zahnaerzte_stadtteile/content.csv
+frankfurt-am-main,Einbürgerungen nach Alter,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-einbuergerungen_nach_alter/content.csv
+frankfurt-am-main,Außenwanderung: Herkunfts- bzw. Zielgebiet (Umland),CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-aussenwanderung_herkunfts-_bzw_zielgebiet_umland/content.csv
+frankfurt-am-main,Aussenwanderung nach Altersgruppen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-aussenwanderung_nach_altersgruppen/content.csv
+frankfurt-am-main,"Straftaten (Tatverdächtige nach Geschlecht, Staatsangehörigkeit und Wohnort)",CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-straftaten_tatverdaechtige_nach_geschlecht_staatsangehoerigkeit_und_wohnort/content.csv
+frankfurt-am-main,Gäste und Übernachtungen im Jahresverlauf,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-gaeste_und_uebernachtungen_im_jahresverlauf/content.csv
+frankfurt-am-main,Baumkataster OP,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-baumkataster_op/content.csv
+frankfurt-am-main,Haushaltsstruktur,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-haushaltsstruktur/content.csv
+frankfurt-am-main,Untersuchte Kinder bei der Einschulungsuntersuchung nach Vorsorgestatus (Stadtteile),CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-untersuchte_kinder_bei_der_einschulungsuntersuchung_nach_vorsorgestatus_stadtteile/content.csv
+frankfurt-am-main,Außenwanderung nach Geschlecht und Nation,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-aussenwanderung_nach_geschlecht_und_nation/content.csv
+frankfurt-am-main,Straftaten nach Art der Straftat,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-straftaten_nach_art_der_straftat/content.csv
+frankfurt-am-main,Klimadaten für Frankfurt (Monat),CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-klimadaten_fuer_frankfurt_monat/content.csv
+frankfurt-am-main,Nichtstädtische Theater,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-nichtstaedtische_theater/content.csv
+frankfurt-am-main,Gebietsgliederung,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-gebietsgliederung/content.csv
+frankfurt-am-main,Haushalte nach Geschlecht und Staatsangehörigkeit,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-haushalte_nach_geschlecht_und_staatsangehoerigkeit/content.csv
+frankfurt-am-main,Bundestagswahl Wahlbeteiligung und Stimmenverteilung nach Alter,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bundestagswahl_wahlbeteiligung_und_stimmenverteilung_nach_alter/content.csv
+frankfurt-am-main,Haushaltsplan 2024/2025 Ergebnishaushalt,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-haushaltsplan_20242025_ergebnishaushalt/content.csv
+frankfurt-am-main,Städtische Theater nach Bühnen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-staedtische_theater_nach_buehnen/content.csv
+frankfurt-am-main,Häufigste Bezugsländer von Migranten und Migrantinnen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-haeufigste_bezugslaender_von_migranten_und_migrantinnen_/content.csv
+frankfurt-am-main,Kinos,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-kinos/content.csv
+frankfurt-am-main,Bürgerhäuser Veranstaltungen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-buergerhaeuser_veranstaltungen/content.csv
+frankfurt-am-main,Landtagswahl 2023 Stimmenverteilung nach Alter und Geschlecht,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-landtagswahl_2023_stimmenverteilung_nach_alter_und_geschlecht/content.csv
+frankfurt-am-main,Haushalte nach Größe,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-haushalte_nach_groesse/content.csv
+frankfurt-am-main,Sozialversicherungspflichtig Beschäftigte im Kernbereich der Gesundheitswirtschaft,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-sozialversicherungspflichtig_beschaeftigte_im_kernbereich_der_gesundheitswirtschaft/content.csv
+frankfurt-am-main,Beherbergungsgewerbe nach Betriebsart,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-beherbergungsgewerbe_nach_betriebsart/content.csv
+frankfurt-am-main,Natürliche Bewegung,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-natuerliche_bewegung/content.csv
+frankfurt-am-main,Vertragsärztinnen und -ärzte sowie psychologische Psychotherapeutinnen und -therapeuten,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-vertragsaerztinnen_und_-aerzte_sowie_psychologische_psychotherapeutinnen_und_-therapeuten/content.csv
+frankfurt-am-main,Meldepflichtige Erkrankungen der Gastroenteritiden (Magen-Darm-Entzündung),CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-meldepflichtige_erkrankungen_der_gastroenteritiden_magen-darm-entzuendung/content.csv
+frankfurt-am-main,Beherbergungsgewerbe seit 2010,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-beherbergungsgewerbe_seit_2010/content.csv
+frankfurt-am-main,Erzeugerpreisindex Jahre,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-erzeugerpreisindex_jahre/content.csv
+frankfurt-am-main,Besucherinnen und Besucher der Stadtbücherei,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-besucherinnen_und_besucher_der_stadtbuecherei/content.csv
+frankfurt-am-main,Flächennutzung,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-flaechennutzung/content.csv
+frankfurt-am-main,Ordnungswidrigkeitsverfahren,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-ordnungswidrigkeitsverfahren/content.csv
+frankfurt-am-main,Einwohnerzahlen im Halbjahr,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-einwohnerzahlen_im_halbjahr/content.csv
+frankfurt-am-main,Europawahl 2024 Stimmenverteilung nach Alter und Geschlecht,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-europawahl_2024_stimmenverteilung_nach_alter_und_geschlecht/content.csv
+frankfurt-am-main,Messe,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-messe/content.csv
+frankfurt-am-main,Alter in 5-Jahres-Schritten,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-alter_in_5-jahres-schritten/content.csv
+frankfurt-am-main,Klimadaten für Frankfurt am Main / Flughafen (nach Monat),CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-klimadaten_fuer_frankfurt_am_main__flughafen_nach_monat/content.csv
+frankfurt-am-main,Trinkwasserverbrauch,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-trinkwasserverbrauch/content.csv
+frankfurt-am-main,Gemeindesteuereinnahmen im Haushaltsjahr,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-gemeindesteuereinnahmen_im_haushaltsjahr/content.csv
+frankfurt-am-main,Führerschein,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-fuehrerschein/content.csv
+frankfurt-am-main,Übernachtungen von Gästen aus Europa,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-uebernachtungen_von_gaesten_aus_europa/content.csv
+frankfurt-am-main,Bevölkerungsvorausberechnung 2045,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bevoelkerungsvorausberechnung_2045/content.csv
+frankfurt-am-main,Häufigste Staatsangehörigkeiten,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-haeufigste_staatsangehoerigkeiten/content.csv
+frankfurt-am-main,Straßenverzeichnis Einzeladressen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-strassenverzeichnis_einzeladressen/content.csv
+frankfurt-am-main,Europawahl 2024 Veränderung der Stimmen zur Europawahl 2019,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-europawahl_2024_veraenderung_der_stimmen_zur_europawahl_2019/content.csv
+frankfurt-am-main,Bevölkerung in Haushalten (Stadtbezirke),CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bevoelkerung_in_haushalten_stadtbezirke_/content.csv
+frankfurt-am-main,"Übergänge auf weiterführende Schulen, Stadtteile",CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-uebergaenge_auf_weiterfuehrende_schulen_stadtteile/content.csv
+frankfurt-am-main,Nichtärztliches Personal in den Krankenhäusern,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-nichtaerztliches_personal_in_den_krankenhaeusern/content.csv
+frankfurt-am-main,Bevölkerungsdichte,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bevoelkerungsdichte/content.csv
+frankfurt-am-main,Minijobs Wirtschaftszweige (Arbeitsort) ab 2016,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-minijobs_wirtschaftszweige_arbeitsort_ab_2016/content.csv
+frankfurt-am-main,Midijobs (Arbeitsort) ab 2010,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-midijobs_arbeitsort_ab_2010/content.csv
+frankfurt-am-main,Gestorbene nach Geschlecht und Alter,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-gestorbene_nach_geschlecht_und_alter_/content.csv
+frankfurt-am-main,Bewegung,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bewegung/content.csv
+frankfurt-am-main,Haushaltsplan 2024/2025 Investitionsprogramm,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-haushaltsplan_20242025_investitionsprogramm/content.csv
+frankfurt-am-main,Insolvenzverfahren,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-insolvenzverfahren/content.csv
+frankfurt-am-main,Ehescheidungen Kinder,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-ehescheidungen_kinder/content.csv
+frankfurt-am-main,Demographische Kennzahlen Stadtbezirke,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-demographische_kennzahlen_stadtbezirke/content.csv
+frankfurt-am-main,Separierte Wertstoffe,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-separierte_wertstoffe/content.csv
+frankfurt-am-main,Bevölkerungsbilanz,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bevoelkerungsbilanz/content.csv
+frankfurt-am-main,Bruttoinlandsprodukt,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bruttoinlandsprodukt/content.csv
+frankfurt-am-main,Reine Wohngeldhaushalte,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-reine_wohngeldhaushalte_/content.csv
+frankfurt-am-main,Europawahl 2024 Wahlbezirksgliederung,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-europawahl_2024_wahlbezirksgliederung/content.csv
+frankfurt-am-main,Schwimmbäder,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-schwimmbaeder/content.csv
+frankfurt-am-main,Eissporthalle,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-eissporthalle/content.csv
+frankfurt-am-main,Verarbeitendes Gewerbe,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-verarbeitendes_gewerbe/content.csv
+frankfurt-am-main,Niedergelassene Vertragsärztinnen und -ärzte sowie Vertragszahnärztinnen und -zahnärzte (Stadtbezirke),CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-niedergelassene_vertragsaerztinnen_und_-aerzte_sowie_vertragszahnaerztinnen_und_-zahnaerzte_stadtbezirke/content.csv
+frankfurt-am-main,Künsterhaus Mousonturm,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-kuensterhaus_mousonturm/content.csv
+frankfurt-am-main,"Median der Entgelte von sozialversicherungspflichtig Vollzeitbeschäftigten, Wohnort",CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-median_der_entgelte_von_sozialversicherungspflichtig_vollzeitbeschaeftigten_wohnort/content.csv
+frankfurt-am-main,Bauhauptgewerbe,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bauhauptgewerbe/content.csv
+frankfurt-am-main,Geburtsland,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-geburtsland/content.csv
+frankfurt-am-main,Aufkommen von Bundes- und Landessteuern im Rechnungsjahr,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-aufkommen_von_bundes-_und_landessteuern_im_rechnungsjahr/content.csv
+frankfurt-am-main,Gäste nach Herkunftskontinenten,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-gaeste_nach_herkunftskontinenten/content.csv
+frankfurt-am-main,Ehescheidungen nach Art,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-ehescheidungen_nach_art/content.csv
+frankfurt-am-main,Binnenwanderung,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-binnenwanderung/content.csv
+frankfurt-am-main,R-Statistik,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-r-statistik/content.csv
+frankfurt-am-main,Außenwanderung: Herkunfts- und Zielgebiet,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-aussenwanderung_herkunfts-_und_zielgebiet/content.csv
+frankfurt-am-main,Zoo,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-zoo/content.csv
+frankfurt-am-main,Bevölkerungszahlen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bevoelkerungszahlen/content.csv
+frankfurt-am-main,Bürgerhäuser Einrichtungen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-buergerhaeuser_einrichtungen/content.csv
+frankfurt-am-main,Europäische Staatsangehörigkeiten,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-europaeische_staatsangehoerigkeiten/content.csv
+frankfurt-am-main,Demographische Kennzahlen gesamtstädtisch,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-demographische_kennzahlen_gesamtstaedtisch/content.csv
+frankfurt-am-main,Beschäftigte (Wohnort) (Stadtteile) ab 2012,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-beschaeftigte_wohnort_stadtteile_ab_2012/content.csv
+frankfurt-am-main,Minijobs (Arbeitsort) ab 2010,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-minijobs_arbeitsort_ab_2010/content.csv
+frankfurt-am-main,Religion,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-religion/content.csv
+frankfurt-am-main,Hauptamtliche Ärztinnen und Ärzte in den Krankenhäusern,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-hauptamtliche_aerztinnen_und_aerzte_in_den_krankenhaeusern/content.csv
+frankfurt-am-main,Städtische Theater Kunstgattungen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-staedtische_theater_kunstgattungen/content.csv
+frankfurt-am-main,Schuldenstand,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-schuldenstand/content.csv
+frankfurt-am-main,Beherbergungsgewerbe nach Betriebsgröße,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-beherbergungsgewerbe_nach_betriebsgroesse/content.csv
+frankfurt-am-main,Einbürgerungen nach Verfahren,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-einbuergerungen_nach_verfahren/content.csv
+frankfurt-am-main,Palmengarten,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-palmengarten/content.csv
+frankfurt-am-main,Ausgewählte wissenschaftliche Bibliotheken,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-ausgewaehlte_wissenschaftliche_bibliotheken/content.csv
+frankfurt-am-main,Meldepflichtige Erkrankungen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-meldepflichtige_erkrankungen/content.csv
+frankfurt-am-main,Haushaltsabfälle,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-haushaltsabfaelle/content.csv
+frankfurt-am-main,Beherbergungsgewerbe nach Betriebsart und Herkunft der Gäste,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-beherbergungsgewerbe_nach_betriebsart_und_herkunft_der_gaeste/content.csv
+frankfurt-am-main,Beschäftigte Wirtschaftszweige (Arbeitsort) ab 2016,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-beschaeftigte_wirtschaftszweige_arbeitsort_ab_2016/content.csv
+frankfurt-am-main,Bedarfsgemeinschaften in der Grundsicherung für Arbeitsuchende (Anzahl der Personen),CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bedarfsgemeinschaften_in_der_grundsicherung_fuer_arbeitsuchende_anzahl_der_personen/content.csv
+frankfurt-am-main,Migration Kontinente,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-migration_kontinente/content.csv
+frankfurt-am-main,Feuerwehr,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-feuerwehr/content.csv
+frankfurt-am-main,Museen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-museen/content.csv
+frankfurt-am-main,Asiatische und australische Staatsangehörigkeiten,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-asiatische_und_australische_staatsangehoerigkeiten/content.csv
+frankfurt-am-main,Alterspyramide Tabelle,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-alterspyramide_tabelle/content.csv
+frankfurt-am-main,Ergebnishaushalt,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-ergebnishaushalt/content.csv
+frankfurt-am-main,Hauskoordinaten,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-hauskoordinaten/content.csv
+frankfurt-am-main,Stromverbrauch,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-stromverbrauch/content.csv
+frankfurt-am-main,Straftaten nach Alter,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-straftaten_nach_alter/content.csv
+frankfurt-am-main,Wählerinnen und Wähler nach Parteien bei der Bundestagswahl,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-waehlerinnen_und_waehler_nach_parteien_bei_der_bundestagswahl/content.csv
+frankfurt-am-main,Übernachtungen der Gäste nach Herkunftskontinent,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-uebernachtungen_der_gaeste_nach_herkunftskontinent/content.csv
+frankfurt-am-main,Straßenverzeichnis,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-strassenverzeichnis/content.csv
+frankfurt-am-main,Altersgruppen (20 Altersgruppen),CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-altersgruppen_20_altersgruppen/content.csv
+frankfurt-am-main,Einwohnerinnen und Einwohner nach Kontinenten,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-einwohnerinnen_und_einwohner_nach_kontinenten/content.csv
+frankfurt-am-main,Umzüge innerhalb Frankfurt am Main,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-umzuege_innerhalb_frankfurt_am_main/content.csv
+frankfurt-am-main,Demographische Kennzahlen Stadtteile,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-demographische_kennzahlen_stadtteile/content.csv
+frankfurt-am-main,Kinder in Haushalten,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-kinder_in_haushalten/content.csv
+frankfurt-am-main,"Erwerbstätigkeit: Erwerbstätige, Vollzeitäquivalente, Arbeitsvolumen (Arbeitsort) ab 2010",CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-erwerbstaetigkeit_erwerbstaetige_vollzeitaequivalente_arbeitsvolumen_arbeitsort_ab_2010/content.csv
+frankfurt-am-main,Erwerbspersonen (Wohnort) (Stadtteile) ab 2012,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-erwerbspersonen_wohnort_stadtteile_ab_2012/content.csv
+frankfurt-am-main,Umweltplakette Nutzfahrzeuge,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-umweltplakette_nutzfahrzeuge/content.csv
+frankfurt-am-main,verfügbares Einkommen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-verfuegbares_einkommen/content.csv
+frankfurt-am-main,Gewerbeabmeldungen ab 2018,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-gewerbeabmeldungen_ab_2018/content.csv
+frankfurt-am-main,Zusammengefasste Geburtenziffer,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-zusammengefasste_geburtenziffer/content.csv
+frankfurt-am-main,Landtagswahl Wahlbeteiligung und Stimmenverteilung nach Alter,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-landtagswahl_wahlbeteiligung_und_stimmenverteilung_nach_alter/content.csv
+frankfurt-am-main,"Niedergelassene Psychiaterinnen und Psychiater, psychologische Psychotherapeutinnen und -therapeuten (Stadtteile)",CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-niedergelassene_psychiaterinnen_und_psychiater_psychologische_psychotherapeutinnen_und_-therapeuten_stadtteile/content.csv
+frankfurt-am-main,Beschäftigte (Arbeitsort) ab 2010,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-beschaeftigte_arbeitsort_ab_2010/content.csv
+frankfurt-am-main,Untersuchte Kinder bei der Einschulungsuntersuchung nach Impfstatus (Stadtteile),CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-untersuchte_kinder_bei_der_einschulungsuntersuchung_nach_impfstatus_stadtteile/content.csv
+frankfurt-am-main,Straßenverzeichnis Wahlen,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-strassenverzeichnis_wahlen/content.csv
+frankfurt-am-main,Landtagswahl Wahlbeteiligung und Stimmenverteilung nach Geschlecht,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-landtagswahl_wahlbeteiligung_und_stimmenverteilung_nach_geschlecht/content.csv
+frankfurt-am-main,Wahlbeteiligung EW 2024,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-wahlbeteiligung_ew_2024/content.csv
+frankfurt-am-main,Gestorbene nach Altersgruppen und häufigster Todesursache,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-gestorbene_nach_altersgruppen_und_haeufigster_todesursache/content.csv
+frankfurt-am-main,Erzeugerpreisindex Quartale,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-erzeugerpreisindex_quartale/content.csv
+frankfurt-am-main,Staatsangehörigkeit,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-staatsangehoerigkeit/content.csv
+frankfurt-am-main,Untersuchte Kinder bei der Einschulungsuntersuchung nach Gewichtsstatus (Stadtteile),CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-untersuchte_kinder_bei_der_einschulungsuntersuchung_nach_gewichtsstatus_stadtteile/content.csv
+frankfurt-am-main,Kommunalwahl 2026 Wahlbezirksgliederung,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-kommunalwahl_2026_wahlbezirksgliederung/content.csv
+frankfurt-am-main,Einwohnerinnen und Einwohner ab 70 Jahren,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-einwohnerinnen_und_einwohner_ab_70_jahren/content.csv
+frankfurt-am-main,Durchschnittliche Personenanzahl pro Haushalt,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-durchschnittliche_personenanzahl_pro_haushalt/content.csv
+frankfurt-am-main,Wählerinnen und Wähler nach Parteien bei der LTW,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-waehlerinnen_und_waehler_nach_parteien_bei_der_ltw/content.csv
+frankfurt-am-main,Fachabteilungen der Krankenhäuser,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-fachabteilungen_der_krankenhaeuser/content.csv
+frankfurt-am-main,Außenwanderung,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-aussenwanderung/content.csv
+frankfurt-am-main,Stadtbücherei,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-stadtbuecherei/content.csv
+frankfurt-am-main,Gewerbeabmeldungen bis 2017,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-gewerbeabmeldungen_bis_2017/content.csv
+frankfurt-am-main,Bundestagswahl Wahlbeteiligung und Stimmenverteilung nach Geschlecht,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bundestagswahl_wahlbeteiligung_und_stimmenverteilung_nach_geschlecht/content.csv
+frankfurt-am-main,Bautätigkeit Reinzugang,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-bautaetigkeit_reinzugang/content.csv
+frankfurt-am-main,Berufspendler/-innen (Arbeitsort) ab 2010,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-berufspendler-innen_arbeitsort_ab_2010/content.csv
+frankfurt-am-main,"Niedergelassene Psychiaterinnen und Psychiater, psychologische Psychotherapeutinnen und -therapeuten (Stadtbezirke)",CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-niedergelassene_psychiaterinnen_und_psychiater_psychologische_psychotherapeutinnen_und_-therapeuten_stadtbezirke/content.csv
+frankfurt-am-main,Monatliches Gäste- und Übernachtungsaufkommen im Jahresverlauf nach Herkunft,CSV,https://offenedaten.frankfurt.de/dcat/dataset/de-he-frankfurtam-monatliches_gaeste-_und_uebernachtungsaufkommen_im_jahresverlauf_nach_herkunft/content.csv
+offenbach-am-main,Bevölkerung nach statistischen Bezirken,CSV,https://offenedaten.offenbach.de/sites/default/files/Bev%C3%B6lkerung_nach%20statBez_2021.csv
+offenbach-am-main,Bevölkerung nach statistischen Bezirken,CSV,https://offenedaten.offenbach.de/sites/default/files/Bev%C3%B6lkerung_nach%20statBez_2022.csv
+offenbach-am-main,Bevölkerung nach statistischen Bezirken,CSV,https://offenedaten.offenbach.de/sites/default/files/Bev%C3%B6lkerung_nach%20statBez_2023.csv
+offenbach-am-main,Zuordnung der Urnenwahlbezirke zu Briefwahlbezirken ab 2021,CSV,https://offenedaten.offenbach.de/sites/default/files/Zuordnung%20Briefwahlbezirke-Wahlbezirke_ab2021.csv
+stadt-hanau,INSPIRE Kommunale Boden- und Raumplanung Magistrat der Stadt Hanau,WFS,https://www.geoportal.hessen.de/registry/wfs/754?service=WFS&request=GetCapabilities
+stadt-hanau,INSPIRE Kommunale Boden- und Raumplanung Magistrat der Stadt Hanau,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=e352f997-3b92-4381-b4f9-9ac116e0b2eb&type=SERVICE&generateFrom=wfs&wfsid=754
+stadt-hanau,Kommunale Boden- und Raumplanung Stadt Hanau,WFS,https://www.geoportal.hessen.de/registry/wfs/753?service=WFS&request=GetCapabilities
+stadt-hanau,Kommunale Boden- und Raumplanung Stadt Hanau,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=a5d79261-ff65-4ba9-9d56-3075553f3153&type=SERVICE&generateFrom=wfs&wfsid=753
+landkreis-main-taunus,INSPIRE Schulen Main-Taunus-Kreis,WFS,https://www.geoportal.hessen.de/registry/wfs/909?service=WFS&request=GetCapabilities
+landkreis-main-taunus,INSPIRE Schulen Main-Taunus-Kreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=955bfdd1-ebc7-42aa-af97-d2cf06473090&type=SERVICE&generateFrom=wfs&wfsid=909
+landkreis-main-taunus,Rettungswachen Main-Taunus-Kreis,WFS,https://www.geoportal.hessen.de/registry/wfs/848?service=WFS&request=GetCapabilities
+landkreis-main-taunus,Rettungswachen Main-Taunus-Kreis,WFS,https://www.geoportal.hessen.de/registry/wfs/810?service=WFS&request=GetCapabilities
+landkreis-main-taunus,Rettungswachen Main-Taunus-Kreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=12c78d79-36b6-432c-a834-cb53ae394135&type=SERVICE&generateFrom=wfs&wfsid=810
+landkreis-main-taunus,Rettungswachen Main-Taunus-Kreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=12c78d79-36b6-432c-a834-cb53ae394135&type=SERVICE&generateFrom=wmslayer&layerid=58195
+landkreis-main-taunus,INSPIRE Rettungswachen Main-Taunus-Kreis,WFS,https://www.geoportal.hessen.de/registry/wfs/849?service=WFS&request=GetCapabilities
+landkreis-main-taunus,INSPIRE Rettungswachen Main-Taunus-Kreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=cf12a181-691a-4815-b274-73aea5cb6ef9&type=SERVICE&generateFrom=wfs&wfsid=849
+landkreis-main-taunus,INSPIRE Rettungswachen Main-Taunus-Kreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=cf12a181-691a-4815-b274-73aea5cb6ef9&type=SERVICE&generateFrom=wmslayer&layerid=58198
+landkreis-main-taunus,INSPIRE Rettungswachen Main-Taunus-Kreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=cf12a181-691a-4815-b274-73aea5cb6ef9&type=SERVICE&generateFrom=wmslayer&layerid=58197
+hochtaunuskreis-der-kreisausschuss,Kommunale Boden- und Raumplanung Hochtaunuskreis - XPlanung,WFS,https://www.geoportal.hessen.de/registry/wfs/828?service=WFS&request=GetCapabilities
+hochtaunuskreis-der-kreisausschuss,Kommunale Boden- und Raumplanung Hochtaunuskreis - XPlanung,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=46d3e8f2-c706-4a19-a5eb-2604fbb06c29&type=SERVICE&generateFrom=wfs&wfsid=828
+hochtaunuskreis-der-kreisausschuss,Gewerbe- und Industrieflächen Hochtaunuskreis,WFS,https://www.geoportal.hessen.de/registry/wfs/793?service=WFS&request=GetCapabilities
+hochtaunuskreis-der-kreisausschuss,Gewerbe- und Industrieflächen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=c7cd7def-dc87-4747-a10c-71f8de86af58&type=SERVICE&generateFrom=wfs&wfsid=793
+hochtaunuskreis-der-kreisausschuss,Kindertageseinrichtungen Hochtaunuskreis,WFS,https://www.geoportal.hessen.de/registry/wfs/789?service=WFS&request=GetCapabilities
+hochtaunuskreis-der-kreisausschuss,Kindertageseinrichtungen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=5fbcddf9-79ad-4ca2-91da-bdfc8c0c2983&type=SERVICE&generateFrom=wfs&wfsid=789
+hochtaunuskreis-der-kreisausschuss,Feuerwehren Hochtaunuskreis,WFS,https://www.geoportal.hessen.de/registry/wfs/794?service=WFS&request=GetCapabilities
+hochtaunuskreis-der-kreisausschuss,Feuerwehren Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=c8c12fbc-97c0-4a4e-81a1-eede87456bcd&type=SERVICE&generateFrom=wfs&wfsid=794
+hochtaunuskreis-der-kreisausschuss,INSPIRE Kindertageseinrichtungen Hochtaunuskreis,WFS,https://www.geoportal.hessen.de/registry/wfs/790?service=WFS&request=GetCapabilities
+hochtaunuskreis-der-kreisausschuss,INSPIRE Kindertageseinrichtungen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=3b9b079e-07fc-46ee-b107-56807f37aca0&type=SERVICE&generateFrom=wfs&wfsid=790
+hochtaunuskreis-der-kreisausschuss,INSPIRE Feuerwehren Hochtaunuskreis,WFS,https://www.geoportal.hessen.de/registry/wfs/795?service=WFS&request=GetCapabilities
+hochtaunuskreis-der-kreisausschuss,INSPIRE Feuerwehren Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=9091cbcd-64ff-4301-8c54-e6a50d71b9e3&type=SERVICE&generateFrom=wfs&wfsid=795
+hochtaunuskreis-der-kreisausschuss,INSPIRE Rettungswachen Hochtaunuskreis,WFS,https://www.geoportal.hessen.de/registry/wfs/784?service=WFS&request=GetCapabilities
+hochtaunuskreis-der-kreisausschuss,INSPIRE Rettungswachen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=cb0625eb-789f-42e1-8bff-f0d5e5221e48&type=SERVICE&generateFrom=wfs&wfsid=784
+hochtaunuskreis-der-kreisausschuss,INSPIRE Rettungswachen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=cb0625eb-789f-42e1-8bff-f0d5e5221e48&type=SERVICE&generateFrom=wmslayer&layerid=43664
+hochtaunuskreis-der-kreisausschuss,INSPIRE Rettungswachen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=cb0625eb-789f-42e1-8bff-f0d5e5221e48&type=SERVICE&generateFrom=wmslayer&layerid=43665
+hochtaunuskreis-der-kreisausschuss,Rettungswachen Hochtaunuskreis,WFS,https://www.geoportal.hessen.de/registry/wfs/783?service=WFS&request=GetCapabilities
+hochtaunuskreis-der-kreisausschuss,Rettungswachen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=878a3e08-db7d-4b90-bae1-a00192af807d&type=SERVICE&generateFrom=wfs&wfsid=783
+hochtaunuskreis-der-kreisausschuss,Rettungswachen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=878a3e08-db7d-4b90-bae1-a00192af807d&type=SERVICE&generateFrom=wmslayer&layerid=43662
+hochtaunuskreis-der-kreisausschuss,Rettungswachen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=878a3e08-db7d-4b90-bae1-a00192af807d&type=SERVICE&generateFrom=wmslayer&layerid=43661
+hochtaunuskreis-der-kreisausschuss,Schulen Hochtaunuskreis,WFS,https://www.geoportal.hessen.de/registry/wfs/775?service=WFS&request=GetCapabilities
+hochtaunuskreis-der-kreisausschuss,Schulen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=660a70f5-dda0-4bfa-901a-ba21c04a0e93&type=SERVICE&generateFrom=wmslayer&layerid=43654
+hochtaunuskreis-der-kreisausschuss,Schulen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=660a70f5-dda0-4bfa-901a-ba21c04a0e93&type=SERVICE&generateFrom=wmslayer&layerid=43653
+hochtaunuskreis-der-kreisausschuss,INSPIRE Schulen Hochtaunuskreis,WFS,https://www.geoportal.hessen.de/registry/wfs/776?service=WFS&request=GetCapabilities
+hochtaunuskreis-der-kreisausschuss,INSPIRE Schulen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=983bc0d2-79e0-42b0-a138-c9ab05520ed3&type=SERVICE&generateFrom=wfs&wfsid=776
+hochtaunuskreis-der-kreisausschuss,INSPIRE Schulen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=983bc0d2-79e0-42b0-a138-c9ab05520ed3&type=SERVICE&generateFrom=wmslayer&layerid=43658
+hochtaunuskreis-der-kreisausschuss,INSPIRE Schulen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=983bc0d2-79e0-42b0-a138-c9ab05520ed3&type=SERVICE&generateFrom=wmslayer&layerid=43657
+hochtaunuskreis-der-kreisausschuss,INSPIRE Schulen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=983bc0d2-79e0-42b0-a138-c9ab05520ed3&type=SERVICE&generateFrom=wmslayer&layerid=43656
+hochtaunuskreis-der-kreisausschuss,INSPIRE Schulen Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=983bc0d2-79e0-42b0-a138-c9ab05520ed3&type=SERVICE&generateFrom=wmslayer&layerid=43659
+hochtaunuskreis-der-kreisausschuss,INSPIRE Kommunale Boden- und Raumplanung Hochtaunuskreis,WFS,https://www.geoportal.hessen.de/registry/wfs/756?service=WFS&request=GetCapabilities
+hochtaunuskreis-der-kreisausschuss,INSPIRE Kommunale Boden- und Raumplanung Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=284800e6-9b53-4cc7-97b8-c16b27056645&type=SERVICE&generateFrom=wfs&wfsid=756
+hochtaunuskreis-der-kreisausschuss,INSPIRE Kommunale Boden- und Raumplanung Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=284800e6-9b53-4cc7-97b8-c16b27056645&type=SERVICE&generateFrom=wmslayer&layerid=43701
+hochtaunuskreis-der-kreisausschuss,Kommunale Boden- und Raumplanung Hochtaunuskreis,WFS,https://www.geoportal.hessen.de/registry/wfs/755?service=WFS&request=GetCapabilities
+hochtaunuskreis-der-kreisausschuss,Kommunale Boden- und Raumplanung Hochtaunuskreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=4c3d4053-3098-4837-a9f5-e8fef8495880&type=SERVICE&generateFrom=wfs&wfsid=755
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Zeitreihe_Bestand_5.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2026_Q2.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2026_Q1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2025_Q4.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2025_Q3.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2025_Q2.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2025_Q1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2024_Q4_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2024_Q3.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2024_Q2.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2024_Q1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2023_Q4.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2023_Q3_0.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2023_Q2_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2023_Q1_0.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2022_Q4_0.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2022_Q3_0.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2022_Q2_0.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2022_Q1_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2021_Q4_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2021_Q3_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2021_Q2_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2021_Q1_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2020_Q4_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2020_Q3_2.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2020_Q2_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2020_Q1_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2019_Q4_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2019_Q3_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2019_Q2_1.csv
+darmstadt,Bevölkerungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Bestand_2019_Q1_2.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Zeitreihe_ab_2024_3.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Zeitreihe_Stadt_Wanderungen_4.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Stadtregion_S%C3%BCdhessen_0.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q2_2026.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q1_2026_0.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q4_2025_0.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q3_2025_0.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q2_2025_0.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q1_2025_0.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q4_2024_0.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q3_2024.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q2_2024.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q1_2024.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q4_2023.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q3_2023.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q2_2023.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q1_2023.csv
+darmstadt,Bevölkerungswanderung,CSV,https://opendata.darmstadt.de/sites/default/files/Wanderung_Q4_2022_0.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Zr_Auslaender_Alter_2.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_alter_2026_Q2.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_alter_2026_Q1.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2025_Q4_0.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2025_Q3_0.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2025_Q2_0.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2025_Q1_0.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2024_Q4.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2024_Q3.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2024_Q2.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2024_Q1.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2023_Q4.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2023_Q3.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2023_Q2.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2023_Q1.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2022_Q4.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2022_Q3.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2022_Q2.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2022_Q1.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2021_Q4.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2021_Q3.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2021_Q2.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2021_Q1.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_Q4_2020.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2020_Q3.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2020_Q2.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2020_Q1.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2019_Q4.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2019_Q3.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2019_Q2_0.csv
+darmstadt,Altersstruktur der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2019_Q1_1.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Zeitreihe_Bestand_Bewegung_6.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2026_Q2.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2026_Q1.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2025_Q4_1.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2025_Q3_1.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2025_Q2_1.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2025_Q1_1.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2024_Q4_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2024_Q3_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2024_Q2_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2024_Q1_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2023_Q4_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2023_Q3_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2023_Q2_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2023_Q1_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2022_Q4_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2022_Q3_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2022_Q2_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2022_Q1_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2021_Q4_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2021_Q3_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2021_Q2_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2021_Q1_1.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2020_Q4_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2020_Q3_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2020_Q2_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2020_Q1_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2019_Q4_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2019_Q3_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2019_Q2_0.csv
+darmstadt,Bevölkerungsentwicklung,CSV,https://opendata.darmstadt.de/sites/default/files/Beventwicklung_2019_Q1_0.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Zeitreihe_HW_Alter_8.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_alter_2026_Q2.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_alter_2026_Q1.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2025_Q4.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2025_Q3.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2025_Q2.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2025_Q1.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2024_Q4.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2024_Q3.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2024_Q2.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2024_Q1_1.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2023_Q4_1.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2023_Q3.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2023_Q2_0.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2023_Q1_0.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2022_Q4_0.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2022_Q3_0.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2022_Q2_1.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2022_Q1_0.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2021_Q4_0.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2021_Q3_0.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2021_Q2_0.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2021_Q1_0.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2020_Q4.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2020_Q3.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2020_Q2.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2020_Q1.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2019_Q4.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2019_Q3_0.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2019_Q2_0.csv
+darmstadt,Altersstruktur der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/HW_Alter_2019_Q1_0.csv
+darmstadt,Haushalte in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/Haushalte_Q4_2025.csv
+darmstadt,Haushalte in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/Haushalte_Q4_2024.csv
+darmstadt,Haushalte in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/Haushalte_Q4_2023.csv
+darmstadt,Haushalte in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/Haushalte_Q4_2022_0.csv
+darmstadt,Haushalte in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/Haushalte_Q4_2021_0.csv
+darmstadt,Altersstruktur der Bevölkerung mit Migrationshintergrund,CSV,https://opendata.darmstadt.de/sites/default/files/ZR_Migra_Alter_2.csv
+darmstadt,Altersstruktur der Bevölkerung mit Migrationshintergrund,CSV,https://opendata.darmstadt.de/sites/default/files/Migra_Alter_Q4_2023_1.csv
+darmstadt,Altersstruktur der Bevölkerung mit Migrationshintergrund,CSV,https://opendata.darmstadt.de/sites/default/files/Migra_Alter_Q4_2022_4.csv
+darmstadt,Altersstruktur der Bevölkerung mit Migrationshintergrund,CSV,https://opendata.darmstadt.de/sites/default/files/Migra_Alter_Q4_2021_4.csv
+darmstadt,Altersstruktur der Bevölkerung mit Migrationshintergrund,CSV,https://opendata.darmstadt.de/sites/default/files/Migra_Alter_Q4_2020_3.csv
+darmstadt,Altersstruktur der Bevölkerung mit Migrationshintergrund,CSV,https://opendata.darmstadt.de/sites/default/files/Migra_Alter_Q4_2019_0.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Zeitreihe_Auslaender_Nat_6.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2019_Q1.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2019_Q2.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2019_Q3.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2019_Q4.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2020_Q1.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2020_Q2.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2020_Q3.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2020_Q4.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2021_Q1_0.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2021_Q2_0.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2021_Q3.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2021_Q4.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2022_Q1_0.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2022_Q2_0.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2022_Q3_1.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2022_Q4_1.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2023_Q1_0.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2023_Q2_0.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Aus_Alter_2023_Q3_0.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2023_Q4.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2024_Q1.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2024_Q2.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2024_Q3.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2024_Q4.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2025_Q1.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2025_Q2.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2025_Q3.csv
+darmstadt,ALTE VERSION Ausländische Nationalitäten der Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Auslaender_Nat_2025_Q4.csv
+darmstadt,Beschäftigte,CSV,https://opendata.darmstadt.de/sites/default/files/ZR_SVBeschaeftigte_REV_3.csv
+darmstadt,Beschäftigte,CSV,https://opendata.darmstadt.de/sites/default/files/Beschaeftigte_2025_Q4.csv
+darmstadt,Beschäftigte,CSV,https://opendata.darmstadt.de/sites/default/files/Beschaeftigte_2024_Q4_0.csv
+darmstadt,Beschäftigte,CSV,https://opendata.darmstadt.de/sites/default/files/Beschaeftigte_REV_2023_Q4.csv
+darmstadt,Beschäftigte,CSV,https://opendata.darmstadt.de/sites/default/files/Beschaeftigte_REV_2022_Q4.csv
+darmstadt,Beschäftigte,CSV,https://opendata.darmstadt.de/sites/default/files/Beschaeftigte_REV_2021_Q4.csv
+darmstadt,Beschäftigte,CSV,https://opendata.darmstadt.de/sites/default/files/Beschaeftigte_REV_2020_Q4.csv
+darmstadt,Beschäftigte,CSV,https://opendata.darmstadt.de/sites/default/files/Beschaeftigte_REV_2019_Q4.csv
+darmstadt,Monatliche Durchschnittstemperatur ab 1961,CSV,https://opendata.darmstadt.de/sites/default/files/Lufttemperatur_1961-2026_Mittelwert_2.csv
+darmstadt,Monatliche Niederschlagsmengen ab 1961,CSV,https://opendata.darmstadt.de/sites/default/files/monatl_Niederschlag_1961-2026.csv
+darmstadt,Jährliche Extremwerte Lufttemperatur ab 1961,CSV,https://opendata.darmstadt.de/sites/default/files/Lufttemperatur_1961-2025_Extremwerte.csv
+darmstadt,Monatliche Höchstwerte Lufttemperatur ab 1961,CSV,https://opendata.darmstadt.de/sites/default/files/Lufttemperatur_1961-2026_Maximum.csv
+darmstadt,Monatliche Tiefstwerte Lufttemperatur ab 1961,CSV,https://opendata.darmstadt.de/sites/default/files/Lufttemperatur_1961-2026_Minimum.csv
+darmstadt,Wohngebäudebestand,CSV,https://opendata.darmstadt.de/sites/default/files/Gebauedebestand_2025.csv
+darmstadt,Wohnungsbestand,CSV,https://opendata.darmstadt.de/sites/default/files/Wohnungsbestand_2025.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ZR_ALO_2.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2026_Q2.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2026_Q1.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2025_Q4.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2025_Q3.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2025_Q2.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2025_Q1.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2024_Q4.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2024_Q3.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2024_Q2.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2024_Q1.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2023_Q4.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2023_Q3.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2023_Q2.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2023_Q1.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2022_Q4.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2022_Q3.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2022_Q2.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2022_Q1.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2021_Q4_0.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2021_Q4.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2021_Q3.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2021_Q2.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2021_Q1.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2020_Q4.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2020_Q3.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2020_Q2.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2020_Q1.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2019_Q4.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2019_Q3.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2019_Q2.csv
+darmstadt,Arbeitslosigkeit,CSV,https://opendata.darmstadt.de/sites/default/files/ALO_2019_Q1.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/ZR_SGB_II_4.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2026_Q1.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2025_Q4_0.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2025_Q3_0.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2025_Q2_0.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2025_Q1.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2024_12_0.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2024_09.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2024_06_0.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2024_03.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2023_12.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2023_09_1.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2023_06.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2023_03.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2022_12.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2022_09.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2022_06.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2022_03.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2021_12.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2021_09.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2021_06.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2021_03.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2020_12.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2020_09.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2020_06.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2020_03_0.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2019_12.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2019_09.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2019_06.csv
+darmstadt,Leistungen nach SGB II,CSV,https://opendata.darmstadt.de/sites/default/files/SGB2_2019_03.csv
+darmstadt,Europawahlen in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/ZR_Europawahl_0.csv
+darmstadt,Bundestagswahlen in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/ZR_Bundestagswahl_Zweitstimmen.csv
+darmstadt,Bundestagswahlen in Darmstadt,GEOJSON,https://opendata.darmstadt.de/sites/default/files/Wahlbezirke-BTW-25_0.geojson
+darmstadt,Landtagswahlen in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/ZR_Landtagswahl.csv
+darmstadt,Kreuzungspläne Stadt Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/Ampelanlagen_Darmstadt.CSV
+darmstadt,Kreuzungspläne Stadt Darmstadt,GEOJSON,https://opendata.darmstadt.de/sites/default/files/Anlagen.geojson
+darmstadt,Kommunalwahlen in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/Kommunalwahlen%20Zeitreihe_0.csv
+darmstadt,Kommunalwahlen in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/Darmstadt_Kommunalwahlbezirke%2BStra%C3%9Fenliste%2B28.01.2026.csv
+darmstadt,Kommunalwahlen in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/Wahllokale%20nach%20Bezirk%20-%20%C3%9Cbersicht.csv
+darmstadt,Kommunalwahlen in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/Zuordnung%20-%20Briefwahl%20zu%20Urnenwahl.csv
+darmstadt,Kommunalwahlen in Darmstadt,CSV,https://opendata.darmstadt.de/sites/default/files/Kandidaten%20-%20Kommunalwahlen%202026.csv
+darmstadt,Studierende,CSV,https://opendata.darmstadt.de/sites/default/files/Studierende_seit1980_3.csv
+darmstadt,Schüler und Schülerinnen,CSV,https://opendata.darmstadt.de/sites/default/files/Schueler_0.csv
+darmstadt,Nationalitätengruppen der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Zeitreihe_Aus_Nat_0.csv
+darmstadt,Häufigste Nationalitäten der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Ausl_Nat_Stadtteile_2025_Q4_0.csv
+darmstadt,Häufigste Nationalitäten der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Ausl_Nat_Stadtteile_2024_Q4.csv
+darmstadt,Häufigste Nationalitäten der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Ausl_Nat_Stadtteile_2023_Q4.csv
+darmstadt,Häufigste Nationalitäten der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Ausl_Nat_Stadtteile_2022_Q4.csv
+darmstadt,Häufigste Nationalitäten der ausländischen Bevölkerung,CSV,https://opendata.darmstadt.de/sites/default/files/Ausl_Nat_Stadtteile_2021_Q4.csv
+darmstadt,Bevölkerung nach Geburtsjahr und Geschlecht,CSV,https://opendata.darmstadt.de/sites/default/files/Geburtsjahre_2025_Q4.csv
+darmstadt,Bevölkerung nach Geburtsjahr und Geschlecht,CSV,https://opendata.darmstadt.de/sites/default/files/Geburtsjahre_2024_Q4_0.csv
+darmstadt,Bevölkerung nach Geburtsjahr und Geschlecht,CSV,https://opendata.darmstadt.de/sites/default/files/Geburtsjahre_2023_Q4.csv
+darmstadt,Bevölkerung nach Geburtsjahr und Geschlecht,CSV,https://opendata.darmstadt.de/sites/default/files/Geburtsjahre_2022_Q4_0.csv
+darmstadt,Bevölkerung nach Geburtsjahr und Geschlecht,CSV,https://opendata.darmstadt.de/sites/default/files/Geburtsjahre_2021_Q4.csv
+darmstadt,Bevölkerung nach Geburtsjahr und Geschlecht,CSV,https://opendata.darmstadt.de/sites/default/files/Geburtsjahre_2020_Q4.csv
+darmstadt,Bevölkerung nach Geburtsjahr und Geschlecht,CSV,https://opendata.darmstadt.de/sites/default/files/Geburtsjahre_2019_Q4_0.csv
+darmstadt,Altersstruktur der Bevölkerung mit Einwanderungsgeschichte,CSV,https://opendata.darmstadt.de/sites/default/files/Einwanderung_Alter_Q4_2025.csv
+darmstadt,Altersstruktur der Bevölkerung mit Einwanderungsgeschichte,CSV,https://opendata.darmstadt.de/sites/default/files/Einwanderung_Alter_Q4_2024.csv
+darmstadt,Statistische Bezirke Darmstadt,GEOJSON,https://opendata.darmstadt.de/sites/default/files/DA_ST_Bezirke.geojson
+darmstadt,Statistische Stadtteile Darmstadt,GEOJSON,https://opendata.darmstadt.de/sites/default/files/DA_ST_Stadtteile.geojson
+darmstadt,Globaler Merkmalskatalog,CSV,https://opendata.darmstadt.de/sites/default/files/Merkmalskatalog_DA_29_07_2026.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Einwohnerinnen%20und%20Einwohner.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Faktor%20Geschlecht_1.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Faktor%20Alter.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Faktor%20Herkunft.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Armutsindikator%20I%20Kinderarmut.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Armutsindikator%20II%20arbeitslose%20erwersbf%C3%A4hige%20Erwachsene.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Armutsindikator%20III%20Altersarmut.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Armutsindex.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Haushalte.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Situationsindikator%201%20Alleinerziehende.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Situationsindikator%202%20Jugendarbeitslosigkeit.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Situationsindex%203%20Transferleistungsbezug.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Situationsindikator%204%20Wohngeld.csv
+darmstadt,Sozialatlas 2025,CSV,https://opendata.darmstadt.de/sites/default/files/Situationsindikator%205%20Alternde%20Gesellschaft.csv
+stadt-russelsheim-am-main,Kommunale Boden- und Raumplanung Stadt Rüsselsheim am Main - XPlanung,WFS,https://www.geoportal.hessen.de/registry/wfs/906?service=WFS&request=GetCapabilities
+stadt-russelsheim-am-main,Kommunale Boden- und Raumplanung Stadt Rüsselsheim am Main - XPlanung,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=37bd86fe-acc0-4be3-93f4-3a0fc6f3161c&type=SERVICE&generateFrom=wfs&wfsid=906
+stadt-russelsheim-am-main,INSPIRE Kommunale Boden- und Raumplanung Stadt Rüsselsheim am Main,WFS,https://www.geoportal.hessen.de/registry/wfs/903?service=WFS&request=GetCapabilities
+stadt-russelsheim-am-main,INSPIRE Kommunale Boden- und Raumplanung Stadt Rüsselsheim am Main,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=8e7c984c-e49e-4ff6-a94a-d77e4c6369fb&type=SERVICE&generateFrom=wfs&wfsid=903
+kreisstadt-hofheim-am-taunus,INSPIRE Kommunale Boden- und Raumplanung Kreisstadt Hofheim am Taunus,WFS,https://www.geoportal.hessen.de/registry/wfs/758?service=WFS&request=GetCapabilities
+kreisstadt-hofheim-am-taunus,INSPIRE Kommunale Boden- und Raumplanung Kreisstadt Hofheim am Taunus,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=ec5db603-da97-4c49-be6c-9896a7df11d4&type=SERVICE&generateFrom=wfs&wfsid=758
+kreisstadt-hofheim-am-taunus,Kommunale Boden- und Raumplanung Kreisstadt Hofheim am Taunus,WFS,https://www.geoportal.hessen.de/registry/wfs/757?service=WFS&request=GetCapabilities
+kreisstadt-hofheim-am-taunus,Kommunale Boden- und Raumplanung Kreisstadt Hofheim am Taunus,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=fdcfb640-68f8-4f3b-8bc8-f14901bd463b&type=SERVICE&generateFrom=wfs&wfsid=757
+stadt-maintal,Kommunale Boden- und Raumplanung Stadt Maintal,WFS,https://www.geoportal.hessen.de/registry/wfs/847?service=WFS&request=GetCapabilities
+stadt-maintal,Kommunale Boden- und Raumplanung Stadt Maintal,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=ab70b082-5510-4099-98b8-3a1cdb3b7242&type=SERVICE&generateFrom=wfs&wfsid=847
+stadt-dietzenbach,Feuerwehren Kreisstadt Dietzenbach,WFS,https://www.geoportal.hessen.de/registry/wfs/881?service=WFS&request=GetCapabilities
+stadt-dietzenbach,Feuerwehren Kreisstadt Dietzenbach,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=97bab19d-4248-478d-8fb9-6fea84b3779a&type=SERVICE&generateFrom=wfs&wfsid=881
+stadt-dietzenbach,Feuerwehren Kreisstadt Dietzenbach,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=97bab19d-4248-478d-8fb9-6fea84b3779a&type=SERVICE&generateFrom=wmslayer&layerid=60018
+stadt-dietzenbach,INSPIRE Kommunale Boden- und Raumplanung Kreisstadt Dietzenbach,WFS,https://www.geoportal.hessen.de/registry/wfs/750?service=WFS&request=GetCapabilities
+stadt-dietzenbach,INSPIRE Kommunale Boden- und Raumplanung Kreisstadt Dietzenbach,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=a847d1b8-5d6c-4e0e-b611-9bca62f1ec86&type=SERVICE&generateFrom=wfs&wfsid=750
+stadt-dietzenbach,INSPIRE Kommunale Boden- und Raumplanung Kreisstadt Dietzenbach,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=a847d1b8-5d6c-4e0e-b611-9bca62f1ec86&type=SERVICE&generateFrom=wmslayer&layerid=52830
+stadt-dietzenbach,Kommunale Boden- und Raumplanung Kreisstadt Dietzenbach,WFS,https://www.geoportal.hessen.de/registry/wfs/749?service=WFS&request=GetCapabilities
+stadt-dietzenbach,Kommunale Boden- und Raumplanung Kreisstadt Dietzenbach,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=bebfc9ec-8f1d-4372-9dcb-578e9d63beee&type=SERVICE&generateFrom=wfs&wfsid=749
+stadt-dietzenbach,Kindertageseinrichtungen Kreisstadt Dietzenbach,WFS,https://www.geoportal.hessen.de/registry/wfs/879?service=WFS&request=GetCapabilities
+stadt-dietzenbach,Kindertageseinrichtungen Kreisstadt Dietzenbach,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=9f25029d-f5c8-4203-ad9c-e650027e2ee1&type=SERVICE&generateFrom=wfs&wfsid=879
+stadt-dietzenbach,Kindertageseinrichtungen Kreisstadt Dietzenbach,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=9f25029d-f5c8-4203-ad9c-e650027e2ee1&type=SERVICE&generateFrom=wmslayer&layerid=60014
+stadt-dietzenbach,Kommunale Boden- und Raumplanung Kreisstadt Dietzenbach - XPlanung,WFS,https://www.geoportal.hessen.de/registry/wfs/880?service=WFS&request=GetCapabilities
+stadt-dietzenbach,Kommunale Boden- und Raumplanung Kreisstadt Dietzenbach - XPlanung,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=207e1710-9ea8-437a-8e9e-69453a8712ca&type=SERVICE&generateFrom=wfs&wfsid=880
+stadt-dietzenbach,Kommunale Boden- und Raumplanung Kreisstadt Dietzenbach - XPlanung,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=207e1710-9ea8-437a-8e9e-69453a8712ca&type=SERVICE&generateFrom=wmslayer&layerid=60016
+stadt-dietzenbach,INSPIRE Feuerwehren Kreisstadt Dietzenbach,WFS,https://www.geoportal.hessen.de/registry/wfs/882?service=WFS&request=GetCapabilities
+stadt-dietzenbach,INSPIRE Feuerwehren Kreisstadt Dietzenbach,WFS,https://www.geoportal.hessen.de/registry/wfs/883?service=WFS&request=GetCapabilities
+stadt-dietzenbach,INSPIRE Feuerwehren Kreisstadt Dietzenbach,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=ca7c0196-b8c7-474b-8166-35efdf2dfe10&type=SERVICE&generateFrom=wfs&wfsid=882
+stadt-dietzenbach,INSPIRE Feuerwehren Kreisstadt Dietzenbach,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=ca7c0196-b8c7-474b-8166-35efdf2dfe10&type=SERVICE&generateFrom=wmslayer&layerid=60020
+stadt-dietzenbach,INSPIRE Feuerwehren Kreisstadt Dietzenbach,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=ca7c0196-b8c7-474b-8166-35efdf2dfe10&type=SERVICE&generateFrom=wmslayer&layerid=60021
+stadt-dietzenbach,INSPIRE Kindertageseinrichtungen Kreisstadt Dietzenbach,WFS,https://www.geoportal.hessen.de/registry/wfs/884?service=WFS&request=GetCapabilities
+stadt-dietzenbach,INSPIRE Kindertageseinrichtungen Kreisstadt Dietzenbach,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=e53a6f46-2ad1-47e4-9eaf-a18806930d26&type=SERVICE&generateFrom=wfs&wfsid=884
+stadt-dietzenbach,INSPIRE Kindertageseinrichtungen Kreisstadt Dietzenbach,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=e53a6f46-2ad1-47e4-9eaf-a18806930d26&type=SERVICE&generateFrom=wmslayer&layerid=60023
+organization-wetteraukreis,Kommunale Boden- und Raumplanung Wetteraukreis - XPlanung,WFS,https://www.geoportal.hessen.de/registry/wfs/844?service=WFS&request=GetCapabilities
+organization-wetteraukreis,Kommunale Boden- und Raumplanung Wetteraukreis - XPlanung,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=57a2d845-0777-455b-9ff9-0ca2a73f2582&type=SERVICE&generateFrom=wfs&wfsid=844
+organization-wetteraukreis,Kommunale Boden- und Raumplanung Wetteraukreis - XPlanung,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=57a2d845-0777-455b-9ff9-0ca2a73f2582&type=SERVICE&generateFrom=wmslayer&layerid=58966
+organization-wetteraukreis,Jagdbezirke Wetteraukreis,WFS,https://www.geoportal.hessen.de/registry/wfs/874?service=WFS&request=GetCapabilities
+organization-wetteraukreis,Jagdbezirke Wetteraukreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=c71e6cc6-22e3-42d7-851e-6fa09a14cc9f&type=SERVICE&generateFrom=wfs&wfsid=874
+organization-wetteraukreis,Jagdbezirke Wetteraukreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=c71e6cc6-22e3-42d7-851e-6fa09a14cc9f&type=SERVICE&generateFrom=wmslayer&layerid=59995
+organization-wetteraukreis,INSPIRE Schulen Wetteraukreis,WFS,https://www.geoportal.hessen.de/registry/wfs/782?service=WFS&request=GetCapabilities
+organization-wetteraukreis,INSPIRE Schulen Wetteraukreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=c44546c2-84d0-4f1d-8c23-bc2d8032e8ab&type=SERVICE&generateFrom=wmslayer&layerid=56847
+organization-wetteraukreis,INSPIRE Schulen Wetteraukreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=c44546c2-84d0-4f1d-8c23-bc2d8032e8ab&type=SERVICE&generateFrom=wmslayer&layerid=56845
+organization-wetteraukreis,INSPIRE Schulen Wetteraukreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=c44546c2-84d0-4f1d-8c23-bc2d8032e8ab&type=SERVICE&generateFrom=wmslayer&layerid=56844
+organization-wetteraukreis,INSPIRE Schulen Wetteraukreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=c44546c2-84d0-4f1d-8c23-bc2d8032e8ab&type=SERVICE&generateFrom=wmslayer&layerid=56846
+organization-wetteraukreis,INSPIRE Kommunale Boden- und Raumplanung Wetteraukreis,WFS,https://www.geoportal.hessen.de/registry/wfs/834?service=WFS&request=GetCapabilities
+organization-wetteraukreis,INSPIRE Kommunale Boden- und Raumplanung Wetteraukreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=a25716f8-a0d2-4876-b9d1-c93f90088504&type=SERVICE&generateFrom=wfs&wfsid=834
+organization-wetteraukreis,INSPIRE Kommunale Boden- und Raumplanung Wetteraukreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=a25716f8-a0d2-4876-b9d1-c93f90088504&type=SERVICE&generateFrom=wmslayer&layerid=58607
+organization-wetteraukreis,Schulen Wetteraukreis,WFS,https://www.geoportal.hessen.de/registry/wfs/781?service=WFS&request=GetCapabilities
+organization-wetteraukreis,Schulen Wetteraukreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=4061e2c7-f116-4c1e-9626-a5106b8cc30f&type=SERVICE&generateFrom=wmslayer&layerid=56842
+organization-wetteraukreis,Kommunale Boden- und Raumplanung Wetteraukreis,WFS,https://www.geoportal.hessen.de/registry/wfs/826?service=WFS&request=GetCapabilities
+organization-wetteraukreis,Kommunale Boden- und Raumplanung Wetteraukreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=785fe61e-49e8-4aa2-bf7d-4480ef21d977&type=SERVICE&generateFrom=wfs&wfsid=826
+organization-wetteraukreis,Einwohnerstatistik nach Ortsbezirken im Wetteraukreis 2025,CSV,https://opendata.hessen.de/dataset/038d0e28-89fa-48af-acfe-c97b9b6c6e34/resource/261aa88a-9654-4835-9f5b-8bd90644025f/download/einwohner_ortsteile2025_final_open_data.csv
+organization-wetteraukreis,Einwohnerstatistik nach Ortsbezirken im Wetteraukreis 2025,CSV,https://opendata.hessen.de/dataset/038d0e28-89fa-48af-acfe-c97b9b6c6e34/resource/e2128c14-33de-41d2-bfa2-248cacc5d481/download/einwohner_ortsteile2025_final_open_data.csv
+organization-wetteraukreis,Wetteraukreis Einwohner Ortsbezirke_Januar2026,CSV,https://opendata.hessen.de/dataset/0e63ed5f-d5a7-4fbc-9509-6545a02903cf/resource/d1d01416-bbbb-47e3-9d00-6ba007ffd7f8/download/einwohner-wetteraukreis_ortsbezirke_1_1_26.csv
+landkreis-main-kinzig,INSPIRE Rettungswachen Main-Kinzig-Kreis,WFS,https://www.geoportal.hessen.de/registry/wfs/937?service=WFS&request=GetCapabilities
+landkreis-main-kinzig,INSPIRE Rettungswachen Main-Kinzig-Kreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=cd48479d-999b-44b8-884b-a088921b706d&type=SERVICE&generateFrom=wfs&wfsid=937
+landkreis-main-kinzig,Rettungswachen Main-Kinzig-Kreis,WFS,https://www.geoportal.hessen.de/registry/wfs/935?service=WFS&request=GetCapabilities
+landkreis-main-kinzig,Rettungswachen Main-Kinzig-Kreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=22798c7c-8d37-4f4c-880b-77141b8dc460&type=SERVICE&generateFrom=wfs&wfsid=935
+landkreis-main-kinzig,Schulen Main-Kinzig-Kreis,WFS,https://www.geoportal.hessen.de/registry/wfs/777?service=WFS&request=GetCapabilities
+landkreis-main-kinzig,Schulen Main-Kinzig-Kreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=25c1ddd6-19c1-4b83-a725-b534f8caaa06&type=SERVICE&generateFrom=wfs&wfsid=777
+landkreis-main-kinzig,INSPIRE Schulen Main-Kinzig-Kreis,WFS,https://www.geoportal.hessen.de/registry/wfs/778?service=WFS&request=GetCapabilities
+landkreis-main-kinzig,INSPIRE Schulen Main-Kinzig-Kreis,WFS,https://www.geoportal.hessen.de/registry/wfs/936?service=WFS&request=GetCapabilities
+landkreis-main-kinzig,INSPIRE Schulen Main-Kinzig-Kreis,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=9dc70d56-6efc-4f97-8c2f-05b0efe254f0&type=SERVICE&generateFrom=wfs&wfsid=778
+magistrat-der-stadt-hochheim-am-main,Kommunale Boden- und Raumplanung Magistrat der Stadt Hochheim am Main - XPlanung,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=e7b602f7-a04c-4839-8e2e-462dfa0e2bd8&type=SERVICE&generateFrom=wmslayer&layerid=59946
+magistrat-der-stadt-hochheim-am-main,INSPIRE Kommunale Boden- und Raumplanung Magistrat der Stadt Hochheim am Main,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=7ec93a9a-6a83-4231-ace1-16ee7a734d09&type=SERVICE&generateFrom=wmslayer&layerid=59942
+magistrat-der-stadt-hochheim-am-main,Kommunale Boden- und Raumplanung Magistrat der Stadt Hochheim am Main,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=ee8bcda4-3fc9-4475-8965-e90dc5657b32&type=SERVICE&generateFrom=wmslayer&layerid=59914
+magistrat-der-stadt-hochheim-am-main,Kommunale Boden- und Raumplanung Magistrat der Stadt Hochheim am Main,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=ee8bcda4-3fc9-4475-8965-e90dc5657b32&type=SERVICE&generateFrom=wmslayer&layerid=59917
+regionalverband-frankfurtrheinmain,INSPIRE Biotop- und Nutzungstypen 2017-2019 Regionalverband FrankfurtRheinMain,WFS,https://www.geoportal.hessen.de/registry/wfs/931?service=WFS&request=GetCapabilities
+regionalverband-frankfurtrheinmain,INSPIRE Biotop- und Nutzungstypen 2017-2019 Regionalverband FrankfurtRheinMain,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=ca7477d0-3691-4a81-9436-557588a57fb6&type=SERVICE&generateFrom=wfs&wfsid=931
+regionalverband-frankfurtrheinmain,"Regionaler Flächennutzungsplan (RegFNP) 2010, Beikarte 1, Genehmigungsexemplar",ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=5346bc0d-f9c4-6853-efa7-9b1e4c3e2294&type=SERVICE&generateFrom=wmslayer&layerid=60876
+regionalverband-frankfurtrheinmain,"Regionaler Flächennutzungsplan (RegFNP) 2010, Beikarte 1, Planstand 31.12.2015",ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=d5a1d064-20f6-dcab-776c-4ca373c7f85f&type=SERVICE&generateFrom=wmslayer&layerid=61035
+regionalverband-frankfurtrheinmain,INSPIRE Regionaler Flächennutzungsplan 2010 Regionalverband FrankfurtRheinMain - Planstand 31.01.2025,WFS,https://www.geoportal.hessen.de/registry/wfs/843?service=WFS&request=GetCapabilities
+regionalverband-frankfurtrheinmain,INSPIRE Regionaler Flächennutzungsplan 2010 Regionalverband FrankfurtRheinMain - Planstand 31.01.2025,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=ed587e84-448f-4539-b12a-87f7c54e85e0&type=SERVICE&generateFrom=wmslayer&layerid=58949
+regionalverband-frankfurtrheinmain,INSPIRE Regionaler Flächennutzungsplan 2010 Regionalverband FrankfurtRheinMain - Planstand 31.01.2025,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=ed587e84-448f-4539-b12a-87f7c54e85e0&type=SERVICE&generateFrom=wmslayer&layerid=58950
+regionalverband-frankfurtrheinmain,INSPIRE Regionaler Flächennutzungsplan 2010 Regionalverband FrankfurtRheinMain - Planstand 31.01.2025,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=ed587e84-448f-4539-b12a-87f7c54e85e0&type=SERVICE&generateFrom=wmslayer&layerid=58951
+regionalverband-frankfurtrheinmain,INSPIRE  Regionaler Flächennutzungsplan 2010 Regionalverband FrankfurtRheinMain - Genehmigung 27.06.2011,WFS,https://www.geoportal.hessen.de/registry/wfs/842?service=WFS&request=GetCapabilities
+regionalverband-frankfurtrheinmain,INSPIRE  Regionaler Flächennutzungsplan 2010 Regionalverband FrankfurtRheinMain - Genehmigung 27.06.2011,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=08ffec82-368d-44b3-8d2d-27b03ada49d9&type=SERVICE&generateFrom=wmslayer&layerid=58946
+regionalverband-frankfurtrheinmain,INSPIRE  Regionaler Flächennutzungsplan 2010 Regionalverband FrankfurtRheinMain - Genehmigung 27.06.2011,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=08ffec82-368d-44b3-8d2d-27b03ada49d9&type=SERVICE&generateFrom=wmslayer&layerid=58945
+regionalverband-frankfurtrheinmain,INSPIRE  Regionaler Flächennutzungsplan 2010 Regionalverband FrankfurtRheinMain - Genehmigung 27.06.2011,ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=08ffec82-368d-44b3-8d2d-27b03ada49d9&type=SERVICE&generateFrom=wmslayer&layerid=58947
+regionalverband-frankfurtrheinmain,"Regionaler Flächennutzungsplan (RegFNP) 2010, Beikarte 2, Genehmigungsexemplar",ATOM,https://geoportal.hessen.de/mapbender/php/mod_inspireDownloadFeed.php?id=ab7ba989-2ac3-9596-171d-2a645c64b37e&type=SERVICE&generateFrom=wmslayer&layerid=60991
