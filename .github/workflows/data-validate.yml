@@ -14,6 +14,13 @@ on:
   # paying for it on a docs-only PR is cheaper than the deadlock.
   pull_request:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: data-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
 jobs:
   validate:
     name: Schema validation (stdlib only, no pip)

@@ -1,0 +1,592 @@
+{
+  "version": 1,
+  "updated": "2026-08-16",
+  "note": "Every upstream BEMBEL reads, one entry per source. Liveness is checked by scripts/verify_sources.py; the shape is enforced by scripts/validate_data.py against data/schema/sources.schema.json. This registry is not shipped data — data/ATTRIBUTION.json remains the licence record for the datasets bundled into the app.",
+  "attribution_required": true,
+  "tiers": {
+    "1": "keyless, live, load-bearing. Ship without these and the app is empty.",
+    "2": "keyless, live, high value, not load-bearing.",
+    "3": "requires registration, key or certificate. Onboarding cost.",
+    "4": "static or slow-moving reference data. Vendored at build time.",
+    "5": "no API exists. Candidate for an agent-operator pipeline."
+  },
+  "field_notes": {
+    "cadence": "How often BEMBEL should poll, not how often upstream changes.",
+    "verified_at": "Date a live request confirmed this entry. Re-run the verifier past ~90 days.",
+    "searched_at": "Tier 5 only: date the search for an API came up empty.",
+    "observed": "Values read at verification. The verifier compares live readings against these and reports drift.",
+    "license": "dl-de/by-2-0 = Datenlizenz Deutschland Namensnennung 2.0, attribution required."
+  },
+  "defaults": {
+    "timeout_s": 20,
+    "retries": 2,
+    "user_agent": "BEMBEL/0.1 (+https://github.com/maurice-jobst)"
+  },
+  "sources": [
+    {
+      "id": "ffm_baustellen",
+      "name": "Frankfurt verkehrsrelevante Baustellen",
+      "tier": 1,
+      "feature": "Baustellen-Layer, \"was ist auf meiner Straße los\"",
+      "protocol": "wfs",
+      "base": "https://geowebdienste.frankfurt.de/Baustellen",
+      "layers": [
+        {
+          "typename": "opendata_verkehr:Baustellen",
+          "observed": {
+            "count": 270
+          },
+          "geometry": "MultiPolygon",
+          "fields": [
+            "startevent",
+            "endevent",
+            "name",
+            "textshort",
+            "textlong"
+          ]
+        },
+        {
+          "typename": "opendata_verkehr:Verkehrsmeldungen",
+          "observed": {
+            "count": 11
+          },
+          "note": "includes event closures (e.g. Frankfurt Marathon); has *_en translations",
+          "fields": [
+            "startevent",
+            "endevent",
+            "name",
+            "textlong",
+            "textlong_en",
+            "sperrung",
+            "meldung",
+            "meldung_en",
+            "meldung2",
+            "meldung3"
+          ]
+        },
+        {
+          "typename": "opendata_verkehr:LSA",
+          "observed": {
+            "count": 843
+          }
+        },
+        {
+          "typename": "opendata_verkehr:BlindenLSA",
+          "observed": {
+            "count": 168
+          },
+          "note": "signals with acoustic aid — accessibility layer, nobody has built this"
+        }
+      ],
+      "request": "{base}?service=WFS&version=2.0.0&request=GetFeature&typeNames={typename}&outputFormat=application/json&srsName=EPSG:4326",
+      "hits_request": "{base}?service=WFS&version=2.0.0&request=GetFeature&typeNames={typename}&resultType=hits",
+      "auth": "none",
+      "license": "dl-de/by-2-0",
+      "attribution": "Stadt Frankfurt am Main",
+      "cadence": "6h",
+      "verified_at": "2026-08-16",
+      "gotchas": [
+        "endevent 2099-12-31 means permanent change, not a bug. Filter it out of 'current works'.",
+        "textlong is German prose. Only Verkehrsmeldungen has _en fields."
+      ]
+    },
+    {
+      "id": "autobahn_de",
+      "name": "Autobahn GmbH Verkehr API",
+      "tier": 1,
+      "feature": "Stau, Sperrungen, Autobahn-Baustellen",
+      "protocol": "rest_json",
+      "base": "https://verkehr.autobahn.de/o/autobahn",
+      "services": {
+        "warning": {
+          "path": "/{road}/services/warning",
+          "note": "Stau/Gefahr. 7 live on A5 at verify."
+        },
+        "roadworks": {
+          "path": "/{road}/services/roadworks",
+          "note": "18 live on A66 at verify."
+        },
+        "closure": {
+          "path": "/{road}/services/closure"
+        },
+        "parking_lorry": {
+          "path": "/{road}/services/parking_lorry"
+        },
+        "electric_charging_station": {
+          "path": "/{road}/services/electric_charging_station"
+        },
+        "webcam": {
+          "path": "/{road}/services/webcam",
+          "note": "0 results for A66 — coverage is patchy."
+        }
+      },
+      "auth": "none",
+      "license": "dl-de/by-2-0",
+      "attribution": "Autobahn GmbH des Bundes",
+      "cadence": "5m",
+      "verified_at": "2026-08-16",
+      "roads_relevant": [
+        "A3",
+        "A5",
+        "A45",
+        "A66",
+        "A67",
+        "A661",
+        "A648",
+        "A643"
+      ],
+      "gotchas": [
+        "Road list endpoint returns 'A60 ' with a trailing space. Trim before use.",
+        "subtitle is already human-formatted with direction, e.g. 'Kassel -> Frankfurt'. Don't re-derive."
+      ]
+    },
+    {
+      "id": "gtfs_de_regional",
+      "name": "gtfs.de — nationwide regional transit GTFS",
+      "tier": 1,
+      "feature": "Abfahrtsmonitor, offline-fähig",
+      "protocol": "gtfs_static",
+      "url": "https://download.gtfs.de/germany/rv_free/latest.zip",
+      "auth": "none",
+      "cadence": "24h",
+      "verified_at": "2026-08-16",
+      "observed": {
+        "bytes": 12040265,
+        "last_modified": "2026-08-15"
+      },
+      "note": "Rebuilt daily. Covers RMV area. No realtime delays — see rmv_hapi (tier 3) for that. For a portfolio app, the zero-dependency offline story is arguably the better demo than live delays."
+    },
+    {
+      "id": "ffm_hochhaeuser",
+      "name": "Frankfurt Hochhäuser (Gebäudehöhen)",
+      "tier": 2,
+      "feature": "Schattenkarte / Skyline",
+      "protocol": "wfs",
+      "base": "https://geowebdienste.frankfurt.de/Hochhaeuser",
+      "typename": "Hochhaeuser:Hochhaeuser",
+      "auth": "none",
+      "license": "dl-de/by-2-0",
+      "cadence": "quarterly",
+      "verified_at": "2026-08-16",
+      "observed": {
+        "count": 439
+      },
+      "fields": {
+        "HFTHOH": "roof height above sea level, e.g. 263.30",
+        "HEHHHOH": "building height, e.g. 97.30",
+        "AOG": "floors above ground",
+        "DAF": "roof form (Flachdach etc.)",
+        "GRF": "footprint area m²",
+        "KGF": "usage class (e.g. Kreditinstitut)",
+        "SDG": "construction status — filter SDG='gebaut'",
+        "LAGE": "street address"
+      },
+      "note": "439 buildings with measured heights (verified count). Full-city shadows would need the HVBG LoD2 model (much bigger lift). Skyline-only shadows are better scoped and more distinctive.",
+      "gotchas": [
+        "Does NOT honour outputFormat=application/json. GML only — parse the <Hochhaeuser:*> elements.",
+        "Layer name is namespaced twice: Hochhaeuser:Hochhaeuser. Bare 'Hochhaeuser' throws ExceptionReport."
+      ]
+    },
+    {
+      "id": "ffm_parken",
+      "name": "Frankfurt Parken (statisch)",
+      "tier": 2,
+      "protocol": "wfs",
+      "base": "https://geowebdienste.frankfurt.de/Parken",
+      "layers": [
+        {
+          "typename": "opendata:Behindertenparkplaetze",
+          "observed": {
+            "count": 448
+          }
+        },
+        {
+          "typename": "opendata:Parkscheinautomaten",
+          "observed": {
+            "count": 921
+          }
+        },
+        {
+          "typename": "opendata:Bewohnerparken",
+          "observed": {
+            "count": 42
+          }
+        }
+      ],
+      "auth": "none",
+      "cadence": "monthly",
+      "verified_at": "2026-08-16",
+      "note": "static only. Live occupancy is mobilithek_parkdaten (tier 3)."
+    },
+    {
+      "id": "ffm_rad",
+      "name": "Frankfurt Radinfrastruktur",
+      "tier": 2,
+      "protocol": "wfs",
+      "base": "https://geowebdienste.frankfurt.de/Rad",
+      "layers": [
+        {
+          "typename": "opendata_rad:Fahrradboxen",
+          "observed": {
+            "count": 41
+          }
+        },
+        {
+          "typename": "opendata_rad:Radinformation",
+          "observed": {
+            "count": 22
+          }
+        }
+      ],
+      "auth": "none",
+      "cadence": "monthly",
+      "verified_at": "2026-08-16"
+    },
+    {
+      "id": "dwd_pollen",
+      "name": "DWD Pollenflug-Gefahrenindex",
+      "tier": 2,
+      "feature": "Pollen-Warnung",
+      "protocol": "rest_json",
+      "url": "https://opendata.dwd.de/climate_environment/health/alerts/s31fg.json",
+      "auth": "none",
+      "license": "GeoNutzV",
+      "attribution": "Deutscher Wetterdienst",
+      "cadence": "6h",
+      "verified_at": "2026-08-16",
+      "region": "Rhein-Main = DWD Partregion within Hessen. Match by region name, not coords.",
+      "note": "3-day forecast, today/tomorrow/day-after per pollen type."
+    },
+    {
+      "id": "dwd_warnungen",
+      "name": "DWD Wetterwarnungen",
+      "tier": 2,
+      "protocol": "jsonp",
+      "url": "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json",
+      "auth": "none",
+      "cadence": "15m",
+      "verified_at": "2026-08-16",
+      "gotchas": [
+        "Wrapped in warnWetter.loadWarnings({...}); — strip the callback before JSON.parse.",
+        "Keyed by Warncell-ID. 106412000 = Frankfurt, 106434000 = Hochtaunuskreis."
+      ]
+    },
+    {
+      "id": "brightsky",
+      "name": "Bright Sky (DWD wrapper)",
+      "tier": 2,
+      "protocol": "rest_json",
+      "base": "https://api.brightsky.dev",
+      "example": "/current_weather?lat=50.11&lon=8.68",
+      "auth": "none",
+      "cadence": "30m",
+      "verified_at": "2026-08-16",
+      "note": "clean JSON over DWD MOSMIX/observations. No key, no rate limit published."
+    },
+    {
+      "id": "nina_mowas",
+      "name": "NINA / MoWaS Bevölkerungswarnungen",
+      "tier": 2,
+      "protocol": "rest_json",
+      "url": "https://warnung.bund.de/api31/mowas/mapData.json",
+      "siblings": [
+        "/api31/katwarn/mapData.json",
+        "/api31/biwapp/mapData.json"
+      ],
+      "auth": "none",
+      "cadence": "15m",
+      "verified_at": "2026-08-16",
+      "gotchas": [
+        "The /api31/dashboard/{ags}.json path returns HTTP 400 — do not use it.",
+        "Filter client-side by geocode; the feed is nationwide."
+      ]
+    },
+    {
+      "id": "sensor_community",
+      "name": "sensor.community (Feinstaub + Temperatur)",
+      "tier": 2,
+      "feature": "Hitzeinsel-Karte — cross with Klimaplanatlas 2026 for 'coolest street near me'",
+      "protocol": "rest_json",
+      "example": "https://data.sensor.community/airrohr/v1/filter/area=50.11,8.68,5",
+      "auth": "none",
+      "license": "ODbL",
+      "cadence": "15m",
+      "verified_at": "2026-08-16",
+      "observed": {
+        "bytes": 34354
+      },
+      "gotchas": [
+        "Citizen sensors. exact_location=0 means the coordinate is fuzzed. Don't present as precise.",
+        "Mixed sensor types (SDS011, BMP180, DHT22) — filter by value_type before averaging."
+      ]
+    },
+    {
+      "id": "lime_frankfurt",
+      "name": "Lime Frankfurt GBFS",
+      "tier": 2,
+      "protocol": "gbfs",
+      "version": "2.2",
+      "discovery": "https://data.lime.bike/api/partners/v2/gbfs/frankfurt/gbfs.json",
+      "siblings": {
+        "dott_wiesbaden": "https://gbfs.api.ridedott.com/public/v2/wiesbaden/gbfs.json",
+        "dott_darmstadt": "https://gbfs.api.ridedott.com/public/v2/darmstadt/gbfs.json",
+        "nextbike_wiesbaden": "https://gbfs.nextbike.net/maps/gbfs/v2/nextbike_wn/gbfs.json"
+      },
+      "auth": "none",
+      "cadence": "5m",
+      "verified_at": "2026-08-16",
+      "gotchas": [
+        "gbfs.nextbike.net/maps/gbfs/v2/nextbike_de/gbfs.json is 404. There is no all-Germany nextbike feed — enumerate per-city from MobilityData systems.csv."
+      ]
+    },
+    {
+      "id": "ivm_datex",
+      "name": "ivm Region FrankfurtRheinMain — DATEX II",
+      "tier": 2,
+      "protocol": "datex2_xml",
+      "feeds": {
+        "traffic_messages": "https://ivm.traff-x.de/gip-service/rest/xb/export/TrafficMessages_IVM",
+        "strategic_routing": "https://ivm.traff-x.de/gip-service/rest/xb/export/StrategicRouting_IVM",
+        "cycling_messages": "https://ivm-rad.traff-x.de/traffix/rest/trafficmessageservlet/getDatex2Data"
+      },
+      "auth": "none",
+      "cadence": "30m",
+      "verified_at": "2026-08-16",
+      "note": "traffic_messages contained only 5 situations at verify. Metadata claims coverage of Friedrichsdorf and Wiesbaden only. Treat ffm_baustellen as canonical and this as a nice-to-have that may grow. cycling_messages is 4.5 MB and covers Hessen-wide touristic cycle routes — that one has real content."
+    },
+    {
+      "id": "hessen_ckan",
+      "name": "Open Data Hessen (CKAN 3)",
+      "tier": 2,
+      "role": "discovery / catalogue, not a runtime dependency",
+      "protocol": "ckan_api",
+      "base": "https://opendata.hessen.de/api/3/action",
+      "auth": "none",
+      "verified_at": "2026-08-16",
+      "observed": {
+        "total_datasets": 1495,
+        "frankfurt_matches": 409
+      },
+      "useful_orgs": [
+        "frankfurt-am-main",
+        "hochtaunuskreis-der-kreisausschuss",
+        "regionalverband-frankfurtrheinmain",
+        "offenbach-am-main",
+        "wiesbaden",
+        "landkreis-main-taunus",
+        "stadt-hanau"
+      ],
+      "note": "Use for periodic re-discovery. See rheinmain-endpoints-raw.csv for the 637-endpoint harvest across 14 publishers."
+    },
+    {
+      "id": "ffm_dcat",
+      "name": "Frankfurt Statistik DCAT-Katalog",
+      "tier": 2,
+      "feature": "Stadtteil-Steckbrief",
+      "protocol": "rdf_xml",
+      "url": "https://offenedaten.frankfurt.de/dcat/catalog.rdf",
+      "csv_pattern": "https://offenedaten.frankfurt.de/dcat/dataset/{id}/content.csv",
+      "auth": "none",
+      "cadence": "quarterly",
+      "verified_at": "2026-08-16",
+      "observed": {
+        "datasets": 155
+      },
+      "picks": [
+        "Kinos",
+        "Museen",
+        "Schwimmbäder",
+        "Zoo",
+        "Palmengarten",
+        "Straßenverzeichnis",
+        "Klimadaten für Frankfurt (Monat)",
+        "Bevölkerungsdichte",
+        "Flächennutzung"
+      ]
+    },
+    {
+      "id": "ffm_wms_layers",
+      "name": "Frankfurt WMS raster layers",
+      "tier": 2,
+      "protocol": "wms",
+      "services": {
+        "klimaplanatlas_2026": "https://geowebdienste.frankfurt.de/Klimaplanatlas_2026",
+        "starkregen_2021": "https://geowebdienste.frankfurt.de/WMS_Starkregengefahrenkarten",
+        "trinkbrunnen": "https://geowebdienste.frankfurt.de/WMS_Trink_Erfrischungsbrunnen",
+        "baumkataster": "https://geowebdienste.frankfurt.de/Baumkataster",
+        "gruenflaechen": "https://geowebdienste.frankfurt.de/Gruenflaechenkataster",
+        "kleingaerten": "https://geowebdienste.frankfurt.de/Kleingaerten",
+        "freizeitanlagen": "https://geowebdienste.frankfurt.de/Freizeitanlagen"
+      },
+      "auth": "none",
+      "cadence": "yearly",
+      "verified_at": "2026-08-16",
+      "note": "Starkregen + pegelonline (already integrated) + Klimaplanatlas = one coherent \"Wasser & Hitze\" screen rather than three scattered features."
+    },
+    {
+      "id": "mobilithek_parkdaten",
+      "name": "Frankfurt Parkdaten dynamisch (live Parkhaus-Belegung)",
+      "tier": 3,
+      "status": "NOT_ONBOARDED",
+      "protocol": "datex2_xml",
+      "portal": "https://mobilithek.info",
+      "auth": "mobilithek subscription + client certificate",
+      "license": "dl-de/by-2-0",
+      "upstream_cadence": "5min",
+      "verified_at": "2026-08-16",
+      "offer_id": "919980029391896576",
+      "decision_pending": true,
+      "note": "Only path to real-time garage occupancy. Same onboarding also unlocks offer 867382417992605696 (LSA Schaltzeitprognose — traffic-light phase prediction / GLOSA) and 110000000002716000 (C-ITS Tagesbaustellen Hessen Mobil). One registration, three feeds. That changes the cost/benefit."
+    },
+    {
+      "id": "rmv_hapi",
+      "name": "RMV Open Data HAFAS API",
+      "tier": 3,
+      "status": "NOT_ONBOARDED",
+      "protocol": "hafas_rest",
+      "base": "https://www.rmv.de/hapi",
+      "portal": "https://opendata.rmv.de",
+      "endpoints": [
+        "departureBoard",
+        "arrivalBoard",
+        "trip",
+        "location.name",
+        "journeyDetail"
+      ],
+      "auth": "free API key, requested by form, arrives by email after a few days",
+      "verified_at": "2026-08-16",
+      "note": "Returns HTTP 503 unauthenticated — that's expected, not an outage. Abwägung: Key gets live delays. gtfs_de_regional gets offline + zero dependency. Open decision — see decisions.md."
+    },
+    {
+      "id": "fraport",
+      "name": "Fraport Developer Portal (FRA flights)",
+      "tier": 3,
+      "status": "NOT_ONBOARDED",
+      "portal": "https://developer.fraport.de/store/apis/list",
+      "auth": "free developer registration",
+      "verified_at": "2026-08-16",
+      "note": "APIs invisible until registered. Third-party alternatives (FlightLabs, AirLabs) are paid. No free public FRA flight feed exists."
+    },
+    {
+      "id": "car_eta",
+      "name": "Drive-time / live-traffic routing",
+      "tier": 3,
+      "status": "NO_FREE_OPTION",
+      "verified_at": "2026-08-16",
+      "finding": "There is no free live-traffic drive-time API for Germany. TomTom Routing (free tier ~2500 req/day) or HERE are the realistic choices. Autobahn warnings give incident context but not an ETA.",
+      "note": "Fallback: Openrouteservice / Valhalla give free routing WITHOUT live traffic — acceptable for \"Fahrzeit zum Flughafen bei freier Strecke\" plus an Autobahn-warning badge. Cheaper and arguably more honest than a fake ETA.",
+      "auth": "TomTom or HERE developer key; free tiers are rate-capped and neither is keyless"
+    },
+    {
+      "id": "ffm_adressen",
+      "name": "Frankfurt Adressdienst",
+      "tier": 4,
+      "protocol": "wfs",
+      "base": "https://geowebdienste.frankfurt.de/Adressdienst",
+      "auth": "none",
+      "verified_at": "2026-08-16",
+      "note": "local geocoding without hitting Nominatim."
+    },
+    {
+      "id": "ffm_gruenguertel",
+      "name": "GrünGürtel + Freizeit/Erholung",
+      "tier": 4,
+      "protocol": "wfs",
+      "services": {
+        "gruenguertel": "https://geowebdienste.frankfurt.de/WFS_GruenGuertel",
+        "freizeit": "https://geowebdienste.frankfurt.de/WFS_GruenGuertel_Freizeit",
+        "naturdenkmale": "https://geowebdienste.frankfurt.de/WFS_Naturdenkmale"
+      },
+      "auth": "none",
+      "verified_at": "2026-08-16"
+    },
+    {
+      "id": "htk_infrastruktur",
+      "name": "Hochtaunuskreis — Kitas, Schulen, Feuerwehren, Rettungswachen",
+      "tier": 4,
+      "catalogue": "https://opendata.hessen.de/api/3/action/package_search?q=organization:hochtaunuskreis-der-kreisausschuss",
+      "auth": "none",
+      "verified_at": "2026-08-16",
+      "note": "covers the \"Rhein-Main-ish, not city boundary\" scope decision."
+    },
+    {
+      "id": "gbfs_systems_catalog",
+      "name": "MobilityData GBFS systems.csv",
+      "tier": 4,
+      "url": "https://raw.githubusercontent.com/MobilityData/gbfs/master/systems.csv",
+      "auth": "none",
+      "cadence": "monthly",
+      "verified_at": "2026-08-16",
+      "note": "re-scan for new Rhein-Main micromobility operators."
+    },
+    {
+      "id": "buergeramt_termine",
+      "name": "Bürgeramt Terminverfügbarkeit",
+      "tier": 5,
+      "searched_at": "2026-08-16",
+      "finding": "no public API found",
+      "note": "Highest-value gap on this list. An agent polling the slot page hourly and pushing \"Termin frei in Bockenheim\" would be more useful to Frankfurters than most tier-2 entries. Check ToS before building."
+    },
+    {
+      "id": "fes_abfallkalender",
+      "name": "FES Abfall- und Sperrmüllkalender",
+      "tier": 5,
+      "searched_at": "2026-08-16",
+      "finding": "fes-frankfurt.de/api/abfallkalender → 404. TYPO3 site, no documented API."
+    },
+    {
+      "id": "baeder_auslastung",
+      "name": "Schwimmbad-Auslastung",
+      "tier": 5,
+      "searched_at": "2026-08-16",
+      "finding": "frankfurter-baeder.de/api/auslastung → 404 (WordPress/Avada site)."
+    },
+    {
+      "id": "mainova_stoerungen",
+      "name": "Mainova Störungsauskunft",
+      "tier": 5,
+      "searched_at": "2026-08-16",
+      "finding": "no public API found"
+    },
+    {
+      "id": "veranstaltungen",
+      "name": "Stadtweiter Veranstaltungskalender",
+      "tier": 5,
+      "searched_at": "2026-08-16",
+      "finding": "No open event API. Partial substitute: opendata_verkehr:Verkehrsmeldungen already carries major events that close streets (Marathon, Ironman, Wäldchestag) with dates — free event feed for the biggest ones."
+    },
+    {
+      "id": "gluehwein_barometer",
+      "name": "Glühwein-Preisbarometer",
+      "tier": 5,
+      "status": "agent_operator_by_design",
+      "note": "Already scoped as agent-generated (weekly news read each November). No upstream source expected or needed.",
+      "finding": "No upstream expected. Prices are published in news copy each November, never as a feed.",
+      "searched_at": "2026-08-16"
+    }
+  ],
+  "deprecated": [
+    {
+      "id": "ffm_ckan_legacy",
+      "url": "https://offenedaten.frankfurt.de/api/3/action/package_list",
+      "status": "HTTP 404 (Tomcat). Portal migrated to a JS statistics frontend.",
+      "verified_at": "2026-08-16",
+      "replacement": [
+        "hessen_ckan",
+        "ffm_dcat"
+      ]
+    },
+    {
+      "id": "govdata_org_filter",
+      "note": "ckan.govdata.de organization_show for 'stadt-frankfurt-am-main' reports package_count 0. Frankfurt data is harvested under 'Open Data Hessen' and 'Mobilithek' orgs instead. Full-text search works; org filter does not.",
+      "verified_at": "2026-08-16",
+      "status": "Organization filter reports package_count 0. Full-text search works; the org filter does not."
+    },
+    {
+      "id": "eco_counter_hessen",
+      "url": "https://hessen-mobil.eco-counter.com/api/v1/counters",
+      "status": "HTTP 401 'API route is not allowed'. Public map only, no API.",
+      "verified_at": "2026-08-16"
+    }
+  ]
+}

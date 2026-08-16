@@ -87,6 +87,31 @@ flowchart TD
 - No third-party dependencies.
 - German is the base language, and all strings go through String Catalogs.
 
+### 🗂️ The source registry
+
+Every upstream this app reads is in [`data/sources.json`](data/sources.json):
+30 entries across the Frankfurt Geoportal, DWD, the Autobahn GmbH, Open Data
+Hessen, GBFS operators and more — each with its licence, its polling cadence,
+the date a live request last proved it works, and the gotchas that cost someone
+an hour (the Hochhäuser WFS ignores `outputFormat=json`; DWD's warning feed is
+JSONP; `endevent 2099-12-31` means permanent, not broken).
+
+Sources are tiered 1–5 by what access costs, and the tier is a claim the
+validator enforces — tier 1–2 must be keyless, and a tier-5 entry records the
+search that found no API rather than an endpoint. The tier-5 block is the part
+most registries leave out: nine things Frankfurt does *not* publish, written
+down so nobody spends another afternoon looking.
+
+```bash
+make verify-sources   # calls all 39 endpoints, reports dead ones and collapsed feature counts
+```
+
+A [weekly job](.github/workflows/sources-liveness.yml) runs the same sweep and
+files one issue when something stops answering. Liveness is not the only
+failure mode — a WFS layer that empties out still returns HTTP 200 — so each
+entry records the count observed at verification and the sweep compares
+against it.
+
 [docs/adr/](docs/adr/) records the decisions that would be expensive to
 reverse. [docs/BACKLOG.md](docs/BACKLOG.md) holds the spec: scope, rationale,
 acceptance criteria. [GitHub Issues](https://github.com/maurice-jobst/bembel/issues)
@@ -110,6 +135,7 @@ one an agent can work in safely
 | Tests | `swift test` on BEMBELKit, natively on macOS, no simulator |
 | App build | `xcodebuild`, iOS Simulator, unsigned |
 | Data | `make validate`: schemas, generated-file equality, source URLs |
+| Upstreams | `make verify-sources`, weekly: every registered open-data endpoint called for real |
 | Community data | schema and authorship checks in [bembel-data](https://github.com/maurice-jobst/bembel-data) |
 
 ## 🔨 Building

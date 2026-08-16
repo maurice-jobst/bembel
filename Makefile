@@ -1,4 +1,4 @@
-.PHONY: build test validate test-data format format-check lint
+.PHONY: build test validate test-data verify-sources format format-check lint
 
 FORMAT_PATHS = App Widgets Packages/BEMBELKit/Sources Packages/BEMBELKit/Tests
 
@@ -16,6 +16,12 @@ validate:
 # The validator's own tests: every rule gets watched failing at least once.
 test-data:
 	cd scripts && python3 -m unittest discover -p 'test_*.py' -v
+
+# Calls every keyless upstream in data/sources.json and reports dead endpoints
+# and collapsed feature counts. Needs the network, so it is a weekly job rather
+# than a PR gate; the offline half runs in test-data.
+verify-sources:
+	python3 scripts/verify_sources.py
 
 format:
 	xcrun swift-format format --in-place --recursive $(FORMAT_PATHS)

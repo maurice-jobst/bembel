@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/maurice-jobst/bembel/data/schema/sources.schema.json",
+  "title": "BEMBEL upstream source registry",
+  "description": "One entry per upstream BEMBEL reads, or per upstream it looked for and did not find. This is not shipped data — data/ATTRIBUTION.json stays the licence record for the datasets bundled into the app, and this registry records where every dataset and every live call comes from, what it cost to get at, and when a live request last proved it works. scripts/validate_data.py implements these checks in stdlib Python plus two the schema cannot express — tier 1 and 2 mean keyless by definition, so an auth value contradicts the tier, and a tier-5 entry must carry the search that came up empty rather than an endpoint. scripts/verify_sources.py is the liveness check and reports drift against 'observed'.",
+  "type": "object",
+  "required": ["version", "updated", "tiers", "sources"],
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "updated": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "note": { "type": "string" },
+    "attribution_required": { "type": "boolean" },
+    "tiers": {
+      "type": "object",
+      "description": "The tier legend. JSON carries no comments, so the legend is data.",
+      "required": ["1", "2", "3", "4", "5"],
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
+    "field_notes": {
+      "type": "object",
+      "description": "What the non-obvious keys mean, for a reader who opens this file cold.",
+      "additionalProperties": { "type": "string" }
+    },
+    "defaults": {
+      "type": "object",
+      "description": "Request defaults for anything reading this registry.",
+      "properties": {
+        "timeout_s": { "type": "integer", "minimum": 1 },
+        "retries": { "type": "integer", "minimum": 0 },
+        "user_agent": { "type": "string", "minLength": 1 }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/source" }
+    },
+    "deprecated": {
+      "type": "array",
+      "description": "Endpoints that were real and are not any more. Kept so nobody rediscovers them and wires them back in.",
+      "items": {
+        "type": "object",
+        "required": ["id", "status", "verified_at"],
+        "properties": {
+          "id": { "$ref": "#/$defs/sourceId" },
+          "url": { "type": "string", "pattern": "^https?://" },
+          "status": { "type": "string", "minLength": 1 },
+          "note": { "type": "string" },
+          "verified_at": { "$ref": "#/$defs/isoDate" },
+          "replacement": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/sourceId" },
+            "description": "Ids of the sources that took over."
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sourceId": { "type": "string", "pattern": "^[a-z][a-z0-9_]*$" },
+    "isoDate": { "type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "url": { "type": "string", "pattern": "^https://" },
+    "source": {
+      "type": "object",
+      "required": ["id", "name", "tier"],
+      "properties": {
+        "id": { "$ref": "#/$defs/sourceId" },
+        "name": { "type": "string", "minLength": 1 },
+        "tier": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "status": {
+          "type": "string",
+          "description": "Onboarding or availability state, e.g. NOT_ONBOARDED, NO_FREE_OPTION."
+        },
+        "feature": { "type": "string", "description": "What this source is for, in product terms." },
+        "role": { "type": "string" },
+        "protocol": {
+          "enum": [
+            "wfs", "wms", "rest_json", "jsonp", "gbfs", "gtfs_static",
+            "datex2_xml", "rdf_xml", "ckan_api", "hafas_rest"
+          ],
+          "description": "Absent means there is nothing to call — tier 5, or a portal that has to be signed into first."
+        },
+        "version": { "type": "string" },
+        "base": { "$ref": "#/$defs/url" },
+        "url": { "$ref": "#/$defs/url" },
+        "discovery": { "$ref": "#/$defs/url" },
+        "catalogue": { "$ref": "#/$defs/url" },
+        "portal": { "$ref": "#/$defs/url" },
+        "typename": { "type": "string" },
+        "layers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["typename"],
+            "properties": {
+              "typename": { "type": "string", "minLength": 1 },
+              "geometry": { "type": "string" },
+              "fields": { "type": "array", "items": { "type": "string" } },
+              "note": { "type": "string" },
+              "observed": { "$ref": "#/$defs/observed" }
+            }
+          }
+        },
+        "services": {
+          "type": "object",
+          "description": "Named endpoints under one service. A string value is a URL; an object describes a path template.",
+          "additionalProperties": true
+        },
+        "feeds": { "type": "object", "additionalProperties": { "$ref": "#/$defs/url" } },
+        "siblings": {
+          "description": "Same protocol, other operator or other city. Array when unnamed, object when the name matters.",
+          "type": ["array", "object"]
+        },
+        "endpoints": { "type": "array", "items": { "type": "string" } },
+        "example": { "type": "string" },
+        "request": { "type": "string", "description": "URL template. Placeholders are {base}, {typename}, {road}." },
+        "hits_request": { "type": "string", "description": "Count-only variant of 'request' — cheap enough to run in CI." },
+        "csv_pattern": { "type": "string" },
+        "auth": {
+          "type": "string",
+          "description": "'none' or a description of what onboarding costs. Tier 1 and 2 must be keyless."
+        },
+        "license": { "type": "string" },
+        "attribution": { "type": "string" },
+        "cadence": { "type": "string", "description": "How often BEMBEL should poll, not how often upstream changes." },
+        "upstream_cadence": { "type": "string" },
+        "verified_at": { "$ref": "#/$defs/isoDate" },
+        "searched_at": { "$ref": "#/$defs/isoDate" },
+        "observed": { "$ref": "#/$defs/observed" },
+        "finding": { "type": "string", "description": "Tier 5: what the search for an API actually turned up." },
+        "note": { "type": "string" },
+        "gotchas": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Things that cost someone an hour. Each one is a sentence, not a paragraph."
+        },
+        "decision_pending": { "type": "boolean" },
+        "offer_id": { "type": "string" },
+        "region": { "type": "string" },
+        "fields": { "type": "object", "additionalProperties": { "type": "string" } },
+        "roads_relevant": { "type": "array", "items": { "type": "string" } },
+        "useful_orgs": { "type": "array", "items": { "type": "string" } },
+        "picks": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "observed": {
+      "type": "object",
+      "description": "Readings taken when the entry was last verified. The verifier compares a live reading against these and reports drift, so a source that quietly empties out is caught while it still returns HTTP 200.",
+      "properties": {
+        "count": { "type": "integer", "minimum": 0, "description": "Feature count, from WFS numberMatched." },
+        "bytes": { "type": "integer", "minimum": 0 },
+        "last_modified": { "$ref": "#/$defs/isoDate" },
+        "datasets": { "type": "integer", "minimum": 0 },
+        "total_datasets": { "type": "integer", "minimum": 0 },
+        "frankfurt_matches": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

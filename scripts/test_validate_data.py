@@ -11,6 +11,7 @@ import unittest
 from pathlib import Path
 
 import validate_data as v
+import verify_sources
 
 RINGS = {"06412000": "frankfurt", "06434011": "kernraum"}
 
@@ -164,6 +165,198 @@ class GeoJSONValidatorTests(unittest.TestCase):
         cross-reference error per feature on top of it."""
         v.check_geojson(valid_dataset(), "test.geojson", {})
         self.assertEqual(list(v.errors), [])
+
+
+def valid_registry() -> dict:
+    return {
+        "version": 1,
+        "updated": "2026-08-16",
+        "tiers": {"1": "load-bearing", "2": "keyless", "3": "key", "4": "static", "5": "no API"},
+        "sources": [
+            {
+                "id": "ffm_baustellen",
+                "name": "Frankfurt verkehrsrelevante Baustellen",
+                "tier": 1,
+                "protocol": "wfs",
+                "base": "https://geowebdienste.frankfurt.de/Baustellen",
+                "layers": [{"typename": "opendata_verkehr:Baustellen", "observed": {"count": 270}}],
+                "auth": "none",
+                "license": "dl-de/by-2-0",
+                "verified_at": "2026-08-16",
+                "gotchas": ["endevent 2099-12-31 means permanent change, not a bug."],
+            },
+            {
+                "id": "rmv_hapi",
+                "name": "RMV Open Data HAFAS API",
+                "tier": 3,
+                "portal": "https://opendata.rmv.de",
+                "auth": "free API key, requested by form",
+                "verified_at": "2026-08-16",
+            },
+            {
+                "id": "fes_abfallkalender",
+                "name": "FES Abfallkalender",
+                "tier": 5,
+                "searched_at": "2026-08-16",
+                "finding": "fes-frankfurt.de/api/abfallkalender returns 404. No documented API.",
+            },
+        ],
+        "deprecated": [
+            {
+                "id": "ffm_ckan_legacy",
+                "url": "https://offenedaten.frankfurt.de/api/3/action/package_list",
+                "status": "HTTP 404 (Tomcat). Portal migrated to a JS frontend.",
+                "verified_at": "2026-08-16",
+                "replacement": ["ffm_baustellen"],
+            }
+        ],
+    }
+
+
+class SourceRegistryTests(unittest.TestCase):
+    """data/sources.json. The interesting rules are the ones a JSON Schema
+    cannot state: a tier is a claim about what access costs, so an entry can be
+    field-by-field well-formed and still contradict itself."""
+
+    def setUp(self) -> None:
+        v.errors.clear()
+
+    def check(self, doc) -> list[str]:
+        v.check_sources(doc, "sources.json")
+        return list(v.errors)
+
+    def broken(self, index, mutate) -> list[str]:
+        doc = valid_registry()
+        mutate(doc["sources"][index])
+        return self.check(doc)
+
+    def assertRejected(self, problems: list[str], needle: str) -> None:
+        self.assertTrue(problems, "expected a rejection, got none")
+        self.assertIn(needle, "\n".join(problems))
+
+    def test_valid_registry_passes(self):
+        self.assertEqual(self.check(valid_registry()), [])
+
+    # --- tier is a claim, and the entry has to keep it ----------------------
+
+    def test_keyless_tier_carrying_auth_is_rejected(self):
+        self.assertRejected(
+            self.broken(0, lambda s: s.update(auth="API key by email")), "means keyless by definition"
+        )
+
+    def test_key_tier_claiming_no_auth_is_rejected(self):
+        self.assertRejected(self.broken(1, lambda s: s.update(auth="none")), "must say what it costs")
+
+    def test_tier_five_carrying_an_endpoint_is_rejected(self):
+        """The shape that rots invisibly: the verifier skips tier 5, so an
+        endpoint parked there is an endpoint nothing ever calls."""
+        self.assertRejected(
+            self.broken(2, lambda s: s.update(url="https://fes-frankfurt.de/api/abfall")),
+            "there is nothing to call",
+        )
+
+    def test_tier_five_without_a_finding_is_rejected(self):
+        self.assertRejected(self.broken(2, lambda s: s.pop("finding")), "must say what the search turned up")
+
+    def test_live_source_without_a_verification_date_is_rejected(self):
+        self.assertRejected(self.broken(0, lambda s: s.pop("verified_at")), "must be a YYYY-MM-DD date")
+
+    def test_impossible_verification_date_is_rejected(self):
+        self.assertRejected(self.broken(0, lambda s: s.update(verified_at="2026-02-31")), "not a real date")
+
+    # --- shape ---------------------------------------------------------------
+
+    def test_duplicate_source_ids_are_rejected(self):
+        doc = valid_registry()
+        doc["sources"].append(copy.deepcopy(doc["sources"][0]))
+        self.assertRejected(self.check(doc), "duplicate id")
+
+    def test_unknown_tier_is_rejected(self):
+        self.assertRejected(self.broken(0, lambda s: s.update(tier=6)), "'tier' must be 1–5")
+
+    def test_plaintext_endpoint_is_rejected(self):
+        self.assertRejected(
+            self.broken(0, lambda s: s.update(base="http://geowebdienste.frankfurt.de/Baustellen")),
+            "must be an https URL",
+        )
+
+    def test_services_as_a_bare_list_is_rejected(self):
+        """A list of URLs loses the name each endpoint is referred to by, and
+        every consumer then keys off array position."""
+        self.assertRejected(
+            self.broken(0, lambda s: s.update(services=["https://geowebdienste.frankfurt.de/Rad"])),
+            "not a bare list",
+        )
+
+    def test_prose_gotcha_is_rejected(self):
+        self.assertRejected(
+            self.broken(0, lambda s: s.update(gotchas=["Erst dies.\nDann das."])), "one-line strings"
+        )
+
+    def test_missing_tier_legend_is_rejected(self):
+        doc = valid_registry()
+        del doc["tiers"]["5"]
+        self.assertRejected(self.check(doc), "tiers 1 through 5")
+
+    def test_replacement_pointing_nowhere_is_rejected(self):
+        doc = valid_registry()
+        doc["deprecated"][0]["replacement"] = ["ffm_ckan_v2"]
+        self.assertRejected(self.check(doc), "is not a source id in this registry")
+
+    def test_deprecated_entry_without_a_reason_is_rejected(self):
+        doc = valid_registry()
+        doc["deprecated"][0].pop("status")
+        self.assertRejected(self.check(doc), "must say why it is dead")
+
+
+class SourceVerifierCoverageTests(unittest.TestCase):
+    """Offline half of the liveness check. Reaching the network is a weekly
+    job, but 'is every registered source actually reachable by the verifier'
+    is a pure question, so it is answered on every PR. Without this a new
+    entry can be added in a shape plan() does not understand and be skipped in
+    silence — which is how the incoming registry shipped three unchecked
+    entries (LESSONS §E6)."""
+
+    def setUp(self) -> None:
+        self.registry = v.load(v.DATA / "sources.json")
+
+    def test_every_reachable_source_has_a_check(self):
+        self.assertEqual(verify_sources.coverage_gaps(self.registry), [])
+
+    def test_exempt_tiers_are_not_silently_counted_as_covered(self):
+        """The exemption is for tiers with nothing to call, not a way to park
+        an entry out of the verifier's reach."""
+        registry = {
+            "sources": [{"id": "ghost", "name": "Ghost", "tier": 4, "auth": "none"}]
+        }
+        self.assertEqual(verify_sources.coverage_gaps(registry), ["ghost"])
+
+    def test_a_wfs_layer_plans_a_hits_request(self):
+        source = next(s for s in self.registry["sources"] if s["id"] == "ffm_baustellen")
+        checks = list(verify_sources.plan(source))
+        self.assertEqual(len(checks), 4)
+        self.assertTrue(all(c.url.endswith("resultType=hits") for c in checks))
+        self.assertEqual(checks[0].observed, {"count": 270})
+
+    def test_a_collapsed_feature_count_is_a_failure_not_a_note(self):
+        check = verify_sources.Check("x", "https://example.invalid", "hits", {"count": 270})
+        self.assertEqual(verify_sources.drift(check, {"count": 0}), ("was 270 features, now 0", True))
+
+    def test_a_moved_feature_count_is_a_note_not_a_failure(self):
+        check = verify_sources.Check("x", "https://example.invalid", "hits", {"count": 270})
+        message, fatal = verify_sources.drift(check, {"count": 265})
+        self.assertFalse(fatal)
+        self.assertIn("270 -> 265", message)
+
+    def test_an_unrecorded_count_does_not_invent_drift(self):
+        check = verify_sources.Check("x", "https://example.invalid", "hits", {})
+        self.assertEqual(verify_sources.drift(check, {"count": 265}), (None, False))
+
+    def test_a_jsonp_body_is_unwrapped_before_parsing(self):
+        check = verify_sources.Check("x", "https://example.invalid", "jsonp")
+        reading, problem = verify_sources.read(check, b'warnWetter.loadWarnings({"time":1});')
+        self.assertIsNone(problem)
+        self.assertEqual(reading["bytes"], 36)
 
 
 class RingsIndexTests(unittest.TestCase):
