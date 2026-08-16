@@ -114,7 +114,7 @@ public enum PegelRules {
 /// caller sees — unlike the curated datasets there is no bundled snapshot to
 /// fall back to, and a stale water level presented as current is worse than
 /// none.
-public actor PegelOnlineProvider {
+public actor PegelOnlineProvider: GaugeProviding {
     private static let base = URL(string: "https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/")!
     /// WSV's own equidistance for this station is 15 minutes.
     private static let staleness = Staleness(maxAge: 15 * 60)

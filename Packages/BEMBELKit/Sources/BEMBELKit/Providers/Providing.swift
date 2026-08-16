@@ -27,8 +27,32 @@ public protocol RadarProviding: Sendable {
     func nowcast() async throws -> RadarNowcast
 }
 
-public protocol CityStatusProviding: Sendable {
-    func status() async throws -> CityStatus
+// The Stadtzustand screen reads four unrelated upstreams: Bright Sky for the
+// temperature, PEGELONLINE for the Main level (BEM-G01), HLNUG for air quality
+// (BEM-G02) and NINA for warnings (BEM-G03). One protocol per upstream, because
+// they fail independently and the screen has to keep saying so.
+//
+// It used to be a single `CityStatusProviding` returning one aggregate value,
+// which meant a PEGELONLINE outage blanked the whole screen — the warning card
+// included, the one that matters most in an emergency. Rejoining these into an
+// aggregate would bring that back.
+
+public protocol TemperatureProviding: Sendable {
+    func temperature() async throws -> TemperatureReading
+}
+
+public protocol GaugeProviding: Sendable {
+    func reading() async throws -> GaugeReading
+}
+
+public protocol AirQualityProviding: Sendable {
+    func airQuality() async throws -> AirQuality
+}
+
+public protocol CityWarningProviding: Sendable {
+    /// Empty is an answer: no warning is in force. It is not the same as a
+    /// failed fetch, and the screen renders the two differently.
+    func warnings() async throws -> [CityWarning]
 }
 
 public protocol RegisterProviding: Sendable {

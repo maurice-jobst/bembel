@@ -216,3 +216,22 @@ struct DetailCardChrome: ViewModifier {
 extension View {
     func bemDetailCard() -> some View { modifier(DetailCardChrome()) }
 }
+
+// MARK: - Status card chrome
+
+/// The Stadtzustand card shell. Written out three times in `CityView` before
+/// the per-source split turned three cards into nine states — at which point
+/// the loading and failure variants had to look like the loaded one, and a
+/// copied `.padding(14)` is how that quietly stops being true.
+struct StatusCardChrome: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(14)
+            .background(BEMColor.saltGlazeElevated)
+            .clipShape(RoundedRectangle(cornerRadius: BEMRadius.card))
+    }
+}
+
+extension View {
+    func bemStatusCard() -> some View { modifier(StatusCardChrome()) }
+}
