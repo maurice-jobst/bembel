@@ -352,6 +352,18 @@ class SourceVerifierCoverageTests(unittest.TestCase):
         check = verify_sources.Check("x", "https://example.invalid", "hits", {})
         self.assertEqual(verify_sources.drift(check, {"count": 265}), (None, False))
 
+    def test_only_live_tiers_and_coverage_gaps_are_worth_alerting_on(self):
+        """The weekly job's exit code is its alerting decision. Tier 4 is
+        vendored at build time and the Frankfurt WFS hosts time out often
+        enough that paging on them would train everyone to ignore the page
+        (LESSONS §E1). Tier 0 is the uncovered-source sentinel."""
+        self.assertEqual(verify_sources.ACTIONABLE_TIERS, {0, 1, 2})
+        self.assertNotIn(4, verify_sources.ACTIONABLE_TIERS)
+
+    def test_exempt_and_actionable_tiers_do_not_overlap(self):
+        """A tier that is never called cannot also be one we alert on."""
+        self.assertEqual(verify_sources.EXEMPT_TIERS & verify_sources.ACTIONABLE_TIERS, set())
+
     def test_a_jsonp_body_is_unwrapped_before_parsing(self):
         check = verify_sources.Check("x", "https://example.invalid", "jsonp")
         reading, problem = verify_sources.read(check, b'warnWetter.loadWarnings({"time":1});')

@@ -35,6 +35,14 @@ REGISTRY = DATA / "sources.json"
 # recorded findings, not endpoints, so there is nothing to verify.
 EXEMPT_TIERS = {3, 5}
 
+# Which failures are worth waking someone for. Tier 1 is load-bearing and tier 2
+# is live, so both are. Tier 4 is static reference data vendored at build time —
+# nothing calls it at runtime, and the Frankfurt WFS hosts are intermittently
+# slow enough that alerting on them would train everyone to ignore the alert
+# (LESSONS §E1). Tier 0 is the sentinel for a source the verifier cannot reach
+# at all, which is always actionable. Non-actionable failures are still printed.
+ACTIONABLE_TIERS = {0, 1, 2}
+
 WFS_HITS = "{base}?service=WFS&version=2.0.0&request=GetFeature&typeNames={typename}&resultType=hits"
 CAPABILITIES = {"wfs": "?service=WFS&request=GetCapabilities", "wms": "?service=WMS&request=GetCapabilities"}
 NUMBER_MATCHED = re.compile(rb'numberMatched="(\d+)"')
@@ -171,7 +179,7 @@ def drift(check, reading):
 
 
 def run(registry, tier_filter):
-    defaults = {"timeout_s": 20, "retries": 2, "user_agent": "BEMBEL-verify/1.0"} | registry.get("defaults", {})
+    defaults = {"timeout_s": 30, "retries": 2, "user_agent": "BEMBEL-verify/1.0"} | registry.get("defaults", {})
     failures, drifts, checked = [], [], 0
 
     for source in registry["sources"]:
@@ -241,11 +249,14 @@ def main() -> int:
     for label, detail in drifts:
         print(f"  drift: {label} — {detail}")
 
-    load_bearing = [f for f in failures if f[0] in (0, 1)]
-    if load_bearing:
-        print(f"\n{len(load_bearing)} of them load-bearing (tier 1 or uncovered):", file=sys.stderr)
-        for _, label, detail in load_bearing:
+    actionable = [f for f in failures if f[0] in ACTIONABLE_TIERS]
+    if actionable:
+        print(f"\n{len(actionable)} actionable (tier 1–2 or uncovered):", file=sys.stderr)
+        for _, label, detail in actionable:
             print(f"  - {label}: {detail}", file=sys.stderr)
+    for tier, label, detail in failures:
+        if tier not in ACTIONABLE_TIERS:
+            print(f"  noted (tier {tier}, not load-bearing): {label} — {detail}")
 
     if args.stamp:
         if failures:
@@ -254,7 +265,9 @@ def main() -> int:
         stamp(registry, date.today().isoformat())
         print("stamped verified_at")
 
-    return 1 if failures else 0
+    # Exit code is the alerting decision: 1 means a human should look. A slow
+    # tier-4 host is reported and forgiven.
+    return 1 if actionable else 0
 
 
 if __name__ == "__main__":
