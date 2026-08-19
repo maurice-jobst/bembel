@@ -314,6 +314,33 @@
       "note": "dashboard/<ars>.json is BBK's own region filter and aggregates MOWAS, KATWARN, BIWAPP, LHP and DWD. The nationwide mapData feeds carry no geocode at all, so filtering those to a region would mean point-in-polygon over every warning in Germany. The card text comes from warnings/<id>.json."
     },
     {
+      "id": "uba_luftdaten",
+      "name": "Umweltbundesamt Luftdaten API v3",
+      "tier": 2,
+      "feature": "Luftqualität im Stadtzustand (BEM-G02) — HLNUG-Stationen",
+      "protocol": "rest_json",
+      "base": "https://luftdaten.umweltbundesamt.de/api/air-data/v3",
+      "example": "/airquality/json?date_from=2026-08-19&time_from=1&date_to=2026-08-19&time_to=24&station=636&lang=de",
+      "auth": "none",
+      "license": "dl-de/by-2-0",
+      "attribution": "Umweltbundesamt; Messnetz HLNUG (Hessen)",
+      "cadence": "1h",
+      "verified_at": "2026-08-19",
+      "services": {
+        "components": "https://luftdaten.umweltbundesamt.de/api/air-data/v3/components/json?lang=de"
+      },
+      "note": "HLNUG has no machine-readable endpoint of its own; UBA republishes the Länder networks, and its 'Hessen' network IS the HLNUG Luftmessnetz. 35 Hessen stations, 4 inside Frankfurt (636 Ost and 763 Schwanheim are Hintergrund, 669 Friedberger Landstraße is Verkehr).",
+      "gotchas": [
+        "The documented host is a redirect: umweltbundesamt.de/api/air_data/v3 answers 301 to luftdaten.umweltbundesamt.de/api/air-data/v3 — new host, underscore became a hyphen.",
+        "airquality/json WITHOUT a station parameter does not answer at all: 40s, zero bytes. Always name a station.",
+        "network=... on stations/json is silently ignored — asking for Hessen returns all 405 active stations (92 KB).",
+        "Three endpoints, three envelopes: components has rows at the top level, stations has data{key:row}, airquality has data{station:{hour:row}}.",
+        "data_incomplete=1 means 'not every component the index wants is present', not bad data. Every Verkehr station trips it — they measure no ozone.",
+        "The per-component 'y' is the position INSIDE its band, so 38 ug/m3 ozone and 121 both read ~0.65. Fold the band index back in before drawing a bar.",
+        "Cells change type between endpoints: station latitude is a quoted string, component values are bare numbers."
+      ]
+    },
+    {
       "id": "sensor_community",
       "name": "sensor.community (Feinstaub + Temperatur)",
       "tier": 2,
@@ -330,7 +357,8 @@
       "gotchas": [
         "Citizen sensors. exact_location=0 means the coordinate is fuzzed. Don't present as precise.",
         "Mixed sensor types (SDS011, BMP180, DHT22) — filter by value_type before averaging."
-      ]
+      ],
+      "note": "Citizen sensors, not a reference network. The authoritative air-quality reading comes from uba_luftdaten (BEM-G02); this stays the Hitzeinsel/temperature angle."
     },
     {
       "id": "lime_frankfurt",

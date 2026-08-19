@@ -36,12 +36,12 @@ struct AppDependencies {
     var radar: any RadarProviding = RadolanRadarProvider()
     /// One property per Stadtzustand upstream, not one aggregate: they fail
     /// independently and the screen says which one did. The Main level
-    /// (BEM-G01) and the warnings (BEM-G03) are live; temperature and air
-    /// (BEM-G02) are still sample, and each becomes live on its own ticket
+    /// (BEM-G01), the air (BEM-G02) and the warnings (BEM-G03) are live;
+    /// temperature is still sample and becomes live on its own ticket
     /// without touching the others.
     var temperature: any TemperatureProviding = SampleTemperatureProvider()
     var gauge: any GaugeProviding = PegelOnlineProvider()
-    var air: any AirQualityProviding = SampleAirQualityProvider()
+    var air: any AirQualityProviding = UBAAirQualityProvider()
     var cityWarnings: any CityWarningProviding = NinaWarningProvider(table: AppDependencies.regionTable)
     var register: any RegisterProviding = AppDependencies.liveRegister()
 
