@@ -5,12 +5,22 @@ import Foundation
 public struct CityWarning: Hashable, Sendable {
     public let title: String
     public let body: String
-    /// Source + clock stamp ("NINA · 09:12").
+    /// Where the issuer says the warning applies, in their words ("Stadt
+    /// Frankfurt am Main"), or `nil` when the message names no area.
+    ///
+    /// Not decoration. `NinaWarningProvider` filters at Kreis granularity —
+    /// the finest the BBK endpoint can be keyed to from an AGS — so a warning
+    /// can reach a user whose ring contains only part of that Kreis. This line
+    /// is what stops them reading it as local.
+    public let areaLabel: String?
+    /// Source + clock stamp ("NINA · 09:12", or "NINA · DWD · 09:12" when BBK
+    /// is relaying another issuer's warning).
     public let stampLabel: String
 
-    public init(title: String, body: String, stampLabel: String) {
+    public init(title: String, body: String, areaLabel: String? = nil, stampLabel: String) {
         self.title = title
         self.body = body
+        self.areaLabel = areaLabel
         self.stampLabel = stampLabel
     }
 }

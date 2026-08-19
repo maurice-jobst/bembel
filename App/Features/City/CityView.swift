@@ -150,6 +150,20 @@ struct CityView: View {
                 Text(verbatim: warning.body)
                     .font(.footnote)
                     .foregroundStyle(BEMColor.inkSecondary)
+                // Where the issuer says it applies. The region filter runs at
+                // Kreis granularity, so a warning can reach a ring that only
+                // partly covers that Kreis — without this line the card would
+                // let it read as local.
+                if let areaLabel = warning.areaLabel {
+                    Label {
+                        Text(verbatim: areaLabel)
+                    } icon: {
+                        Image(systemName: "mappin.and.ellipse")
+                    }
+                    .font(.caption)
+                    .foregroundStyle(BEMColor.inkSecondary)
+                    .padding(.top, 2)
+                }
                 Text(verbatim: warning.stampLabel)
                     .font(.caption2.monospacedDigit())
                     .foregroundStyle(BEMColor.inkSecondary)
