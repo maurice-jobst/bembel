@@ -92,12 +92,15 @@ struct ShadowView: View {
             SunCurveScrubber(minutes: $model.minutes)
                 .frame(height: 58)
 
+            // Derived, not typed out: the scrubber's ends moved when the sun
+            // model became real (BEM-D03), and a hardcoded axis would now be
+            // labelling the wrong minutes.
             HStack {
-                Text(verbatim: "05:30")
+                Text(verbatim: SunModel.clockLabel(minutes: SunModel.dayStart))
                 Spacer()
-                Text(verbatim: "13:00")
+                Text(verbatim: SunModel.clockLabel(minutes: model.solarNoonMinutes))
                 Spacer()
-                Text(verbatim: "21:30")
+                Text(verbatim: SunModel.clockLabel(minutes: SunModel.dayEnd))
             }
             .font(.caption2.monospacedDigit())
             .foregroundStyle(BEMColor.inkSecondary)
