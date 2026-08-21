@@ -71,8 +71,13 @@ the same meaning is a year later. Scope gives, the date does not.
 
 ## Consequences
 
-- The tab bar goes from five to four. ADR 0009 is amended, not superseded —
-  its reasoning about the "More" overflow is unchanged and still binding.
+- The tab bar stays at five, but one of them changes what it is: `shadow`
+  becomes `sun`. Dropping the tab was the first instinct and it was wrong —
+  there is a real, cross-validated ephemeris behind it, and deleting a working
+  screen to make a cut look tidy is not a cut, it is waste. The bar goes to
+  four only if the `BEM-C01` gate below cuts departures. ADR 0009 is amended,
+  not superseded — its reasoning about the "More" overflow is unchanged and
+  still binding.
 - The building/shadow geometry is published from a **separate repository**
   with dl-de/zero-2-0 lineage, not from `bembel-data`. `bembel-data` already
   carries OSM-derived rows under ODbL share-alike, and `BACKLOG.md`'s

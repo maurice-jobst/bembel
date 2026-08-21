@@ -17,8 +17,8 @@ bembel-data community layer (Wasserhäuschen + Ebbelwei registers, rating
 funnel, provenance UX, data-linked stickers + kiosk visit stamps); v1.0 also
 ships RMV departures + widgets, drinking water, rain radar, Stadtzustand and
 a Sonnenstand screen. **The Schattenkarte's rendering is out of v1.0 (ADR
-0010) — its geometry ships as a published dataset instead, and the tab bar is
-four, not five.** When portfolio value and product value conflict, portfolio
+0010) — its geometry ships as a published dataset instead, and the Schatten
+tab is now Sonnenstand.** When portfolio value and product value conflict, portfolio
 value wins (ADR 0010); ship 22 March 2027; datasets bundled + refreshed via conditional GET; bundle ID prefix
 `de.mauricejobst`; MIT code licence; selection principles are data readiness
 first and AI-native development (ADR 0008).

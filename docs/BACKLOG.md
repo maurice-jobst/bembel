@@ -25,7 +25,7 @@ below are a point-in-time note, not a live status — check the issue.
 | Accounts | No BEMBEL accounts. Apple services (Game Center, iCloud) opt-in — revised 2026-08-13, "no accounts" was never locked |
 | Base language | German, English v1.1, localisation scaffolding ships in v1.0 |
 | Target ship | **22 March 2027** — World Water Day, Trinkbrunnen season opening |
-| Navigation | Four tabs. Orte (Wasserhäuschen · Ebbelwei · Trinkbrunnen) first — ADR 0009 and its 2026-08-21 amendment |
+| Navigation | Five tabs. Orte (Wasserhäuschen · Ebbelwei · Trinkbrunnen) first — ADR 0009. The Schatten tab became Sonnenstand in the 2026-08-21 amendment; the bar drops to four only if `BEM-C01` misses its gate |
 
 **Selection principles:** data readiness first, then coolness × feasibility; and best for AI-native development (ADR 0008 — deterministic, fixture-testable, no hosted service in the critical path). Four of the five classic features require zero curation.
 

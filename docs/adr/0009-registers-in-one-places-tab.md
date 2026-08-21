@@ -29,7 +29,7 @@ Orte on the Trinkbrunnen segment.
 - Deep links are additive: `bembel://kiosk`, `bembel://ebbelwei`,
   `bembel://orte`. Nothing that worked before stopped working.
 
-## Amendment 2026-08-21 — the bar is four, not five
+## Amendment 2026-08-21 — one tab changes what it is
 
 `BEM-D04` (shadow projection + rendering) leaves v1.0 with ADR 0010, so the
 `shadow` tab no longer has the feature it was named for. What is behind it is
@@ -39,11 +39,15 @@ raster we are not shipping.
 
 The wash goes; the ephemeris stays. `BEMTab.shadow` becomes `BEMTab.sun` and
 the tab is **Sonnenstand**: where the sun is, honestly, rather than where the
-shade falls, fabricated. The tab bar goes to four.
+shade falls, fabricated.
 
-The original reasoning is unchanged and still binding — this amendment
-subtracts a tab, it does not license adding one. A fifth place dataset is
-still a segment inside Orte, not a sixth tab.
+The bar therefore stays at **five**. An earlier draft of this amendment said
+four, which was simply wrong arithmetic — the tab is renamed, not removed. It
+goes to four only if the 1 December `BEM-C01` gate cuts departures.
+
+The original reasoning is unchanged and still binding — this amendment renames
+a tab, it does not license adding one. A fourth place dataset is still a
+segment inside Orte, not a sixth tab.
 
 - `bembel://shadow` and `bembel://schatten` keep resolving, with `?t=` intact;
   `bembel://sun` and `bembel://sonne` are added as aliases. Nothing that

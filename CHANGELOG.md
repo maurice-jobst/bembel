@@ -39,7 +39,8 @@ All notable changes to BEMBEL. Format follows
   Datensatz mit sauberer dl-de/zero-Herkunft; das Rendern (`BEM-D04`) ist der
   Aufmacher von v1.2. Der Tab überlebt als **Sonnenstand** mit der echten
   NOAA-Ephemeride — die vorgetäuschte Schattenfläche darüber verschwindet.
-  Damit hat die Tab-Leiste vier statt fünf Einträge (Ergänzung zu ADR 0009).
+  Der Tab heißt jetzt „Sonne" (Ergänzung zu ADR 0009); die Leiste bleibt bei
+  fünf Einträgen.
 - **Positionierung neu:** „Für eine Stadt, die heißer wird — Wasser, Luft,
   Regen." Schatten und Bäume sind nicht in v1.0, also stehen sie auch nicht
   mehr in der Zeile.
