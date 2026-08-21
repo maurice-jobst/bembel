@@ -5,6 +5,12 @@ Ordered by **data readiness first**, then coolness × feasibility. A feature who
 Effort is *implementation* effort assuming the data layer from `EPIC A` exists.
 Rot = how fast the feature decays if nobody maintains it.
 
+> **Note 2026-08-21.** This file is the record of *why features were selected*,
+> and it is left standing as written. It is no longer the record of what v1.0
+> ships: ADR 0010 moved the Schattenkarte's rendering (B1) out of v1.0 and
+> rewrote the positioning line stated at the end of this document. `BACKLOG.md`
+> rev. 5 is the current scope.
+
 ---
 
 ## Tier A — data already exists, effort is UI only

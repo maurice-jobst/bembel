@@ -1,9 +1,10 @@
 # 🍎 BEMBEL
 
-**A free iPhone city app for Frankfurt and Rhein-Main.** Frankfurt already
-publishes what you need on a hot afternoon: where the shade falls, where the
-water is, what the air is doing. It publishes it in formats you cannot use
-while standing on a street corner. BEMBEL puts it in one place.
+**A free iPhone city app for Frankfurt and Rhein-Main.** Für eine Stadt, die
+heißer wird — Wasser, Luft, Regen. Frankfurt already publishes what you need on
+a hot afternoon: where the water is, what the air is doing, whether the rain is
+about to arrive. It publishes it in formats you cannot use while standing on a
+street corner. BEMBEL puts it in one place.
 
 ![Platform: iOS 18.5+](https://img.shields.io/badge/iOS-18.5%2B-000000?style=flat-square&logo=apple&logoColor=white)
 ![Swift + SwiftUI](https://img.shields.io/badge/Swift-SwiftUI-F05138?style=flat-square&logo=swift&logoColor=white)
@@ -53,12 +54,19 @@ ratings arrive as pull requests.
 | **Ebbelwei-Wirtschaften register** | [bembel-data](https://github.com/maurice-jobst/bembel-data) |
 | Sticker: Datenspender/Verifizierer/Erste-Bewertung, plus Kiosk-Stempel | contributors.json + on-device visits |
 | RMV departures with Home/Lock Screen widgets | RMV Open Data API |
-| Schattenkarte, an on-device shadow map with time scrubbing | Hessen LoD2 building model (DL-DE Zero) |
+| Sonnenstand: where the sun is, with a time scrubber | NOAA solar position, computed on device |
 | Free drinking water, with seasonal state engine | Frankfurt Geoportal, OSM, Refill |
 | Rain radar | DWD open data (RADOLAN, parsed on-device) |
 | Stadtzustand: Main level, air quality, civil warnings | PEGELONLINE, HLNUG, NINA |
 
+The Schattenkarte — an on-device shadow map over the Hessen LoD2 building
+model — is **not** in v1.0. Its geometry ships as a standalone published
+dataset; the rendering is the v1.2 headline. See
+[ADR 0010](docs/adr/0010-portfolio-artefact-over-product.md) for why, and what
+that says about how this project is scoped generally.
+
 Ship target: 22 March 2027 (World Water Day). Scope of record:
+[docs/BACKLOG.md](docs/BACKLOG.md) (rev. 5); the hero framing is in the
 [hero-repositioning spec](docs/superpowers/specs/2026-08-13-hero-repositioning-design.md).
 
 ## 🏗️ Architecture
