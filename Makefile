@@ -1,4 +1,4 @@
-.PHONY: build test validate test-data verify-sources format format-check lint
+.PHONY: build test validate test-data verify-sources format format-check lint archive testflight icon
 
 FORMAT_PATHS = App Widgets Packages/BEMBELKit/Sources Packages/BEMBELKit/Tests
 
@@ -9,6 +9,26 @@ build:
 
 test:
 	swift test --package-path Packages/BEMBELKit
+
+# Release archive for a real device. Needs BEMBEL_TEAM_ID in
+# Config/Secrets.xcconfig and Xcode signed into that Apple account —
+# see docs/TESTFLIGHT.md.
+archive:
+	xcodebuild -project BEMBEL.xcodeproj -scheme BEMBEL \
+		-configuration Release -destination 'generic/platform=iOS' \
+		-archivePath build/BEMBEL.xcarchive \
+		-allowProvisioningUpdates archive
+
+# Uploads the archive to App Store Connect / TestFlight
+# (ExportOptions.plist has destination=upload).
+testflight: archive
+	xcodebuild -exportArchive -archivePath build/BEMBEL.xcarchive \
+		-exportOptionsPlist Config/ExportOptions.plist \
+		-exportPath build/export -allowProvisioningUpdates
+
+# Regenerate the app icon (deterministic drawing, never hand-edited).
+icon:
+	swift scripts/generate_app_icon.swift
 
 validate:
 	python3 scripts/validate_data.py

@@ -377,52 +377,56 @@ struct Sparkline: View {
 
 // Failing sources come from `DebugFailingSource`, the same hook the simulator
 // uses via `-BEMFailSources`. One way to fail, so what a preview shows and what
-// a running app shows cannot drift apart.
+// a running app shows cannot drift apart. DEBUG-gated as a block because
+// `DebugFailingSource` only exists in DEBUG and #Preview bodies are still
+// type-checked in Release.
+#if DEBUG
 
-private struct QuietWarnings: CityWarningProviding {
-    func warnings() async throws -> [CityWarning] { [] }
-}
+    private struct QuietWarnings: CityWarningProviding {
+        func warnings() async throws -> [CityWarning] { [] }
+    }
 
-private func previewDependencies(
-    temperature: any TemperatureProviding = SampleTemperatureProvider(),
-    gauge: any GaugeProviding = SampleGaugeProvider(),
-    air: any AirQualityProviding = SampleAirQualityProvider(),
-    warnings: any CityWarningProviding = SampleCityWarningProvider()
-) -> AppDependencies {
-    var dependencies = AppDependencies()
-    dependencies.temperature = temperature
-    dependencies.gauge = gauge
-    dependencies.air = air
-    dependencies.cityWarnings = warnings
-    return dependencies
-}
+    private func previewDependencies(
+        temperature: any TemperatureProviding = SampleTemperatureProvider(),
+        gauge: any GaugeProviding = SampleGaugeProvider(),
+        air: any AirQualityProviding = SampleAirQualityProvider(),
+        warnings: any CityWarningProviding = SampleCityWarningProvider()
+    ) -> AppDependencies {
+        var dependencies = AppDependencies()
+        dependencies.temperature = temperature
+        dependencies.gauge = gauge
+        dependencies.air = air
+        dependencies.cityWarnings = warnings
+        return dependencies
+    }
 
-#Preview("Alles geladen") {
-    CityView()
-        .environment(Router())
-        .environment(\.dependencies, previewDependencies())
-}
+    #Preview("Alles geladen") {
+        CityView()
+            .environment(Router())
+            .environment(\.dependencies, previewDependencies())
+    }
 
-#Preview("Pegel tot, Warnung lebt") {
-    // The state this whole split exists for: PEGELONLINE is down and the
-    // civil-protection warning is still on screen.
-    CityView()
-        .environment(Router())
-        .environment(\.dependencies, previewDependencies(gauge: DebugFailingSource()))
-}
+    #Preview("Pegel tot, Warnung lebt") {
+        // The state this whole split exists for: PEGELONLINE is down and the
+        // civil-protection warning is still on screen.
+        CityView()
+            .environment(Router())
+            .environment(\.dependencies, previewDependencies(gauge: DebugFailingSource()))
+    }
 
-#Preview("Keine Warnung in Kraft") {
-    CityView()
-        .environment(Router())
-        .environment(\.dependencies, previewDependencies(warnings: QuietWarnings()))
-}
+    #Preview("Keine Warnung in Kraft") {
+        CityView()
+            .environment(Router())
+            .environment(\.dependencies, previewDependencies(warnings: QuietWarnings()))
+    }
 
-#Preview("Alle Quellen tot") {
-    let failing = DebugFailingSource()
-    CityView()
-        .environment(Router())
-        .environment(
-            \.dependencies,
-            previewDependencies(temperature: failing, gauge: failing, air: failing, warnings: failing)
-        )
-}
+    #Preview("Alle Quellen tot") {
+        let failing = DebugFailingSource()
+        CityView()
+            .environment(Router())
+            .environment(
+                \.dependencies,
+                previewDependencies(temperature: failing, gauge: failing, air: failing, warnings: failing)
+            )
+    }
+#endif
