@@ -2,13 +2,16 @@ import BEMBELKit
 import MapKit
 import SwiftUI
 
-/// Schattenkarte: map with a cobalt-tinted shadow layer that follows the
-/// time scrubber. The scrubber sits on a sun-elevation curve (variant 1d of
-/// the design doc). The tint uses the kit's crude solar model; the real
-/// LoD2 shadow index replaces both at BEM-D02.
-struct ShadowView: View {
+/// Sonnenstand: where the sun is over Frankfurt, on a draggable clock.
+///
+/// This was the Schattenkarte. ADR 0010 took the shadow rendering out of v1.0
+/// (`BEM-D04`, now v1.2) and with it the flat cobalt wash that used to sit
+/// over the map pretending to be the LoD2 shadow raster. What stays is the
+/// part that was always real: the ephemeris from `BEM-D03`, cross-checked
+/// against published sunrise and sunset times.
+struct SunView: View {
     @Environment(Router.self) private var router
-    @State private var model = ShadowModel()
+    @State private var model = SunScreenModel()
     @State private var position: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 50.1109, longitude: 8.6714),
@@ -20,13 +23,6 @@ struct ShadowView: View {
         ZStack {
             Map(position: $position)
                 .mapStyle(.standard(pointsOfInterest: .excludingAll))
-                .overlay {
-                    // Stand-in for the LoD2 shadow raster: a flat cobalt wash
-                    // whose weight follows the sun. BEM-D02 replaces this.
-                    BEMColor.cobaltDeep
-                        .opacity(0.32 * (1 - Double(model.sun.elevation) / SunModel.peakElevation))
-                        .allowsHitTesting(false)
-                }
                 .ignoresSafeArea()
 
             VStack {
@@ -36,6 +32,13 @@ struct ShadowView: View {
             }
             .padding(.horizontal, BEMSpacing.m)
         }
+        // `initial: true` so a cold launch straight into a deep link is handled
+        // too — the value is already set by the time this view first appears.
+        .onChange(of: router.sunDate, initial: true) { _, date in
+            guard let date else { return }
+            model.show(at: date)
+            router.sunDate = nil
+        }
     }
 
     private var topControls: some View {
@@ -44,7 +47,7 @@ struct ShadowView: View {
                 Image(systemName: "calendar")
                     .font(.footnote)
                     .foregroundStyle(BEMColor.cobalt)
-                Text(Date.now, format: .dateTime.weekday(.abbreviated).day().month(.abbreviated))
+                Text(model.day, format: .dateTime.weekday(.abbreviated).day().month(.abbreviated))
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(BEMColor.ink)
             }
@@ -71,7 +74,7 @@ struct ShadowView: View {
                     .font(BEMFont.boardLarge)
                     .foregroundStyle(BEMColor.ink)
                 Text(
-                    "shadow.sun \(model.sun.elevation) \(String(localized: model.sun.westward ? "shadow.direction.west" : "shadow.direction.east"))"
+                    "sun.elevation \(model.sun.elevation) \(String(localized: model.sun.westward ? "sun.direction.east" : "sun.direction.west"))"
                 )
                 .font(BEMFont.dataLabel)
                 .foregroundStyle(BEMColor.inkSecondary)
@@ -79,7 +82,7 @@ struct ShadowView: View {
                 Button {
                     model.resetToNow()
                 } label: {
-                    Text("shadow.now")
+                    Text("sun.now")
                         .font(.footnote.weight(.semibold))
                         .foregroundStyle(BEMColor.cobalt)
                         .padding(.horizontal, 11)
@@ -89,7 +92,7 @@ struct ShadowView: View {
                 .buttonStyle(.plain)
             }
 
-            SunCurveScrubber(minutes: $model.minutes)
+            SunCurveScrubber(minutes: $model.minutes, curve: model.curve)
                 .frame(height: 58)
 
             // Derived, not typed out: the scrubber's ends moved when the sun
@@ -115,8 +118,14 @@ struct ShadowView: View {
 
 /// Draggable sun-elevation curve: filled arc, marker line, dot riding the
 /// curve.
+///
+/// The curve is the day's real elevation, handed in by the model. It used to
+/// be a bezier copied out of the design file — one hump, the same on every day
+/// of the year, under a readout that came from the ephemeris. In December the
+/// dot rode high while the number beside it said 8°.
 struct SunCurveScrubber: View {
     @Binding var minutes: Double
+    let curve: [SunModel.CurvePoint]
 
     var body: some View {
         GeometryReader { geo in
@@ -124,14 +133,12 @@ struct SunCurveScrubber: View {
             let height = geo.size.height
             let fraction = (minutes - SunModel.dayStart) / (SunModel.dayEnd - SunModel.dayStart)
             let x = fraction * width
-            let dotY =
-                height - 2 - (Double(SunModel.sample(atMinutes: minutes).elevation) / SunModel.peakElevation)
-                * (height - 10)
+            let dotY = y(forWeight: weight(atFraction: fraction), in: height)
 
             ZStack(alignment: .topLeading) {
-                curve(in: geo.size, closed: true)
+                path(in: geo.size, closed: true)
                     .fill(BEMColor.cobalt.opacity(0.13))
-                curve(in: geo.size, closed: false)
+                path(in: geo.size, closed: false)
                     .stroke(BEMColor.cobalt.opacity(0.7), lineWidth: 1.5)
                 Rectangle()
                     .fill(BEMColor.glazeLine)
@@ -162,30 +169,42 @@ struct SunCurveScrubber: View {
         }
         .accessibilityRepresentation {
             Slider(value: $minutes, in: SunModel.dayStart...SunModel.dayEnd, step: 5) {
-                Text("shadow.scrubber")
+                Text("sun.scrubber")
             }
         }
     }
 
-    private func curve(in size: CGSize, closed: Bool) -> Path {
-        let w = size.width
-        let h = size.height
-        // The design's curve, normalized from its 340×58 viewBox.
+    /// Baseline sits 2pt off the bottom; a full-height sun stops 10pt short of
+    /// the top so the dot never clips.
+    private func y(forWeight weight: Double, in height: Double) -> Double {
+        height - 2 - weight * (height - 10)
+    }
+
+    /// Linear interpolation between samples. 96 of them across 17 hours is a
+    /// point every eleven minutes, and the curve has no feature finer than
+    /// that.
+    private func weight(atFraction fraction: Double) -> Double {
+        guard curve.count > 1 else { return curve.first?.weight ?? 0 }
+        let clamped = min(max(fraction, 0), 1)
+        let scaled = clamped * Double(curve.count - 1)
+        let lower = Int(scaled)
+        guard lower < curve.count - 1 else { return curve[curve.count - 1].weight }
+        let t = scaled - Double(lower)
+        return curve[lower].weight * (1 - t) + curve[lower + 1].weight * t
+    }
+
+    private func path(in size: CGSize, closed: Bool) -> Path {
         var path = Path()
-        path.move(to: CGPoint(x: 0, y: h * 0.965))
-        path.addCurve(
-            to: CGPoint(x: w * 0.5, y: h * 0.138),
-            control1: CGPoint(x: w * 0.135, y: h * 0.965),
-            control2: CGPoint(x: w * 0.182, y: h * 0.172)
-        )
-        path.addCurve(
-            to: CGPoint(x: w, y: h * 0.965),
-            control1: CGPoint(x: w * 0.818, y: h * 0.172),
-            control2: CGPoint(x: w * 0.865, y: h * 0.965)
-        )
+        guard let first = curve.first else { return path }
+        path.move(to: CGPoint(x: 0, y: y(forWeight: first.weight, in: size.height)))
+        for point in curve.dropFirst() {
+            path.addLine(
+                to: CGPoint(x: point.fraction * size.width, y: y(forWeight: point.weight, in: size.height))
+            )
+        }
         if closed {
-            path.addLine(to: CGPoint(x: w, y: h))
-            path.addLine(to: CGPoint(x: 0, y: h))
+            path.addLine(to: CGPoint(x: size.width, y: size.height))
+            path.addLine(to: CGPoint(x: 0, y: size.height))
             path.closeSubpath()
         }
         return path

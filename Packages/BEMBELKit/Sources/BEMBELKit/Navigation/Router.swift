@@ -11,9 +11,11 @@ public final class Router {
     public var selectedRegister: PlaceRegister = .wasserhaeuschen
     public var isPresentingSettings = false
 
-    /// Requested scrub time for the shadow map, set via deep link.
-    /// `nil` means "now". Consumed by the Schattenkarte feature (BEM-E03).
-    public var shadowDate: Date?
+    /// Requested scrub time for the Sonnenstand screen, set via deep link.
+    /// `nil` means "now". Consumed by `SunView`, which clears it once it has
+    /// taken ownership — same nil→value discipline as `pendingEntryID`, so the
+    /// same link opening twice is two distinct changes and not a dropped no-op.
+    public var sunDate: Date?
 
     /// An entry a deep link asked for, not yet handed to the Orte tab. Orte
     /// clears it once it has taken ownership, so the same link opening twice
@@ -33,9 +35,9 @@ public final class Router {
             selectedRegister = register
             pendingEntryID = id
             selectedTab = .places
-        case .shadow(let date):
-            shadowDate = date
-            selectedTab = .shadow
+        case .sun(let date):
+            sunDate = date
+            selectedTab = .sun
         case .settings:
             isPresentingSettings = true
         }

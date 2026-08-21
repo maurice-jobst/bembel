@@ -516,7 +516,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Schatten, Wasser, Luft für eine Stadt, die heißer wird."
+            "value": "Wasser, Luft und Regen für eine Stadt, die heißer wird."
           }
         }
       }
@@ -581,6 +581,26 @@
         }
       }
     },
+    "onboarding.radar.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zwei Stunden Vorhersage vom DWD, auf dem Gerät gerechnet."
+          }
+        }
+      }
+    },
+    "onboarding.radar.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regenradar"
+          }
+        }
+      }
+    },
     "onboarding.region.subtitle": {
       "localizations": {
         "de": {
@@ -606,7 +626,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "RMV, DWD, Pegel, Luft, Warnungen an einer Stelle."
+            "value": "RMV, Pegel, Luft und Warnungen an einer Stelle."
           }
         }
       }
@@ -616,7 +636,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abfahrten, Regen, Stadtzustand"
+            "value": "Abfahrten und Stadtzustand"
           }
         }
       }
@@ -647,26 +667,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Metropolregion. Mehr Haltestellen, längere Listen."
-          }
-        }
-      }
-    },
-    "onboarding.shadow.body": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wo um 15:00 Schatten liegt, auf die Minute gerechnet, offline."
-          }
-        }
-      }
-    },
-    "onboarding.shadow.title": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schattenkarte"
           }
         }
       }
@@ -1001,56 +1001,6 @@
         }
       }
     },
-    "shadow.direction.east": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schatten nach Osten"
-          }
-        }
-      }
-    },
-    "shadow.direction.west": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Schatten nach Westen"
-          }
-        }
-      }
-    },
-    "shadow.now": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "jetzt"
-          }
-        }
-      }
-    },
-    "shadow.scrubber": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Uhrzeit"
-          }
-        }
-      }
-    },
-    "shadow.sun %lld %@": {
-      "localizations": {
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sonne %lld° · %@"
-          }
-        }
-      }
-    },
     "stickers.contributions": {
       "localizations": {
         "de": {
@@ -1151,6 +1101,56 @@
         }
       }
     },
+    "sun.direction.east": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonne im Osten"
+          }
+        }
+      }
+    },
+    "sun.direction.west": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonne im Westen"
+          }
+        }
+      }
+    },
+    "sun.elevation %lld %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld° · %@"
+          }
+        }
+      }
+    },
+    "sun.now": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "jetzt"
+          }
+        }
+      }
+    },
+    "sun.scrubber": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uhrzeit"
+          }
+        }
+      }
+    },
     "tab.city": {
       "localizations": {
         "de": {
@@ -1191,12 +1191,12 @@
         }
       }
     },
-    "tab.shadow": {
+    "tab.sun": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Schatten"
+            "value": "Sonne"
           }
         }
       }

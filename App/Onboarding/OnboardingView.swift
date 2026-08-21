@@ -40,8 +40,8 @@ struct OnboardingView: View {
 
                 VStack(alignment: .leading, spacing: 14) {
                     featureRow(
-                        icon: "building.2.fill", title: "onboarding.shadow.title", body: "onboarding.shadow.body")
-                    featureRow(icon: "drop.fill", title: "onboarding.water.title", body: "onboarding.water.body")
+                        icon: "drop.fill", title: "onboarding.water.title", body: "onboarding.water.body")
+                    featureRow(icon: "cloud.rain.fill", title: "onboarding.radar.title", body: "onboarding.radar.body")
                     featureRow(icon: "tram.fill", title: "onboarding.rest.title", body: "onboarding.rest.body")
                 }
                 .padding(.top, BEMSpacing.s)
