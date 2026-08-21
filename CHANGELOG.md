@@ -18,6 +18,19 @@ All notable changes to BEMBEL. Format follows
   aus den Einstellungen) sowie Kiosk-Stempel per opt-in Standorterkennung auf dem Gerät.
 - BEM-S11-Loader: gebündelter Snapshot, Conditional GET gegen das veröffentlichte
   bembel-data-Bundle, Datenstand in den Einstellungen.
+- 73 Trinkbrunnen aus Frankfurter WFS + OSM auf der Orte-Karte, geprüft vs.
+  ungeprüft dreifach unterscheidbar (Form, Farbe, Text), mit Saisonlogik
+  (Winterpause, Osterregel für historische Brunnen).
+- Live-Regenradar: DWD RADOLAN RV direkt auf dem Gerät geparst (2-h-Nowcast
+  für Frankfurt), ohne Drittanbieter-Paket.
+- Stadtzustand mit echten Quellen, je Karte unabhängig: Main-Pegel von
+  PEGELONLINE (Osthafen), amtliche Warnungen aus NINA (auf den gewählten Ring
+  gefiltert), Luftqualität aus dem UBA-Messnetz (nächstgelegene Station).
+  Fällt eine Quelle aus, sagt genau ihre Karte das — der Rest bleibt stehen.
+- Echte Sonnenstände (NOAA-Ephemeride) hinter der Schattenkarte statt einer
+  Parabel — Sonnenauf- und -untergang stimmen jetzt das ganze Jahr.
+- App-Icon (generiert, `make icon`) und TestFlight-Weg: `make testflight`
+  archiviert und lädt zu App Store Connect hoch (docs/TESTFLIGHT.md).
 
 ### Changed
 
