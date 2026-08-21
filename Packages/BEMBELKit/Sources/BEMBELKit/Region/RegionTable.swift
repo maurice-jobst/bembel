@@ -43,6 +43,20 @@ public struct RegionTable: Sendable {
         byAGS[ags]?.ring
     }
 
+    /// The distinct Kreis prefixes — the first five AGS digits — of every
+    /// municipality inside `selection`, sorted.
+    ///
+    /// For APIs that can only be keyed at Kreis level. NINA is the one that
+    /// forced this: its region key is a Regionalschlüssel, which below Kreis
+    /// level is laid out differently from the AGS and so cannot be derived
+    /// from one. It also keeps the widest ring at 26 requests rather than 475.
+    public func kreisKeys(in selection: Ring) -> [String] {
+        let keys = municipalities.lazy
+            .filter { $0.ring <= selection }
+            .map { String($0.ags.rawValue.prefix(5)) }
+        return Set(keys).sorted()
+    }
+
     /// Whether a POI in `ags` is visible under the user's ring `selection`.
     /// Unknown municipalities are excluded — a hole in the table must surface
     /// as missing data, not silently widen the region.
