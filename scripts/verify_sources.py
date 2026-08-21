@@ -96,9 +96,16 @@ def plan(source):
             yield Check(sid, url, "json", observed)
         # A REST source can call more than one path. They were going unchecked
         # while looking checked, which is the tier-5-with-an-endpoint mistake
-        # wearing a different hat.
+        # wearing a different hat. A service is either a full URL or a
+        # {"path": ...} template relative to base, with {road} filled from the
+        # first road the registry claims is relevant.
         for name, service in (source.get("services") or {}).items():
-            yield Check(f"{sid}/{name}", service, "json")
+            if isinstance(service, dict):
+                road = (source.get("roads_relevant") or ["A5"])[0]
+                url = source.get("base", "") + service["path"].format(road=road)
+            else:
+                url = service
+            yield Check(f"{sid}/{name}", url, "json")
 
     elif protocol == "jsonp":
         yield Check(sid, source["url"], "jsonp")

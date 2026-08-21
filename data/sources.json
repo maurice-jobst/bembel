@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-16",
+  "updated": "2026-08-21",
   "note": "Every upstream BEMBEL reads, one entry per source. Liveness is checked by scripts/verify_sources.py; the shape is enforced by scripts/validate_data.py against data/schema/sources.schema.json. This registry is not shipped data — data/ATTRIBUTION.json remains the licence record for the datasets bundled into the app.",
   "attribution_required": true,
   "tiers": {
@@ -85,7 +85,7 @@
       "license": "dl-de/by-2-0",
       "attribution": "Stadt Frankfurt am Main",
       "cadence": "6h",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "gotchas": [
         "endevent 2099-12-31 means permanent change, not a bug. Filter it out of 'current works'.",
         "textlong is German prose. Only Verkehrsmeldungen has _en fields."
@@ -125,7 +125,7 @@
       "license": "dl-de/by-2-0",
       "attribution": "Autobahn GmbH des Bundes",
       "cadence": "5m",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "roads_relevant": [
         "A3",
         "A5",
@@ -150,7 +150,7 @@
       "url": "https://download.gtfs.de/germany/rv_free/latest.zip",
       "auth": "none",
       "cadence": "24h",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "observed": {
         "bytes": 12040265,
         "last_modified": "2026-08-15"
@@ -168,7 +168,7 @@
       "auth": "none",
       "license": "dl-de/by-2-0",
       "cadence": "quarterly",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "observed": {
         "count": 439
       },
@@ -216,7 +216,7 @@
       ],
       "auth": "none",
       "cadence": "monthly",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "note": "static only. Live occupancy is mobilithek_parkdaten (tier 3)."
     },
     {
@@ -241,7 +241,7 @@
       ],
       "auth": "none",
       "cadence": "monthly",
-      "verified_at": "2026-08-16"
+      "verified_at": "2026-08-21"
     },
     {
       "id": "dwd_pollen",
@@ -254,7 +254,7 @@
       "license": "GeoNutzV",
       "attribution": "Deutscher Wetterdienst",
       "cadence": "6h",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "region": "Rhein-Main = DWD Partregion within Hessen. Match by region name, not coords.",
       "note": "3-day forecast, today/tomorrow/day-after per pollen type."
     },
@@ -266,7 +266,7 @@
       "url": "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json",
       "auth": "none",
       "cadence": "15m",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "gotchas": [
         "Wrapped in warnWetter.loadWarnings({...}); — strip the callback before JSON.parse.",
         "Keyed by Warncell-ID. 106412000 = Frankfurt, 106434000 = Hochtaunuskreis."
@@ -282,7 +282,7 @@
       "example": "/current_weather?lat=50.11&lon=8.68",
       "auth": "none",
       "cadence": "30m",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "note": "clean JSON over DWD MOSMIX/observations. No key, no rate limit published."
     },
     {
@@ -301,7 +301,7 @@
       ],
       "auth": "none",
       "cadence": "15m",
-      "verified_at": "2026-08-19",
+      "verified_at": "2026-08-21",
       "gotchas": [
         "The region key is the 12-digit Regionalschlüssel, not the 8-digit AGS. dashboard/06412000.json is HTTP 400; dashboard/064120000000.json is 200.",
         "ARS is not AGS with zeros appended — below Kreis level the two lay their digits out differently, so 150853700000 for Wernigerode is not a key at all.",
@@ -325,7 +325,7 @@
       "license": "dl-de/by-2-0",
       "attribution": "Umweltbundesamt; Messnetz HLNUG (Hessen)",
       "cadence": "1h",
-      "verified_at": "2026-08-19",
+      "verified_at": "2026-08-21",
       "services": {
         "components": "https://luftdaten.umweltbundesamt.de/api/air-data/v3/components/json?lang=de"
       },
@@ -350,7 +350,7 @@
       "auth": "none",
       "license": "ODbL",
       "cadence": "15m",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "observed": {
         "bytes": 34354
       },
@@ -374,7 +374,7 @@
       },
       "auth": "none",
       "cadence": "5m",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "gotchas": [
         "gbfs.nextbike.net/maps/gbfs/v2/nextbike_de/gbfs.json is 404. There is no all-Germany nextbike feed — enumerate per-city from MobilityData systems.csv."
       ]
@@ -391,7 +391,7 @@
       },
       "auth": "none",
       "cadence": "30m",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "note": "traffic_messages contained only 5 situations at verify. Metadata claims coverage of Friedrichsdorf and Wiesbaden only. Treat ffm_baustellen as canonical and this as a nice-to-have that may grow. cycling_messages is 4.5 MB and covers Hessen-wide touristic cycle routes — that one has real content."
     },
     {
@@ -402,7 +402,7 @@
       "protocol": "ckan_api",
       "base": "https://opendata.hessen.de/api/3/action",
       "auth": "none",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "observed": {
         "total_datasets": 1495,
         "frankfurt_matches": 409
@@ -428,7 +428,7 @@
       "csv_pattern": "https://offenedaten.frankfurt.de/dcat/dataset/{id}/content.csv",
       "auth": "none",
       "cadence": "quarterly",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "observed": {
         "datasets": 155
       },
@@ -460,7 +460,7 @@
       },
       "auth": "none",
       "cadence": "yearly",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "note": "Starkregen + pegelonline (already integrated) + Klimaplanatlas = one coherent \"Wasser & Hitze\" screen rather than three scattered features."
     },
     {
@@ -524,7 +524,7 @@
       "protocol": "wfs",
       "base": "https://geowebdienste.frankfurt.de/Adressdienst",
       "auth": "none",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "note": "local geocoding without hitting Nominatim."
     },
     {
@@ -538,7 +538,7 @@
         "naturdenkmale": "https://geowebdienste.frankfurt.de/WFS_Naturdenkmale"
       },
       "auth": "none",
-      "verified_at": "2026-08-16"
+      "verified_at": "2026-08-21"
     },
     {
       "id": "htk_infrastruktur",
@@ -546,7 +546,7 @@
       "tier": 4,
       "catalogue": "https://opendata.hessen.de/api/3/action/package_search?q=organization:hochtaunuskreis-der-kreisausschuss",
       "auth": "none",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "note": "covers the \"Rhein-Main-ish, not city boundary\" scope decision."
     },
     {
@@ -556,7 +556,7 @@
       "url": "https://raw.githubusercontent.com/MobilityData/gbfs/master/systems.csv",
       "auth": "none",
       "cadence": "monthly",
-      "verified_at": "2026-08-16",
+      "verified_at": "2026-08-21",
       "note": "re-scan for new Rhein-Main micromobility operators."
     },
     {
