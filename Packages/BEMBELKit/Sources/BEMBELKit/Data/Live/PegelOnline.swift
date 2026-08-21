@@ -134,6 +134,10 @@ public actor PegelOnlineProvider: GaugeProviding {
         case unreadableTimestamp(String)
     }
 
+    public func invalidate() {
+        cached = nil
+    }
+
     public func reading() async throws -> GaugeReading {
         if let cached, !Self.staleness.isStale(fetchedAt: cached.fetchedAt) {
             return cached.reading
@@ -173,13 +177,13 @@ public actor PegelOnlineProvider: GaugeProviding {
         guard let currentMetres = PegelRules.metres(current.value, unit: timeseries.unit) else {
             throw Failure.unsupportedUnit(timeseries.unit)
         }
-        guard let measuredAt = ISO8601DateFormatter.pegel.date(from: current.timestamp) else {
+        guard let measuredAt = ISO8601DateFormatter.internetDateTime.date(from: current.timestamp) else {
             throw Failure.unreadableTimestamp(current.timestamp)
         }
 
         let dated = series.compactMap { row -> (Date, Double)? in
             guard
-                let date = ISO8601DateFormatter.pegel.date(from: row.timestamp),
+                let date = ISO8601DateFormatter.internetDateTime.date(from: row.timestamp),
                 let metres = PegelRules.metres(row.value, unit: timeseries.unit)
             else { return nil }
             return (date, metres)
@@ -203,7 +207,7 @@ public actor PegelOnlineProvider: GaugeProviding {
             trendLabel: trendLabel,
             trend: trend,
             stationName: station.name,
-            stampLabel: Self.clock.string(from: measuredAt),
+            stampLabel: DateFormatter.berlinClock.string(from: measuredAt),
             history: PegelRules.sparkline(from: dated.map(\.1)),
             stateMnwMhw: current.stateMnwMhw.map(GaugeState.init(rawValue:)) ?? .unknown,
             stateNswHsw: current.stateNswHsw.map(GaugeState.init(rawValue:)) ?? .unknown
@@ -222,21 +226,4 @@ public actor PegelOnlineProvider: GaugeProviding {
         return formatter
     }()
 
-    private nonisolated(unsafe) static let clock: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_DE")
-        formatter.timeZone = TimeZone(identifier: "Europe/Berlin") ?? .current
-        formatter.dateFormat = "HH:mm"
-        return formatter
-    }()
-}
-
-extension ISO8601DateFormatter {
-    /// PEGELONLINE stamps `2026-08-15T12:30:00+02:00` — offset, no fractional
-    /// seconds.
-    nonisolated(unsafe) static let pegel: ISO8601DateFormatter = {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime]
-        return formatter
-    }()
 }

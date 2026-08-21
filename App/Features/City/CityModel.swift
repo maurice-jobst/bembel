@@ -41,6 +41,12 @@ final class CityModel {
     /// that succeeded — a screen that refreshes only its broken half would
     /// leave the good cards stamped with an older clock than the bad ones.
     func refresh(from sources: CitySources, near coordinate: CLLocationCoordinate2D? = nil) async {
+        // Without this, a pull inside a provider's staleness window would be
+        // answered out of its cache and re-stamped as a refresh.
+        await sources.temperature.invalidate()
+        await sources.gauge.invalidate()
+        await sources.air.invalidate()
+        await sources.warnings.invalidate()
         temperatureState = .idle
         gaugeState = .idle
         airState = .idle

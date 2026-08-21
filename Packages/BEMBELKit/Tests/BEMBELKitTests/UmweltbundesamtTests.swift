@@ -180,7 +180,7 @@ struct UBAAirQualityTests {
     @Test("Both days are asked for, so the card does not blank out after midnight")
     func urlSpansTwoDays() throws {
         let justAfterMidnight = try #require(
-            ISO8601DateFormatter.pegel.date(from: "2026-08-19T00:20:00+02:00")
+            ISO8601DateFormatter.internetDateTime.date(from: "2026-08-19T00:20:00+02:00")
         )
         let url = UBAAirQualityProvider.airQualityURL(station: "636", now: justAfterMidnight)
         let query = try #require(URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems)

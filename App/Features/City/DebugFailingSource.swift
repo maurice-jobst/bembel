@@ -45,6 +45,12 @@
             throw Injected()
         }
         func warnings() async throws -> [CityWarning] { throw Injected() }
+
+        /// Written out although there is nothing to drop: with four protocols
+        /// each carrying a defaulted `invalidate()`, the compiler finds four
+        /// candidate witnesses and calls the conformance ambiguous — one
+        /// explicit method settles all four.
+        func invalidate() async {}
     }
 
     /// Points the NINA client at somebody else's Kreis, so a populated warning
