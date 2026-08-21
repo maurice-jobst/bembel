@@ -5,12 +5,22 @@ import Foundation
 public struct CityWarning: Hashable, Sendable {
     public let title: String
     public let body: String
-    /// Source + clock stamp ("NINA · 09:12").
+    /// Where the issuer says the warning applies, in their words ("Stadt
+    /// Frankfurt am Main"), or `nil` when the message names no area.
+    ///
+    /// Not decoration. `NinaWarningProvider` filters at Kreis granularity —
+    /// the finest the BBK endpoint can be keyed to from an AGS — so a warning
+    /// can reach a user whose ring contains only part of that Kreis. This line
+    /// is what stops them reading it as local.
+    public let areaLabel: String?
+    /// Source + clock stamp ("NINA · 09:12", or "NINA · DWD · 09:12" when BBK
+    /// is relaying another issuer's warning).
     public let stampLabel: String
 
-    public init(title: String, body: String, stampLabel: String) {
+    public init(title: String, body: String, areaLabel: String? = nil, stampLabel: String) {
         self.title = title
         self.body = body
+        self.areaLabel = areaLabel
         self.stampLabel = stampLabel
     }
 }
@@ -110,34 +120,102 @@ public struct TemperatureReading: Sendable, Equatable {
     }
 }
 
-/// One pollutant bar (HLNUG).
-public struct AirValue: Identifiable, Sendable {
-    public var id: String { name }
-    public let name: String
-    public let readingLabel: String
-    /// Fill fraction of the bar, 0…1, relative to the assessment threshold.
-    public let fraction: Double
-    public let elevated: Bool
+/// Where a reading sits on the Umweltbundesamt's five-band
+/// Luftqualitätsindex — the official German assessment, and the same scale
+/// HLNUG publishes its own stations against.
+///
+/// The bands are the plain-language interpretation: the app does not invent
+/// its own wording for "how bad is this", and it does not carry a table of
+/// µg/m³ thresholds either. Thresholds differ per pollutant and change when
+/// the assessment changes; asking the API which band a value fell into is the
+/// only version of this that cannot silently go out of date.
+public enum AirIndex: Sendable, Hashable, CaseIterable {
+    case veryGood
+    case good
+    case moderate
+    case poor
+    case veryPoor
+    /// The station published a value the index does not assess, or none at
+    /// all. Rendered as "keine Bewertung", never as reassurance.
+    case unassessed
 
-    public init(name: String, readingLabel: String, fraction: Double, elevated: Bool) {
-        self.name = name
-        self.readingLabel = readingLabel
-        self.fraction = fraction
-        self.elevated = elevated
+    /// UBA numbers the bands 0…4. Anything else — including the -1 the API
+    /// uses for "not assessed" — is an absence of judgement, not a good one.
+    public init(uba: Int?) {
+        switch uba {
+        case 0: self = .veryGood
+        case 1: self = .good
+        case 2: self = .moderate
+        case 3: self = .poor
+        case 4: self = .veryPoor
+        default: self = .unassessed
+        }
+    }
+
+    /// Position on the scale, or `nil` when there is no assessment.
+    public var band: Int? {
+        switch self {
+        case .veryGood: 0
+        case .good: 1
+        case .moderate: 2
+        case .poor: 3
+        case .veryPoor: 4
+        case .unassessed: nil
+        }
+    }
+
+    /// From "mäßig" upwards, which is where UBA starts advising sensitive
+    /// people to change their behaviour. `unassessed` is deliberately not
+    /// elevated *and* not calm — callers must handle it as its own case.
+    public var isElevated: Bool {
+        guard let band else { return false }
+        return band >= 2
     }
 }
 
-/// One air-quality reading: the bars plus the station and clock they came from.
+/// One pollutant bar.
+public struct AirValue: Identifiable, Sendable {
+    public var id: String { name }
+    /// The pollutant's symbol as the source spells it ("NO₂", "PM₂,₅").
+    public let name: String
+    public let readingLabel: String
+    /// Fill fraction of the bar, 0…1, across the **whole** five-band scale.
+    ///
+    /// Not the fraction within the current band, which is what the API's own
+    /// `y` field gives: 38 µg/m³ of ozone and 121 µg/m³ both sit near 0.65 of
+    /// their respective bands, and a bar that drew them the same length would
+    /// erase the difference between "sehr gut" and "mäßig".
+    public let fraction: Double
+    public let index: AirIndex
+
+    public init(name: String, readingLabel: String, fraction: Double, index: AirIndex) {
+        self.name = name
+        self.readingLabel = readingLabel
+        self.fraction = fraction
+        self.index = index
+    }
+}
+
+/// One air-quality reading: the bars, the station's overall index, and the
+/// station and clock they came from.
 ///
 /// The stamp travels with the values rather than beside them, because a stamp
 /// left over from a previous successful load next to bars that failed to
-/// refresh is a lie the type should not be able to express.
+/// refresh is a lie the type should not be able to express. The same argument
+/// applies to `index`, which is why the screen's summary capsule reads it from
+/// here instead of being written into the view.
 public struct AirQuality: Sendable {
     public let values: [AirValue]
+    /// The station's own overall assessment — the worst of its pollutants, as
+    /// UBA computes it, not something this app derives from the bars.
+    public let index: AirIndex
+    public let stationName: String
     public let stampLabel: String
 
-    public init(values: [AirValue], stampLabel: String) {
+    public init(values: [AirValue], index: AirIndex, stationName: String, stampLabel: String) {
         self.values = values
+        self.index = index
+        self.stationName = stationName
         self.stampLabel = stampLabel
     }
 }

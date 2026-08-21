@@ -223,6 +223,9 @@ HLNUG stations. Nearest station, index, plain-language interpretation.
 <a id="bem-g03"></a>
 ### BEM-G03 — Civil warnings · `size:S` · M2
 NINA / warnung.bund.de, filtered to the user's ring. Read-only, no push in v1.0 — push means a server.
+The filter runs at **Kreis** granularity, not Gemeinde: BBK keys its region endpoint on the 12-digit
+Regionalschlüssel, and only the Kreis form of that is derivable from an AGS. A warning can therefore reach a
+ring that covers only part of that Kreis, which is why the card names the area the issuer gave it.
 
 ---
 

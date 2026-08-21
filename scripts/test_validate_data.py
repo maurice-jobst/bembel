@@ -338,6 +338,18 @@ class SourceVerifierCoverageTests(unittest.TestCase):
         self.assertTrue(all(c.url.endswith("resultType=hits") for c in checks))
         self.assertEqual(checks[0].observed, {"count": 270})
 
+    def test_a_rest_source_plans_its_extra_services_too(self):
+        """A second path on a REST source is still a path that can 404.
+
+        uba_luftdaten reads two of them, and before this an entry could list a
+        service the verifier never called — checked-looking and unchecked, the
+        same mistake as a tier-5 entry carrying an endpoint.
+        """
+        source = next(s for s in self.registry["sources"] if s["id"] == "uba_luftdaten")
+        names = {c.label for c in verify_sources.plan(source)}
+        self.assertIn("uba_luftdaten", names)
+        self.assertIn("uba_luftdaten/components", names)
+
     def test_a_collapsed_feature_count_is_a_failure_not_a_note(self):
         check = verify_sources.Check("x", "https://example.invalid", "hits", {"count": 270})
         self.assertEqual(verify_sources.drift(check, {"count": 0}), ("was 270 features, now 0", True))

@@ -1,8 +1,10 @@
+import CoreLocation
 import Foundation
 
 /// Fabricated Stadtzustand sources for previews and for the seams that have no
-/// live implementation yet: Bright Sky (no ticket), HLNUG (BEM-G02) and NINA
-/// (BEM-G03). The Main level is live — see `PegelOnlineProvider`.
+/// live implementation yet: Bright Sky (no ticket). The Main level
+/// (`PegelOnlineProvider`), the air (`UBAAirQualityProvider`) and the
+/// warnings (`NinaWarningProvider`) are live.
 ///
 /// One type per upstream, matching the protocols. A single sample aggregate
 /// would make it impossible to preview "air failed, warnings fine", which is
@@ -39,25 +41,36 @@ public struct SampleGaugeProvider: GaugeProviding {
 public struct SampleAirQualityProvider: AirQualityProviding {
     public static let airQuality = AirQuality(
         values: [
-            AirValue(name: "NO₂", readingLabel: "21 µg/m³", fraction: 0.26, elevated: false),
-            AirValue(name: "PM₂,₅", readingLabel: "8 µg/m³", fraction: 0.18, elevated: false),
-            AirValue(name: "O₃", readingLabel: "96 µg/m³", fraction: 0.62, elevated: true),
+            AirValue(name: "NO₂", readingLabel: "21 µg/m³", fraction: 0.21, index: .veryGood),
+            AirValue(name: "PM₂,₅", readingLabel: "8 µg/m³", fraction: 0.16, index: .veryGood),
+            AirValue(name: "O₃", readingLabel: "96 µg/m³", fraction: 0.36, index: .good),
         ],
-        stampLabel: "HLNUG Station Frankfurt-Ost · 10:00"
+        // The station's index is the worst of its pollutants, not an average.
+        index: .good,
+        stationName: "Frankfurt Ost",
+        stampLabel: "HLNUG · Frankfurt Ost (Hintergrund) · 10:00"
     )
 
     public init() {}
 
-    public func airQuality() async throws -> AirQuality { Self.airQuality }
+    public func airQuality(near coordinate: CLLocationCoordinate2D?) async throws -> AirQuality {
+        Self.airQuality
+    }
 }
 
+/// Previews only. **Never wire this into a shipping build** — the live
+/// configuration reads NINA (`NinaWarningProvider`, BEM-G03). A fabricated
+/// civil-protection warning on that card is worse than no card at all, which
+/// is why the live provider fails visibly instead of degrading to this one.
+///
 /// Warning text is source text and is not localized by the app.
 public struct SampleCityWarningProvider: CityWarningProviding {
     public static let warnings = [
         CityWarning(
             title: "Hitzewarnung Stufe 1",
             body: "Bis Donnerstag 19 Uhr. Viel trinken, Mittagssonne meiden.",
-            stampLabel: "NINA · 09:12"
+            areaLabel: "Stadt Frankfurt am Main",
+            stampLabel: "NINA · DWD · 09:12"
         )
     ]
 

@@ -18,18 +18,31 @@ struct AppDependencies {
     /// then, and the app still launches.
     private static let store = try? DatasetStore.makeDefault()
 
+    /// Decoded once — 475 municipalities, read on every warnings poll.
+    /// `nil` when rings.json is unreadable, which `NinaWarningProvider` turns
+    /// into a visible failure rather than a fallback: unlike the register and
+    /// the fountains, there is no honest stand-in for a civil-protection
+    /// warning, and fabricated ones on that card would be worse than an empty
+    /// one that says it is broken.
+    private static let regionTable: RegionTable? = {
+        #if DEBUG
+            if let debug = DebugWarningRegion.table { return debug }
+        #endif
+        return try? RegionTable.bundled()
+    }()
+
     var departures: any DeparturesProviding = SampleDeparturesProvider()
     var fountains: any FountainProviding = AppDependencies.liveFountains()
     var radar: any RadarProviding = RadolanRadarProvider()
     /// One property per Stadtzustand upstream, not one aggregate: they fail
-    /// independently and the screen says which one did. The Main level is live
-    /// (BEM-G01); temperature, air (BEM-G02) and warnings (BEM-G03) are still
-    /// sample, and each becomes live on its own ticket without touching the
-    /// others.
+    /// independently and the screen says which one did. The Main level
+    /// (BEM-G01), the air (BEM-G02) and the warnings (BEM-G03) are live;
+    /// temperature is still sample and becomes live on its own ticket
+    /// without touching the others.
     var temperature: any TemperatureProviding = SampleTemperatureProvider()
     var gauge: any GaugeProviding = PegelOnlineProvider()
-    var air: any AirQualityProviding = SampleAirQualityProvider()
-    var cityWarnings: any CityWarningProviding = SampleCityWarningProvider()
+    var air: any AirQualityProviding = UBAAirQualityProvider()
+    var cityWarnings: any CityWarningProviding = NinaWarningProvider(table: AppDependencies.regionTable)
     var register: any RegisterProviding = AppDependencies.liveRegister()
 
     var citySources: CitySources {

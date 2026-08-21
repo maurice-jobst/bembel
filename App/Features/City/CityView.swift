@@ -1,4 +1,5 @@
 import BEMBELKit
+import CoreLocation
 import SwiftUI
 
 /// Stadtzustand: warnings, Main level, air quality — every card names its
@@ -12,6 +13,9 @@ struct CityView: View {
     @Environment(Router.self) private var router
     @Environment(\.dependencies) private var dependencies
     @State private var model = CityModel()
+    /// Only to pick the nearest measuring station. One coarse fix, asked for
+    /// on appear and never stored — same contract the Orte tab keeps.
+    @State private var location = UserLocation()
 
     private var sources: CitySources { dependencies.citySources }
 
@@ -36,7 +40,7 @@ struct CityView: View {
                 .padding(.horizontal, BEMSpacing.l)
             }
             .background(BEMColor.saltGlaze)
-            .refreshable { await model.refresh(from: sources) }
+            .refreshable { await model.refresh(from: sources, near: location.fix?.coordinate) }
             .navigationTitle("tab.city")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -47,7 +51,15 @@ struct CityView: View {
             }
         }
         .task {
-            await model.load(from: sources)
+            location.refresh()
+            await model.load(from: sources, near: location.fix?.coordinate)
+        }
+        // The first fix usually lands after the first load. Re-resolving the
+        // station once it does is the difference between "nearest station" and
+        // "the Frankfurt default, always".
+        .onChange(of: location.fix) { _, fix in
+            guard let fix else { return }
+            Task { await model.retryAir(from: sources, near: fix.coordinate) }
         }
     }
 
@@ -118,8 +130,10 @@ struct CityView: View {
         case .loaded(let air):
             airCard(air)
         case .failed:
-            SourceFailureCard(title: "city.air.title", icon: "wind", sourceName: "HLNUG") {
-                await model.retryAir(from: sources)
+            // Names the service that failed, not the network whose readings
+            // it publishes: HLNUG did not time out, UBA's API did.
+            SourceFailureCard(title: "city.air.title", icon: "wind", sourceName: "Umweltbundesamt") {
+                await model.retryAir(from: sources, near: location.fix?.coordinate)
             }
         }
     }
@@ -150,6 +164,20 @@ struct CityView: View {
                 Text(verbatim: warning.body)
                     .font(.footnote)
                     .foregroundStyle(BEMColor.inkSecondary)
+                // Where the issuer says it applies. The region filter runs at
+                // Kreis granularity, so a warning can reach a ring that only
+                // partly covers that Kreis — without this line the card would
+                // let it read as local.
+                if let areaLabel = warning.areaLabel {
+                    Label {
+                        Text(verbatim: areaLabel)
+                    } icon: {
+                        Image(systemName: "mappin.and.ellipse")
+                    }
+                    .font(.caption)
+                    .foregroundStyle(BEMColor.inkSecondary)
+                    .padding(.top, 2)
+                }
                 Text(verbatim: warning.stampLabel)
                     .font(.caption2.monospacedDigit())
                     .foregroundStyle(BEMColor.inkSecondary)
@@ -246,7 +274,10 @@ struct CityView: View {
                         .foregroundStyle(BEMColor.cobalt)
                 }
                 Spacer()
-                StatusCapsule(label: Text("city.air.good"), color: BEMColor.good)
+                // Was hardcoded to "gut". On sample data that was merely
+                // wrong; on live readings it would be an app that calls every
+                // day a good air day.
+                StatusCapsule(label: Text(Self.indexKey(air.index)), color: Self.indexColor(air.index))
             }
 
             VStack(spacing: 9) {
@@ -260,7 +291,7 @@ struct CityView: View {
                             ZStack(alignment: .leading) {
                                 Capsule().fill(BEMColor.glazeLine)
                                 Capsule()
-                                    .fill(value.elevated ? BEMColor.caution : BEMColor.good)
+                                    .fill(Self.indexColor(value.index))
                                     .frame(width: geo.size.width * value.fraction)
                             }
                         }
@@ -279,6 +310,32 @@ struct CityView: View {
                 .foregroundStyle(BEMColor.inkSecondary)
         }
         .bemStatusCard()
+    }
+
+    /// UBA's own band names are the plain-language interpretation; the app
+    /// does not invent a second vocabulary for the same scale.
+    private static func indexKey(_ index: AirIndex) -> LocalizedStringKey {
+        switch index {
+        case .veryGood: "city.air.index.veryGood"
+        case .good: "city.air.index.good"
+        case .moderate: "city.air.index.moderate"
+        case .poor: "city.air.index.poor"
+        case .veryPoor: "city.air.index.veryPoor"
+        case .unassessed: "city.air.index.unassessed"
+        }
+    }
+
+    /// Three tokens for five bands, because the palette has three and
+    /// inventing two more shades of orange would encode a precision the eye
+    /// cannot read off a 6-point capsule anyway. `unassessed` gets the neutral
+    /// ink: no judgement was made, so the bar must not imply one.
+    private static func indexColor(_ index: AirIndex) -> Color {
+        switch index {
+        case .veryGood, .good: BEMColor.good
+        case .moderate: BEMColor.caution
+        case .poor, .veryPoor: BEMColor.alert
+        case .unassessed: BEMColor.inkSecondary
+        }
     }
 }
 

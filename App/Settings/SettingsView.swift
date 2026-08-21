@@ -88,7 +88,7 @@ struct DataSourcesView: View {
         ("OpenStreetMap", "ODbL"),
         ("DWD RADOLAN", "GeoNutzV"),
         ("PEGELONLINE (WSV)", "Datenlizenz Deutschland 2.0"),
-        ("HLNUG Luftmessnetz", "Datenlizenz Deutschland 2.0"),
+        ("HLNUG Luftmessnetz, über Umweltbundesamt", "Datenlizenz Deutschland 2.0"),
         ("NINA (BBK)", "Datenlizenz Deutschland 2.0"),
     ]
 
