@@ -90,7 +90,9 @@ struct DeepLinkTests {
     @Test("Scheme and host are case-insensitive")
     func caseInsensitivity() {
         #expect(link("BEMBEL://WASSER") == .places(.trinkbrunnen))
-        #expect(link("Bembel://Schatten") == .shadow(at: nil))
+        #expect(link("Bembel://Schatten") == .sun(at: nil))
+        #expect(link("bembel://sonne") == .sun(at: nil))
+        #expect(link("BEMBEL://SUN") == .sun(at: nil))
     }
 
     @Test("Foreign schemes and unknown hosts are rejected, not crashed on")
@@ -103,14 +105,14 @@ struct DeepLinkTests {
         #expect(link("bembel://\(String(repeating: "a", count: 10_000))") == nil)
     }
 
-    @Test("Zoned shadow timestamp is parsed exactly")
+    @Test("Zoned sun timestamp is parsed exactly")
     func zonedTimestamp() {
         let parsed = link("bembel://shadow?t=2027-06-21T15:00:00%2B02:00")
         let expected = Date(timeIntervalSince1970: 1_813_582_800)  // 2027-06-21 13:00 UTC
-        #expect(parsed == .shadow(at: expected))
+        #expect(parsed == .sun(at: expected))
     }
 
-    @Test("Naive shadow timestamp is Frankfurt local time")
+    @Test("Naive sun timestamp is Frankfurt local time")
     func naiveTimestamp() throws {
         let parsed = link("bembel://schatten?t=2027-06-21T15:00")
         var calendar = Calendar(identifier: .gregorian)
@@ -118,14 +120,14 @@ struct DeepLinkTests {
         let expected = try #require(
             calendar.date(from: DateComponents(year: 2027, month: 6, day: 21, hour: 15))
         )
-        #expect(parsed == .shadow(at: expected))
+        #expect(parsed == .sun(at: expected))
     }
 
-    @Test("Garbage timestamp degrades to shadow-at-now, not to failure")
+    @Test("Garbage timestamp degrades to sun-at-now, not to failure")
     func garbageTimestamp() {
-        #expect(link("bembel://shadow?t=notadate") == .shadow(at: nil))
-        #expect(link("bembel://shadow?t=") == .shadow(at: nil))
-        #expect(link("bembel://shadow") == .shadow(at: nil))
-        #expect(link("bembel://shadow?x=1&t=2027-13-45T99:99") == .shadow(at: nil))
+        #expect(link("bembel://shadow?t=notadate") == .sun(at: nil))
+        #expect(link("bembel://shadow?t=") == .sun(at: nil))
+        #expect(link("bembel://shadow") == .sun(at: nil))
+        #expect(link("bembel://shadow?x=1&t=2027-13-45T99:99") == .sun(at: nil))
     }
 }

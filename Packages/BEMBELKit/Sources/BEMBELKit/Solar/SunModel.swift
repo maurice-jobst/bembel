@@ -52,6 +52,52 @@ public enum SunModel {
     /// replaces.
     public static let peakElevation: Double = 63.4
 
+    /// One point of the day's elevation curve, normalised for drawing.
+    ///
+    /// `weight` is elevation over `peakElevation`, so 1.0 is the highest the
+    /// sun ever gets over Frankfurt, not the highest it gets today — a June
+    /// curve towers over a December one, which is the entire point of drawing
+    /// it from the ephemeris instead of from a fixed bezier.
+    public struct CurvePoint: Sendable, Equatable {
+        /// 0…1 across the scrubber's clock range.
+        public let fraction: Double
+        /// 0…1 of `peakElevation`, floored at zero below the horizon.
+        public let weight: Double
+
+        public init(fraction: Double, weight: Double) {
+            self.fraction = fraction
+            self.weight = weight
+        }
+    }
+
+    /// The day's sun-elevation curve across the scrubber's clock range.
+    ///
+    /// The screen drew a fixed bezier until ADR 0010: one hand-drawn hump,
+    /// identical on every day of the year, sitting under a scrubber whose
+    /// readout came from the real ephemeris. On a December afternoon the dot
+    /// rode high on a curve while the number beside it said 8°. This returns
+    /// what the sun actually did.
+    ///
+    /// `samples` is clamped to at least two so the caller always gets both
+    /// ends of the range.
+    public static func elevationCurve(
+        on day: Date = .now,
+        at coordinate: CLLocationCoordinate2D = SunModel.frankfurt,
+        calendar: Calendar = .current,
+        samples: Int = 96
+    ) -> [CurvePoint] {
+        let count = max(2, samples)
+        return (0..<count).map { index in
+            let fraction = Double(index) / Double(count - 1)
+            let minutes = dayStart + fraction * (dayEnd - dayStart)
+            let elevation = position(atMinutes: minutes, on: day, at: coordinate, calendar: calendar).elevation
+            return CurvePoint(
+                fraction: fraction,
+                weight: min(1, max(0, elevation / peakElevation))
+            )
+        }
+    }
+
     /// Sun at a wall-clock time on a given day.
     ///
     /// `minutes` is local clock time, which is what the scrubber speaks;

@@ -259,3 +259,77 @@ struct SunModelTests {
         #expect(SunModel.nowMinutes(noon, calendar: calendar) == 720)
     }
 }
+
+/// The curve the scrubber draws. It replaced a fixed bezier that was the same
+/// shape on every day of the year (ADR 0010), so the tests that matter are the
+/// ones a fixed shape would fail.
+@Suite("Sun elevation curve")
+struct SunCurveTests {
+    private func curve(_ iso: String) throws -> [SunModel.CurvePoint] {
+        try SunModel.elevationCurve(on: instant(iso), calendar: berlinCalendar())
+    }
+
+    @Test("Spans the scrubber's range end to end")
+    func spansRange() throws {
+        let points = try curve("2026-06-21T12:00:00Z")
+        #expect(points.count == 96)
+        #expect(points.first?.fraction == 0)
+        #expect(points.last?.fraction == 1)
+    }
+
+    @Test("Weights stay inside 0…1")
+    func normalised() throws {
+        for day in ["2026-06-21T12:00:00Z", "2026-12-21T12:00:00Z", "2026-03-20T12:00:00Z"] {
+            for point in try curve(day) {
+                #expect(point.weight >= 0)
+                #expect(point.weight <= 1)
+            }
+        }
+    }
+
+    /// The whole reason the bezier had to go: in June the sun reaches 63°, in
+    /// December 16°, and one hand-drawn hump cannot be both.
+    @Test("Summer towers over winter")
+    func seasonalAmplitude() throws {
+        let summer = try #require(curve("2026-06-21T12:00:00Z").map(\.weight).max())
+        let winter = try #require(curve("2026-12-21T12:00:00Z").map(\.weight).max())
+        #expect(summer > 0.97)
+        #expect(winter < 0.3)
+        #expect(summer > winter * 3)
+    }
+
+    /// Elevation has exactly one maximum per day, so the drawn curve must rise
+    /// then fall — never wobble. A single direction change is the assertion.
+    @Test("Rises once and falls once")
+    func unimodal() throws {
+        let weights = try curve("2026-09-15T12:00:00Z").map(\.weight)
+        var reversals = 0
+        var rising = true
+        for (previous, next) in zip(weights, weights.dropFirst()) where next != previous {
+            let nowRising = next > previous
+            if nowRising != rising {
+                reversals += 1
+                rising = nowRising
+            }
+        }
+        // One reversal at the peak. The run starts flat at zero before sunrise,
+        // which is why the first comparison is skipped by `next != previous`.
+        #expect(reversals == 1)
+    }
+
+    /// Winter mornings and evenings sit below the horizon inside the 05:00–22:00
+    /// clock range, and `SunSample` floors those at zero rather than drawing a
+    /// curve underground.
+    @Test("Night is flat, not negative")
+    func nightIsFloored() throws {
+        let winter = try curve("2026-12-21T12:00:00Z")
+        #expect(winter.first?.weight == 0)
+        #expect(winter.last?.weight == 0)
+    }
+
+    @Test("Sample count is clamped to something drawable")
+    func clampedSamples() {
+        #expect(SunModel.elevationCurve(samples: 0).count == 2)
+        #expect(SunModel.elevationCurve(samples: 1).count == 2)
+    }
+}

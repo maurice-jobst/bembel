@@ -9,7 +9,8 @@ import Foundation
 ///   bembel://ebbelwei   | apfelwein         [/<entry-id>]
 ///   bembel://water      | wasser | brunnen  [/<fountain-id>]  (opens Orte on Trinkbrunnen)
 ///   bembel://departures | abfahrten
-///   bembel://shadow     | schatten     [?t=ISO-8601, naive times = Europe/Berlin]
+///   bembel://sun        | sonne        [?t=ISO-8601, naive times = Europe/Berlin]
+///   bembel://shadow     | schatten     — kept: same screen, pre-ADR-0010 name
 ///   bembel://radar      | regen
 ///   bembel://city       | stadt
 ///   bembel://settings   | einstellungen
@@ -25,7 +26,13 @@ public enum DeepLink: Hashable, Sendable {
     /// resolution is deliberately lenient about it (see `PlacesModel`), because
     /// ids are unique across the published bundle anyway.
     case entry(register: PlaceRegister, id: String)
-    case shadow(at: Date?)
+    /// Sonnenstand, optionally at a requested instant.
+    ///
+    /// The `shadow`/`schatten` hosts still resolve here. They were published
+    /// before ADR 0010 renamed the screen, and `BEM-A03` promises that nothing
+    /// which worked stops working — a link in someone's note is not ours to
+    /// break.
+    case sun(at: Date?)
     case settings
 
     /// An id longer than this is not a bembel-data slug, it is an attack.
@@ -61,10 +68,10 @@ public enum DeepLink: Hashable, Sendable {
             return entryID == nil ? .tab(.city) : nil
         case "settings", "einstellungen":
             return entryID == nil ? .settings : nil
-        case "shadow", "schatten":
+        case "sun", "sonne", "shadow", "schatten":
             guard entryID == nil else { return nil }
             let raw = components.queryItems?.first { $0.name == "t" }?.value
-            return .shadow(at: raw.flatMap(parseTimestamp))
+            return .sun(at: raw.flatMap(parseTimestamp))
         default:
             return nil
         }
@@ -87,7 +94,7 @@ public enum DeepLink: Hashable, Sendable {
     }
 
     /// ISO 8601; a timestamp without zone designator is local Frankfurt time.
-    /// Unparseable input degrades to `nil` (shadow map opens at "now").
+    /// Unparseable input degrades to `nil` (the screen opens at "now").
     static func parseTimestamp(_ raw: String) -> Date? {
         let zoned = ISO8601DateFormatter()
         zoned.formatOptions = [.withInternetDateTime]
