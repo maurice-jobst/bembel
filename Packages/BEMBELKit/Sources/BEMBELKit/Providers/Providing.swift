@@ -38,12 +38,32 @@ public protocol RadarProviding: Sendable {
 // included, the one that matters most in an emergency. Rejoining these into an
 // aggregate would bring that back.
 
+// Every city source carries the `invalidate()` contract from
+// `RegisterProviding`: pull-to-refresh tells us the staleness window is wrong
+// for this moment, and a refresh that answers out of a provider's cache would
+// re-stamp the same reading as new. Defaulted to a no-op so sample providers
+// and fixtures stay one-liners.
+
 public protocol TemperatureProviding: Sendable {
     func temperature() async throws -> TemperatureReading
+
+    func invalidate() async
+}
+
+extension TemperatureProviding {
+    /// A provider that answers from fixtures has nothing to invalidate.
+    public func invalidate() async {}
 }
 
 public protocol GaugeProviding: Sendable {
     func reading() async throws -> GaugeReading
+
+    func invalidate() async
+}
+
+extension GaugeProviding {
+    /// A provider that answers from fixtures has nothing to invalidate.
+    public func invalidate() async {}
 }
 
 public protocol AirQualityProviding: Sendable {
@@ -53,12 +73,26 @@ public protocol AirQualityProviding: Sendable {
     /// falls back to the Frankfurt station, the same contract
     /// `FountainRanking` already keeps for the Orte list.
     func airQuality(near coordinate: CLLocationCoordinate2D?) async throws -> AirQuality
+
+    func invalidate() async
+}
+
+extension AirQualityProviding {
+    /// A provider that answers from fixtures has nothing to invalidate.
+    public func invalidate() async {}
 }
 
 public protocol CityWarningProviding: Sendable {
     /// Empty is an answer: no warning is in force. It is not the same as a
     /// failed fetch, and the screen renders the two differently.
     func warnings() async throws -> [CityWarning]
+
+    func invalidate() async
+}
+
+extension CityWarningProviding {
+    /// A provider that answers from fixtures has nothing to invalidate.
+    public func invalidate() async {}
 }
 
 public protocol RegisterProviding: Sendable {

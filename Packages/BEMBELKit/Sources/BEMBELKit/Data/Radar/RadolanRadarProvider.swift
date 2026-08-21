@@ -20,13 +20,9 @@ public enum RadarNowcastRules {
     public static func nowcast(
         series: [RadarSample],
         measuredAt: Date?,
-        now: Date,
-        timeZone: TimeZone = TimeZone(identifier: "Europe/Berlin") ?? .current
+        now: Date
     ) -> RadarNowcast {
-        var clock = DateFormatter()
-        clock.locale = Locale(identifier: "de_DE")
-        clock.timeZone = timeZone
-        clock.dateFormat = "HH:mm"
+        let clock = DateFormatter.berlinClock
 
         let wet = series.filter { ($0.millimetres ?? 0) >= rainThreshold }
         let headline: String
