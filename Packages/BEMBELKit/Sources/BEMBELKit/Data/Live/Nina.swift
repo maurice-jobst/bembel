@@ -237,6 +237,10 @@ public actor NinaWarningProvider: CityWarningProviding {
         case unreadableRegion(String)
     }
 
+    public func invalidate() {
+        cached = nil
+    }
+
     public func warnings() async throws -> [CityWarning] {
         let ring = selectedRing()
         if let cached, cached.ring == ring, !Self.staleness.isStale(fetchedAt: cached.fetchedAt) {
@@ -323,7 +327,7 @@ public actor NinaWarningProvider: CityWarningProviding {
                 stampLabel: NinaRules.stampLabel(
                     provider: dashboard.payload.data.provider,
                     sentAt: sentAt,
-                    clock: Self.clock
+                    clock: DateFormatter.berlinClock
                 )
             ),
             severityRank: NinaRules.severityRank(info.severity ?? dashboard.payload.data.severity),
@@ -353,28 +357,13 @@ public actor NinaWarningProvider: CityWarningProviding {
 
     /// CAP stamps carry an offset; DWD sometimes adds fractional seconds.
     static func date(from raw: String) -> Date? {
-        ISO8601DateFormatter.nina.date(from: raw) ?? ISO8601DateFormatter.ninaFractional.date(from: raw)
+        ISO8601DateFormatter.internetDateTime.date(from: raw) ?? ISO8601DateFormatter.ninaFractional.date(from: raw)
     }
-
-    // Cached for the same reason PEGELONLINE's are: formatter construction
-    // dominates the parse, and both classes are documented thread-safe.
-    private nonisolated(unsafe) static let clock: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "de_DE")
-        formatter.timeZone = TimeZone(identifier: "Europe/Berlin") ?? .current
-        formatter.dateFormat = "HH:mm"
-        return formatter
-    }()
 }
 
 extension ISO8601DateFormatter {
-    /// `2026-08-19T11:00:00+02:00`.
-    nonisolated(unsafe) static let nina: ISO8601DateFormatter = {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime]
-        return formatter
-    }()
-
+    /// DWD's CAP variant: `.withFractionalSeconds` on top of the shared
+    /// `internetDateTime` options.
     nonisolated(unsafe) static let ninaFractional: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]

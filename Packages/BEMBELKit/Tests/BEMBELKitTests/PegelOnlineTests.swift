@@ -157,4 +157,46 @@ struct PegelOnlineTests {
             )
         }
     }
+
+    @Test("invalidate() sends the next reading back to the source")
+    func invalidateRefetches() async throws {
+        // The trap this guards: an actor method that no longer matches the
+        // protocol requirement would be silently shadowed by the defaulted
+        // no-op, and pull-to-refresh would re-stamp the cached reading as new.
+        let counter = RequestCounter()
+        MockURLProtocol.setHandler(host: "www.pegelonline.wsv.de") { request in
+            counter.increment()
+            let path = request.url?.path() ?? ""
+            let name =
+                if path.hasSuffix("/W.json") {
+                    "pegel-timeseries"
+                } else if path.hasSuffix("currentmeasurement.json") {
+                    "pegel-current"
+                } else {
+                    "pegel-measurements"
+                }
+            return (200, [:], try fixture(name))
+        }
+        let config = URLSessionConfiguration.ephemeral
+        config.protocolClasses = [MockURLProtocol.self]
+        config.urlCache = nil
+        let provider = PegelOnlineProvider(
+            client: HTTPClient(session: URLSession(configuration: config)))
+
+        _ = try await provider.reading()
+        let afterFirst = counter.value
+        _ = try await provider.reading()
+        #expect(counter.value == afterFirst)  // inside the staleness window, cache answers
+
+        await (provider as any GaugeProviding).invalidate()
+        _ = try await provider.reading()
+        #expect(counter.value == afterFirst * 2)
+    }
+}
+
+private final class RequestCounter: @unchecked Sendable {
+    private let lock = NSLock()
+    private var count = 0
+    func increment() { lock.withLock { count += 1 } }
+    var value: Int { lock.withLock { count } }
 }

@@ -157,7 +157,7 @@ struct NinaRulesTests {
 
 @Suite("NINA warnings")
 struct NinaWarningTests {
-    private static let duringTheStorm = ISO8601DateFormatter.nina.date(from: "2026-08-19T12:00:00+02:00")!
+    private static let duringTheStorm = ISO8601DateFormatter.internetDateTime.date(from: "2026-08-19T12:00:00+02:00")!
 
     private func mapped(
         _ detail: String, _ dashboard: String, now: Date = duringTheStorm
@@ -197,17 +197,17 @@ struct NinaWarningTests {
 
     @Test("A warning that has run out is not a warning")
     func expired() throws {
-        let after = ISO8601DateFormatter.nina.date(from: "2026-08-20T08:00:00+02:00")!
+        let after = ISO8601DateFormatter.internetDateTime.date(from: "2026-08-20T08:00:00+02:00")!
         #expect(try mapped("nina-warning-dwd", "nina-dashboard-dwd", now: after) == nil)
         // Exactly at the expiry it is already over.
-        let atExpiry = ISO8601DateFormatter.nina.date(from: "2026-08-20T00:00:00+02:00")!
+        let atExpiry = ISO8601DateFormatter.internetDateTime.date(from: "2026-08-20T00:00:00+02:00")!
         #expect(try mapped("nina-warning-dwd", "nina-dashboard-dwd", now: atExpiry) == nil)
     }
 
     @Test("Withdrawn and non-actual messages never reach the card")
     func withdrawn() throws {
         let detail = try ninaDecoded(NinaWarningDetail.self, "nina-warning-dwd")
-        let expires = ISO8601DateFormatter.nina.date(from: "2026-08-20T00:00:00+02:00")
+        let expires = ISO8601DateFormatter.internetDateTime.date(from: "2026-08-20T00:00:00+02:00")
         #expect(NinaRules.isInForce(detail, expires: expires, now: Self.duringTheStorm))
 
         let cancelled = NinaWarningDetail(

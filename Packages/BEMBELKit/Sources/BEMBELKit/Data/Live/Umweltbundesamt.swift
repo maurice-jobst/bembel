@@ -281,6 +281,12 @@ public actor UBAAirQualityProvider: AirQualityProviding {
         case noReading(station: String)
     }
 
+    /// Drops the reading, not the station list or the component vocabulary —
+    /// those are UBA master data, and pull-to-refresh is about the reading.
+    public func invalidate() {
+        cached = nil
+    }
+
     public func airQuality(near coordinate: CLLocationCoordinate2D?) async throws -> AirQuality {
         let station = try await resolveStation(near: coordinate)
         if let cached, cached.stationID == station.id, !Self.staleness.isStale(fetchedAt: cached.fetchedAt) {
