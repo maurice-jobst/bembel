@@ -34,6 +34,23 @@ All notable changes to BEMBEL. Format follows
 
 ### Changed
 
+- **Schattenkarte-Rendering aus v1.0 gestrichen (ADR 0010).** Die Geometrie
+  (`BEM-D01`/`BEM-D02`) bleibt drin, aber als eigenständig veröffentlichter
+  Datensatz mit sauberer dl-de/zero-Herkunft; das Rendern (`BEM-D04`) ist der
+  Aufmacher von v1.2. Der Tab überlebt als **Sonnenstand** mit der echten
+  NOAA-Ephemeride — die vorgetäuschte Schattenfläche darüber verschwindet.
+  Damit hat die Tab-Leiste vier statt fünf Einträge (Ergänzung zu ADR 0009).
+- **Positionierung neu:** „Für eine Stadt, die heißer wird — Wasser, Luft,
+  Regen." Schatten und Bäume sind nicht in v1.0, also stehen sie auch nicht
+  mehr in der Zeile.
+- **Zweck festgeschrieben (ADR 0010):** Im Konflikt gewinnt der
+  Portfolio-Wert vor dem Produkt-Wert. Daraus folgen der Epic-S-Deckel (keine
+  neuen Datenquellen-Tickets vor dem Release), `docs/AI-NATIVE.md` als
+  v1.0-Lieferung und ein 1.-Dezember-Gate für den RMV-Schlüssel.
+- ADR 0001 ergänzt: die zwei Beobachtungen, die die Backend-Entscheidung
+  wieder aufmachen würden — eine Quelle, die nur über einen eigenen Server
+  erreichbar ist, und Einnahmen als Pflicht statt als Trinkgeld.
+
 - Der Trinkwasser-Tab ist im neuen **Orte**-Tab aufgegangen (ADR 0009); Trinkbrunnen
   bleiben unverändert im Funktionsumfang. `bembel://water` funktioniert weiter.
 
