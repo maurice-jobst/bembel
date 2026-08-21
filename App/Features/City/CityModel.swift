@@ -1,4 +1,5 @@
 import BEMBELKit
+import CoreLocation
 import Foundation
 import Observation
 
@@ -30,28 +31,28 @@ final class CityModel {
         !temperatureState.hasLoaded && !gaugeState.hasLoaded && !airState.hasLoaded && !warningState.hasLoaded
     }
 
-    func load(from sources: CitySources) async {
+    func load(from sources: CitySources, near coordinate: CLLocationCoordinate2D? = nil) async {
         guard !hasLoaded else { return }
-        await loadAll(from: sources)
+        await loadAll(from: sources, near: coordinate)
     }
 
     /// Pull-to-refresh: the user is telling us the cached readings are wrong
     /// for this moment. Everything goes back to the source, including the ones
     /// that succeeded — a screen that refreshes only its broken half would
     /// leave the good cards stamped with an older clock than the bad ones.
-    func refresh(from sources: CitySources) async {
+    func refresh(from sources: CitySources, near coordinate: CLLocationCoordinate2D? = nil) async {
         temperatureState = .idle
         gaugeState = .idle
         airState = .idle
         warningState = .idle
-        await loadAll(from: sources)
+        await loadAll(from: sources, near: coordinate)
     }
 
     /// All four in flight at once. Sequentially, a PEGELONLINE request sitting
     /// on its timeout would hold the warning card back by exactly that long —
     /// which is the coupling this split exists to remove, reintroduced as
     /// latency instead of as failure.
-    private func loadAll(from sources: CitySources) async {
+    private func loadAll(from sources: CitySources, near coordinate: CLLocationCoordinate2D?) async {
         if !temperatureState.hasLoaded { temperatureState = .loading }
         if !gaugeState.hasLoaded { gaugeState = .loading }
         if !airState.hasLoaded { airState = .loading }
@@ -61,7 +62,7 @@ final class CityModel {
             try await sources.temperature.temperature()
         }
         async let gauge = Loadable<GaugeReading>.result { try await sources.gauge.reading() }
-        async let air = Loadable<AirQuality>.result { try await sources.air.airQuality() }
+        async let air = Loadable<AirQuality>.result { try await sources.air.airQuality(near: coordinate) }
         async let warnings = Loadable<[CityWarning]>.result { try await sources.warnings.warnings() }
 
         temperatureState = await temperature
@@ -76,9 +77,9 @@ final class CityModel {
         gaugeState = await .result { try await sources.gauge.reading() }
     }
 
-    func retryAir(from sources: CitySources) async {
+    func retryAir(from sources: CitySources, near coordinate: CLLocationCoordinate2D? = nil) async {
         airState = .loading
-        airState = await .result { try await sources.air.airQuality() }
+        airState = await .result { try await sources.air.airQuality(near: coordinate) }
     }
 
     func retryWarnings(from sources: CitySources) async {

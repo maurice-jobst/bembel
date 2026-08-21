@@ -94,6 +94,11 @@ def plan(source):
         url = source.get("url") or (source.get("base", "") + source.get("example", ""))
         if url:
             yield Check(sid, url, "json", observed)
+        # A REST source can call more than one path. They were going unchecked
+        # while looking checked, which is the tier-5-with-an-endpoint mistake
+        # wearing a different hat.
+        for name, service in (source.get("services") or {}).items():
+            yield Check(f"{sid}/{name}", service, "json")
 
     elif protocol == "jsonp":
         yield Check(sid, source["url"], "jsonp")

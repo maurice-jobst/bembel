@@ -11,12 +11,62 @@
         }
       }
     },
-    "city.air.good": {
+    "city.air.index.good": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
             "value": "gut"
+          }
+        }
+      }
+    },
+    "city.air.index.moderate": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mäßig"
+          }
+        }
+      }
+    },
+    "city.air.index.poor": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "schlecht"
+          }
+        }
+      }
+    },
+    "city.air.index.unassessed": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "keine Bewertung"
+          }
+        }
+      }
+    },
+    "city.air.index.veryGood": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sehr gut"
+          }
+        }
+      }
+    },
+    "city.air.index.veryPoor": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sehr schlecht"
           }
         }
       }

@@ -1,6 +1,7 @@
 #if DEBUG
 
     import BEMBELKit
+    import CoreLocation
     import Foundation
 
     /// Makes a Stadtzustand source fail on demand, so the designed failure
@@ -40,7 +41,9 @@
 
         func temperature() async throws -> TemperatureReading { throw Injected() }
         func reading() async throws -> GaugeReading { throw Injected() }
-        func airQuality() async throws -> AirQuality { throw Injected() }
+        func airQuality(near coordinate: CLLocationCoordinate2D?) async throws -> AirQuality {
+            throw Injected()
+        }
         func warnings() async throws -> [CityWarning] { throw Injected() }
     }
 

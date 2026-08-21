@@ -1,3 +1,4 @@
+import CoreLocation
 import Foundation
 
 // The seam between the app shell (frontend lane) and data sources (backend
@@ -46,7 +47,12 @@ public protocol GaugeProviding: Sendable {
 }
 
 public protocol AirQualityProviding: Sendable {
-    func airQuality() async throws -> AirQuality
+    /// `coordinate` picks the station: air quality is measured at points, and
+    /// the nearest one is a different answer from the city's default one.
+    /// `nil` — no fix, or permission withheld — is a supported answer and
+    /// falls back to the Frankfurt station, the same contract
+    /// `FountainRanking` already keeps for the Orte list.
+    func airQuality(near coordinate: CLLocationCoordinate2D?) async throws -> AirQuality
 }
 
 public protocol CityWarningProviding: Sendable {
