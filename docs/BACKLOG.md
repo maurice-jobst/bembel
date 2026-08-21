@@ -157,6 +157,11 @@ CityGML → `(simplified footprint, ground height, ridge height)` in a compact b
 ### BEM-D03 — Solar position · `size:S` · M2
 NOAA solar position algorithm. Pure function, exhaustively unit-testable against published values.
 **AC:** Matches reference azimuth/elevation for 20 known place/time pairs within 0.1°.
+Note for D04/D05: the scrubber's range is a **clock** range (05:00–22:00, wide enough for the
+earliest Frankfurt sunrise and the latest sunset), not the sun's day — sunrise, sunset and solar
+noon all move across the year and `SunModel` computes them rather than asserting them. The curve
+drawn behind the scrubber is still the design's fixed bezier and no longer matches the real
+elevation away from midsummer; redrawing it from `SunModel` belongs to D05.
 
 <a id="bem-d04"></a>
 ### BEM-D04 — Shadow projection + rendering · `size:L` · M2 · `learning-goal`
