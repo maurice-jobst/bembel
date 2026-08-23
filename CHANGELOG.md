@@ -36,6 +36,10 @@ All notable changes to BEMBEL. Format follows
   vollständig live.
 - App-Icon (generiert, `make icon`) und TestFlight-Weg: `make testflight`
   archiviert und lädt zu App Store Connect hoch (docs/TESTFLIGHT.md).
+- [docs/AI-NATIVE.md](docs/AI-NATIVE.md): welche Beschränkungen dieses Repo
+  angenommen hat, damit agentengeschriebene Änderungen überprüfbar bleiben —
+  jede mit dem Mechanismus, der sie hält, plus den Regeln ohne Zähne und dem,
+  was trotzdem durchkam.
 
 ### Changed
 

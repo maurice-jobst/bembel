@@ -119,9 +119,12 @@ branch and its test landed in the same commit.
   `enforce_admins` is off, so an admin can push straight past all of it. The
   README says a human reviews every pull request. That is true as practice, not
   as mechanism.
-- **`Co-Authored-By: Claude` is a convention, not a check.** 21 of the 28
-  commits on `main` carry it. Seven do not: six from one session that dropped
-  the trailer, plus Dependabot's.
+- **`Co-Authored-By: Claude` is a convention, not a check.** Most commits on
+  `main` carry it; several do not — six from one session that dropped the
+  trailer, plus Dependabot's. The count is deliberately not written here: the
+  first draft of this document said "21 of 28", and two merges later that was
+  wrong. A number nobody recomputes is the same failure this section is about,
+  so [count them yourself](#checking-any-of-this).
 - **"No third-party dependencies" is a property of
   [`Package.swift`](../Packages/BEMBELKit/Package.swift), not a CI rule.**
   Nothing would fail if someone added one.
