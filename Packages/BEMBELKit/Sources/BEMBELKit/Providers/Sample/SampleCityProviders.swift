@@ -1,17 +1,22 @@
 import CoreLocation
 import Foundation
 
-/// Fabricated Stadtzustand sources for previews and for the seams that have no
-/// live implementation yet: Bright Sky (no ticket). The Main level
+/// Fabricated Stadtzustand sources for previews. All four upstreams are live
+/// now — the temperature (`DWDPoiTemperatureProvider`), the Main level
 /// (`PegelOnlineProvider`), the air (`UBAAirQualityProvider`) and the
-/// warnings (`NinaWarningProvider`) are live.
+/// warnings (`NinaWarningProvider`).
 ///
 /// One type per upstream, matching the protocols. A single sample aggregate
 /// would make it impossible to preview "air failed, warnings fine", which is
 /// the state this screen most needs to get right.
 
 public struct SampleTemperatureProvider: TemperatureProviding {
-    public static let reading = TemperatureReading(label: "Frankfurt am Main · 24 °C")
+    public static let reading = TemperatureReading(
+        celsius: 19.7,
+        celsiusLabel: "19,7",
+        stationName: "Flughafen",
+        stampLabel: "20:00"
+    )
 
     public init() {}
 

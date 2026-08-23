@@ -109,14 +109,30 @@ public struct GaugeReading: Sendable {
     }
 }
 
-/// Ambient temperature for the screen's header line. Its own type because it
-/// is its own upstream — DWD by way of Bright Sky, per `data/sources.json` —
-/// and not a field on a reading it would otherwise share a failure with.
+/// Ambient 2 m air temperature for the screen's header line. Its own type
+/// because it is its own upstream — DWD's POI station reports, per
+/// `data/sources.json` — and not a field on a reading it would otherwise
+/// share a failure with.
 public struct TemperatureReading: Sendable, Equatable {
-    public let label: String
+    /// Degrees Celsius as measured. Kept alongside the label because a heat
+    /// app will eventually band this, and re-parsing a formatted German
+    /// decimal to get the number back would be the wrong way round.
+    public let celsius: Double
+    /// One decimal with German decimal comma ("19,7"); the unit is rendered
+    /// by the view, the same split `GaugeReading.levelLabel` makes.
+    public let celsiusLabel: String
+    /// Where the thermometer stands — not the city. The nearest DWD station
+    /// can be well outside the built-up core, which is exactly the difference
+    /// this app should not paper over.
+    public let stationName: String
+    /// Clock stamp of the measurement hour, Europe/Berlin.
+    public let stampLabel: String
 
-    public init(label: String) {
-        self.label = label
+    public init(celsius: Double, celsiusLabel: String, stationName: String, stampLabel: String) {
+        self.celsius = celsius
+        self.celsiusLabel = celsiusLabel
+        self.stationName = stationName
+        self.stampLabel = stampLabel
     }
 }
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-21",
+  "updated": "2026-08-23",
   "note": "Every upstream BEMBEL reads, one entry per source. Liveness is checked by scripts/verify_sources.py; the shape is enforced by scripts/validate_data.py against data/schema/sources.schema.json. This registry is not shipped data — data/ATTRIBUTION.json remains the licence record for the datasets bundled into the app.",
   "attribution_required": true,
   "tiers": {
@@ -259,6 +259,31 @@
       "note": "3-day forecast, today/tomorrow/day-after per pollen type."
     },
     {
+      "id": "dwd_poi",
+      "name": "DWD Wetterbeobachtungen (POI)",
+      "tier": 2,
+      "feature": "Temperatur im Stadtzustand (BEM-G06)",
+      "protocol": "csv",
+      "url": "https://opendata.dwd.de/weather/weather_reports/poi/10637-BEOB.csv",
+      "base": "https://opendata.dwd.de/weather/weather_reports/poi/",
+      "auth": "none",
+      "license": "GeoNutzV",
+      "attribution": "Deutscher Wetterdienst",
+      "cadence": "1h",
+      "verified_at": "2026-08-23",
+      "observed": {
+        "bytes": 7092
+      },
+      "station": "10637 = Frankfurt/Main (EDDF). The only reporting POI station inside the city; 10635 is Kleiner Feldberg at 805 m and 10641 is Offenbach-Wetterpark. Names come from the MOSMIX station catalogue, whose LAT/LON columns are degrees.decimal-minutes, not decimal degrees.",
+      "gotchas": [
+        "Three header lines, not one: parameter names, units, then German labels. Read the column by name from line 1 and the unit from line 2 — index and unit are both assumptions that will eventually be wrong.",
+        "German decimal comma. '---' means the station did not report that hour; it is not zero, and several columns in this file legitimately are zero.",
+        "Timestamps are UTC and two-digit-year ('23.08.26;18:00'). Foundation's default two-digit window starts in 1950, so an unpinned parser reads 26 as 1926.",
+        "Rows arrive newest-first; nothing documents that, so sort rather than index [0]."
+      ],
+      "note": "Chosen over brightsky for BEM-G06: this is DWD's own file, which keeps a hosted third-party service out of the critical path (ADR 0008). The thermometer stands on the airfield and reads cooler than the Innenstadt on hot afternoons — the app names the station for exactly that reason."
+    },
+    {
       "id": "dwd_warnungen",
       "name": "DWD Wetterwarnungen",
       "tier": 2,
@@ -283,7 +308,7 @@
       "auth": "none",
       "cadence": "30m",
       "verified_at": "2026-08-21",
-      "note": "clean JSON over DWD MOSMIX/observations. No key, no rate limit published."
+      "note": "clean JSON over DWD MOSMIX/observations. No key, no rate limit published. Not read by the app: BEM-G06 checked DWD's own POI files first and they parse directly (dwd_poi), so the hosted wrapper stays out of the critical path per ADR 0008. Kept as the documented fallback if opendata.dwd.de ever stops publishing POI."
     },
     {
       "id": "nina_mowas",
