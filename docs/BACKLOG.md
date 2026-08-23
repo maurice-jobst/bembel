@@ -230,7 +230,7 @@ Last ~2h in loop, play/pause/scrub, colourblind-safe scale.
 
 ## EPIC G — Stadtzustand
 
-One screen, three trivial APIs. Cheapest utility-per-line-of-code in the project.
+One screen, four trivial APIs. Cheapest utility-per-line-of-code in the project.
 
 <a id="bem-g01"></a>
 ### BEM-G01 — Main-Pegel · `size:S` · M2
@@ -246,6 +246,14 @@ NINA / warnung.bund.de, filtered to the user's ring. Read-only, no push in v1.0 
 The filter runs at **Kreis** granularity, not Gemeinde: BBK keys its region endpoint on the 12-digit
 Regionalschlüssel, and only the Kreis form of that is derivable from an AGS. A warning can therefore reach a
 ring that covers only part of that Kreis, which is why the card names the area the issuer gave it.
+
+<a id="bem-g06"></a>
+### BEM-G06 — Temperatur live · `size:S` · M2
+DWD POI station reports (`opendata.dwd.de/weather/weather_reports/poi/10637-BEOB.csv`), hourly CSV, no key.
+The brief named Bright Sky and told whoever took it to check DWD's own files first — they parse directly, so
+the hosted wrapper stays out of the critical path (ADR 0008) and out of the app. 10637 is the only reporting
+POI station inside Frankfurt; it stands on the airfield and reads cooler than the Innenstadt on a hot
+afternoon, which is why the header line names the station instead of saying "Frankfurt".
 
 ---
 

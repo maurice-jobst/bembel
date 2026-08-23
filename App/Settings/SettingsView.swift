@@ -87,6 +87,7 @@ struct DataSourcesView: View {
         ("Geoportal Frankfurt", "Datenlizenz Deutschland 2.0"),
         ("OpenStreetMap", "ODbL"),
         ("DWD RADOLAN", "GeoNutzV"),
+        ("DWD Wetterbeobachtungen (POI, Station Frankfurt/Main)", "GeoNutzV"),
         ("PEGELONLINE (WSV)", "Datenlizenz Deutschland 2.0"),
         ("HLNUG Luftmessnetz, über Umweltbundesamt", "Datenlizenz Deutschland 2.0"),
         ("NINA (BBK)", "Datenlizenz Deutschland 2.0"),

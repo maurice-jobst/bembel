@@ -29,6 +29,11 @@ All notable changes to BEMBEL. Format follows
   Fällt eine Quelle aus, sagt genau ihre Karte das — der Rest bleibt stehen.
 - Echte Sonnenstände (NOAA-Ephemeride) hinter der Schattenkarte statt einer
   Parabel — Sonnenauf- und -untergang stimmen jetzt das ganze Jahr.
+- Temperatur live aus den DWD-Stationsmeldungen (Station Frankfurt/Main, stündlich)
+  statt aus dem Sample. Die Zeile nennt Messwert, Station und Messzeit: das
+  Thermometer steht am Flughafen und liest an heißen Nachmittagen kühler als die
+  Innenstadt — das soll die Zeile nicht verwischen. Damit ist der Stadtzustand
+  vollständig live.
 - App-Icon (generiert, `make icon`) und TestFlight-Weg: `make testflight`
   archiviert und lädt zu App Store Connect hoch (docs/TESTFLIGHT.md).
 

@@ -75,7 +75,14 @@ struct CityView: View {
             case .idle, .loading:
                 Text("city.loading")
             case .loaded(let reading):
-                Text(verbatim: reading.label)
+                // Value, where it was measured, when, and by whom — the same
+                // four things every card on this screen has to say. The
+                // station is named because DWD's Frankfurt thermometer stands
+                // at the airport, and an afternoon reading from the airfield
+                // is not the Innenstadt's afternoon.
+                Text(
+                    "city.temperature.line \(reading.celsiusLabel) \(reading.stationName) \(reading.stampLabel)"
+                )
             case .failed:
                 Text("city.temperature.unavailable")
             }

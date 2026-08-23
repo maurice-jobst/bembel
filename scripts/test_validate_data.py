@@ -350,6 +350,16 @@ class SourceVerifierCoverageTests(unittest.TestCase):
         self.assertIn("uba_luftdaten", names)
         self.assertIn("uba_luftdaten/components", names)
 
+    def test_a_csv_source_plans_a_body_check(self):
+        """DWD's station observations are a CSV file, not an API. The verifier
+        still has to call it: 'the file moved' looks exactly like 'the app
+        works' until someone asks."""
+        source = next(s for s in self.registry["sources"] if s["id"] == "dwd_poi")
+        checks = list(verify_sources.plan(source))
+        self.assertEqual(len(checks), 1)
+        self.assertEqual(checks[0].kind, "body")
+        self.assertTrue(checks[0].url.endswith("10637-BEOB.csv"))
+
     def test_a_collapsed_feature_count_is_a_failure_not_a_note(self):
         check = verify_sources.Check("x", "https://example.invalid", "hits", {"count": 270})
         self.assertEqual(verify_sources.drift(check, {"count": 0}), ("was 270 features, now 0", True))

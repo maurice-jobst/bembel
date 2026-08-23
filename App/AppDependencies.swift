@@ -35,11 +35,11 @@ struct AppDependencies {
     var fountains: any FountainProviding = AppDependencies.liveFountains()
     var radar: any RadarProviding = RadolanRadarProvider()
     /// One property per Stadtzustand upstream, not one aggregate: they fail
-    /// independently and the screen says which one did. The Main level
-    /// (BEM-G01), the air (BEM-G02) and the warnings (BEM-G03) are live;
-    /// temperature is still sample and becomes live on its own ticket
-    /// without touching the others.
-    var temperature: any TemperatureProviding = SampleTemperatureProvider()
+    /// independently and the screen says which one did. All four are live —
+    /// temperature (BEM-G06), the Main level (BEM-G01), the air (BEM-G02) and
+    /// the warnings (BEM-G03) — and each went live on its own ticket without
+    /// touching the others, which is the whole point of the split.
+    var temperature: any TemperatureProviding = DWDPoiTemperatureProvider()
     var gauge: any GaugeProviding = PegelOnlineProvider()
     var air: any AirQualityProviding = UBAAirQualityProvider()
     var cityWarnings: any CityWarningProviding = NinaWarningProvider(table: AppDependencies.regionTable)
