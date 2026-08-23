@@ -146,6 +146,11 @@ one an agent can work in safely
 | Upstreams | `make verify-sources`, weekly: every registered open-data endpoint called for real |
 | Community data | schema and authorship checks in [bembel-data](https://github.com/maurice-jobst/bembel-data) |
 
+[docs/AI-NATIVE.md](docs/AI-NATIVE.md) is the long version: which constraints
+this repo accepted so that agent-written changes stay reviewable, each one
+pointing at the file or check that enforces it — and the section on what got
+through the gates anyway.
+
 ## 🔨 Building
 
 Requires Xcode 16.4+ (iOS 18.5 SDK).
