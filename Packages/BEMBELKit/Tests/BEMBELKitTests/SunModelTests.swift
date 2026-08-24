@@ -333,3 +333,132 @@ struct SunCurveTests {
         #expect(SunModel.elevationCurve(samples: 1).count == 2)
     }
 }
+
+/// Sunrise and sunset, the numbers `BEM-D06` puts on screen and then qualifies.
+///
+/// Checked the same two ways the positions were: against a second, independent
+/// derivation, and against facts that follow from geometry rather than from
+/// this code. The reference times come from the classic sunrise equation
+/// (hour angle from the declination) rather than from sweeping the NOAA
+/// position — a different route to the same number. That formulation carries
+/// its own error of a minute or two, so the tolerance is two minutes; it is
+/// there to catch a wrong hour or a wrong horizon, not to certify seconds.
+@Suite("Daylight")
+struct DaylightTests {
+    private let calendar = berlinCalendar()
+
+    private func daylight(_ iso: String) throws -> (sunrise: Double, sunset: Double) {
+        try #require(
+            SunModel.daylight(on: try instant(iso), at: frankfurt, calendar: calendar),
+            "Frankfurt has a sunrise every day of the year"
+        )
+    }
+
+    @Test("Frankfurt's solstices and equinox match an independent derivation")
+    func publishedTimes() throws {
+        // day, sunrise, sunset — local clock, CEST in summer and CET in winter.
+        let expected: [(String, String, String)] = [
+            ("2026-06-21T10:00:00Z", "05:16", "21:40"),
+            ("2026-12-21T10:00:00Z", "08:23", "16:26"),
+            ("2026-03-20T10:00:00Z", "06:30", "18:38"),
+        ]
+        for (iso, sunrise, sunset) in expected {
+            let times = try daylight(iso)
+            #expect(abs(times.sunrise - minutes(sunrise)) <= 2, "sunrise on \(iso)")
+            #expect(abs(times.sunset - minutes(sunset)) <= 2, "sunset on \(iso)")
+        }
+    }
+
+    @Test("The equinox day is longer than twelve hours, and that is not a bug")
+    func equinoxIsLongerThanTwelveHours() throws {
+        // The horizon convention is what makes this true: the sun is called up
+        // when its *upper limb* appears, half a degree before its centre
+        // reaches the horizon, and refraction lifts it there earlier still. At
+        // Frankfurt's latitude that buys about eight extra minutes. A model
+        // that put sunrise at 0° elevation would return exactly 12 hours here
+        // and be wrong every day of the year.
+        let times = try daylight("2026-03-20T10:00:00Z")
+        let length = times.sunset - times.sunrise
+        #expect(length > 12 * 60)
+        #expect(length < 12 * 60 + 15)
+    }
+
+    @Test("Sunrise, solar noon and sunset are in that order")
+    func ordering() throws {
+        for iso in ["2026-06-21T10:00:00Z", "2026-12-21T10:00:00Z", "2026-09-15T10:00:00Z"] {
+            let times = try daylight(iso)
+            let noon = SunModel.solarNoonMinutes(
+                on: try instant(iso), at: frankfurt, calendar: calendar)
+            #expect(times.sunrise < noon)
+            #expect(noon < times.sunset)
+        }
+    }
+
+    @Test("The solstices really are the longest and shortest days")
+    func solsticeExtremes() throws {
+        let summer = try daylight("2026-06-21T10:00:00Z")
+        let winter = try daylight("2026-12-21T10:00:00Z")
+        let equinox = try daylight("2026-03-20T10:00:00Z")
+        let length = { (t: (sunrise: Double, sunset: Double)) in t.sunset - t.sunrise }
+        #expect(length(summer) > length(equinox))
+        #expect(length(equinox) > length(winter))
+        // Frankfurt's swing is roughly 8h05 to 16h24 — a factor of two.
+        #expect(length(summer) > 16 * 60)
+        #expect(length(winter) < 8.5 * 60)
+    }
+
+    @Test("The horizon constant is the one the position type tests against")
+    func horizonConventionIsSharedNotCopied() throws {
+        // Two places applying "−0.833°" from separate literals is how the
+        // disclosure screen ends up describing a convention the code no longer
+        // follows.
+        #expect(SunModel.horizonElevation == -0.833)
+        // And it is applied to the *geometric* elevation. The refracted value
+        // is deliberately ignored here: −0.833° already contains the
+        // refraction allowance, so a position whose apparent elevation is well
+        // above the threshold is still down if its true one is not.
+        let justUp = SolarPosition(
+            elevation: 0, geometricElevation: SunModel.horizonElevation + 0.001, azimuth: 0)
+        let justDown = SolarPosition(
+            elevation: 0, geometricElevation: SunModel.horizonElevation - 0.001, azimuth: 0)
+        #expect(justUp.isUp)
+        #expect(!justDown.isUp)
+    }
+
+    @Test("The sun is genuinely up between the two times and down outside them")
+    func bracketsHold() throws {
+        let times = try daylight("2026-09-15T10:00:00Z")
+        let day = try instant("2026-09-15T10:00:00Z")
+        func up(_ m: Double) -> Bool {
+            SunModel.position(atMinutes: m, on: day, at: frankfurt, calendar: calendar).isUp
+        }
+        #expect(!up(times.sunrise - 2))
+        #expect(up(times.sunrise + 2))
+        #expect(up(times.sunset - 2))
+        #expect(!up(times.sunset + 2))
+    }
+
+    @Test("Polar day and polar night answer nil rather than a wrong number")
+    func polarNightAndDay() throws {
+        // Longyearbyen, 78.22°N. Frankfurt never sees either case, which is
+        // precisely why an unhandled one would ship unnoticed.
+        let longyearbyen = CLLocationCoordinate2D(latitude: 78.22, longitude: 15.65)
+        var arctic = Calendar(identifier: .gregorian)
+        arctic.timeZone = TimeZone(identifier: "Europe/Oslo")!
+        #expect(
+            SunModel.daylight(
+                on: try instant("2026-12-21T10:00:00Z"), at: longyearbyen, calendar: arctic) == nil)
+        #expect(
+            SunModel.daylight(
+                on: try instant("2026-06-21T10:00:00Z"), at: longyearbyen, calendar: arctic) == nil)
+        // And the same place does have a sunrise in between.
+        #expect(
+            SunModel.daylight(
+                on: try instant("2026-04-15T10:00:00Z"), at: longyearbyen, calendar: arctic) != nil)
+    }
+
+    private func minutes(_ clock: String) -> Double {
+        let parts = clock.split(separator: ":").compactMap { Double($0) }
+        return parts[0] * 60 + parts[1]
+    }
+}
