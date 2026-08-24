@@ -126,10 +126,45 @@ public actor RadolanRadarProvider: RadarProviding {
             return cached.nowcast
         }
         let archive = try await download()
-        let nowcast = try Self.nowcast(
+        let forecast = try Self.nowcast(
             fromArchive: archive, at: coordinate, grid: grid, bounds: bounds)
+        // The past is a bonus, never a precondition (BEM-F03). Twelve separate
+        // requests fail in ways one tar archive does not, and none of those
+        // ways may cost the forecast.
+        let past = await observations(before: forecast.measuredAt ?? Date())
+        let nowcast = forecast.prepending(past)
         cached = (nowcast, Date())
         return nowcast
+    }
+
+    /// The last hour of RY observations, oldest first. Frames that do not
+    /// arrive are simply absent — a shorter axis, not a failure.
+    private func observations(before reference: Date) async -> [RadarFrame] {
+        let stamps = RadolanObservations.stamps(now: reference)
+        return await withTaskGroup(of: RadarFrame?.self) { group in
+            for stamp in stamps {
+                let minute = RadolanObservations.offsetMinutes(of: stamp, from: reference)
+                // Only the past belongs here. A clock that has drifted forward
+                // must not push an observation onto the forecast's ticks.
+                guard minute < 0 else { continue }
+                let url = RadolanObservations.url(for: stamp)
+                let session = session
+                let bounds = bounds
+                group.addTask {
+                    guard
+                        let (data, response) = try? await session.data(from: url),
+                        (response as? HTTPURLResponse).map({ (200..<300).contains($0.statusCode) }) ?? false
+                    else { return nil }
+                    return try? RadolanObservations.frame(
+                        from: data, minute: minute, bounds: bounds)
+                }
+            }
+            var frames: [RadarFrame] = []
+            for await frame in group {
+                if let frame { frames.append(frame) }
+            }
+            return frames.sorted { $0.minute < $1.minute }
+        }
     }
 
     private func download() async throws -> Data {

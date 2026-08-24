@@ -27,6 +27,21 @@ final class SunScreenModel {
     /// times a second while a finger is down.
     private(set) var curve = SunModel.elevationCurve()
 
+    /// Sunrise and sunset for the day on screen, or `nil` where the sun does
+    /// not cross the horizon. Cached with the rest of the per-day work: it
+    /// sweeps the day twice and nothing about it changes while a finger drags
+    /// the scrubber.
+    private(set) var daylight = SunModel.daylight()
+
+    /// The refraction lift at the current scrub position, in degrees — how far
+    /// the atmosphere is holding the sun above where it really is. Shown on
+    /// the accuracy screen because it is the one correction in here a reader
+    /// can watch change: a hundredth of a degree overhead, most of half a
+    /// degree at the horizon.
+    var refractionLift: Double {
+        sun.position.elevation - sun.position.geometricElevation
+    }
+
     func resetToNow() {
         show(at: .now)
     }
@@ -40,5 +55,6 @@ final class SunScreenModel {
         day = date
         solarNoonMinutes = SunModel.solarNoonMinutes(on: date)
         curve = SunModel.elevationCurve(on: date)
+        daylight = SunModel.daylight(on: date)
     }
 }

@@ -83,6 +83,32 @@ public struct RadarNowcast: Sendable {
     /// How far ahead the composite reaches, in minutes.
     public var horizonMinutes: Int { series.last?.minute ?? 0 }
 
+    /// How far back the drawn frames reach, in minutes — negative, or 0 when
+    /// there is no observed past (BEM-F03).
+    public var pastMinutes: Int { min(frames.first?.minute ?? 0, 0) }
+
+    /// Index of the frame for "now". Not zero once the past is there, which is
+    /// why the view asks rather than assuming.
+    public var nowFrameIndex: Int {
+        frames.firstIndex { $0.minute >= 0 } ?? 0
+    }
+
+    /// The same nowcast with observed frames in front of the forecast.
+    /// Observations do not extend `series`: the headline is about what is
+    /// coming, and rain that already fell must not turn "Regen jetzt" on.
+    public func prepending(_ past: [RadarFrame]) -> RadarNowcast {
+        guard !past.isEmpty else { return self }
+        return RadarNowcast(
+            outlook: outlook,
+            series: series,
+            frames: past.filter { $0.minute < 0 } + frames,
+            bounds: bounds,
+            measuredAt: measuredAt,
+            stampLabel: stampLabel,
+            attribution: attribution
+        )
+    }
+
     /// Wall-clock label for a step, so the playhead can say what time it is
     /// showing. Falls back to the step offset when the composite carried no
     /// measurement time — a clock that guesses would be worse than an offset

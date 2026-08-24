@@ -23,6 +23,10 @@ All notable changes to BEMBEL. Format follows
   (Winterpause, Osterregel für historische Brunnen).
 - Live-Regenradar: DWD RADOLAN RV direkt auf dem Gerät geparst (2-h-Nowcast
   für Frankfurt), ohne Drittanbieter-Paket.
+- Regenradar zeigt auch die **vergangene Stunde** (DWD RADOLAN RY): die
+  Zeitleiste reicht von −60 Min bis +120 Min, „jetzt" ist darauf markiert und
+  ist die Startposition. Damit ist zu sehen, ob ein Schauer auf einen zukommt
+  oder abzieht — der Nowcast allein zeigt das nicht.
 - Regenradar zeigt jetzt die echten Radarbilder auf der Karte statt vier
   dekorativer Farbflecken: 25 Bilder über zwei Stunden, Abspielen, Pause und
   Scrubben, Skala in mm/h mit sechs Stufen (einfarbig und monoton — die
@@ -46,6 +50,21 @@ All notable changes to BEMBEL. Format follows
   angenommen hat, damit agentengeschriebene Änderungen überprüfbar bleiben —
   jede mit dem Mechanismus, der sie hält, plus den Regeln ohne Zähne und dem,
   was trotzdem durchkam.
+
+- Sonnenstand erklärt sich: „Wie genau ist das?" nennt Quelle (NOAA, auf dem
+  Gerät), die gegen ein zweites Verfahren geprüfte Genauigkeit, die
+  Horizont-Konvention — und ausdrücklich, was die Zahlen *nicht* versprechen.
+  Der berechnete Sonnenuntergang ist nicht der Moment, in dem die Sonne hinter
+  dem Taunus oder dem Nachbarhaus verschwindet.
+
+### Fixed
+
+- **Sonnenauf- und -untergang lagen um Minuten daneben.** Die −0,833°-Grenze
+  gilt für die *wahre* Sonnenhöhe und enthält die Refraktion bereits; geprüft
+  wurde gegen die refraktionskorrigierte Höhe, also zweimal. Ergebnis:
+  Sonnenaufgang rund drei Minuten zu früh, Untergang eine Minute zu spät —
+  jeden Tag seit BEM-D03. Gefunden beim Schreiben der Offenlegung, die genau
+  diese Konvention beschreibt.
 
 ### Changed
 

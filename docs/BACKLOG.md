@@ -196,6 +196,13 @@ Date + time scrubber, snap-to-now, sunrise/sunset markers. Shipped with `BEM-D03
 ### BEM-D06 — Accuracy disclosure · `size:S` · M2
 **Re-scoped by ADR 0010.** The shadow-model limits (~1 m heights, no balconies, no trees, no terrain) describe a feature v1.0 no longer ships. The Sonnenstand screen has its own accuracy story — refraction, the horizon convention, and what a computed sunrise does and does not promise. Being upfront still costs one screen and buys all the credibility.
 
+**Writing the disclosure found the bug it discloses.** `−0.833°` is the standard sunrise criterion applied to the
+sun's *geometric* elevation: it already contains both the 0.267° of solar radius and the 0.567° of refraction.
+`SolarPosition.isUp` was testing the *refraction-corrected* elevation against it, applying refraction twice — sunrise
+about three minutes early and sunset a minute late, every day since `BEM-D03`. Tests passed because the only case
+that pinned `isUp` built a position with `elevation == geometricElevation`, where the two conventions agree.
+`SunModel.horizonElevation` is now the single constant, and `daylight(on:at:)` sweeps the geometric elevation.
+
 ---
 
 ## EPIC E — Free drinking water
@@ -233,6 +240,19 @@ observation series (RY/WN), a different product and its own ticket.
 
 The frames are resampled onto a lat/lon box rather than stretched from the grid: RADOLAN is polar stereographic and
 its rows are rotated ~1.3° from true north at Frankfurt, which is most of a kilometre across the drawn box.
+
+<a id="bem-f03"></a>
+### BEM-F03 — Radar past (RADOLAN RY) · `size:M` · M2
+The hour before now, from DWD's observation product. Falls out of `BEM-F02`, whose AC asked for a past the
+nowcast product does not have.
+
+**RY is on a different grid from RV.** `GP 900x 900`, classic RADOLAN composite, SW corner 46.9526/3.5889 —
+Frankfurt is row 346, column 424 there and row 498, column 443 on DE1200. Both are inside 900, so reading RY with
+DE1200's corner returns a valid cell about 150 km north: silently wrong, never throws. The header is checked.
+
+Capped at **one hour, twelve frames**, because each frame is its own request against a public service every five
+minutes per user, against one tar archive for the whole forecast. A failed observation shortens the axis; it never
+costs the forecast.
 
 ---
 
