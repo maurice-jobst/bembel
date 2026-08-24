@@ -68,6 +68,13 @@ All notable changes to BEMBEL. Format follows
 
 ### Changed
 
+- **Die drei Zahlen, die der README über `data/sources.json` behauptet, werden
+  jetzt nachgerechnet.** Alle drei waren falsch — 30 Einträge statt 32, 39
+  Endpunkte statt 48, „nine" Tier-5-Funde statt sechs. Keine davon war je
+  geändert worden, weil keine je gelesen wurde. `make validate` rechnet sie
+  jetzt aus der Registry nach, und eine Formulierung, auf die das Muster nicht
+  mehr passt, ist ein Fehler statt einer stillen Abschaltung
+  (`scripts/validate_data.py`, neun Tests).
 - **Schattenkarte-Rendering aus v1.0 gestrichen (ADR 0010).** Die Geometrie
   (`BEM-D01`/`BEM-D02`) bleibt drin, aber als eigenständig veröffentlichter
   Datensatz mit sauberer dl-de/zero-Herkunft; das Rendern (`BEM-D04`) ist der

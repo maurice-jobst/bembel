@@ -199,6 +199,16 @@ A generated placeholder that looks like a measurement survives until something
 independent contradicts it. Fixtures are now captured from real responses, and
 a field nobody can compute honestly is removed instead of approximated.
 
+The same rot reached the shop window. README.md quoted three numbers about
+`data/sources.json` — 30 entries, 39 endpoints, nine tier-5 findings — and by
+the time anything recomputed them the registry held 32, 48 and six. Nobody had
+edited them, which is the point: a number is only as current as the last person
+who remembered it exists, and remembering is not a mechanism. `make validate`
+now recomputes all three, taking the endpoint count from `verify_sources.plan()`
+rather than counting a second way, and treats prose the pattern no longer
+matches as a failure — an unchecked claim that still looks checked is the
+failure mode this whole section is about.
+
 ---
 
 ## Checking any of this
