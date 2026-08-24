@@ -23,6 +23,12 @@ All notable changes to BEMBEL. Format follows
   (Winterpause, Osterregel für historische Brunnen).
 - Live-Regenradar: DWD RADOLAN RV direkt auf dem Gerät geparst (2-h-Nowcast
   für Frankfurt), ohne Drittanbieter-Paket.
+- Regenradar zeigt jetzt die echten Radarbilder auf der Karte statt vier
+  dekorativer Farbflecken: 25 Bilder über zwei Stunden, Abspielen, Pause und
+  Scrubben, Skala in mm/h mit sechs Stufen (einfarbig und monoton — die
+  übliche Grün-Gelb-Rot-Skala ist für Rot-Grün-Sehschwäche die denkbar
+  schlechteste). Die Zeitachse zeigt den Horizont, den die Quelle wirklich
+  hat: `jetzt` bis `+120 Min` statt der erfundenen −60…+90.
 - Stadtzustand mit echten Quellen, je Karte unabhängig: Main-Pegel von
   PEGELONLINE (Osthafen), amtliche Warnungen aus NINA (auf den gewählten Ring
   gefiltert), Luftqualität aus dem UBA-Messnetz (nächstgelegene Station).

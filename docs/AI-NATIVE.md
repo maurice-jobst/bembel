@@ -190,6 +190,11 @@ arrived; the field was deleted rather than filled
 ([`FountainRanking`](../Packages/BEMBELKit/Sources/BEMBELKit/Domain/Fountain.swift)
 computes it from a fix, or shows nothing).
 
+The Regenradar was the same thing at map scale: four blurred ellipses drawn
+over real Frankfurt coordinates, under a headline computed from the actual
+radar. It survived from the first mockup until the frames it was standing in
+for finally arrived (BEM-F02).
+
 A generated placeholder that looks like a measurement survives until something
 independent contradicts it. Fixtures are now captured from real responses, and
 a field nobody can compute honestly is removed instead of approximated.

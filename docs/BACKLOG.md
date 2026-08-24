@@ -224,7 +224,15 @@ The fountain map now lives as the Trinkbrunnen segment of the Orte tab (ADR 0009
 
 <a id="bem-f02"></a>
 ### BEM-F02 — Animated overlay · `size:L` · M2
-Last ~2h in loop, play/pause/scrub, colourblind-safe scale.
+Real RADOLAN frames in a loop, play/pause/scrub, colourblind-safe scale.
+
+**The ticket said "last ~2h"; the product has no past.** RV is a nowcast — it starts at the measurement and runs
+forward two hours. The axis used to read −60…+90, which was the mockup's guess and matched no data that exists.
+It now reads the composite's own horizon, `jetzt` → `+120 Min`. Showing where the rain *has been* needs RADOLAN's
+observation series (RY/WN), a different product and its own ticket.
+
+The frames are resampled onto a lat/lon box rather than stretched from the grid: RADOLAN is polar stereographic and
+its rows are rotated ~1.3° from true north at Frankfurt, which is most of a kilometre across the drawn box.
 
 ---
 

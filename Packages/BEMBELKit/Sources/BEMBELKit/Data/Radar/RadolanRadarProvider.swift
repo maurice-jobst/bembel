@@ -9,53 +9,48 @@ public enum RadarNowcastRules {
     /// 0.1 mm per five minutes is 1.2 mm/h.
     public static let rainThreshold = 0.1
 
-    public static func intensity(_ millimetres: Double) -> String {
+    public static func intensity(_ millimetres: Double) -> RainIntensity {
         switch millimetres {
-        case ..<0.5: "leicht"
-        case ..<2.0: "mäßig"
-        default: "stark"
+        case ..<0.5: .light
+        case ..<2.0: .moderate
+        default: .heavy
         }
+    }
+
+    public static func outlook(series: [RadarSample]) -> RainOutlook {
+        let horizon = series.last?.minute ?? 0
+        guard series.contains(where: { $0.millimetres != nil }) else { return .noData }
+
+        let wet = series.filter { ($0.millimetres ?? 0) >= rainThreshold }
+        guard let first = wet.first else { return .dry(horizonMinutes: horizon) }
+
+        let run = consecutiveRun(from: series, startingAt: first.minute)
+        if first.minute == 0 {
+            // Rain that runs off the end of the composite is not "two more
+            // hours" — it is the edge of what the radar can see.
+            let remaining = run.lastMinute >= horizon ? nil : run.minutes
+            return .rainingNow(intensity: intensity(run.peak), minutesRemaining: remaining)
+        }
+        return .rainStarting(
+            inMinutes: first.minute,
+            intensity: intensity(run.peak),
+            lastingMinutes: run.minutes
+        )
     }
 
     public static func nowcast(
         series: [RadarSample],
-        measuredAt: Date?,
-        now: Date
+        frames: [RadarFrame] = [],
+        bounds: RadarBounds = .rheinMain,
+        measuredAt: Date?
     ) -> RadarNowcast {
-        let clock = DateFormatter.berlinClock
-
-        let wet = series.filter { ($0.millimetres ?? 0) >= rainThreshold }
-        let headline: String
-        let detail: String
-
-        if let first = wet.first, first.minute == 0 {
-            let run = consecutiveRun(from: series, startingAt: 0)
-            headline = "Regen jetzt"
-            detail =
-                run.minutes >= series.last?.minute ?? 0
-                ? "\(intensity(run.peak)), hält die nächsten zwei Stunden an"
-                : "\(intensity(run.peak)), noch etwa \(run.minutes) Minuten"
-        } else if let first = wet.first {
-            let run = consecutiveRun(from: series, startingAt: first.minute)
-            headline = "Regen in \(first.minute) Min"
-            detail = "\(intensity(run.peak)), etwa \(run.minutes) Minuten lang"
-        } else {
-            headline = "Kein Regen"
-            let horizon = series.last?.minute ?? 0
-            detail = horizon > 0 ? "in den nächsten \(horizon) Minuten" : "keine Radardaten"
-        }
-
-        return RadarNowcast(
-            headline: headline,
-            detail: detail,
-            clockLabel: clock.string(from: now),
-            stampLabel: measuredAt.map(clock.string(from:)) ?? "—",
-            // The view's axis runs −60…+90; the composite starts at now, so the
-            // playhead sits where "now" falls on that axis. BEM-F02 owns making
-            // the axis match the data it actually has.
-            progress: 60.0 / 150.0,
+        RadarNowcast(
+            outlook: outlook(series: series),
             series: series,
+            frames: frames,
+            bounds: bounds,
             measuredAt: measuredAt,
+            stampLabel: measuredAt.map(DateFormatter.berlinClock.string(from:)) ?? "—",
             attribution: "Datenbasis: Deutscher Wetterdienst (RADOLAN RV, GeoNutzV)"
         )
     }
@@ -66,7 +61,7 @@ public enum RadarNowcastRules {
     private static func consecutiveRun(
         from series: [RadarSample], startingAt minute: Int
     )
-        -> (minutes: Int, peak: Double)
+        -> (minutes: Int, lastMinute: Int, peak: Double)
     {
         var peak = 0.0
         var last = minute
@@ -75,7 +70,7 @@ public enum RadarNowcastRules {
             peak = max(peak, value)
             last = sample.minute
         }
-        return (max(5, last - minute + 5), peak)
+        return (max(5, last - minute + 5), last, peak)
     }
 }
 
@@ -96,17 +91,23 @@ public actor RadolanRadarProvider: RadarProviding {
     private let session: URLSession
     private let coordinate: CLLocationCoordinate2D
     private let grid: RadolanGrid
+    private let bounds: RadarBounds
     private var cached: (nowcast: RadarNowcast, fetchedAt: Date)?
 
     public init(
         url: URL = RadolanRadarProvider.latestURL,
         coordinate: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 50.1109, longitude: 8.6821),
         grid: RadolanGrid = .de1200,
+        /// Which slice of the national composite gets resampled for drawing.
+        /// Injectable because verifying the overlay means pointing it at wherever
+        /// it is actually raining, which on most days is not Frankfurt.
+        bounds: RadarBounds = .rheinMain,
         session: URLSession = .shared
     ) {
         self.url = url
         self.coordinate = coordinate
         self.grid = grid
+        self.bounds = bounds
         self.session = session
     }
 
@@ -125,7 +126,8 @@ public actor RadolanRadarProvider: RadarProviding {
             return cached.nowcast
         }
         let archive = try await download()
-        let nowcast = try Self.nowcast(fromArchive: archive, at: coordinate, grid: grid, now: Date())
+        let nowcast = try Self.nowcast(
+            fromArchive: archive, at: coordinate, grid: grid, bounds: bounds)
         cached = (nowcast, Date())
         return nowcast
     }
@@ -150,7 +152,7 @@ public actor RadolanRadarProvider: RadarProviding {
         fromArchive archive: Data,
         at coordinate: CLLocationCoordinate2D,
         grid: RadolanGrid = .de1200,
-        now: Date
+        bounds: RadarBounds = .rheinMain
     ) throws -> RadarNowcast {
         let tar: Data
         do {
@@ -161,6 +163,7 @@ public actor RadolanRadarProvider: RadarProviding {
         guard let cell = grid.cell(for: coordinate) else { throw Failure.outsideGrid }
 
         var samples: [RadarSample] = []
+        var frames: [RadarFrame] = []
         var measuredAt: Date?
         for entry in TarArchive.entries(in: tar) {
             // One malformed frame costs that frame, never the whole nowcast.
@@ -172,9 +175,15 @@ public actor RadolanRadarProvider: RadarProviding {
                     millimetres: composite.peak(row: cell.row, column: cell.column)
                 )
             )
+            // Resampled here and the composite dropped immediately: a national
+            // grid is 1100×1200 doubles, and holding 25 of them to draw a
+            // Rhein-Main box would be ~260 MB for 1.6 MB of pixels.
+            frames.append(RadolanResampler.frame(from: composite, grid: grid, bounds: bounds))
         }
         guard !samples.isEmpty else { throw Failure.noUsableFrames }
         samples.sort { $0.minute < $1.minute }
-        return RadarNowcastRules.nowcast(series: samples, measuredAt: measuredAt, now: now)
+        frames.sort { $0.minute < $1.minute }
+        return RadarNowcastRules.nowcast(
+            series: samples, frames: frames, bounds: bounds, measuredAt: measuredAt)
     }
 }
