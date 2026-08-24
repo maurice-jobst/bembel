@@ -46,10 +46,11 @@ anything they cover.
 - Curated data rows: source URL mandatory, facts only, enforced by
   `scripts/validate_data.py`, not by convention.
 - README.md's three numbers about `data/sources.json` (entry count, endpoints
-  the sweep calls, tier-5 findings) are recomputed by `make validate`. Don't
-  hand-edit them to match a change — add the source and rerun. Rewording those
-  sentences fails the check by design: move the pattern in `README_CLAIMS`
-  with the prose, or drop both.
+  the sweep calls, tier-5 findings) are recomputed by `make validate`: the
+  registry is the authority and the prose follows it. Add a source and the
+  check names the new number — write that one down; never adjust a number to
+  paper over the registry. Rewording those sentences fails the check by
+  design: move the pattern in `README_CLAIMS` with the prose, or drop both.
 - The Orte tab (`App/Features/Places/`) carries all three place datasets behind
   one segmented control — there is no Water feature folder any more (ADR 0009).
   `BEMTab` has five cases; adding a sixth pushes iPhone into a "More" overflow.
