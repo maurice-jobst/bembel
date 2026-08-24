@@ -1321,6 +1321,196 @@
         }
       }
     },
+    "sun.accuracy.computed.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf diesem Gerät gerechnet, nicht abgerufen. Der Sonnenhöchststand ist der echte Meridiandurchgang: er wandert übers Jahr um gut eine Stunde und liegt nie einfach bei 13:00."
+          }
+        }
+      }
+    },
+    "sun.accuracy.horizon.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Lufthülle hebt die Sonne optisch an. Was du untergehen siehst, ist geometrisch schon untergegangen. Auf- und Untergang gelten deshalb bei −0,833° wahrer Höhe: halber Sonnendurchmesser plus Refraktion. Gegen 0° gerechnet käme der Sonnenaufgang jeden Tag des Jahres ein paar Minuten zu spät."
+          }
+        }
+      }
+    },
+    "sun.accuracy.horizon.header": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Refraktion und Horizont"
+          }
+        }
+      }
+    },
+    "sun.accuracy.limit.atmosphere": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Refraktionsformel unterstellt Standardatmosphäre (1010 hPa, 10 °C). Bei anderem Luftdruck oder anderer Temperatur verschiebt sich der Auf- und Untergang um Sekunden bis Zehnersekunden."
+          }
+        }
+      }
+    },
+    "sun.accuracy.limit.horizon": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Horizont dieser Rechnung ist frei und eben. Taunus, Häuser und Gelände stehen nicht darin — in einer Straßenschlucht ist die Sonne deutlich früher weg als hier angegeben."
+          }
+        }
+      }
+    },
+    "sun.accuracy.limit.location": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gerechnet wird für Frankfurts Koordinate, nicht für den Standort deines Geräts. Über das Stadtgebiet macht das Sekunden aus."
+          }
+        }
+      }
+    },
+    "sun.accuracy.limits.header": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Was das nicht verspricht"
+          }
+        }
+      }
+    },
+    "sun.accuracy.nodaylight": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "An diesem Tag geht die Sonne hier nicht auf oder nicht unter."
+          }
+        }
+      }
+    },
+    "sun.accuracy.noon": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonnenhöchststand"
+          }
+        }
+      }
+    },
+    "sun.accuracy.open": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genauigkeit"
+          }
+        }
+      }
+    },
+    "sun.accuracy.precision.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gegen ein zweites, unabhängiges Verfahren geprüft (Michalsky 1988 / Astronomical Almanac): beide stimmen auf 0,009° überein — über beide Halbkugeln, alle Jahreszeiten und bis weit unter den Horizont. Das ist eine andere Herleitung, nicht dieselbe Rechnung zweimal. Die NOAA gibt für ihre Näherungen ±0,5 Minuten Auf- und Untergangszeit für die Jahre 1800 bis 2100 an."
+          }
+        }
+      }
+    },
+    "sun.accuracy.precision.header": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wie genau"
+          }
+        }
+      }
+    },
+    "sun.accuracy.refraction.footer": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Am Horizont gut ein halbes Grad, im Zenit ein Hundertstel. Zieh am Regler und sieh zu."
+          }
+        }
+      }
+    },
+    "sun.accuracy.refraction.now": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anhebung gerade"
+          }
+        }
+      }
+    },
+    "sun.accuracy.source.body": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aus den Sonnenstandsgleichungen der NOAA, direkt auf dem Gerät gerechnet. Keine Netzabfrage, keine Ephemeridendatei, kein fremdes Paket. Dieselbe Eingabe ergibt dieselbe Ausgabe — auf jedem Gerät, in jedem Jahr, auch offline."
+          }
+        }
+      }
+    },
+    "sun.accuracy.source.header": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Woher die Zahlen kommen"
+          }
+        }
+      }
+    },
+    "sun.accuracy.sunrise": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonnenaufgang"
+          }
+        }
+      }
+    },
+    "sun.accuracy.sunset": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonnenuntergang"
+          }
+        }
+      }
+    },
+    "sun.accuracy.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wie genau ist das?"
+          }
+        }
+      }
+    },
     "sun.direction.east": {
       "localizations": {
         "de": {

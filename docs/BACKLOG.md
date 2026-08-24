@@ -196,6 +196,13 @@ Date + time scrubber, snap-to-now, sunrise/sunset markers. Shipped with `BEM-D03
 ### BEM-D06 — Accuracy disclosure · `size:S` · M2
 **Re-scoped by ADR 0010.** The shadow-model limits (~1 m heights, no balconies, no trees, no terrain) describe a feature v1.0 no longer ships. The Sonnenstand screen has its own accuracy story — refraction, the horizon convention, and what a computed sunrise does and does not promise. Being upfront still costs one screen and buys all the credibility.
 
+**Writing the disclosure found the bug it discloses.** `−0.833°` is the standard sunrise criterion applied to the
+sun's *geometric* elevation: it already contains both the 0.267° of solar radius and the 0.567° of refraction.
+`SolarPosition.isUp` was testing the *refraction-corrected* elevation against it, applying refraction twice — sunrise
+about three minutes early and sunset a minute late, every day since `BEM-D03`. Tests passed because the only case
+that pinned `isUp` built a position with `elevation == geometricElevation`, where the two conventions agree.
+`SunModel.horizonElevation` is now the single constant, and `daylight(on:at:)` sweeps the geometric elevation.
+
 ---
 
 ## EPIC E — Free drinking water
