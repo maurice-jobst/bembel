@@ -193,7 +193,7 @@ struct RadarView: View {
                     }
                 }
 
-                axis(horizon: nowcast.horizonMinutes)
+                axis(from: nowcast.pastMinutes, to: nowcast.horizonMinutes)
 
                 SourceLine(
                     systemImage: "arrow.trianglehead.2.clockwise",
@@ -224,9 +224,11 @@ struct RadarView: View {
         .accessibilityLabel(model.isPlaying ? "radar.pause" : "radar.play")
     }
 
-    /// "jetzt" at the head of the forecast, "+25 Min" anywhere else.
+    /// "jetzt" at the present, "+25 Min" ahead of it, "vor 25 Min" behind.
     private var playheadCaption: LocalizedStringKey {
-        model.currentMinute == 0 ? "radar.now" : "radar.ahead \(model.currentMinute)"
+        let minute = model.currentMinute
+        if minute == 0 { return "radar.now" }
+        return minute > 0 ? "radar.ahead \(minute)" : "radar.behind \(-minute)"
     }
 
     private var timelineTrack: some View {
@@ -239,6 +241,16 @@ struct RadarView: View {
                 Capsule()
                     .fill(BEMColor.cobaltDeep)
                     .frame(width: width * model.progress, height: 4)
+                // Where the observed past ends and the forecast begins. Without
+                // it the track is one undifferentiated bar and "jetzt" is a
+                // word in the axis rather than a place on the timeline.
+                if model.nowFraction > 0 {
+                    Circle()
+                        .fill(BEMColor.saltGlazeElevated)
+                        .stroke(BEMColor.cobaltDeep, lineWidth: 1.5)
+                        .frame(width: 7, height: 7)
+                        .offset(x: width * model.nowFraction - 3.5)
+                }
                 RoundedRectangle(cornerRadius: 2)
                     .fill(BEMColor.cobalt)
                     .frame(width: 3, height: 18)
@@ -264,22 +276,23 @@ struct RadarView: View {
         }
     }
 
-    /// The axis is the data's own horizon, read from the composite.
+    /// The axis is the data's own span, read from the frames.
     ///
     /// It used to read −60…+90, which was the design's guess and matched
-    /// nothing: RV is a *nowcast*, it starts at the measurement and runs
-    /// forward two hours. There is no past hour in this product, so the axis
-    /// no longer draws one. Showing where the rain has been needs RADOLAN's
-    /// observation series, which is a different product and its own ticket.
-    private func axis(horizon: Int) -> some View {
+    /// nothing. BEM-F02 cut it to the forecast's real horizon; BEM-F03 put a
+    /// past back in front of it — from a different product on a different
+    /// grid, which is why it took a second ticket rather than a constant.
+    /// Both ends come from the data, so a frame that fails to arrive shortens
+    /// the axis instead of mislabelling it.
+    private func axis(from past: Int, to horizon: Int) -> some View {
         HStack {
+            if past < 0 {
+                Text("radar.axis.past \(-past)")
+                Spacer()
+            }
             Text("radar.now")
             Spacer()
-            Text(verbatim: "+\(horizon / 4)")
-            Spacer()
             Text(verbatim: "+\(horizon / 2)")
-            Spacer()
-            Text(verbatim: "+\(horizon * 3 / 4)")
             Spacer()
             Text("radar.axis.end \(horizon)")
         }

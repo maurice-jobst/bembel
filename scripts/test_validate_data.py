@@ -360,6 +360,16 @@ class SourceVerifierCoverageTests(unittest.TestCase):
         self.assertEqual(checks[0].kind, "body")
         self.assertTrue(checks[0].url.endswith("10637-BEOB.csv"))
 
+    def test_a_binary_source_plans_a_body_check(self):
+        """The radar was a live upstream nobody was checking. RADOLAN is a
+        binary file, not an API, and until BEM-F03 it was absent from the
+        registry entirely — checked-looking by being invisible."""
+        for sid in ("dwd_radolan_rv", "dwd_radolan_ry"):
+            source = next(s for s in self.registry["sources"] if s["id"] == sid)
+            checks = list(verify_sources.plan(source))
+            self.assertEqual(len(checks), 1, sid)
+            self.assertEqual(checks[0].kind, "body")
+
     def test_a_collapsed_feature_count_is_a_failure_not_a_note(self):
         check = verify_sources.Check("x", "https://example.invalid", "hits", {"count": 270})
         self.assertEqual(verify_sources.drift(check, {"count": 0}), ("was 270 features, now 0", True))

@@ -29,11 +29,17 @@ public struct SolarPosition: Sendable, Equatable {
         self.azimuth = azimuth
     }
 
-    /// True while any part of the disc is up. The −0.833° is the standard
-    /// sunrise definition: half a degree of solar radius plus the refraction
-    /// that lifts the disc into view before it geometrically clears the
-    /// horizon.
-    public var isUp: Bool { elevation > -0.833 }
+    /// True while any part of the disc is up.
+    ///
+    /// Tested against `geometricElevation`, not `elevation`. The −0.833° is
+    /// the standard sunrise criterion applied to the sun's *true* position: it
+    /// already bundles the 0.267° of solar radius **and** the 0.567° of
+    /// refraction that lifts the disc into view. Comparing the
+    /// refraction-corrected elevation against it applies refraction twice,
+    /// which reported sunrise about three minutes early and sunset a minute
+    /// late, every day of the year. Found while writing the accuracy
+    /// disclosure this convention is described on (BEM-D06).
+    public var isUp: Bool { geometricElevation > SunModel.horizonElevation }
 
     /// The bearing a shadow is cast towards — directly away from the sun.
     public var shadowBearing: Double { (azimuth + 180).truncatingRemainder(dividingBy: 360) }

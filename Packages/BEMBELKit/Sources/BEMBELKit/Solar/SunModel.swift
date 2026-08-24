@@ -165,6 +165,77 @@ public enum SunModel {
         return best.minutes
     }
 
+    /// The standard sunrise/sunset criterion, applied to the sun's **true**
+    /// (unrefracted) elevation: 0.267° of solar radius plus 0.567° of
+    /// atmospheric refraction. `SolarPosition.isUp` tests against this, and so
+    /// does `daylight` — named once so the screen that discloses the
+    /// convention and the code that applies it cannot drift apart.
+    public static let horizonElevation = -0.833
+
+    /// Sunrise and sunset in local clock minutes, or `nil` for a day the sun
+    /// does not cross the horizon at all.
+    ///
+    /// `nil` is a real answer, not a failure: above the Arctic circle there are
+    /// days with no sunrise and days with no sunset, and a number there would
+    /// be a lie rather than an approximation. Frankfurt never sees one, which
+    /// is exactly why it would go unnoticed.
+    ///
+    /// Coarse sweep then bisection, like `solarNoonMinutes` — the elevation
+    /// crosses the horizon at most once each way per day, so there is no
+    /// wrong crossing to land on, and this needs no separate inversion of the
+    /// equation of time.
+    public static func daylight(
+        on day: Date = .now,
+        at coordinate: CLLocationCoordinate2D = SunModel.frankfurt,
+        calendar: Calendar = .current
+    ) -> (sunrise: Double, sunset: Double)? {
+        // Geometric, not refracted: see `horizonElevation`. Sweeping the
+        // refracted elevation against the same threshold double-counts
+        // refraction and stretches the day by about four minutes.
+        func elevation(_ minutes: Double) -> Double {
+            position(atMinutes: minutes, on: day, at: coordinate, calendar: calendar)
+                .geometricElevation
+        }
+
+        var crossings: [(minutes: Double, rising: Bool)] = []
+        var previous = elevation(0)
+        for step in stride(from: 5.0, through: 1440, by: 5) {
+            let current = elevation(step)
+            let wasUp = previous > horizonElevation
+            let isUp = current > horizonElevation
+            if wasUp != isUp {
+                crossings.append((bisect(from: step - 5, to: step, rising: isUp, elevation: elevation), isUp))
+            }
+            previous = current
+        }
+
+        guard
+            let sunrise = crossings.first(where: { $0.rising })?.minutes,
+            let sunset = crossings.last(where: { !$0.rising })?.minutes,
+            sunrise < sunset
+        else { return nil }
+        return (sunrise, sunset)
+    }
+
+    /// Where the elevation crosses the horizon between two minutes that
+    /// straddle it, to a tenth of a minute.
+    private static func bisect(
+        from low: Double, to high: Double, rising: Bool, elevation: (Double) -> Double
+    ) -> Double {
+        var low = low
+        var high = high
+        while high - low > 0.1 {
+            let middle = (low + high) / 2
+            let isUp = elevation(middle) > horizonElevation
+            if isUp == rising {
+                high = middle
+            } else {
+                low = middle
+            }
+        }
+        return (low + high) / 2
+    }
+
     public static func clockLabel(minutes: Double) -> String {
         let h = Int(minutes) / 60
         let m = Int(minutes) % 60

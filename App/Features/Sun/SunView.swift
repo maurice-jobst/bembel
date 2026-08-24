@@ -12,6 +12,7 @@ import SwiftUI
 struct SunView: View {
     @Environment(Router.self) private var router
     @State private var model = SunScreenModel()
+    @State private var isPresentingAccuracy = false
     @State private var position: MapCameraPosition = .region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 50.1109, longitude: 8.6714),
@@ -38,6 +39,14 @@ struct SunView: View {
             guard let date else { return }
             model.show(at: date)
             router.sunDate = nil
+        }
+        .sheet(isPresented: $isPresentingAccuracy) {
+            SunAccuracyView(
+                day: model.day,
+                daylight: model.daylight,
+                solarNoonMinutes: model.solarNoonMinutes,
+                refractionLift: model.refractionLift
+            )
         }
     }
 
@@ -73,11 +82,24 @@ struct SunView: View {
                 Text(verbatim: SunModel.clockLabel(minutes: model.minutes))
                     .font(BEMFont.boardLarge)
                     .foregroundStyle(BEMColor.ink)
-                Text(
-                    "sun.elevation \(model.sun.elevation) \(String(localized: model.sun.westward ? "sun.direction.east" : "sun.direction.west"))"
-                )
-                .font(BEMFont.dataLabel)
-                .foregroundStyle(BEMColor.inkSecondary)
+                // Tappable on purpose: the elevation readout is the number the
+                // accuracy screen is about, so it is where someone wondering
+                // about it will reach first.
+                Button {
+                    isPresentingAccuracy = true
+                } label: {
+                    HStack(spacing: 4) {
+                        Text(
+                            "sun.elevation \(model.sun.elevation) \(String(localized: model.sun.westward ? "sun.direction.east" : "sun.direction.west"))"
+                        )
+                        Image(systemName: "info.circle")
+                            .font(.caption2)
+                    }
+                    .font(BEMFont.dataLabel)
+                    .foregroundStyle(BEMColor.inkSecondary)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("sun.accuracy.open")
                 Spacer()
                 Button {
                     model.resetToNow()

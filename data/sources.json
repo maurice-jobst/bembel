@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-08-23",
+  "updated": "2026-08-24",
   "note": "Every upstream BEMBEL reads, one entry per source. Liveness is checked by scripts/verify_sources.py; the shape is enforced by scripts/validate_data.py against data/schema/sources.schema.json. This registry is not shipped data — data/ATTRIBUTION.json remains the licence record for the datasets bundled into the app.",
   "attribution_required": true,
   "tiers": {
@@ -282,6 +282,60 @@
         "Rows arrive newest-first; nothing documents that, so sort rather than index [0]."
       ],
       "note": "Chosen over brightsky for BEM-G06: this is DWD's own file, which keeps a hosted third-party service out of the critical path (ADR 0008). The thermometer stands on the airfield and reads cooler than the Innenstadt on hot afternoons — the app names the station for exactly that reason."
+    },
+    {
+      "id": "dwd_radolan_rv",
+      "name": "DWD RADOLAN RV (Regen-Nowcast)",
+      "tier": 1,
+      "feature": "Regenradar, Vorhersage (BEM-F01/F02)",
+      "protocol": "binary",
+      "url": "https://opendata.dwd.de/weather/radar/composite/rv/DE1200_RV_LATEST.tar.bz2",
+      "base": "https://opendata.dwd.de/weather/radar/composite/rv/",
+      "auth": "none",
+      "license": "GeoNutzV",
+      "attribution": "Deutscher Wetterdienst",
+      "cadence": "5m",
+      "verified_at": "2026-08-24",
+      "observed": {
+        "frames": 25,
+        "step_minutes": 5,
+        "horizon_minutes": 120
+      },
+      "grid": "DE1200: 1100×1200 at 1 km, SW corner 45.68606067/3.566994635. Frankfurt = row 498, column 443.",
+      "gotchas": [
+        "The nowcast composites in this directory are HDF5 (`composite_rv_*.tar` holds `-hd5` files). The parseable classic RADOLAN binary is `DE1200_RV<stamp>.tar.bz2` / `DE1200_RV_LATEST.tar.bz2` in the same directory.",
+        "bzip2 is absent from Apple's Compression framework, but libbz2.tbd ships in every Apple SDK — a system library, not a dependency.",
+        "No-data is 0x29C4 and the 0x2000 flag bit; both must stay nil, never 0 mm.",
+        "Read the header: GP is rows x columns, PR is the scale exponent, VV the forecast step. Nothing is safe to hardcode."
+      ],
+      "note": "One tar archive covers the whole two-hour forecast. This is an observation-free product: it starts at the measurement and runs forward, which is why the past comes from dwd_radolan_ry instead."
+    },
+    {
+      "id": "dwd_radolan_ry",
+      "name": "DWD RADOLAN RY (Regen-Beobachtung)",
+      "tier": 2,
+      "feature": "Regenradar, vergangene Stunde (BEM-F03)",
+      "protocol": "binary",
+      "url": "https://opendata.dwd.de/weather/radar/radolan/ry/",
+      "auth": "none",
+      "license": "GeoNutzV",
+      "attribution": "Deutscher Wetterdienst",
+      "cadence": "5m",
+      "verified_at": "2026-08-24",
+      "observed": {
+        "retained_files": 576,
+        "bytes_dry": 3743,
+        "bytes_wet": 8637
+      },
+      "grid": "Classic RADOLAN 900×900 at 1 km, SW corner 46.9526/3.5889 — NOT DE1200. Frankfurt = row 346, column 424.",
+      "gotchas": [
+        "Different grid from RV. Reading RY with DE1200's corner returns an in-bounds cell about 150 km north — silently wrong, never throws. Check the header's GP field.",
+        "The header writes the geometry as `GP 900x 900`, with spaces inside the field.",
+        "No VV field: it is an observation, so the forecast step is absent rather than 0.",
+        "The URL checked here is the directory. Individual filenames carry a UTC timestamp (raa01-ry_10000-YYMMDDhhmm-dwd---bin.bz2) and 404 once they roll off.",
+        "A composite is not on the server the instant its timestamp says — back off one five-minute step."
+      ],
+      "note": "One file per frame, so an hour of past is twelve requests against a public service every five minutes per user. BEM-F03 caps it at one hour for that reason; two hours would double it for a question the last hour already answers."
     },
     {
       "id": "dwd_warnungen",
