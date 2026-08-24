@@ -56,14 +56,28 @@ final class RadarModel {
         nowcast = .loading
         nowcast = await .result { try await provider.nowcast() }
         renderImages()
+        resetToNow()
     }
 
     func refresh(from provider: any RadarProviding) async {
         pause()
         nowcast = .loading
         nowcast = await .result { try await provider.nowcast() }
-        playhead = 0
         renderImages()
+        resetToNow()
+    }
+
+    /// Open on the present, not on the oldest frame. Once observations are in
+    /// front of the forecast (BEM-F03) index 0 is an hour ago, and a radar
+    /// that opens in the past is a radar that looks broken.
+    func resetToNow() {
+        playhead = nowcast.value?.nowFrameIndex ?? 0
+    }
+
+    /// Where "now" sits along the track, 0…1 — the tick the axis marks.
+    var nowFraction: Double {
+        guard frames.count > 1, let index = nowcast.value?.nowFrameIndex else { return 0 }
+        return Double(index) / Double(frames.count - 1)
     }
 
     /// The map's colour scheme can change while the nowcast is on screen —

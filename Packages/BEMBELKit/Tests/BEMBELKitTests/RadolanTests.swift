@@ -474,3 +474,210 @@ struct RadarBandTests {
         #expect(zip(RadarRaster.bands, RadarRaster.bands.dropFirst()).allSatisfy { $0 < $1 })
     }
 }
+
+/// RADOLAN RY, the observation product behind the timeline's past (BEM-F03).
+///
+/// `radolan-ry-900.bin.bz2` is a real frame from 2026-08-23T19:55Z, the
+/// evening the Baltic band was over Rügen — 8.6 KB compressed, the size that
+/// made twelve separate requests defensible in the first place.
+@Suite("RADOLAN observations")
+struct RadolanObservationTests {
+    private let frankfurt = CLLocationCoordinate2D(latitude: 50.1109, longitude: 8.6821)
+
+    private func fixture() throws -> Data {
+        let url = try #require(
+            Bundle.module.url(forResource: "radolan-ry-900", withExtension: "bin.bz2"))
+        return try Data(contentsOf: url)
+    }
+
+    private func composite() throws -> RadolanComposite {
+        try RadolanComposite(data: try BZip2.decompress(try fixture()))
+    }
+
+    @Test("RY is 900×900, and the header says so rather than us assuming it")
+    func geometry() throws {
+        let composite = try composite()
+        #expect(composite.product == "RY")
+        #expect(composite.rows == 900)
+        #expect(composite.columns == 900)
+        // No VV field on an observation: it forecasts nothing.
+        #expect(composite.forecastMinute == 0)
+        #expect(composite.measuredAt != nil)
+        // `GP 900x 900` carries spaces inside the field. A parser that split on
+        // "x" without trimming would read 900 and " 900" and fail.
+        #expect(composite.values.count == 900 * 900)
+    }
+
+    @Test("Frankfurt sits at row 346, column 424 — with coverage around it")
+    func frankfurtCell() throws {
+        let cell = try #require(RadolanGrid.radolan900.cell(for: frankfurt))
+        #expect(cell.row == 346)
+        #expect(cell.column == 424)
+        // In bounds is not enough: DE1200's corner would also put Frankfurt in
+        // bounds on this grid, hundreds of kilometres from Frankfurt. A
+        // no-data-free window is the check that catches that.
+        let composite = try composite()
+        var readings = 0
+        for dr in -3...3 {
+            for dc in -3...3 where composite.value(row: cell.row + dr, column: cell.column + dc) != nil {
+                readings += 1
+            }
+        }
+        #expect(readings == 49)
+    }
+
+    @Test("The wrong grid gives an in-bounds cell 150 km away, and never throws")
+    func wrongGridFailsSilently() throws {
+        // This is the failure the geometry guard exists for, and it is worse
+        // than being out of bounds. Frankfurt is (346, 424) on the 900×900
+        // grid and (498, 443) on DE1200 — and 498 and 443 are *both* inside
+        // 900, so reading an RY frame with DE1200's corner returns a perfectly
+        // valid cell about 150 km north. Nothing throws. The rain would simply
+        // be drawn in the wrong place, which is the one radar bug a user
+        // cannot detect.
+        let onNine = try #require(RadolanGrid.radolan900.cell(for: frankfurt))
+        let onTwelve = try #require(RadolanGrid.de1200.cell(for: frankfurt))
+        #expect(onNine.row == 346 && onNine.column == 424)
+        #expect(onTwelve.row < 900 && onTwelve.column < 900, "the wrong grid stays in bounds")
+        // One cell is one kilometre.
+        let displacement =
+            (Double(onTwelve.row - onNine.row) * Double(onTwelve.row - onNine.row)
+            + Double(onTwelve.column - onNine.column) * Double(onTwelve.column - onNine.column)).squareRoot()
+        #expect(displacement > 100)
+    }
+
+    @Test("A frame resamples onto the same box as the forecast's frames")
+    func resamplesOntoSharedBounds() throws {
+        let frame = try RadolanObservations.frame(
+            from: try fixture(), minute: -30, bounds: .rheinMain)
+        #expect(frame.minute == -30)
+        #expect(frame.width == RadarRaster.width)
+        #expect(frame.height == RadarRaster.height)
+        // Same geometry as a forecast frame, which is what lets the view treat
+        // past and future identically.
+        #expect(frame.millimetres.count == RadarRaster.width * RadarRaster.height)
+    }
+
+    @Test("A frame on an unexpected grid is refused, not drawn")
+    func rejectsWrongGeometry() throws {
+        // The RV composite is a real RADOLAN frame on the *other* grid. Handed
+        // to the observation path it must be refused: drawing it would place
+        // German rain over the wrong 900 km.
+        let rv = try #require(
+            Bundle.module.url(forResource: "radolan-rv-de1200", withExtension: "tar.bz2"))
+        let tar = try BZip2.decompress(try Data(contentsOf: rv))
+        let entry = try #require(TarArchive.entries(in: tar).first)
+        let composite = try RadolanComposite(data: entry.data)
+        #expect(composite.rows == 1200)
+        #expect(
+            throws: RadolanObservations.Failure.unexpectedGeometry(rows: 1200, columns: 1100)
+        ) {
+            _ = try RadolanObservations.frame(from: composite, minute: -5, bounds: .rheinMain)
+        }
+    }
+
+    // MARK: - URL scheme
+
+    private func utc(_ text: String) throws -> Date {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        return try #require(formatter.date(from: text))
+    }
+
+    @Test("Stamps floor to the five-minute grid and back off one step")
+    func stamps() throws {
+        // 06:17 rounds down to 06:15, then backs off to 06:10: a composite is
+        // not on the server the moment its timestamp says, and asking early
+        // buys a 404 rather than a wait.
+        #expect(
+            RadolanObservations.latestStamp(now: try utc("2026-08-24 06:17"))
+                == (try utc("2026-08-24 06:10")))
+        // Exactly on a boundary still backs off.
+        #expect(
+            RadolanObservations.latestStamp(now: try utc("2026-08-24 06:15"))
+                == (try utc("2026-08-24 06:10")))
+    }
+
+    @Test("Twelve frames, oldest first, an hour of them")
+    func stampSeries() throws {
+        let stamps = RadolanObservations.stamps(now: try utc("2026-08-24 06:17"))
+        #expect(stamps.count == 12)
+        #expect(stamps.first == (try utc("2026-08-24 05:15")))
+        #expect(stamps.last == (try utc("2026-08-24 06:10")))
+        #expect(zip(stamps, stamps.dropFirst()).allSatisfy { $1.timeIntervalSince($0) == 300 })
+    }
+
+    @Test("The filename is DWD's, two-digit year and all")
+    func urls() throws {
+        let url = RadolanObservations.url(for: try utc("2026-08-24 06:15"))
+        #expect(
+            url.absoluteString
+                == "https://opendata.dwd.de/weather/radar/radolan/ry/raa01-ry_10000-2608240615-dwd---bin.bz2"
+        )
+    }
+
+    @Test("Offsets are negative and land on the five-minute ticks")
+    func offsets() throws {
+        let reference = try utc("2026-08-24 06:15")
+        #expect(
+            RadolanObservations.offsetMinutes(of: try utc("2026-08-24 05:15"), from: reference) == -60)
+        #expect(
+            RadolanObservations.offsetMinutes(of: try utc("2026-08-24 06:10"), from: reference) == -5)
+        // A few seconds of clock drift must not produce a −4 that misses a tick.
+        let drifted = try utc("2026-08-24 06:10").addingTimeInterval(38)
+        #expect(RadolanObservations.offsetMinutes(of: drifted, from: reference) == -5)
+    }
+}
+
+@Suite("Nowcast assembly")
+struct NowcastAssemblyTests {
+    private func frame(_ minute: Int) -> RadarFrame {
+        RadarFrame(minute: minute, width: 1, height: 1, millimetres: [1])
+    }
+
+    @Test("Observations go in front of the forecast and move 'now'")
+    func prepending() {
+        let base = RadarNowcast(
+            outlook: .dry(horizonMinutes: 120),
+            series: [RadarSample(minute: 0, millimetres: 0)],
+            frames: [frame(0), frame(5)]
+        )
+        #expect(base.nowFrameIndex == 0)
+        #expect(base.pastMinutes == 0)
+
+        let withPast = base.prepending([frame(-10), frame(-5)])
+        #expect(withPast.frames.map(\.minute) == [-10, -5, 0, 5])
+        #expect(withPast.pastMinutes == -10)
+        // "Now" is no longer the first frame, which is the whole reason the
+        // view asks for this index instead of using zero.
+        #expect(withPast.nowFrameIndex == 2)
+    }
+
+    @Test("A failed past leaves the forecast exactly as it was")
+    func emptyPastChangesNothing() {
+        let base = RadarNowcast(
+            outlook: .dry(horizonMinutes: 120), series: [], frames: [frame(0), frame(5)])
+        let unchanged = base.prepending([])
+        #expect(unchanged.frames.map(\.minute) == [0, 5])
+        #expect(unchanged.nowFrameIndex == 0)
+    }
+
+    @Test("Observations never reach the headline")
+    func pastDoesNotChangeTheOutlook() {
+        // Rain that already fell must not turn "Regen jetzt" on. The series is
+        // the forecast at the user's location; frames are only pixels.
+        let base = RadarNowcast(outlook: .dry(horizonMinutes: 120), series: [], frames: [frame(0)])
+        let withPast = base.prepending([frame(-30)])
+        #expect(withPast.outlook == .dry(horizonMinutes: 120))
+        #expect(withPast.series.isEmpty)
+    }
+
+    @Test("A stray non-negative frame is not accepted as past")
+    func onlyNegativeMinutesArePast() {
+        let base = RadarNowcast(outlook: .noData, frames: [frame(0)])
+        let withPast = base.prepending([frame(-5), frame(0), frame(10)])
+        #expect(withPast.frames.map(\.minute) == [-5, 0])
+    }
+}
