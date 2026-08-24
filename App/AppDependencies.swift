@@ -33,7 +33,7 @@ struct AppDependencies {
 
     var departures: any DeparturesProviding = SampleDeparturesProvider()
     var fountains: any FountainProviding = AppDependencies.liveFountains()
-    var radar: any RadarProviding = RadolanRadarProvider()
+    var radar: any RadarProviding = AppDependencies.liveRadar()
     /// One property per Stadtzustand upstream, not one aggregate: they fail
     /// independently and the screen says which one did. All four are live —
     /// temperature (BEM-G06), the Main level (BEM-G01), the air (BEM-G02) and
@@ -57,6 +57,17 @@ struct AppDependencies {
         #else
             return CitySources(temperature: temperature, gauge: gauge, air: air, warnings: cityWarnings)
         #endif
+    }
+
+    /// Rhein-Main by default. `DebugRadarRegion` can move the drawn box, which
+    /// is the only way to look at the overlay on a dry day (BEM-F02).
+    static func liveRadar() -> any RadarProviding {
+        #if DEBUG
+            if let bounds = DebugRadarRegion.bounds, let coordinate = DebugRadarRegion.coordinate {
+                return RadolanRadarProvider(coordinate: coordinate, bounds: bounds)
+            }
+        #endif
+        return RadolanRadarProvider()
     }
 
     /// `??` cannot bridge the two concrete types into `any RegisterProviding`,

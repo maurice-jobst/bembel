@@ -51,6 +51,23 @@ public struct RadolanGrid: Sendable {
         )
     }
 
+    /// The inverse of `project`. Closed form, no iteration: the projection's
+    /// radial term `cos φ / (1 + sin φ)` is `tan(π/4 − φ/2)`, so the latitude
+    /// falls straight out of an `atan`.
+    ///
+    /// Needed because drawing the radar on a map is the opposite question from
+    /// reading one cell: the map asks where a cell *is*, not which cell covers
+    /// a place.
+    static func unproject(x: Double, y: Double) -> (latitude: Double, longitude: Double) {
+        let phi0 = standardParallel * .pi / 180
+        let lambda0 = originLongitude * .pi / 180
+        // Grid north is −y, which is why the arguments look swapped.
+        let lambda = lambda0 + atan2(x, -y)
+        let rho = (x * x + y * y).squareRoot()
+        let phi = .pi / 2 - 2 * atan(rho / (earthRadius * (1 + sin(phi0))))
+        return (phi * 180 / .pi, lambda * 180 / .pi)
+    }
+
     /// Grid cell containing this coordinate, or `nil` outside the grid.
     /// Row 0 is the southernmost, matching the byte order in the composite.
     public func cell(for coordinate: CLLocationCoordinate2D) -> (row: Int, column: Int)? {
@@ -59,5 +76,16 @@ public struct RadolanGrid: Sendable {
         let row = Int(((point.y - originY) / cellSize).rounded())
         guard (0..<columns).contains(column), (0..<rows).contains(row) else { return nil }
         return (row, column)
+    }
+
+    /// Centre of a grid cell. Out-of-range indices are allowed on purpose —
+    /// the projection is defined beyond the grid, and a caller walking a
+    /// bounding box should get a coordinate it can then reject.
+    public func coordinate(row: Int, column: Int) -> CLLocationCoordinate2D {
+        let point = Self.unproject(
+            x: originX + Double(column) * cellSize,
+            y: originY + Double(row) * cellSize
+        )
+        return CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
     }
 }

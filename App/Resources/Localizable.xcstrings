@@ -761,6 +761,116 @@
         }
       }
     },
+    "radar.ahead %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld Min"
+          }
+        }
+      }
+    },
+    "radar.axis.end %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld Min"
+          }
+        }
+      }
+    },
+    "radar.detail.dry %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "in den nächsten %lld Minuten"
+          }
+        }
+      }
+    },
+    "radar.detail.nodata": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Radar sieht hier gerade nichts"
+          }
+        }
+      }
+    },
+    "radar.detail.now %@ %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, noch etwa %2$lld Minuten"
+          }
+        }
+      }
+    },
+    "radar.detail.now.beyond %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, hält über die Vorhersage hinaus an"
+          }
+        }
+      }
+    },
+    "radar.detail.starting %@ %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@, etwa %2$lld Minuten lang"
+          }
+        }
+      }
+    },
+    "radar.intensity.heavy": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "stark"
+          }
+        }
+      }
+    },
+    "radar.intensity.light": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "leicht"
+          }
+        }
+      }
+    },
+    "radar.intensity.moderate": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "mäßig"
+          }
+        }
+      }
+    },
+    "radar.legend.accessibility": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Legende: Regenmenge in Millimetern pro Stunde, von hell (wenig) nach dunkel (viel)"
+          }
+        }
+      }
+    },
     "radar.legend.unit": {
       "localizations": {
         "de": {
@@ -771,12 +881,72 @@
         }
       }
     },
+    "radar.loading": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Radar wird geladen"
+          }
+        }
+      }
+    },
     "radar.now": {
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
             "value": "jetzt"
+          }
+        }
+      }
+    },
+    "radar.outlook.dry": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kein Regen"
+          }
+        }
+      }
+    },
+    "radar.outlook.nodata": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Radardaten"
+          }
+        }
+      }
+    },
+    "radar.outlook.now": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regen jetzt"
+          }
+        }
+      }
+    },
+    "radar.outlook.starting %lld": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Regen in %lld Min"
+          }
+        }
+      }
+    },
+    "radar.pause": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pause"
           }
         }
       }
@@ -797,6 +967,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "DWD RADOLAN · %@"
+          }
+        }
+      }
+    },
+    "radar.timeline": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zeitleiste der Vorhersage"
+          }
+        }
+      }
+    },
+    "radar.unavailable": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Radar nicht verfügbar"
           }
         }
       }
