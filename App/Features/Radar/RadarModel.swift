@@ -51,8 +51,19 @@ final class RadarModel {
     var currentMinute: Int { currentFrame?.minute ?? 0 }
 
     func load(from provider: any RadarProviding, scheme: ColorScheme) async {
+        // `scheme` means "the palette the current images were rendered with",
+        // so it may only be set by something that then renders. Assigning it
+        // before this guard broke that: a second appearance with a new scheme
+        // recorded the palette and returned without repainting, and the
+        // `repaint` that follows the scheme change then correctly concluded it
+        // had nothing to do — leaving the frames in the old palette until the
+        // next refresh. Already loaded means the frames are unchanged and only
+        // the palette can have moved, which is exactly a repaint.
+        guard !nowcast.hasLoaded else {
+            repaint(for: scheme)
+            return
+        }
         self.scheme = scheme
-        guard !nowcast.hasLoaded else { return }
         nowcast = .loading
         nowcast = await .result { try await provider.nowcast() }
         renderImages()
