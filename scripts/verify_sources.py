@@ -119,11 +119,12 @@ def plan(source):
         for name, url in (source.get("siblings") or {}).items():
             yield Check(f"{sid}/{name}", url, "json")
 
-    elif protocol == "csv":
-        # A plain file over HTTP. Nothing to introspect beyond "it is still
-        # there and still has a body" — the column and unit assumptions are
-        # checked in the app's own fixtures, where they can be checked
-        # precisely rather than by counting bytes.
+    elif protocol in ("csv", "binary"):
+        # A plain file (or a directory of them) over HTTP. Nothing to
+        # introspect beyond "it is still there and still has a body" — the
+        # column, unit and grid assumptions are checked in the app's own
+        # fixtures, where they can be checked precisely rather than by
+        # counting bytes.
         yield Check(sid, source["url"], "body", observed)
 
     elif protocol in ("datex2_xml", "gtfs_static", "rdf_xml"):

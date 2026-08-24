@@ -16,11 +16,28 @@ public struct RadolanGrid: Sendable {
     public static let standardParallel = 60.0
 
     /// DE1200: 1100 columns × 1200 rows at 1 km, south-west corner as published.
+    /// The grid RV (the nowcast) is published on.
     public static let de1200 = RadolanGrid(
         columns: 1100,
         rows: 1200,
         cornerLatitude: 45.68606067,
         cornerLongitude: 3.566994635,
+        cellSize: 1.0
+    )
+
+    /// The classic 900 × 900 RADOLAN composite grid, same projection, its own
+    /// south-west corner.
+    ///
+    /// **RY is not on DE1200.** The observation product's header says
+    /// `GP 900x 900`, and reading it with DE1200's corner puts Frankfurt
+    /// hundreds of kilometres away while staying comfortably in bounds — a
+    /// wrong answer that never throws. The header is read, so a frame on the
+    /// wrong grid mismatches its declared geometry instead of being drawn.
+    public static let radolan900 = RadolanGrid(
+        columns: 900,
+        rows: 900,
+        cornerLatitude: 46.9526,
+        cornerLongitude: 3.5889,
         cellSize: 1.0
     )
 

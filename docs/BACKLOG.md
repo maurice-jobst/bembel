@@ -241,6 +241,19 @@ observation series (RY/WN), a different product and its own ticket.
 The frames are resampled onto a lat/lon box rather than stretched from the grid: RADOLAN is polar stereographic and
 its rows are rotated ~1.3° from true north at Frankfurt, which is most of a kilometre across the drawn box.
 
+<a id="bem-f03"></a>
+### BEM-F03 — Radar past (RADOLAN RY) · `size:M` · M2
+The hour before now, from DWD's observation product. Falls out of `BEM-F02`, whose AC asked for a past the
+nowcast product does not have.
+
+**RY is on a different grid from RV.** `GP 900x 900`, classic RADOLAN composite, SW corner 46.9526/3.5889 —
+Frankfurt is row 346, column 424 there and row 498, column 443 on DE1200. Both are inside 900, so reading RY with
+DE1200's corner returns a valid cell about 150 km north: silently wrong, never throws. The header is checked.
+
+Capped at **one hour, twelve frames**, because each frame is its own request against a public service every five
+minutes per user, against one tar archive for the whole forecast. A failed observation shortens the axis; it never
+costs the forecast.
+
 ---
 
 ## EPIC G — Stadtzustand

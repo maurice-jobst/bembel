@@ -23,6 +23,10 @@ All notable changes to BEMBEL. Format follows
   (Winterpause, Osterregel für historische Brunnen).
 - Live-Regenradar: DWD RADOLAN RV direkt auf dem Gerät geparst (2-h-Nowcast
   für Frankfurt), ohne Drittanbieter-Paket.
+- Regenradar zeigt auch die **vergangene Stunde** (DWD RADOLAN RY): die
+  Zeitleiste reicht von −60 Min bis +120 Min, „jetzt" ist darauf markiert und
+  ist die Startposition. Damit ist zu sehen, ob ein Schauer auf einen zukommt
+  oder abzieht — der Nowcast allein zeigt das nicht.
 - Regenradar zeigt jetzt die echten Radarbilder auf der Karte statt vier
   dekorativer Farbflecken: 25 Bilder über zwei Stunden, Abspielen, Pause und
   Scrubben, Skala in mm/h mit sechs Stufen (einfarbig und monoton — die
