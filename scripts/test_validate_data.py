@@ -393,6 +393,84 @@ class SourceVerifierCoverageTests(unittest.TestCase):
         self.assertEqual(reading["bytes"], 36)
 
 
+class ReadmeClaimTests(unittest.TestCase):
+    """The README numbers about the source registry. All three were wrong when
+    this check was added, so each way of being wrong gets watched here."""
+
+    # Two sources: one tier-2 REST entry the sweep calls, one tier-5 finding it
+    # cannot. That makes the three claims 2, 1 and 1 respectively.
+    REGISTRY = {
+        "sources": [
+            {
+                "id": "ffm_dcat",
+                "name": "Frankfurt DCAT",
+                "tier": 2,
+                "protocol": "rest_json",
+                "url": "https://offenedaten.frankfurt.de/api/3/action/package_list",
+            },
+            {
+                "id": "fes_abfallkalender",
+                "name": "FES Abfallkalender",
+                "tier": 5,
+                "finding": "no API, only a form",
+            },
+        ]
+    }
+
+    def setUp(self) -> None:
+        v.errors.clear()
+
+    def readme(self, sources="2", endpoints="1", tier_five="one") -> str:
+        return (
+            f"Every upstream this app reads is in `data/sources.json`:\n"
+            f"{sources} entries across the Frankfurt Geoportal, DWD and more.\n"
+            f"The tier-5 block is the part most registries "
+            f"leave out: {tier_five} things Frankfurt does *not* publish.\n"
+            f"make verify-sources   # calls all {endpoints} endpoints, reports dead ones\n"
+        )
+
+    def check(self, text) -> list[str]:
+        v.check_readme_claims(self.REGISTRY, "README.md", text)
+        return list(v.errors)
+
+    def test_numbers_that_match_the_registry_pass(self):
+        self.assertEqual(self.check(self.readme()), [])
+
+    def test_a_stale_source_count_is_rejected(self):
+        self.assertIn("data/sources.json has 2", "\n".join(self.check(self.readme(sources="30"))))
+
+    def test_a_stale_endpoint_count_is_rejected(self):
+        """The number the README quotes for `make verify-sources` is the sweep's
+        own plan, so adding a source without touching the README fails here."""
+        self.assertIn("data/sources.json has 1", "\n".join(self.check(self.readme(endpoints="39"))))
+
+    def test_a_stale_tier_five_count_is_rejected(self):
+        self.assertIn("data/sources.json has 1", "\n".join(self.check(self.readme(tier_five="nine"))))
+
+    def test_prose_the_pattern_no_longer_finds_is_a_failure_not_a_skip(self):
+        """The shape that rots invisibly: reword the sentence and the number
+        stops being checked while still standing in the shop window."""
+        rewritten = self.readme().replace("entries across the Frankfurt Geoportal", "sources, covering")
+        self.assertIn("no longer checked", "\n".join(self.check(rewritten)))
+
+    def test_a_count_spelled_as_a_word_is_read(self):
+        """Prose gets to say "six"; the check still has to read it."""
+        self.assertEqual(self.check(self.readme(tier_five="one")), [])
+
+    def test_an_unreadable_count_is_rejected_rather_than_ignored(self):
+        self.assertIn("not a number", "\n".join(self.check(self.readme(sources="several"))))
+
+    def test_a_malformed_registry_is_left_to_check_sources(self):
+        """One complaint per problem — check_sources already rejects this."""
+        v.check_readme_claims({"sources": []}, "README.md", self.readme())
+        self.assertEqual(v.errors, [])
+
+    def test_the_real_readme_matches_the_real_registry(self):
+        """The end-to-end case: the numbers as actually published."""
+        v.check_readme_claims(v.load(v.DATA / "sources.json"))
+        self.assertEqual(v.errors, [])
+
+
 class RingsIndexTests(unittest.TestCase):
     def test_index_maps_ags_to_ring(self):
         doc = {"municipalities": [{"ags": "06412000", "name": "Frankfurt", "ring": "frankfurt"}]}

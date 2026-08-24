@@ -11,6 +11,9 @@ Enforced here, not in any prompt (locked decision):
     fields contradict its tier is rejected (a keyless tier that needs a key,
     a "no API exists" tier that carries an endpoint)
 
+  - the three numbers README.md quotes about data/sources.json are recomputed
+    from the registry, so the shop window cannot quietly go stale
+
 Also enforced: data/rings.json and data/manifest.json are byte-identical to
 their bundled copies in BEMBELKit/Resources, so app and published data can
 never drift. Every data/*.geojson gets the same treatment.
@@ -25,6 +28,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
+import verify_sources
 from bembel_paths import DATA, KIT_RESOURCES, REPO, mirrored
 
 AGS_RE = re.compile(r"^\d{8}$")
@@ -40,6 +44,55 @@ MAX_STRING_LEN = 300
 # WGS84 numbers, so a plain -180..180 / -90..90 range test catches nothing.
 LON_RANGE = (7.0, 10.0)
 LAT_RANGE = (49.0, 51.2)
+
+# README.md states three numbers about data/sources.json. A number in the shop
+# window that nobody recomputes is the failure docs/AI-NATIVE.md names under
+# "Rules without teeth" — and by the time this check was written all three had
+# rotted: 30 entries against 32, 39 endpoints against 48, nine tier-5 findings
+# against six. Nothing had changed them, because nothing was reading them.
+#
+# Each claim is anchored to the prose around it, and a pattern that no longer
+# matches is an error rather than a silent skip. That is the rule
+# verify_sources.py already applies to a source it cannot plan a check for: an
+# entry that looks watched and is not is worse than one that is openly missing.
+# `\s+` between the words so reflowing a paragraph — which changes nothing a
+# reader sees — does not read as a missing claim.
+README_CLAIMS = (
+    (
+        "registered sources",
+        re.compile(r"(\S+)\s+entries\s+across\s+the\s+Frankfurt\s+Geoportal"),
+        len,
+    ),
+    (
+        "endpoints the sweep calls",
+        re.compile(r"calls\s+all\s+(\S+)\s+endpoints"),
+        # A lambda only to defer the lookup: the function is defined below.
+        lambda rows: planned_check_count(rows),
+    ),
+    (
+        "tier-5 findings",
+        re.compile(r"leave\s+out:\s+(\S+)\s+things\s+Frankfurt\s+does"),
+        lambda rows: sum(1 for row in rows if row.get("tier") == 5),
+    ),
+)
+
+# Enough to spell any count these claims will plausibly reach. Prose gets to say
+# "six" instead of "6"; the check still has to read it.
+NUMBER_WORDS = {
+    "zero": 0,
+    "one": 1,
+    "two": 2,
+    "three": 3,
+    "four": 4,
+    "five": 5,
+    "six": 6,
+    "seven": 7,
+    "eight": 8,
+    "nine": 9,
+    "ten": 10,
+    "eleven": 11,
+    "twelve": 12,
+}
 
 errors: list[str] = []
 
@@ -225,6 +278,65 @@ def check_sources(doc, label: str) -> None:
         for replacement in row.get("replacement") or []:
             if replacement not in seen:
                 err(f"{where}: replacement {replacement!r} is not a source id in this registry")
+
+
+def planned_check_count(rows) -> int:
+    """How many requests `make verify-sources` actually issues.
+
+    verify_sources.plan() is the authority rather than a second count written
+    out here — a number recomputed by different logic drifts from the sweep it
+    claims to describe, which is the whole failure this check exists for.
+    """
+    return sum(
+        len(list(verify_sources.plan(row)))
+        for row in rows
+        if row.get("tier") not in verify_sources.EXEMPT_TIERS and row.get("auth", "none") == "none"
+    )
+
+
+def as_number(raw: str):
+    """A claim written as digits or as a word. None if it is neither."""
+    return int(raw) if raw.isdigit() else NUMBER_WORDS.get(raw.lower())
+
+
+def check_readme_claims(doc, label: str = "README.md", text: str | None = None) -> None:
+    """The numbers README.md quotes about the source registry, recomputed.
+
+    Not schema validation, but the same class of rule: a claim in the repo that
+    a reader will believe, checked against the file it describes rather than
+    against whoever last remembered to edit it. `text` is injectable so the
+    tests can watch each way this fails without writing to the real README.
+    """
+    rows = doc.get("sources") if isinstance(doc, dict) else None
+    if not isinstance(rows, list) or not rows:
+        return  # check_sources has already rejected this; one complaint is enough
+
+    if text is None:
+        try:
+            text = (REPO / "README.md").read_text(encoding="utf-8")
+        except OSError as exc:
+            err(f"{label}: unreadable — {exc}")
+            return
+
+    for name, pattern, compute in README_CLAIMS:
+        match = pattern.search(text)
+        if match is None:
+            err(
+                f"{label}: nothing matches {pattern.pattern!r} any more, so the {name} "
+                "number is no longer checked — move the pattern with the prose or drop both"
+            )
+            continue
+        claimed = as_number(match.group(1))
+        if claimed is None:
+            err(f"{label}: {name} reads {match.group(1)!r}, which is not a number this check can read")
+            continue
+        try:
+            actual = compute(rows)
+        except Exception as exc:  # noqa: BLE001 — a malformed registry is check_sources' complaint, not ours
+            err(f"{label}: cannot recompute {name} from data/sources.json — {exc}")
+            continue
+        if claimed != actual:
+            err(f"{label}: says {match.group(1)} {name}, data/sources.json has {actual}")
 
 
 def check_iso_date(value, where: str) -> None:
@@ -451,7 +563,9 @@ def main() -> int:
     check_manifest(load(DATA / "manifest.json"), "data/manifest.json")
     check_manifest(load(KIT_RESOURCES / "manifest.json"), "Kit Resources/manifest.json")
     check_attribution(load(DATA / "ATTRIBUTION.json"), "data/ATTRIBUTION.json")
-    check_sources(load(DATA / "sources.json"), "data/sources.json")
+    sources_doc = load(DATA / "sources.json")
+    check_sources(sources_doc, "data/sources.json")
+    check_readme_claims(sources_doc)
     check_operator_datasets()
     check_geojson_datasets(rings_index(rings_doc))
     check_mirror("rings.json")
