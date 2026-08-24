@@ -276,6 +276,20 @@ the hosted wrapper stays out of the critical path (ADR 0008) and out of the app.
 POI station inside Frankfurt; it stands on the airfield and reads cooler than the Innenstadt on a hot
 afternoon, which is why the header line names the station instead of saying "Frankfurt".
 
+<a id="bem-g04"></a>
+### BEM-G04 — Pollenflug · `size:S` · M4
+DWD Pollenflug-Gefahrenindex (`dwd_pollen` im Register), Rhein-Main als DWD-Partregion. Filed as an issue on
+2026-08-16 with no entry here — added now so the spec and the issue tracker agree.
+**Not in v1.0** (ADR 0010, depth over breadth): freed capacity goes to polish, App Store presence, localisation
+and `AI-NATIVE.md`, not to further sources.
+
+<a id="bem-g05"></a>
+### BEM-G05 — „Wasser & Hitze" · `size:L` · M4 · `needs-decision`
+Starkregen, Klimaplanatlas and the Main gauge as one screen. Same story as `BEM-G04`: filed 2026-08-16, no spec
+entry until now, and **out of v1.0** under ADR 0010. Large *and* undecided in front of a date that does not move
+is exactly the risk the scope decision existed to remove. The gauge half already ships (`BEM-G01`) and both
+raster sources stay in `data/sources.json`; what is missing is the shared screen, not the data.
+
 ---
 
 ## EPIC H — Ship
