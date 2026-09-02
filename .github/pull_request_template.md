@@ -1,6 +1,6 @@
 ## Ticket
 
-Closes #<!-- issue number --> (BEM-XXX — see [docs/BACKLOG.md](../docs/BACKLOG.md) for the spec)
+Closes #<!-- issue number --> (BEM-XXX — the issue body is the spec; [docs/BACKLOG.md](../docs/BACKLOG.md) is the epic index)
 
 ## What & why
 

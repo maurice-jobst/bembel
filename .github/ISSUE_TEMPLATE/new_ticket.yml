@@ -1,15 +1,14 @@
 name: New backlog ticket
-description: Propose a new BEM-XXX ticket not yet in docs/BACKLOG.md
+description: Propose a new BEM-XXX ticket
 labels: []
 body:
   - type: markdown
     attributes:
       value: |
-        For v1.0 scope, check `docs/KICKOFF-PROMPT.md` first — if it's not one
-        of the five locked features, it's probably v1.1+ (see
-        `docs/BACKLOG.md` § "v1.1 and beyond") or out of scope entirely.
-        Once accepted, this gets a `BEM-XXX` id and a matching entry in
-        BACKLOG.md's spec.
+        Check the locked scope in `docs/BACKLOG.md` (ADR 0010) first — if it
+        is not a v1.0 feature it is probably a milestone-M4 side quest or out
+        of scope; epic S is capped until v1.0 ships. Once accepted, this gets
+        a `BEM-XXX` id, the labels, and a row in the BACKLOG.md epic index.
   - type: textarea
     id: what
     attributes:

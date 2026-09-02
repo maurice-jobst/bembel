@@ -12,39 +12,30 @@ street corner. BEMBEL puts it in one place.
 ![Dependencies: none](https://img.shields.io/badge/dependencies-none-blue?style=flat-square)
 ![Privacy: Data Not Collected](https://img.shields.io/badge/privacy-Data%20Not%20Collected-6f42c1?style=flat-square)
 ![Ship target: 22 March 2027](https://img.shields.io/badge/v1.0-22%20March%202027-orange?style=flat-square)
-
-[![CI](https://github.com/maurice-jobst/bembel/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/maurice-jobst/bembel/actions/workflows/ci.yml)
-[![Data validation](https://github.com/maurice-jobst/bembel/actions/workflows/data-validate.yml/badge.svg?branch=main)](https://github.com/maurice-jobst/bembel/actions/workflows/data-validate.yml)
+[![CI](https://github.com/maurice-jobst/bembel/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/maurice-jobst/bembel/actions/workflows/ci.yml) [![Data validation](https://github.com/maurice-jobst/bembel/actions/workflows/data-validate.yml/badge.svg?branch=main)](https://github.com/maurice-jobst/bembel/actions/workflows/data-validate.yml)
 
 No ads, no tracking, no BEMBEL backend, no BEMBEL accounts. Apple services
 (Game Center, iCloud) and GitHub participation are opt-in. The App Store
-privacy label says "Data Not Collected", and that holds.
-
-Named after the Apfelwein jug: grey salt-glazed stoneware, cobalt diamond
-relief.
+privacy label says "Data Not Collected", and that holds. Named after the
+Apfelwein jug: grey salt-glazed stoneware, cobalt diamond relief.
 
 ## 🥤 The hero: community data, wie Yelp, nur in GitHub
 
-BEMBEL's flagship is the **Wasserhäuschen-Register**, with the
-**Ebbelwei-Wirtschaften register** alongside it. Both run on
-[bembel-data](https://github.com/maurice-jobst/bembel-data), where entries and
-ratings arrive as pull requests.
+The flagship is the **Wasserhäuschen-Register**, with the **Ebbelwei-Wirtschaften
+register** alongside it. Both run on [bembel-data](https://github.com/maurice-jobst/bembel-data),
+where entries and ratings arrive as pull requests.
 
 - **Provenance over anonymity.** Every entry shows who verified it, when, and
   from which source. One tap opens its full GitHub history.
 - **Ratings you can trust.** One rating per GitHub account per entry, enforced
   by CI: [`check_authorship.py`](https://github.com/maurice-jobst/bembel-data/blob/main/scripts/check_authorship.py)
   rejects any pull request touching a rating file named for someone else, and
-  maintainers get no proxy path around it. We have not found this trust model
-  built out of GitHub primitives anywhere else.
+  maintainers get no proxy path around it.
 - **The app is the funnel.** "Bewerten" opens a prefilled GitHub flow for that
-  kiosk, and contributors earn in-app sticker credit (Datenspender). No BEMBEL
-  accounts, no backend, and the privacy label stays "Data Not Collected".
-- **Built and shipped.** Both registers live in the **Orte** tab, first in the
-  tab bar ([ADR 0009](docs/adr/0009-registers-in-one-places-tab.md)): Merkmale
-  as the navigation, a provenance byline on every entry, coverage per
-  Stadtteil, and the Sammlung with data-linked stickers and opt-in kiosk visit
-  stamps.
+  kiosk, and contributors earn in-app sticker credit (Datenspender).
+- **Shipped.** Both registers live in the **Orte** tab, first in the tab bar
+  ([ADR 0009](docs/adr/0009-registers-in-one-places-tab.md)): Merkmale-first
+  navigation, a provenance byline per entry, coverage per Stadtteil, stickers.
 
 ## 📱 v1.0
 
@@ -57,17 +48,16 @@ ratings arrive as pull requests.
 | Sonnenstand: where the sun is, with a time scrubber | NOAA solar position, computed on device |
 | Free drinking water, with seasonal state engine | Frankfurt Geoportal, OSM, Refill |
 | Rain radar | DWD open data (RADOLAN, parsed on-device) |
-| Stadtzustand: Main level, air quality, civil warnings | PEGELONLINE, HLNUG, NINA |
+| Stadtzustand: Main level, air quality, temperature, civil warnings | PEGELONLINE, HLNUG, DWD, NINA |
 
 The Schattenkarte — an on-device shadow map over the Hessen LoD2 building
-model — is **not** in v1.0. Its geometry ships as a standalone published
-dataset; the rendering is the v1.2 headline. See
-[ADR 0010](docs/adr/0010-portfolio-artefact-over-product.md) for why, and what
-that says about how this project is scoped generally.
-
-Ship target: 22 March 2027 (World Water Day). Scope of record:
-[docs/BACKLOG.md](docs/BACKLOG.md) (rev. 5); the hero framing is in the
-[hero-repositioning spec](docs/superpowers/specs/2026-08-13-hero-repositioning-design.md).
+model — is **not** in v1.0: its geometry ships as a published dataset, the
+rendering is the v1.2 headline
+([ADR 0010](docs/adr/0010-portfolio-artefact-over-product.md)). Ship target:
+22 March 2027 (World Water Day); English localization is v1.1. Scope of record:
+one [GitHub Issue](https://github.com/maurice-jobst/bembel/issues) per ticket,
+indexed by epic in [docs/BACKLOG.md](docs/BACKLOG.md); post-1.0 side quests are
+[milestone M4](https://github.com/maurice-jobst/bembel/milestone/5).
 
 ## 🏗️ Architecture
 
@@ -82,28 +72,22 @@ flowchart TD
     R --> B
 ```
 
-- **iOS 18.5+, SwiftUI, iPhone only.** Plain Xcode project, no generators.
-- Three targets: `BEMBEL` (app), `BEMBELWidgets` (widget extension), and
-  `BEMBELKit`, a local Swift package holding the design system, navigation,
-  region model and data layer.
-- **No backend.** The build bundles the curated datasets, and the app refreshes
-  them at runtime via conditional GET against a static manifest. It calls the
-  live APIs (RMV, DWD, PEGELONLINE, HLNUG, NINA) straight from the device.
+- **iOS 18.5+, SwiftUI, iPhone only.** Plain Xcode project, no generators, no
+  third-party dependencies, German-first String Catalogs. Three targets:
+  `BEMBEL` (app), `BEMBELWidgets` (widget extension) and `BEMBELKit`, a local
+  Swift package with the design system, navigation, region model and data layer.
+- **No backend.** Curated datasets are bundled and refreshed via conditional
+  GET against a static manifest; live APIs are called straight from the device.
 - **Provider seam** ([ADR 0007](docs/adr/0007-provider-seam.md)): each feature
-  reads a protocol from BEMBELKit. Today those protocols return sample
-  fixtures, and we swap in live sources one at a time without touching views.
-- No third-party dependencies.
-- German is the base language, and all strings go through String Catalogs.
+  reads a protocol from BEMBELKit; fixtures and live sources are interchangeable
+  behind it, so going live never touches a view.
 
 ### 🗂️ The source registry
 
 Every upstream this app reads is in [`data/sources.json`](data/sources.json):
 34 entries across the Frankfurt Geoportal, DWD, the Autobahn GmbH, Open Data
-Hessen, GBFS operators and more — each with its licence, its polling cadence,
-the date a live request last proved it works, and the gotchas that cost someone
-an hour (the Hochhäuser WFS ignores `outputFormat=json`; DWD's warning feed is
-JSONP; `endevent 2099-12-31` means permanent, not broken).
-
+Hessen, GBFS operators and more — each with its licence, polling cadence, the
+date a live request last proved it works, and the gotchas that cost an hour.
 Sources are tiered 1–5 by what access costs, and the tier is a claim the
 validator enforces — tier 1–2 must be keyless, and a tier-5 entry records the
 search that found no API rather than an endpoint. The tier-5 block is the part
@@ -115,26 +99,15 @@ make verify-sources   # calls all 50 endpoints, reports dead ones and collapsed 
 ```
 
 A [weekly job](.github/workflows/sources-liveness.yml) runs the same sweep and
-files one issue when something stops answering. Liveness is not the only
-failure mode — a WFS layer that empties out still returns HTTP 200 — so each
-entry records the count observed at verification and the sweep compares
-against it.
-
-[docs/adr/](docs/adr/) records the decisions that would be expensive to
-reverse. [docs/BACKLOG.md](docs/BACKLOG.md) holds the spec: scope, rationale,
-acceptance criteria. [GitHub Issues](https://github.com/maurice-jobst/bembel/issues)
-and [Milestones](https://github.com/maurice-jobst/bembel/milestones) carry
-day-to-day status (M0 Skeleton → M1 Pipeline & geometry → M2 Features →
-M3 Ship).
+files one issue when an upstream stops answering or a layer quietly empties out.
 
 ## 🤖 How it is built
 
-AI agents write the implementation. A human reviews every pull request. CI
-takes what a reviewer should not have to check by hand: formatting, schema
-conformance, and the data-provenance rules. That split is the doctrine this
-project runs on, **AI at the edges, deterministic core**, and it also decides
-technical questions. Given two options a human would rate the same, we take the
-one an agent can work in safely
+AI agents write the implementation; a human reviews every pull request; CI
+takes what a reviewer should not have to check by hand — formatting, schema
+conformance, data provenance. That split, **AI at the edges, deterministic
+core**, also decides technical questions: given two options a human would rate
+the same, we take the one an agent can work in safely
 ([ADR 0008](docs/adr/0008-ai-native-selection-principle.md)).
 
 | Gate | What runs |
@@ -142,59 +115,36 @@ one an agent can work in safely
 | Format | `make format-check`, swift-format bundled with Xcode |
 | Tests | `swift test` on BEMBELKit, natively on macOS, no simulator |
 | App build | `xcodebuild`, iOS Simulator, unsigned |
-| Data | `make validate`: schemas, generated-file equality, source URLs |
+| Data | `make validate`: schemas, generated-file equality, source URLs, README numbers |
 | Upstreams | `make verify-sources`, weekly: every registered open-data endpoint called for real |
 | Community data | schema and authorship checks in [bembel-data](https://github.com/maurice-jobst/bembel-data) |
 
 [docs/AI-NATIVE.md](docs/AI-NATIVE.md) is the long version: which constraints
-this repo accepted so that agent-written changes stay reviewable, each one
-pointing at the file or check that enforces it — and the section on what got
-through the gates anyway.
+this repo accepted so that agent-written changes stay reviewable, each pointing
+at the file or check that enforces it — and what got through the gates anyway.
+Decisions that would be expensive to reverse live in [docs/adr/](docs/adr/).
 
 ## 🔨 Building
 
-Requires Xcode 16.4+ (iOS 18.5 SDK).
+Xcode 16.4+ (iOS 18.5 SDK). `BEMBELKit` also compiles for macOS, so `swift
+test` runs natively without a simulator; there is no Mac app.
 
 ```bash
 cp Config/Secrets.xcconfig.template Config/Secrets.xcconfig
 # fill in BEMBEL_TEAM_ID (and later RMV_API_KEY); the file is gitignored
 make build         # xcodebuild, iOS Simulator, no signing
-make test          # BEMBELKit unit tests via swift test (no simulator needed)
+make test          # BEMBELKit unit tests via swift test
 make validate      # data schema validation
 make format        # swift-format (bundled with Xcode); run before pushing
-make format-check  # the same check CI runs
 ```
 
-`BEMBELKit` also compiles for macOS, so `swift test` runs natively on any
-machine and in CI without booting a simulator. There is no Mac app.
+## 👥 Team and licences
 
-## 🔭 Beyond 1.0
-
-The horizon is
-[milestone M4, side quests](https://github.com/maurice-jobst/bembel/milestone/5):
-the full Sticker-Sammelalbum (city-hotspot geofences, Game Center, seasonal
-drops; the data-linked stickers ship in 1.0), GrünGürtel walks, Baumkataster,
-Stolpersteine, Blaulicht-Archiv, and more. English localization is v1.1.
-
-## 👥 Team
-
-Three lanes. PM and architecture:
-[@maurice-jobst](https://github.com/maurice-jobst). Frontend, meaning app and
-widgets: [@cybeerboy](https://github.com/cybeerboy). Backend, meaning the data
-pipeline, `data/`, `scripts/` and CI:
-[@jaypikay](https://github.com/jaypikay) and
-[@monsdroid](https://github.com/monsdroid). See
-[CONTRIBUTING.md](CONTRIBUTING.md) for the working agreement.
-
-## ⚖️ Licences
+PM and architecture: [@maurice-jobst](https://github.com/maurice-jobst). App and
+widgets: [@cybeerboy](https://github.com/cybeerboy). Data pipeline and CI: [@jaypikay](https://github.com/jaypikay),
+[@monsdroid](https://github.com/monsdroid). Working agreement: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Code is [MIT](LICENSE). Bundled data carries its sources' licences, attributed
-in `data/ATTRIBUTION.json` and rendered in-app. Datasets derived from
-OpenStreetMap are ODbL, which is share-alike.
-
----
-
-Maurice Jobst leads this as PM and architect. His
-[entity home](https://maurice-jobst.github.io/) has the wider context, and
-[ai-workbench](https://github.com/maurice-jobst/ai-workbench) applies the same
-doctrine to knowledge work.
+in `data/ATTRIBUTION.json` and rendered in-app; OSM-derived datasets are ODbL
+(share-alike). [ai-workbench](https://github.com/maurice-jobst/ai-workbench)
+applies the same doctrine to knowledge work.
