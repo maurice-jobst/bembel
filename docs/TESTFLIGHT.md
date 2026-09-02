@@ -58,6 +58,5 @@ nie von Hand in den Asset-Katalog malen.
 
 - RMV-Abfahrten laufen noch auf Sample-Daten (#11, API-Key ausstehend) —
   für interne Tester okay, in der Beta-Beschreibung erwähnen.
-- Temperatur ist noch Sample (Bright Sky, ohne Ticket).
 - Kiosk-Stempel feuern nur im Vordergrund (When-In-Use, offene
   Produktentscheidung aus PR #52).

@@ -28,9 +28,9 @@ anything they cover.
 ## Conventions
 
 - One commit per ticket, message prefixed `BEM-XXX:`. Reference the GitHub
-  Issue (`Closes #N`) in the PR, not in the commit — issues are the status
-  surface, docs/BACKLOG.md is the spec. See CONTRIBUTING.md's "Workflow"
-  section before closing or relabeling an issue.
+  Issue (`Closes #N`) in the PR, not in the commit — the issue body is the
+  spec and the status; docs/BACKLOG.md only maps epics to issues. See
+  CONTRIBUTING.md's "Workflow" section before closing or relabeling an issue.
 - Verification: `make test` (BEMBELKit, runs on macOS — no simulator),
   `make build` (needs Xcode 16.4+), `make validate` (data schemas).
 - The .pbxproj uses filesystem-synchronized groups (objectVersion 77): adding

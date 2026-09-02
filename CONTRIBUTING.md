@@ -6,18 +6,16 @@ Small team, strict habits. This file is the working agreement.
 
 - Single `main`, PR-based. One commit per ticket where feasible, message
   prefixed with the ticket ID: `BEM-A05: curated dataset split`.
-- **Two surfaces per ticket, not one:** [docs/BACKLOG.md](docs/BACKLOG.md) is
-  the spec — scope, rationale, acceptance criteria. The matching
-  [GitHub Issue](https://github.com/maurice-jobst/bembel/issues) (same
-  `BEM-XXX` id in the title) is where work actually gets tracked — assign
-  yourself, comment, and close it via your PR (`Closes #N`) rather than
-  editing BACKLOG.md's status. If they ever disagree, BACKLOG.md wins for
-  scope/ACs, the issue wins for current status.
+- **The [GitHub Issue](https://github.com/maurice-jobst/bembel/issues) is the
+  ticket:** its body is a self-contained brief — scope, rationale, acceptance
+  criteria, lane — and it is where work gets tracked. Assign yourself,
+  comment, close it via your PR (`Closes #N`). [docs/BACKLOG.md](docs/BACKLOG.md)
+  is the index from epic to issue numbers, nothing more; update it when a
+  ticket is created or moves epic.
 - Issues carry an `epic:X` label, a `size:S/M/L` label, a lane label
   (`area:app` / `area:data`), and a milestone (M0–M3 for v1.0, M4 for
   post-1.0 side quests). `needs-decision`, `blocked`, and `learning-goal`
-  show up where BACKLOG.md flags them. Issue bodies are self-contained
-  briefs — pick one from your lane, assign yourself, start.
+  mark the exceptions. Pick an issue from your lane, assign yourself, start.
 - Locked product decisions are in
   [the hero-repositioning spec](docs/superpowers/specs/2026-08-13-hero-repositioning-design.md)
   (the original kickoff prompt is archived under `docs/history/`) — don't
