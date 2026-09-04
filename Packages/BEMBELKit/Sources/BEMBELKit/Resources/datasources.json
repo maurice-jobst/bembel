@@ -10,6 +10,13 @@
       "attribution": "Deutscher Wetterdienst"
     },
     {
+      "id": "dwd_pollen",
+      "name": "DWD Pollenflug-Gefahrenindex",
+      "tier": 2,
+      "license": "GeoNutzV",
+      "attribution": "Deutscher Wetterdienst"
+    },
+    {
       "id": "dwd_radolan_rv",
       "name": "DWD RADOLAN RV (Regen-Nowcast)",
       "tier": 1,

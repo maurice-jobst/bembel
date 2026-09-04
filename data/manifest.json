@@ -11,6 +11,10 @@
     "bembeldata": {
       "path": "bembeldata.json",
       "url": "https://raw.githubusercontent.com/maurice-jobst/bembel-data/dist/bembel-data.json"
+    },
+    "pollen": {
+      "path": "pollen.json",
+      "url": "https://opendata.dwd.de/climate_environment/health/alerts/s31fg.json"
     }
   }
 }

@@ -181,6 +181,36 @@
         }
       }
     },
+    "city.pollen.title": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pollenflug"
+          }
+        }
+      }
+    },
+    "city.pollen.none": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktuell keine erhöhte Pollenbelastung"
+          }
+        }
+      }
+    },
+    "city.pollen.forecast %@ %@": {
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "morgen %1$@ · übermorgen %2$@"
+          }
+        }
+      }
+    },
     "coverage.empty": {
       "localizations": {
         "de": {
