@@ -35,14 +35,16 @@ struct AppDependencies {
     var fountains: any FountainProviding = AppDependencies.liveFountains()
     var radar: any RadarProviding = AppDependencies.liveRadar()
     /// One property per Stadtzustand upstream, not one aggregate: they fail
-    /// independently and the screen says which one did. All four are live —
-    /// temperature (BEM-G06), the Main level (BEM-G01), the air (BEM-G02) and
-    /// the warnings (BEM-G03) — and each went live on its own ticket without
-    /// touching the others, which is the whole point of the split.
+    /// independently and the screen says which one did. All five are live —
+    /// temperature (BEM-G06), the Main level (BEM-G01), the air (BEM-G02),
+    /// the warnings (BEM-G03) and pollen (BEM-G04) — and each went live on
+    /// its own ticket without touching the others, which is the whole point
+    /// of the split.
     var temperature: any TemperatureProviding = DWDPoiTemperatureProvider()
     var gauge: any GaugeProviding = PegelOnlineProvider()
     var air: any AirQualityProviding = UBAAirQualityProvider()
     var cityWarnings: any CityWarningProviding = NinaWarningProvider(table: AppDependencies.regionTable)
+    var pollen: any PollenProviding = AppDependencies.livePollen()
     var register: any RegisterProviding = AppDependencies.liveRegister()
 
     var citySources: CitySources {
@@ -52,10 +54,13 @@ struct AppDependencies {
                 temperature: failing.contains("temperature") ? DebugFailingSource() : temperature,
                 gauge: failing.contains("gauge") ? DebugFailingSource() : gauge,
                 air: failing.contains("air") ? DebugFailingSource() : air,
-                warnings: failing.contains("warnings") ? DebugFailingSource() : cityWarnings
+                warnings: failing.contains("warnings") ? DebugFailingSource() : cityWarnings,
+                pollen: failing.contains("pollen") ? DebugFailingSource() : pollen
             )
         #else
-            return CitySources(temperature: temperature, gauge: gauge, air: air, warnings: cityWarnings)
+            return CitySources(
+                temperature: temperature, gauge: gauge, air: air, warnings: cityWarnings, pollen: pollen
+            )
         #endif
     }
 
@@ -85,6 +90,14 @@ struct AppDependencies {
     static func liveFountains() -> any FountainProviding {
         guard let store else { return SampleFountainProvider() }
         return FountainDatasetProvider(store: store)
+    }
+
+    /// Same branch, same reason (BEM-G04, #71): a broken Application Support
+    /// directory must not cost the Stadtzustand screen its pollen row, and the
+    /// bundled DWD snapshot is already offline-complete.
+    static func livePollen() -> any PollenProviding {
+        guard let store else { return SamplePollenProvider() }
+        return PollenDatasetProvider(store: store)
     }
 }
 

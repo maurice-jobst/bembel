@@ -622,6 +622,7 @@ def main() -> int:
     if not errors:
         check_datasources_view(sources_doc, attribution_doc)
     check_mirror("bembeldata.json")
+    check_mirror("pollen.json")
 
     if errors:
         print(f"FAIL — {len(errors)} problem(s):", file=sys.stderr)

@@ -41,7 +41,7 @@ departures do not ship on sample data.
 | D Sonnenstand / LoD2 | #19 solar position · #21 time controls · #22 accuracy disclosure · #92 Schatten → Sonnenstand | #17 LoD2 acquisition · #18 building dataset · #20 shadow rendering (v1.2) |
 | E Drinking water | #23 dataset · #24 seasonal engine · #25 map, list, detail | — |
 | F Rain radar | #26 RADOLAN client · #27 overlay · #99 RY past hour | — |
-| G Stadtzustand | #28 Main-Pegel · #29 air quality · #30 NINA · #77 per-source state · #91 live temperature | #71 Pollen (M4) · #76 Wasser & Hitze (M4, `needs-decision`) |
+| G Stadtzustand | #28 Main-Pegel · #29 air quality · #30 NINA · #71 Pollen · #77 per-source state · #91 live temperature | #76 Wasser & Hitze (M4, `needs-decision`) |
 | H Ship | #90 AI-NATIVE.md | #31 App Store presence · #32 localisation audit · #33 tip jar (`needs-decision`) · #34 privacy + TestFlight · #35 outreach |
 | S Side quests | #39 Wasserhäuschen-Register · #40 Ebbelwei · #46 bundle loader (hero, pulled into v1.0) | #36 #37 #38 #41 #42 #43 #44 #45 #72 #73 #74 #75 (all M4) |
 
