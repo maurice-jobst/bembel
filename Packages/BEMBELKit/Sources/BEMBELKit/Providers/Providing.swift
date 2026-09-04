@@ -95,6 +95,21 @@ extension CityWarningProviding {
     public func invalidate() async {}
 }
 
+/// The fifth Stadtzustand upstream (BEM-G04, #71) — DWD pollen, added on its
+/// own ticket the same way the other four went live, without touching them.
+public protocol PollenProviding: Sendable {
+    /// Empty is an answer: nothing is in the air right now. Not the same as a
+    /// failed fetch — `CityWarningProviding.warnings()` makes the same split.
+    func pollen() async throws -> PollenReading
+
+    func invalidate() async
+}
+
+extension PollenProviding {
+    /// A provider that answers from fixtures has nothing to invalidate.
+    public func invalidate() async {}
+}
+
 public protocol RegisterProviding: Sendable {
     /// The whole published bundle. Registers are small (hundreds of entries)
     /// and the UI slices them by register and Merkmal locally — paging here

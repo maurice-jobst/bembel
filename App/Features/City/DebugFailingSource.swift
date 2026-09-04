@@ -15,16 +15,16 @@
     ///     xcrun simctl launch <device> de.mauricejobst.bembel -BEMFailSources gauge
     ///     xcrun simctl launch <device> de.mauricejobst.bembel -BEMFailSources gauge,air
     ///
-    /// Recognised names: `temperature`, `gauge`, `air`, `warnings`, or `all`.
-    /// DEBUG only — it does not exist in a release build.
+    /// Recognised names: `temperature`, `gauge`, `air`, `warnings`, `pollen`,
+    /// or `all`. DEBUG only — it does not exist in a release build.
     struct DebugFailingSource:
-        TemperatureProviding, GaugeProviding, AirQualityProviding, CityWarningProviding
+        TemperatureProviding, GaugeProviding, AirQualityProviding, CityWarningProviding, PollenProviding
     {
         struct Injected: LocalizedError {
             var errorDescription: String? { "Debug: source forced to fail" }
         }
 
-        static let names = ["temperature", "gauge", "air", "warnings"]
+        static let names = ["temperature", "gauge", "air", "warnings", "pollen"]
 
         /// Parsed once. `UserDefaults` picks up `-BEMFailSources x,y` from the
         /// launch arguments, which is how this stays a launch flag rather than
@@ -45,11 +45,12 @@
             throw Injected()
         }
         func warnings() async throws -> [CityWarning] { throw Injected() }
+        func pollen() async throws -> PollenReading { throw Injected() }
 
-        /// Written out although there is nothing to drop: with four protocols
-        /// each carrying a defaulted `invalidate()`, the compiler finds four
+        /// Written out although there is nothing to drop: with five protocols
+        /// each carrying a defaulted `invalidate()`, the compiler finds five
         /// candidate witnesses and calls the conformance ambiguous — one
-        /// explicit method settles all four.
+        /// explicit method settles all five.
         func invalidate() async {}
     }
 

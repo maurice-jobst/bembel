@@ -83,3 +83,32 @@ public struct SampleCityWarningProvider: CityWarningProviding {
 
     public func warnings() async throws -> [CityWarning] { Self.warnings }
 }
+
+/// Previews and the offline fallback. The live card reads DWD's `s31fg.json`
+/// (`PollenDatasetProvider`, BEM-G04, #71). Two types, one at a half-step, to
+/// keep the "no rounding" rule visible in every preview that uses this.
+public struct SamplePollenProvider: PollenProviding {
+    public static let reading = PollenReading(
+        values: [
+            PollenTypeReading(
+                name: "Graeser",
+                today: PollenLevel(rawValue: "2"),
+                tomorrow: PollenLevel(rawValue: "1-2"),
+                dayAfterTomorrow: PollenLevel(rawValue: "2"),
+                todayDescription: "mittlere Belastung"
+            ),
+            PollenTypeReading(
+                name: "Ambrosia",
+                today: PollenLevel(rawValue: "0-1"),
+                tomorrow: PollenLevel(rawValue: "1"),
+                dayAfterTomorrow: PollenLevel(rawValue: "0-1"),
+                todayDescription: "keine bis geringe Belastung"
+            ),
+        ],
+        stampLabel: "DWD · 2026-09-04 11:00 Uhr"
+    )
+
+    public init() {}
+
+    public func pollen() async throws -> PollenReading { Self.reading }
+}

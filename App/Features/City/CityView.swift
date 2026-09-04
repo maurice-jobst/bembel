@@ -29,6 +29,7 @@ struct CityView: View {
                     warningSection
                     gaugeSection
                     airSection
+                    pollenSection
 
                     DiamondRelief()
                         .stroke(BEMColor.cobalt, lineWidth: 1.5)
@@ -141,6 +142,25 @@ struct CityView: View {
             // it publishes: HLNUG did not time out, UBA's API did.
             SourceFailureCard(title: "city.air.title", icon: "wind", sourceName: "Umweltbundesamt") {
                 await model.retryAir(from: sources, near: location.fix?.coordinate)
+            }
+        }
+    }
+
+    @ViewBuilder private var pollenSection: some View {
+        switch model.pollenState {
+        case .idle, .loading:
+            SourceLoadingCard(title: "city.pollen.title", icon: "leaf")
+        case .loaded(let pollen):
+            // Empty is DWD saying "nothing in the air right now" — the same
+            // answer an empty warning list gives, rendered the same way.
+            if pollen.values.isEmpty {
+                pollenAllClearRow(pollen)
+            } else {
+                pollenCard(pollen)
+            }
+        case .failed:
+            SourceFailureCard(title: "city.pollen.title", icon: "leaf", sourceName: "DWD") {
+                await model.retryPollen(from: sources)
             }
         }
     }
@@ -319,6 +339,92 @@ struct CityView: View {
         .bemStatusCard()
     }
 
+    private func pollenAllClearRow(_ pollen: PollenReading) -> some View {
+        HStack(alignment: .top, spacing: BEMSpacing.s) {
+            Image(systemName: "leaf")
+                .foregroundStyle(BEMColor.good)
+            VStack(alignment: .leading, spacing: 2) {
+                Text("city.pollen.none")
+                    .font(.footnote)
+                    .foregroundStyle(BEMColor.inkSecondary)
+                Text(verbatim: pollen.stampLabel)
+                    .font(.caption2.monospacedDigit())
+                    .foregroundStyle(BEMColor.inkSecondary)
+            }
+            Spacer()
+        }
+        .bemStatusCard()
+        .accessibilityElement(children: .combine)
+    }
+
+    private func pollenCard(_ pollen: PollenReading) -> some View {
+        VStack(alignment: .leading, spacing: BEMSpacing.m) {
+            Label {
+                Text("city.pollen.title")
+                    .font(.callout.weight(.semibold))
+                    .foregroundStyle(BEMColor.ink)
+            } icon: {
+                Image(systemName: "leaf")
+                    .foregroundStyle(BEMColor.cobalt)
+            }
+
+            VStack(spacing: 9) {
+                ForEach(pollen.values) { value in
+                    pollenRow(value)
+                }
+            }
+
+            Text(verbatim: pollen.stampLabel)
+                .font(.caption2.monospacedDigit())
+                .foregroundStyle(BEMColor.inkSecondary)
+        }
+        .bemStatusCard()
+    }
+
+    private func pollenRow(_ value: PollenTypeReading) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            HStack {
+                Text(verbatim: Self.pollenDisplayName(value.name))
+                    .font(.footnote.weight(.medium))
+                    .foregroundStyle(BEMColor.ink)
+                Spacer()
+                // DWD's own sentence for today's level — the same rule
+                // `indexKey` follows for air: the app does not invent a second
+                // vocabulary for a scale the source already names.
+                StatusCapsule(label: Text(verbatim: value.todayDescription), color: Self.pollenColor(value.today))
+            }
+            Text("city.pollen.forecast \(value.tomorrow.rawValue) \(value.dayAfterTomorrow.rawValue)")
+                .font(.caption2)
+                .foregroundStyle(BEMColor.inkSecondary)
+        }
+        .accessibilityElement(children: .combine)
+    }
+
+    /// DWD spells its JSON keys in ASCII ("Graeser", "Beifuss"); the raw key
+    /// stays on `PollenTypeReading.name` so a lookup back into the payload
+    /// matches exactly, and only the display gets the correct German
+    /// spelling. Anything this build has not listed passes through as-is —
+    /// same open-vocabulary rule as `GaugeState` and `PollenLevel`.
+    private static func pollenDisplayName(_ raw: String) -> String {
+        switch raw {
+        case "Graeser": "Gräser"
+        case "Beifuss": "Beifuß"
+        default: raw
+        }
+    }
+
+    /// Three tints for seven half-steps, same reasoning as `indexColor`: the
+    /// palette has three, and a capsule this small cannot read finer anyway.
+    /// Already filtered to elevated levels only (`today != "0"`), so the
+    /// lowest visible step still reads as calm rather than alarming.
+    private static func pollenColor(_ level: PollenLevel) -> Color {
+        switch level.severityRank {
+        case ...2: BEMColor.good
+        case 3...4: BEMColor.caution
+        default: BEMColor.alert
+        }
+    }
+
     /// UBA's own band names are the plain-language interpretation; the app
     /// does not invent a second vocabulary for the same scale.
     private static func indexKey(_ index: AirIndex) -> LocalizedStringKey {
@@ -397,13 +503,15 @@ struct Sparkline: View {
         temperature: any TemperatureProviding = SampleTemperatureProvider(),
         gauge: any GaugeProviding = SampleGaugeProvider(),
         air: any AirQualityProviding = SampleAirQualityProvider(),
-        warnings: any CityWarningProviding = SampleCityWarningProvider()
+        warnings: any CityWarningProviding = SampleCityWarningProvider(),
+        pollen: any PollenProviding = SamplePollenProvider()
     ) -> AppDependencies {
         var dependencies = AppDependencies()
         dependencies.temperature = temperature
         dependencies.gauge = gauge
         dependencies.air = air
         dependencies.cityWarnings = warnings
+        dependencies.pollen = pollen
         return dependencies
     }
 
@@ -433,7 +541,18 @@ struct Sparkline: View {
             .environment(Router())
             .environment(
                 \.dependencies,
-                previewDependencies(temperature: failing, gauge: failing, air: failing, warnings: failing)
+                previewDependencies(
+                    temperature: failing, gauge: failing, air: failing, warnings: failing, pollen: failing
+                )
             )
+    }
+
+    #Preview("Keine Pollenbelastung") {
+        struct QuietPollen: PollenProviding {
+            func pollen() async throws -> PollenReading { PollenReading(values: [], stampLabel: "DWD · 11:00 Uhr") }
+        }
+        return CityView()
+            .environment(Router())
+            .environment(\.dependencies, previewDependencies(pollen: QuietPollen()))
     }
 #endif
