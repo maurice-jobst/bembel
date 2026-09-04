@@ -85,7 +85,7 @@ flowchart TD
 ### 🗂️ The source registry
 
 Every upstream this app reads is in [`data/sources.json`](data/sources.json):
-34 entries across the Frankfurt Geoportal, DWD, the Autobahn GmbH, Open Data
+38 entries across the Frankfurt Geoportal, DWD, the Autobahn GmbH, Open Data
 Hessen, GBFS operators and more — each with its licence, polling cadence, the
 date a live request last proved it works, and the gotchas that cost an hour.
 Sources are tiered 1–5 by what access costs, and the tier is a claim the
@@ -95,7 +95,7 @@ most registries leave out: six things Frankfurt does *not* publish, written
 down so nobody spends another afternoon looking.
 
 ```bash
-make verify-sources   # calls all 50 endpoints, reports dead ones and collapsed feature counts
+make verify-sources   # calls all 54 endpoints, reports dead ones and collapsed feature counts
 ```
 
 A [weekly job](.github/workflows/sources-liveness.yml) runs the same sweep and

@@ -71,6 +71,10 @@
           "type": "string",
           "description": "Onboarding or availability state, e.g. NOT_ONBOARDED, NO_FREE_OPTION."
         },
+        "consumption": {
+          "enum": ["live", "bundled"],
+          "description": "Set only when the app or its build pipeline actually reaches this upstream: 'live' for a running-app request, 'bundled' for data fetched at build/generation time and shipped in the app. Absent means registered but not (yet) called. Drives BEM-B06's data/datasources.json mirror and Settings > Quellen."
+        },
         "feature": { "type": "string", "description": "What this source is for, in product terms." },
         "role": { "type": "string" },
         "protocol": {
