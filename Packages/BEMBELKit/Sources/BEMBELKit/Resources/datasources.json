@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "updated": "2026-09-04",
+  "live": [
+    {
+      "id": "dwd_poi",
+      "name": "DWD Wetterbeobachtungen (POI)",
+      "tier": 2,
+      "license": "GeoNutzV",
+      "attribution": "Deutscher Wetterdienst"
+    },
+    {
+      "id": "dwd_radolan_rv",
+      "name": "DWD RADOLAN RV (Regen-Nowcast)",
+      "tier": 1,
+      "license": "GeoNutzV",
+      "attribution": "Deutscher Wetterdienst"
+    },
+    {
+      "id": "dwd_radolan_ry",
+      "name": "DWD RADOLAN RY (Regen-Beobachtung)",
+      "tier": 2,
+      "license": "GeoNutzV",
+      "attribution": "Deutscher Wetterdienst"
+    },
+    {
+      "id": "nina_mowas",
+      "name": "NINA / MoWaS Bevölkerungswarnungen",
+      "tier": 2,
+      "license": "dl-de/by-2-0",
+      "attribution": "Bundesamt für Bevölkerungsschutz und Katastrophenhilfe (BBK)"
+    },
+    {
+      "id": "pegelonline",
+      "name": "PEGELONLINE (WSV)",
+      "tier": 1,
+      "license": "dl-de/by-2-0",
+      "attribution": "Wasserstraßen- und Schifffahrtsverwaltung des Bundes (WSV)"
+    },
+    {
+      "id": "uba_luftdaten",
+      "name": "Umweltbundesamt Luftdaten API v3",
+      "tier": 2,
+      "license": "dl-de/by-2-0",
+      "attribution": "Umweltbundesamt; Messnetz HLNUG (Hessen)"
+    }
+  ],
+  "bundled": [
+    {
+      "id": "bembel-data",
+      "name": "bembel-data (Community-Register)",
+      "license": "Open Database License (ODbL) 1.0",
+      "attribution": "bembel-data-Mitwirkende"
+    },
+    {
+      "id": "fountains-ffm",
+      "name": "Trink- und Erfrischungsbrunnen Frankfurt am Main",
+      "license": "Datenlizenz Deutschland Namensnennung 2.0",
+      "attribution": "Quelle: Stadt Frankfurt am Main, www.frankfurt.de"
+    },
+    {
+      "id": "fountains-osm",
+      "name": "OpenStreetMap — amenity=drinking_water",
+      "license": "Open Database License (ODbL) 1.0",
+      "attribution": "© OpenStreetMap-Mitwirkende"
+    }
+  ]
+}
