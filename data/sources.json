@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "updated": "2026-08-24",
-  "note": "Every upstream BEMBEL reads, one entry per source. Liveness is checked by scripts/verify_sources.py; the shape is enforced by scripts/validate_data.py against data/schema/sources.schema.json. This registry is not shipped data — data/ATTRIBUTION.json remains the licence record for the datasets bundled into the app.",
+  "updated": "2026-09-04",
+  "note": "Every upstream BEMBEL reads, one entry per source. Liveness is checked by scripts/verify_sources.py; the shape is enforced by scripts/validate_data.py against data/schema/sources.schema.json. This file itself is not shipped — but a filtered view of it is (BEM-B06, #70): entries carrying a 'consumption' tag are mirrored into data/datasources.json and BEMBELKit's Resources, and that is what Settings > Quellen reads. data/ATTRIBUTION.json stays the licence record for datasets bundled at build time; every ATTRIBUTION row's 'registry_id' must point back to an entry here.",
   "attribution_required": true,
   "tiers": {
     "1": "keyless, live, load-bearing. Ship without these and the app is empty.",
@@ -16,7 +16,8 @@
     "searched_at": "Tier 5 only: date the search for an API came up empty.",
     "observed": "Values read at verification. The verifier compares live readings against these and reports drift.",
     "license": "dl-de/by-2-0 = Datenlizenz Deutschland Namensnennung 2.0, attribution required.",
-    "tier": "Tier 1-2 failures are actionable and alert; tier 4 is vendored at build time and is only reported."
+    "tier": "Tier 1-2 failures are actionable and alert; tier 4 is vendored at build time and is only reported.",
+    "consumption": "'live' or 'bundled' means the running app or its build pipeline actually reaches this upstream — absent means registered but not (yet) called. Only tagged entries appear in data/datasources.json and Settings > Quellen (BEM-B06, #70). Requires license + attribution to be set."
   },
   "defaults": {
     "timeout_s": 30,
@@ -262,6 +263,7 @@
       "id": "dwd_poi",
       "name": "DWD Wetterbeobachtungen (POI)",
       "tier": 2,
+      "consumption": "live",
       "feature": "Temperatur im Stadtzustand (BEM-G06)",
       "protocol": "csv",
       "url": "https://opendata.dwd.de/weather/weather_reports/poi/10637-BEOB.csv",
@@ -287,6 +289,7 @@
       "id": "dwd_radolan_rv",
       "name": "DWD RADOLAN RV (Regen-Nowcast)",
       "tier": 1,
+      "consumption": "live",
       "feature": "Regenradar, Vorhersage (BEM-F01/F02)",
       "protocol": "binary",
       "url": "https://opendata.dwd.de/weather/radar/composite/rv/DE1200_RV_LATEST.tar.bz2",
@@ -314,6 +317,7 @@
       "id": "dwd_radolan_ry",
       "name": "DWD RADOLAN RY (Regen-Beobachtung)",
       "tier": 2,
+      "consumption": "live",
       "feature": "Regenradar, vergangene Stunde (BEM-F03)",
       "protocol": "binary",
       "url": "https://opendata.dwd.de/weather/radar/radolan/ry/",
@@ -368,6 +372,7 @@
       "id": "nina_mowas",
       "name": "NINA / MoWaS Bevölkerungswarnungen",
       "tier": 2,
+      "consumption": "live",
       "feature": "Bevölkerungswarnungen im Stadtzustand (BEM-G03)",
       "protocol": "rest_json",
       "url": "https://warnung.bund.de/api31/dashboard/064120000000.json",
@@ -379,6 +384,8 @@
         "/api31/warnings/{id}.json"
       ],
       "auth": "none",
+      "license": "dl-de/by-2-0",
+      "attribution": "Bundesamt für Bevölkerungsschutz und Katastrophenhilfe (BBK)",
       "cadence": "15m",
       "verified_at": "2026-08-21",
       "gotchas": [
@@ -396,6 +403,7 @@
       "id": "uba_luftdaten",
       "name": "Umweltbundesamt Luftdaten API v3",
       "tier": 2,
+      "consumption": "live",
       "feature": "Luftqualität im Stadtzustand (BEM-G02) — HLNUG-Stationen",
       "protocol": "rest_json",
       "base": "https://luftdaten.umweltbundesamt.de/api/air-data/v3",
@@ -418,6 +426,23 @@
         "The per-component 'y' is the position INSIDE its band, so 38 ug/m3 ozone and 121 both read ~0.65. Fold the band index back in before drawing a bar.",
         "Cells change type between endpoints: station latitude is a quoted string, component values are bare numbers."
       ]
+    },
+    {
+      "id": "pegelonline",
+      "name": "PEGELONLINE (WSV)",
+      "tier": 1,
+      "consumption": "live",
+      "feature": "Main-Pegel im Stadtzustand (BEM-G01, #28)",
+      "protocol": "rest_json",
+      "base": "https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/",
+      "example": "66ff3eb4-513b-478b-abd2-2f5126ea66fd/W.json",
+      "auth": "none",
+      "license": "dl-de/by-2-0",
+      "attribution": "Wasserstraßen- und Schifffahrtsverwaltung des Bundes (WSV)",
+      "cadence": "15m",
+      "verified_at": "2026-09-04",
+      "station": "66ff3eb4-513b-478b-abd2-2f5126ea66fd = Frankfurt Osthafen, Main km 37.591 — the gauge BEMBELKit pins (see Data/Live/PegelOnline.swift).",
+      "note": "Shipped since #28 (closed) but never registered here — the #69 sweep predates it and nothing added it after. Added now so BEM-B06's Settings source list can read this from the registry instead of a hand-typed string."
     },
     {
       "id": "sensor_community",
@@ -682,6 +707,48 @@
       "note": "Already scoped as agent-generated (weekly news read each November). No upstream source expected or needed.",
       "finding": "No upstream expected. Prices are published in news copy each November, never as a feed.",
       "searched_at": "2026-08-16"
+    },
+    {
+      "id": "ffm_trinkbrunnen",
+      "name": "Trink- und Erfrischungsbrunnen Frankfurt (WFS)",
+      "tier": 2,
+      "consumption": "bundled",
+      "feature": "Trinkbrunnen-Datensatz (Epic E, #23) — generiert, nicht live abgefragt",
+      "protocol": "wfs",
+      "base": "https://geowebdienste.frankfurt.de/WFS_Trink_Erfrischungsbrunnen",
+      "auth": "none",
+      "license": "Datenlizenz Deutschland Namensnennung 2.0",
+      "attribution": "Quelle: Stadt Frankfurt am Main, www.frankfurt.de",
+      "verified_at": "2026-09-04",
+      "note": "Registriert als Gegenstück zu data/ATTRIBUTION.json's 'fountains-ffm' (BEM-B06, #70) — dessen registry_id zeigt hierher. Die WMS-Variante desselben Datensatzes steht separat unter ffm_wms_layers.trinkbrunnen; diese hier ist die WFS-Vektorquelle, die scripts/generate_fountains.py tatsächlich einliest."
+    },
+    {
+      "id": "openstreetmap",
+      "name": "OpenStreetMap (amenity=drinking_water)",
+      "tier": 2,
+      "consumption": "bundled",
+      "feature": "Trinkbrunnen-Datensatz, Community-Ergänzung (Epic E, #23)",
+      "url": "https://www.openstreetmap.org/copyright",
+      "auth": "none",
+      "license": "Open Database License (ODbL) 1.0",
+      "attribution": "© OpenStreetMap-Mitwirkende",
+      "cadence": "yearly",
+      "verified_at": "2026-09-04",
+      "note": "Registriert als Gegenstück zu data/ATTRIBUTION.json's 'fountains-osm' (BEM-B06, #70). Share-alike: abgeleitete Zeilen bleiben über osm_id identifizierbar."
+    },
+    {
+      "id": "bembel_data_dist",
+      "name": "bembel-data (Community-Register)",
+      "tier": 1,
+      "consumption": "bundled",
+      "feature": "Wasserhäuschen- + Ebbelwei-Register (Hero, #39/#40/#46)",
+      "protocol": "rest_json",
+      "url": "https://raw.githubusercontent.com/maurice-jobst/bembel-data/dist/bembel-data.json",
+      "auth": "none",
+      "license": "Open Database License (ODbL) 1.0",
+      "attribution": "bembel-data-Mitwirkende",
+      "verified_at": "2026-09-04",
+      "note": "scripts/sync_bembel_data.py liest genau diese URL, hatte aber nie einen Registereintrag (BEM-B06, #70). Bundled statt live: die App liest die mitgelieferte Momentaufnahme, nicht diese URL direkt."
     }
   ],
   "deprecated": [
