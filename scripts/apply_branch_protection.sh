@@ -7,6 +7,12 @@
 # GitHub Free doesn't support branch protection on PRIVATE repos (Pro/Team/
 # Enterprise, or the repo must be public) — this fails with a 403 until
 # maurice-jobst/bembel is switched to public. Run it right after that flip.
+#
+# enforce_admins: true (#106) — the README promises human review for every
+# PR; without this an admin can merge past it mechanically. bembel-data
+# already runs enforce_admins: true. An emergency bypass still exists (an
+# admin can flip the protection off), it's just a visible, logged act
+# instead of a silent one.
 set -eu
 gh api -X PUT repos/maurice-jobst/bembel/branches/main/protection --input - <<'EOF'
 {
@@ -18,7 +24,7 @@ gh api -X PUT repos/maurice-jobst/bembel/branches/main/protection --input - <<'E
       "Schema validation (stdlib only, no pip)"
     ]
   },
-  "enforce_admins": false,
+  "enforce_admins": true,
   "required_pull_request_reviews": {
     "required_approving_review_count": 0,
     "dismiss_stale_reviews": true
