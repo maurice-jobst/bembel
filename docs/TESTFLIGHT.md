@@ -58,5 +58,6 @@ nie von Hand in den Asset-Katalog malen.
 
 - RMV-Abfahrten laufen noch auf Sample-Daten (#11, API-Key ausstehend) —
   für interne Tester okay, in der Beta-Beschreibung erwähnen.
-- Kiosk-Stempel feuern nur im Vordergrund (When-In-Use, offene
-  Produktentscheidung aus PR #52).
+- Kiosk-Stempel feuern nur im Vordergrund (When-In-Use). Das ist keine Lücke
+  mehr, sondern entschieden (#105): Always-Auth wurde bewusst nicht
+  eingeführt, der Settings-Text nennt die Reichweite jetzt korrekt.

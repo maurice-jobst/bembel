@@ -1256,7 +1256,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Erkennt auf dem Gerät, wenn du an einem Wasserhäuschen bist, und schaltet den Stempel frei. Kein Standort verlässt das Telefon."
+            "value": "Erkennt, solange die App offen ist, wenn du an einem Wasserhäuschen bist, und schaltet den Stempel frei. Im Hintergrund passiert nichts — dafür verlässt kein Standort das Telefon."
           }
         }
       }
