@@ -28,6 +28,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
+import generate_data_sources_view
 import verify_sources
 from bembel_paths import DATA, KIT_RESOURCES, REPO, mirrored
 
@@ -267,6 +268,17 @@ def check_sources(doc, label: str) -> None:
         ):
             err(f"{where}: 'gotchas' must be a list of one-line strings (≤{MAX_STRING_LEN} chars)")
 
+        consumption = row.get("consumption")
+        if consumption is not None:
+            if consumption not in ("live", "bundled"):
+                err(f"{where}: 'consumption' must be 'live' or 'bundled', got {consumption!r}")
+            missing = [f for f in ("license", "attribution") if not row.get(f)]
+            if missing:
+                err(
+                    f"{where}: consumption:{consumption} appears in Settings > Quellen, "
+                    f"so it needs {missing} too"
+                )
+
     for i, row in enumerate(doc.get("deprecated") or []):
         where = f"{label}: deprecated[{i}]"
         if not isinstance(row, dict):
@@ -349,7 +361,12 @@ def check_iso_date(value, where: str) -> None:
         err(f"{where} is not a real date: {value!r}")
 
 
-def check_attribution(doc, label: str) -> None:
+def check_attribution(doc, label: str, source_ids: set[str] | None = None) -> None:
+    """data/ATTRIBUTION.json — the licence record for datasets bundled at
+    build time. `registry_id` (BEM-B06, #70) is the other half of that claim:
+    every bundled dataset came from *somewhere*, and that somewhere belongs
+    in data/sources.json too, not only in this file's free-text source_url.
+    """
     if doc is None:
         return
     entries = doc.get("datasets")
@@ -368,6 +385,11 @@ def check_attribution(doc, label: str) -> None:
             value = entry.get(field)
             if isinstance(value, str) and not value.startswith(("https://", "http://")):
                 err(f"{where}: '{field}' must be an http(s) URL")
+        registry_id = entry.get("registry_id")
+        if not isinstance(registry_id, str) or not registry_id.strip():
+            err(f"{where}: 'registry_id' must name the data/sources.json entry this dataset came from")
+        elif source_ids is not None and registry_id not in source_ids:
+            err(f"{where}: registry_id {registry_id!r} is not a source id in data/sources.json")
 
 
 def rings_index(doc) -> dict[str, str]:
@@ -556,20 +578,49 @@ def check_mirror(name: str) -> None:
         )
 
 
+def check_datasources_view(sources_doc, attribution_doc) -> None:
+    """data/datasources.json is generated (scripts/generate_data_sources_view.py)
+    — check_mirror above only proves the two shipped copies agree with each
+    other, not that either agrees with data/sources.json and ATTRIBUTION.json.
+    Recomputing here catches the case check_mirror cannot: someone edits the
+    registry and forgets to re-run the generator, so both copies are
+    identically stale (README_CLAIMS exists for the same reason)."""
+    path = DATA / "datasources.json"
+    if not path.is_file():
+        err("data/datasources.json is missing — run scripts/generate_data_sources_view.py")
+        return
+    try:
+        want = generate_data_sources_view.build(sources_doc, attribution_doc)
+    except ValueError as exc:
+        err(f"data/datasources.json: cannot regenerate — {exc}")
+        return
+    have = json.loads(path.read_text(encoding="utf-8"))
+    if have != want:
+        err(
+            "data/datasources.json is stale — run "
+            "'python3 scripts/generate_data_sources_view.py' and commit both copies"
+        )
+
+
 def main() -> int:
     rings_doc = load(DATA / "rings.json")
     check_rings(rings_doc, "data/rings.json")
     check_rings(load(KIT_RESOURCES / "rings.json"), "Kit Resources/rings.json")
     check_manifest(load(DATA / "manifest.json"), "data/manifest.json")
     check_manifest(load(KIT_RESOURCES / "manifest.json"), "Kit Resources/manifest.json")
-    check_attribution(load(DATA / "ATTRIBUTION.json"), "data/ATTRIBUTION.json")
     sources_doc = load(DATA / "sources.json")
+    source_ids = {row["id"] for row in sources_doc.get("sources", []) if isinstance(row.get("id"), str)}
+    attribution_doc = load(DATA / "ATTRIBUTION.json")
+    check_attribution(attribution_doc, "data/ATTRIBUTION.json", source_ids)
     check_sources(sources_doc, "data/sources.json")
     check_readme_claims(sources_doc)
     check_operator_datasets()
     check_geojson_datasets(rings_index(rings_doc))
     check_mirror("rings.json")
     check_mirror("manifest.json")
+    check_mirror("datasources.json")
+    if not errors:
+        check_datasources_view(sources_doc, attribution_doc)
     check_mirror("bembeldata.json")
 
     if errors:

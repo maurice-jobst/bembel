@@ -61,11 +61,19 @@ struct SettingsView: View {
 }
 
 /// Data-state rows read view-model state, not a provider — the ADR 0007 seam
-/// applies to Settings exactly as it does to the feature tabs.
+/// applies to Settings exactly as it does to the feature tabs. The source
+/// catalog itself needs no provider: it is bundled, not fetched, so it loads
+/// synchronously from `DataSourceCatalog.load()` in `init` rather than through
+/// `.task` — there is nothing to await and nothing that can go stale mid-session.
 @MainActor
 @Observable
 final class DataSourcesModel {
     private(set) var snapshot: Loadable<RegisterSnapshot> = .idle
+    private(set) var catalog: DataSourceCatalog?
+
+    init(catalog: DataSourceCatalog? = try? DataSourceCatalog.load()) {
+        self.catalog = catalog
+    }
 
     func load(from provider: any RegisterProviding) async {
         guard !snapshot.hasLoaded else { return }
@@ -74,24 +82,14 @@ final class DataSourcesModel {
     }
 }
 
-/// Every dataset the app touches, with provider and licence. Grows with the
-/// feature tickets; the validator enforces the same rule for curated data.
+/// Every dataset the app touches, read from `data/sources.json` +
+/// `data/ATTRIBUTION.json` via the generated `datasources.json` bundle
+/// (BEM-B06, #70) — no hand-typed array to drift out of sync with what the
+/// app actually calls. A new registered source appears here once it carries
+/// a `consumption` tag; nothing else needs to change.
 struct DataSourcesView: View {
     @Environment(\.dependencies) private var dependencies
     @State private var model = DataSourcesModel()
-
-    private static let sources: [(name: String, licence: String)] = [
-        ("bembel-data (Community)", "ODbL"),
-        ("RMV Open Data", "CC BY 4.0"),
-        ("Hessen LoD2 (HVBG)", "Datenlizenz Deutschland 2.0"),
-        ("Geoportal Frankfurt", "Datenlizenz Deutschland 2.0"),
-        ("OpenStreetMap", "ODbL"),
-        ("DWD RADOLAN", "GeoNutzV"),
-        ("DWD Wetterbeobachtungen (POI, Station Frankfurt/Main)", "GeoNutzV"),
-        ("PEGELONLINE (WSV)", "Datenlizenz Deutschland 2.0"),
-        ("HLNUG Luftmessnetz, über Umweltbundesamt", "Datenlizenz Deutschland 2.0"),
-        ("NINA (BBK)", "Datenlizenz Deutschland 2.0"),
-    ]
 
     var body: some View {
         List {
@@ -116,24 +114,42 @@ struct DataSourcesView: View {
                 Text("settings.data.header")
             }
 
-            Section {
-                ForEach(Self.sources, id: \.name) { source in
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(verbatim: source.name)
-                            .font(.body)
-                        Text(verbatim: source.licence)
-                            .font(.footnote)
-                            .foregroundStyle(BEMColor.inkSecondary)
-                    }
+            if let catalog = model.catalog {
+                sourceSection(catalog.live, header: "settings.sources.live", showsFooter: false)
+                sourceSection(catalog.bundled, header: "settings.sources.bundled", showsFooter: true)
+            } else {
+                Section {
+                    Text("settings.data.unavailable")
+                        .foregroundStyle(BEMColor.inkSecondary)
                 }
-            } footer: {
-                Text("settings.sources.footer")
             }
         }
         .navigationTitle("settings.sources")
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await model.load(from: dependencies.register)
+        }
+    }
+
+    @ViewBuilder
+    private func sourceSection(_ entries: [DataSourceEntry], header: LocalizedStringKey, showsFooter: Bool) -> some View
+    {
+        Section {
+            ForEach(entries) { source in
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(verbatim: source.name)
+                        .font(.body)
+                    Text(verbatim: source.license)
+                        .font(.footnote)
+                        .foregroundStyle(BEMColor.inkSecondary)
+                }
+            }
+        } header: {
+            Text(header)
+        } footer: {
+            if showsFooter {
+                Text("settings.sources.footer")
+            }
         }
     }
 }

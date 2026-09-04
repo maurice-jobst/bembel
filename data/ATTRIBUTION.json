@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "note": "One entry per bundled dataset. Rendered in-app on the attribution screen; scripts/validate_data.py requires id, name, source_url, license and license_url on every row.",
+  "note": "One entry per bundled dataset. Rendered in-app on the attribution screen; scripts/validate_data.py requires id, name, source_url, license and license_url on every row. 'registry_id' is required too (BEM-B06, #70) and must name a data/sources.json entry — the cross-reference the validator holds every row to.",
   "datasets": [
     {
       "id": "fountains-ffm",
@@ -9,6 +9,7 @@
       "license": "Datenlizenz Deutschland Namensnennung 2.0",
       "license_url": "https://www.govdata.de/dl-de/by-2-0",
       "attribution": "Quelle: Stadt Frankfurt am Main, www.frankfurt.de",
+      "registry_id": "ffm_trinkbrunnen",
       "note": "Klimareferat. Erfrischungsbrunnen fuehren Trinkwasser, werden aber nicht beprobt — im Datensatz als geprueft=false gefuehrt."
     },
     {
@@ -18,7 +19,18 @@
       "license": "Open Database License (ODbL) 1.0",
       "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
       "attribution": "© OpenStreetMap-Mitwirkende",
+      "registry_id": "openstreetmap",
       "note": "Share-alike: abgeleitete Zeilen bleiben ueber osm_id identifizierbar."
+    },
+    {
+      "id": "bembel-data",
+      "name": "bembel-data (Community-Register)",
+      "source_url": "https://raw.githubusercontent.com/maurice-jobst/bembel-data/dist/bembel-data.json",
+      "license": "Open Database License (ODbL) 1.0",
+      "license_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+      "attribution": "bembel-data-Mitwirkende",
+      "registry_id": "bembel_data_dist",
+      "note": "Wasserhäuschen- + Ebbelwei-Register, das Hero-Feature. War bislang nur als Zeile im hartkodierten Quellen-Array der Settings sichtbar (BEM-B06, #70), nicht hier."
     }
   ]
 }
