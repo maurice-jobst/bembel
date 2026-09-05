@@ -10,8 +10,8 @@ A registry entry rots in two ways. The endpoint dies, which HTTP tells you, and
 the endpoint quietly empties out, which it does not — a WFS layer that drops
 from 270 features to 0 still answers 200. So every check compares its reading
 against the `observed` block recorded when the entry was last verified, and a
-collapse to nothing is a failure, not a note (LESSONS §E6: drift nobody sweeps
-for is invisible by definition).
+collapse to nothing is a failure, not a note (drift nobody sweeps for is invisible by
+definition).
 
 Coverage is enforced rather than assumed. plan() must produce a check for every
 source that is not exempt-by-tier, and an entry it cannot plan for is reported
@@ -39,7 +39,7 @@ EXEMPT_TIERS = {3, 5}
 # is live, so both are. Tier 4 is static reference data vendored at build time —
 # nothing calls it at runtime, and the Frankfurt WFS hosts are intermittently
 # slow enough that alerting on them would train everyone to ignore the alert
-# (LESSONS §E1). Tier 0 is the sentinel for a source the verifier cannot reach
+# (default-deny on human attention). Tier 0 is the sentinel for a source the verifier cannot reach
 # at all, which is always actionable. Non-actionable failures are still printed.
 ACTIONABLE_TIERS = {0, 1, 2}
 
