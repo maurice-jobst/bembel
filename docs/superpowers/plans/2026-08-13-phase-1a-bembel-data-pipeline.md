@@ -737,7 +737,7 @@ Feld-IDs: `eintrag`, `art`, `quelle`, `details`.
 - [ ] **Step 4b: Make the contract enforceable, not just written down**
 
 A prose contract between two repos drifts silently — a renamed field id opens an
-empty form and nothing turns red (estate rule LESSONS §E4: a rule lands with its
+empty form and nothing turns red (no tool, no rule: a rule lands with its
 enforcing check or it doesn't land). Create `scripts/check_funnel.py`:
 
 ```python
@@ -805,7 +805,8 @@ cd /Users/krazykraut/Projects/bembel-data && python3 scripts/check_funnel.py && 
 ```
 
 Expected: OK, then `Feld-IDs fehlen: ['eintrag']` with `exit=1`, then OK again. A
-check that has never failed once is not known to work (LESSONS §E6).
+check that has never failed once is not known to work — governance that depends
+on someone noticing is luck.
 
 - [ ] **Step 5: Point the README at the new surfaces**
 
@@ -849,7 +850,7 @@ umbenennt, ändert damit stillschweigend den Trichter der App.
 
 ```bash
 cd /Users/krazykraut/Projects/bembel-data && python3 scripts/validate.py && python3 scripts/check_funnel.py && git add -A && git commit -m "Trichter: Ebbelwei- und Verifizierungs-Formular, Vertrag mit der App dokumentiert und geprüft" && git push -u origin feat/app-funnel
-gh pr create -R maurice-jobst/bembel-data --title "Trichter aus der App: Formulare + Vertrag" --body "Die Issue-Formulare und der dokumentierte URL-Vertrag, auf die der In-App-Trichter zielt (Phase 1a, Aufgabe 4). \`scripts/check_funnel.py\` hält den Vertrag in der CI fest — LESSONS §E4 (Regel und prüfende Kontrolle im selben PR), §C3 (der Vertrag steht an genau einer Stelle).
+gh pr create -R maurice-jobst/bembel-data --title "Trichter aus der App: Formulare + Vertrag" --body "Die Issue-Formulare und der dokumentierte URL-Vertrag, auf die der In-App-Trichter zielt (Phase 1a, Aufgabe 4). \`scripts/check_funnel.py\` hält den Vertrag in der CI fest — Regel und prüfende Kontrolle im selben PR; der Vertrag steht an genau einer Stelle.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 gh pr merge -R maurice-jobst/bembel-data --squash --delete-branch

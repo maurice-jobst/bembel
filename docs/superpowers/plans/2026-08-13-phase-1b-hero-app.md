@@ -3077,7 +3077,7 @@ In `AGENTS.md`, under Conventions, add the one thing a future agent will otherwi
 cd /Users/krazykraut/Projects/BEMBEL && make format-check && make test && make validate && make build
 ```
 
-Expected: four green runs. Paste the actual output into the PR body — an assertion that it passed is not evidence (LESSONS §A7).
+Expected: four green runs. Paste the actual output into the PR body — an assertion that it passed is not evidence; the pasted output is.
 
 - [ ] **Step 6: Open the PR**
 
@@ -3095,7 +3095,7 @@ Closes #39. Closes #40. Closes #46. Partially addresses #36 (data-linked sticker
 
 Verification: \`make format-check\`, \`make test\`, \`make validate\`, \`make build\` — output below.
 
-LESSONS §A3 (the deterministic layer accepts: bembel-data's CI computes the aggregates, the app only renders them), §A7 (every task ends in a runnable check), §E4 (the app↔data field-id contract is enforced by \`check_funnel.py\` in bembel-data, not by prose).
+The model proposes, a deterministic layer accepts (bembel-data's CI computes the aggregates, the app only renders them); every task ends in a runnable check; the app↔data field-id contract is enforced by \`check_funnel.py\` in bembel-data, not by prose.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
 ```
