@@ -36,7 +36,7 @@
 - [ ] **Step 1: Create the branch**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && git checkout main && git pull && git checkout -b feat/hero-registers
+cd ~/dev/BEMBEL && git checkout main && git pull && git checkout -b feat/hero-registers
 ```
 
 - [ ] **Step 2: Write the domain models**
@@ -458,7 +458,7 @@ public struct SampleRegisterProvider: RegisterProviding {
 - [ ] **Step 5: Verify and commit**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && make format && make test && make format-check
+cd ~/dev/BEMBEL && make format && make test && make format-check
 ```
 
 Expected: `swift test` builds the package and the existing 29 tests still pass (nothing new is tested yet — these are types).
@@ -829,7 +829,7 @@ struct BembelDataBundleTests {
 - [ ] **Step 4: Run the tests**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && make test
+cd ~/dev/BEMBEL && make test
 ```
 
 Expected: all pass. If `merkmaleAreDataDriven` fails on ordering, the tie-break in `RegisterSnapshot.merkmale(in:)` is what the assertion must match — fix the assertion to the implementation's documented order (count desc, then raw value asc), not the other way round.
@@ -974,7 +974,7 @@ if __name__ == "__main__":
 - [ ] **Step 4: Generate the snapshot**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && python3 scripts/sync_bembel_data.py
+cd ~/dev/BEMBEL && python3 scripts/sync_bembel_data.py
 ```
 
 Expected: `snapshot updated from https://raw.githubusercontent.com/…` with a non-zero entry count. If it 404s, Phase 1a Task 3 has not merged yet — merge it first rather than hand-writing a snapshot.
@@ -999,7 +999,7 @@ and in `main()`, next to the existing mirror checks:
 Then run it:
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && make validate
+cd ~/dev/BEMBEL && make validate
 ```
 
 Expected: `data validation OK`. The mirror check proves both snapshot copies are byte-identical — the failure mode `make validate` exists to catch.
@@ -1094,7 +1094,7 @@ Add to the existing `DatasetStoreTests` suite in `Packages/BEMBELKit/Tests/BEMBE
 - [ ] **Step 8: Verify and commit**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && make format && make test && make validate && make build && make format-check
+cd ~/dev/BEMBEL && make format && make test && make validate && make build && make format-check
 ```
 
 Expected: tests pass including the new one; `make validate` OK; the app builds.
@@ -1319,7 +1319,7 @@ struct RatingFunnelTests {
 - [ ] **Step 3: Verify and commit**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && make format && make test && make format-check
+cd ~/dev/BEMBEL && make format && make test && make format-check
 ```
 
 Expected: all funnel tests pass.
@@ -1508,7 +1508,7 @@ struct StickerRulesTests {
 - [ ] **Step 3: Verify and commit**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && make format && make test && make format-check
+cd ~/dev/BEMBEL && make format && make test && make format-check
 ```
 
 Expected: all sticker tests pass.
@@ -1635,7 +1635,7 @@ In `DeepLinkTests.swift`, replace every assertion that expects `.tab(.water)` wi
 - [ ] **Step 5: Move the fountain views**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && mkdir -p App/Features/Places && git mv App/Features/Water/WaterView.swift App/Features/Places/FountainViews.swift && git rm App/Features/Water/WaterModel.swift
+cd ~/dev/BEMBEL && mkdir -p App/Features/Places && git mv App/Features/Water/WaterView.swift App/Features/Places/FountainViews.swift && git rm App/Features/Water/WaterModel.swift
 ```
 
 In `FountainViews.swift`, delete `struct WaterView` and `enum WaterFilter` entirely (the tab shell replaces both) and keep `FountainPin` and `FountainDetailCard` unchanged — they are the Trinkbrunnen segment's rendering and stay exactly as they are.
@@ -1918,7 +1918,7 @@ and delete the now-unused `tab.water`, `water.filter.*` and `water.search` keys 
 - [ ] **Step 10: Verify and commit**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && make format && make test && make build && make format-check
+cd ~/dev/BEMBEL && make format && make test && make build && make format-check
 ```
 
 Expected: deep-link tests pass with the new shapes; the app builds with five tabs, Orte first.
@@ -2314,7 +2314,7 @@ plus one `merkmal.<raw>` key per vocabulary entry:
 - [ ] **Step 6: Verify in the simulator, not just in the compiler**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && make format && make build && make test && make format-check
+cd ~/dev/BEMBEL && make format && make build && make test && make format-check
 ```
 
 Then run the app on a booted simulator and check three things by eye: the Merkmale chips filter the map, an entry's byline shows a verified date and an `@handle`, and "Bewerten" opens the sheet. Tapping through to GitHub opens Safari — do not submit anything.
@@ -2497,7 +2497,7 @@ In `PlacesView.swift`, add the state and the entry point. The toolbar row sits a
 - [ ] **Step 5: Verify and commit**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && make format && make build && make test && make format-check
+cd ~/dev/BEMBEL && make format && make build && make test && make format-check
 ```
 
 Then in the simulator: unverified entries render grey, their card shows the callout, and the coverage sheet lists Stadtteile with progress bars.
@@ -2708,7 +2708,7 @@ If `MapCameraPosition.region` is unavailable, fall back to the Frankfurt centre 
 - [ ] **Step 5: Verify and commit**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && make format && make test && make build && make format-check
+cd ~/dev/BEMBEL && make format && make test && make build && make format-check
 ```
 
 Expected: the three selection tests pass; the app builds. Simulator check: with the toggle off (Task 10 adds it — until then flip the default in the debugger or skip), no location prompt appears on the Orte tab.
@@ -2973,7 +2973,7 @@ and load it:
 - [ ] **Step 6: Verify and commit**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && make format && make test && make build && make format-check
+cd ~/dev/BEMBEL && make format && make test && make build && make format-check
 ```
 
 Simulator check: enter `cybeerboy` in Settings → the album unlocks "Erste Bewertung" against the sample data; clear it → the stickers lock again. Settings → Datenquellen shows a schema version and an entry count.
@@ -3074,7 +3074,7 @@ In `AGENTS.md`, under Conventions, add the one thing a future agent will otherwi
 - [ ] **Step 5: Full verification before the PR**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && make format-check && make test && make validate && make build
+cd ~/dev/BEMBEL && make format-check && make test && make validate && make build
 ```
 
 Expected: four green runs. Paste the actual output into the PR body — an assertion that it passed is not evidence (LESSONS §A7).

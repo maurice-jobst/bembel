@@ -31,7 +31,7 @@
 - [ ] **Step 1: Create branch**
 
 ```bash
-cd /Users/krazykraut/Projects/BEMBEL && git checkout -b docs/hero-repositioning
+cd ~/dev/BEMBEL && git checkout -b docs/hero-repositioning
 ```
 
 - [ ] **Step 2: Write the ADR**

@@ -37,7 +37,7 @@ Extends the schemas so one Merkmale vocabulary spans both registers (the app's M
 - [ ] **Step 1: Create the branch**
 
 ```bash
-cd /Users/krazykraut/Projects/bembel-data && git checkout -b feat/bundle-pipeline
+cd ~/dev/bembel-data && git checkout -b feat/bundle-pipeline
 ```
 
 - [ ] **Step 2: Extend the Wasserhäuschen schema**
@@ -100,7 +100,7 @@ In `data/wasserhaeuschen/yok-yok.json`, add `"district": "Bahnhofsviertel"` dire
 - [ ] **Step 5: Validate**
 
 ```bash
-cd /Users/krazykraut/Projects/bembel-data && python3 scripts/validate.py
+cd ~/dev/bembel-data && python3 scripts/validate.py
 ```
 
 Expected: `data validation OK (1 entries)`.
@@ -416,7 +416,7 @@ dist/
 - [ ] **Step 4: Run it**
 
 ```bash
-cd /Users/krazykraut/Projects/bembel-data && python3 scripts/build_bundle.py && python3 -c "import json;print(json.dumps(json.load(open('dist/bembel-data.json'))['entries'][0]['provenance'],indent=2,ensure_ascii=False))"
+cd ~/dev/bembel-data && python3 scripts/build_bundle.py && python3 -c "import json;print(json.dumps(json.load(open('dist/bembel-data.json'))['entries'][0]['provenance'],indent=2,ensure_ascii=False))"
 ```
 
 Expected: the summary line reports 1 entry, and the printed provenance block has a real `historyURL`, a `lastChangedAt` timestamp, `verifiedAt: null`, and `lastEditor` either `"maurice-jobst"` (if `logins.json` matched) or `null` — never a display name.
@@ -424,7 +424,7 @@ Expected: the summary line reports 1 entry, and the printed provenance block has
 - [ ] **Step 5: Prove determinism**
 
 ```bash
-cd /Users/krazykraut/Projects/bembel-data && cp dist/bembel-data.json /tmp/bundle-a.json && python3 scripts/build_bundle.py && diff /tmp/bundle-a.json dist/bembel-data.json && echo "byte-identisch"
+cd ~/dev/bembel-data && cp dist/bembel-data.json /tmp/bundle-a.json && python3 scripts/build_bundle.py && diff /tmp/bundle-a.json dist/bembel-data.json && echo "byte-identisch"
 ```
 
 Expected: `byte-identisch`. If it differs, something non-deterministic leaked in — fix it before moving on; the conditional-GET contract depends on identical bytes producing an identical ETag.
@@ -432,7 +432,7 @@ Expected: `byte-identisch`. If it differs, something non-deterministic leaked in
 - [ ] **Step 6: Prove aggregation with a throwaway rating**
 
 ```bash
-cd /Users/krazykraut/Projects/bembel-data && mkdir -p data/bewertungen/yok-yok && cat > data/bewertungen/yok-yok/maurice-jobst.json <<'JSON'
+cd ~/dev/bembel-data && mkdir -p data/bewertungen/yok-yok && cat > data/bewertungen/yok-yok/maurice-jobst.json <<'JSON'
 {
   "entry": "yok-yok",
   "login": "maurice-jobst",
@@ -449,7 +449,7 @@ Expected: `{'average': 5.0, 'count': 1, 'ratings': [...]}` and a contributor row
 Then remove the throwaway rating — it is not a real rating and must not be committed:
 
 ```bash
-cd /Users/krazykraut/Projects/bembel-data && rm -r data/bewertungen/yok-yok && git status --short
+cd ~/dev/bembel-data && rm -r data/bewertungen/yok-yok && git status --short
 ```
 
 Expected: only `scripts/build_bundle.py`, `logins.json` and `.gitignore` show as changes.
@@ -540,7 +540,7 @@ jobs:
 - [ ] **Step 2: Commit and open the PR**
 
 ```bash
-cd /Users/krazykraut/Projects/bembel-data && git add .github/workflows/publish.yml && git commit -m "CI: Bundle auf den dist-Branch veröffentlichen, Release-Asset anhängen" && git push -u origin feat/bundle-pipeline
+cd ~/dev/bembel-data && git add .github/workflows/publish.yml && git commit -m "CI: Bundle auf den dist-Branch veröffentlichen, Release-Asset anhängen" && git push -u origin feat/bundle-pipeline
 gh pr create -R maurice-jobst/bembel-data --title "Bundle-Pipeline: Merkmale-Vokabular, deterministischer Bau, dist-Veröffentlichung" --body "Phase 1a der BEMBEL-Hero-Umsetzung.
 
 - Gemeinsames Merkmale-Vokabular über beide Register, optionales \`district\`-Feld
@@ -590,7 +590,7 @@ The app's funnel is nothing but URL construction — but it can only target form
 - [ ] **Step 1: Branch**
 
 ```bash
-cd /Users/krazykraut/Projects/bembel-data && git checkout main && git pull && git checkout -b feat/app-funnel
+cd ~/dev/bembel-data && git checkout main && git pull && git checkout -b feat/app-funnel
 ```
 
 - [ ] **Step 2: Ebbelwei issue form**
@@ -801,7 +801,7 @@ first and add a step next to the `validate.py` step, matching its style:
 Then prove it works in both directions:
 
 ```bash
-cd /Users/krazykraut/Projects/bembel-data && python3 scripts/check_funnel.py && sed -i '' 's/^    id: eintrag$/    id: entry_id/' .github/ISSUE_TEMPLATE/verifizierung.yml && python3 scripts/check_funnel.py; echo "exit=$?"; git checkout .github/ISSUE_TEMPLATE/verifizierung.yml && python3 scripts/check_funnel.py
+cd ~/dev/bembel-data && python3 scripts/check_funnel.py && sed -i '' 's/^    id: eintrag$/    id: entry_id/' .github/ISSUE_TEMPLATE/verifizierung.yml && python3 scripts/check_funnel.py; echo "exit=$?"; git checkout .github/ISSUE_TEMPLATE/verifizierung.yml && python3 scripts/check_funnel.py
 ```
 
 Expected: OK, then `Feld-IDs fehlen: ['eintrag']` with `exit=1`, then OK again. A
@@ -848,7 +848,7 @@ umbenennt, ändert damit stillschweigend den Trichter der App.
 - [ ] **Step 7: Validate, commit, PR, merge**
 
 ```bash
-cd /Users/krazykraut/Projects/bembel-data && python3 scripts/validate.py && python3 scripts/check_funnel.py && git add -A && git commit -m "Trichter: Ebbelwei- und Verifizierungs-Formular, Vertrag mit der App dokumentiert und geprüft" && git push -u origin feat/app-funnel
+cd ~/dev/bembel-data && python3 scripts/validate.py && python3 scripts/check_funnel.py && git add -A && git commit -m "Trichter: Ebbelwei- und Verifizierungs-Formular, Vertrag mit der App dokumentiert und geprüft" && git push -u origin feat/app-funnel
 gh pr create -R maurice-jobst/bembel-data --title "Trichter aus der App: Formulare + Vertrag" --body "Die Issue-Formulare und der dokumentierte URL-Vertrag, auf die der In-App-Trichter zielt (Phase 1a, Aufgabe 4). \`scripts/check_funnel.py\` hält den Vertrag in der CI fest — LESSONS §E4 (Regel und prüfende Kontrolle im selben PR), §C3 (der Vertrag steht an genau einer Stelle).
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)"
@@ -879,7 +879,7 @@ The register must not launch empty. Four to six sourced entries make the second 
 - [ ] **Step 1: Branch**
 
 ```bash
-cd /Users/krazykraut/Projects/bembel-data && git checkout main && git pull && git checkout -b data/ebbelwei-seed
+cd ~/dev/bembel-data && git checkout main && git pull && git checkout -b data/ebbelwei-seed
 ```
 
 - [ ] **Step 2: Research each candidate before writing anything**
@@ -920,7 +920,7 @@ Coordinates come from OSM (linked in `sources` — OSM data is ODbL, the licence
 - [ ] **Step 4: Validate and build**
 
 ```bash
-cd /Users/krazykraut/Projects/bembel-data && python3 scripts/validate.py && python3 scripts/build_bundle.py
+cd ~/dev/bembel-data && python3 scripts/validate.py && python3 scripts/build_bundle.py
 ```
 
 Expected: `data validation OK (N entries)` with N = 1 + your Ebbelwei count, and the builder reporting the same count plus the new Sachsenhausen/Bornheim coverage rows.
