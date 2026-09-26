@@ -95,7 +95,7 @@ most registries leave out: six things Frankfurt does *not* publish, written
 down so nobody spends another afternoon looking.
 
 ```bash
-make verify-sources   # calls all 54 endpoints, reports dead ones and collapsed feature counts
+make verify-sources   # calls all 50 endpoints, reports dead ones and collapsed feature counts
 ```
 
 A [weekly job](.github/workflows/sources-liveness.yml) runs the same sweep and
