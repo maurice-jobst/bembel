@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated": "2026-09-04",
+  "updated": "2026-09-26",
   "note": "Every upstream BEMBEL reads, one entry per source. Liveness is checked by scripts/verify_sources.py; the shape is enforced by scripts/validate_data.py against data/schema/sources.schema.json. This file itself is not shipped — but a filtered view of it is (BEM-B06, #70): entries carrying a 'consumption' tag are mirrored into data/datasources.json and BEMBELKit's Resources, and that is what Settings > Quellen reads. data/ATTRIBUTION.json stays the licence record for datasets bundled at build time; every ATTRIBUTION row's 'registry_id' must point back to an entry here.",
   "attribution_required": true,
   "tiers": {
@@ -86,7 +86,7 @@
       "license": "dl-de/by-2-0",
       "attribution": "Stadt Frankfurt am Main",
       "cadence": "6h",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "gotchas": [
         "endevent 2099-12-31 means permanent change, not a bug. Filter it out of 'current works'.",
         "textlong is German prose. Only Verkehrsmeldungen has _en fields."
@@ -126,7 +126,7 @@
       "license": "dl-de/by-2-0",
       "attribution": "Autobahn GmbH des Bundes",
       "cadence": "5m",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "roads_relevant": [
         "A3",
         "A5",
@@ -151,7 +151,7 @@
       "url": "https://download.gtfs.de/germany/rv_free/latest.zip",
       "auth": "none",
       "cadence": "24h",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "observed": {
         "bytes": 12040265,
         "last_modified": "2026-08-15"
@@ -169,7 +169,7 @@
       "auth": "none",
       "license": "dl-de/by-2-0",
       "cadence": "quarterly",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "observed": {
         "count": 439
       },
@@ -217,7 +217,7 @@
       ],
       "auth": "none",
       "cadence": "monthly",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "note": "static only. Live occupancy is mobilithek_parkdaten (tier 3)."
     },
     {
@@ -242,7 +242,7 @@
       ],
       "auth": "none",
       "cadence": "monthly",
-      "verified_at": "2026-08-21"
+      "verified_at": "2026-09-26"
     },
     {
       "id": "dwd_pollen",
@@ -256,7 +256,7 @@
       "license": "GeoNutzV",
       "attribution": "Deutscher Wetterdienst",
       "cadence": "6h",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "region": "Rhein-Main = DWD Partregion within Hessen. Match by region name, not coords.",
       "note": "3-day forecast, today/tomorrow/day-after per pollen type."
     },
@@ -273,7 +273,7 @@
       "license": "GeoNutzV",
       "attribution": "Deutscher Wetterdienst",
       "cadence": "1h",
-      "verified_at": "2026-08-23",
+      "verified_at": "2026-09-26",
       "observed": {
         "bytes": 7092
       },
@@ -299,7 +299,7 @@
       "license": "GeoNutzV",
       "attribution": "Deutscher Wetterdienst",
       "cadence": "5m",
-      "verified_at": "2026-08-24",
+      "verified_at": "2026-09-26",
       "observed": {
         "frames": 25,
         "step_minutes": 5,
@@ -326,7 +326,7 @@
       "license": "GeoNutzV",
       "attribution": "Deutscher Wetterdienst",
       "cadence": "5m",
-      "verified_at": "2026-08-24",
+      "verified_at": "2026-09-26",
       "observed": {
         "retained_files": 576,
         "bytes_dry": 3743,
@@ -350,7 +350,7 @@
       "url": "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json",
       "auth": "none",
       "cadence": "15m",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "gotchas": [
         "Wrapped in warnWetter.loadWarnings({...}); — strip the callback before JSON.parse.",
         "Keyed by Warncell-ID. 106412000 = Frankfurt, 106434000 = Hochtaunuskreis."
@@ -366,7 +366,7 @@
       "example": "/current_weather?lat=50.11&lon=8.68",
       "auth": "none",
       "cadence": "30m",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "note": "clean JSON over DWD MOSMIX/observations. No key, no rate limit published. Not read by the app: BEM-G06 checked DWD's own POI files first and they parse directly (dwd_poi), so the hosted wrapper stays out of the critical path per ADR 0008. Kept as the documented fallback if opendata.dwd.de ever stops publishing POI."
     },
     {
@@ -388,7 +388,7 @@
       "license": "dl-de/by-2-0",
       "attribution": "Bundesamt für Bevölkerungsschutz und Katastrophenhilfe (BBK)",
       "cadence": "15m",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "gotchas": [
         "The region key is the 12-digit Regionalschlüssel, not the 8-digit AGS. dashboard/06412000.json is HTTP 400; dashboard/064120000000.json is 200.",
         "ARS is not AGS with zeros appended — below Kreis level the two lay their digits out differently, so 150853700000 for Wernigerode is not a key at all.",
@@ -413,7 +413,7 @@
       "license": "dl-de/by-2-0",
       "attribution": "Umweltbundesamt; Messnetz HLNUG (Hessen)",
       "cadence": "1h",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "services": {
         "components": "https://luftdaten.umweltbundesamt.de/api/air-data/v3/components/json?lang=de"
       },
@@ -441,7 +441,7 @@
       "license": "dl-de/by-2-0",
       "attribution": "Wasserstraßen- und Schifffahrtsverwaltung des Bundes (WSV)",
       "cadence": "15m",
-      "verified_at": "2026-09-04",
+      "verified_at": "2026-09-26",
       "station": "66ff3eb4-513b-478b-abd2-2f5126ea66fd = Frankfurt Osthafen, Main km 37.591 — the gauge BEMBELKit pins (see Data/Live/PegelOnline.swift).",
       "note": "Shipped since #28 (closed) but never registered here — the #69 sweep predates it and nothing added it after. Added now so BEM-B06's Settings source list can read this from the registry instead of a hand-typed string."
     },
@@ -455,7 +455,7 @@
       "auth": "none",
       "license": "ODbL",
       "cadence": "15m",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "observed": {
         "bytes": 34354
       },
@@ -473,15 +473,14 @@
       "version": "2.2",
       "discovery": "https://data.lime.bike/api/partners/v2/gbfs/frankfurt/gbfs.json",
       "siblings": {
-        "dott_wiesbaden": "https://gbfs.api.ridedott.com/public/v2/wiesbaden/gbfs.json",
-        "dott_darmstadt": "https://gbfs.api.ridedott.com/public/v2/darmstadt/gbfs.json",
         "nextbike_wiesbaden": "https://gbfs.nextbike.net/maps/gbfs/v2/nextbike_wn/gbfs.json"
       },
       "auth": "none",
       "cadence": "5m",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "gotchas": [
-        "gbfs.nextbike.net/maps/gbfs/v2/nextbike_de/gbfs.json is 404. There is no all-Germany nextbike feed — enumerate per-city from MobilityData systems.csv."
+        "gbfs.nextbike.net/maps/gbfs/v2/nextbike_de/gbfs.json is 404. There is no all-Germany nextbike feed — enumerate per-city from MobilityData systems.csv.",
+        "Dott left Wiesbaden and Darmstadt in Sept 2026 (404 ERR_REGION_NOT_FOUND, absent from Dott's own aggregate gbfs.json). MobilityData systems.csv still lists both — the catalogue lags the operators, so a row there is a lead, not proof."
       ]
     },
     {
@@ -490,14 +489,12 @@
       "tier": 2,
       "protocol": "datex2_xml",
       "feeds": {
-        "traffic_messages": "https://ivm.traff-x.de/gip-service/rest/xb/export/TrafficMessages_IVM",
-        "strategic_routing": "https://ivm.traff-x.de/gip-service/rest/xb/export/StrategicRouting_IVM",
         "cycling_messages": "https://ivm-rad.traff-x.de/traffix/rest/trafficmessageservlet/getDatex2Data"
       },
       "auth": "none",
       "cadence": "30m",
-      "verified_at": "2026-08-21",
-      "note": "traffic_messages contained only 5 situations at verify. Metadata claims coverage of Friedrichsdorf and Wiesbaden only. Treat ffm_baustellen as canonical and this as a nice-to-have that may grow. cycling_messages is 4.5 MB and covers Hessen-wide touristic cycle routes — that one has real content."
+      "verified_at": "2026-09-26",
+      "note": "Only cycling_messages is left: 4.5 MB, Hessen-wide touristic cycle routes, real content. The car-traffic feeds on ivm.traff-x.de died in September 2026 — see deprecated ivm_datex_gip. ffm_baustellen is the canonical source for works and closures in Frankfurt."
     },
     {
       "id": "hessen_ckan",
@@ -507,7 +504,7 @@
       "protocol": "ckan_api",
       "base": "https://opendata.hessen.de/api/3/action",
       "auth": "none",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "observed": {
         "total_datasets": 1495,
         "frankfurt_matches": 409
@@ -533,7 +530,7 @@
       "csv_pattern": "https://offenedaten.frankfurt.de/dcat/dataset/{id}/content.csv",
       "auth": "none",
       "cadence": "quarterly",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "observed": {
         "datasets": 155
       },
@@ -565,7 +562,7 @@
       },
       "auth": "none",
       "cadence": "yearly",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "note": "Starkregen + pegelonline (already integrated) + Klimaplanatlas = one coherent \"Wasser & Hitze\" screen rather than three scattered features."
     },
     {
@@ -629,7 +626,7 @@
       "protocol": "wfs",
       "base": "https://geowebdienste.frankfurt.de/Adressdienst",
       "auth": "none",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "note": "local geocoding without hitting Nominatim."
     },
     {
@@ -643,7 +640,7 @@
         "naturdenkmale": "https://geowebdienste.frankfurt.de/WFS_Naturdenkmale"
       },
       "auth": "none",
-      "verified_at": "2026-08-21"
+      "verified_at": "2026-09-26"
     },
     {
       "id": "htk_infrastruktur",
@@ -651,7 +648,7 @@
       "tier": 4,
       "catalogue": "https://opendata.hessen.de/api/3/action/package_search?q=organization:hochtaunuskreis-der-kreisausschuss",
       "auth": "none",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "note": "covers the \"Rhein-Main-ish, not city boundary\" scope decision."
     },
     {
@@ -661,7 +658,7 @@
       "url": "https://raw.githubusercontent.com/MobilityData/gbfs/master/systems.csv",
       "auth": "none",
       "cadence": "monthly",
-      "verified_at": "2026-08-21",
+      "verified_at": "2026-09-26",
       "note": "re-scan for new Rhein-Main micromobility operators."
     },
     {
@@ -720,7 +717,7 @@
       "auth": "none",
       "license": "Datenlizenz Deutschland Namensnennung 2.0",
       "attribution": "Quelle: Stadt Frankfurt am Main, www.frankfurt.de",
-      "verified_at": "2026-09-04",
+      "verified_at": "2026-09-26",
       "note": "Registriert als Gegenstück zu data/ATTRIBUTION.json's 'fountains-ffm' (BEM-B06, #70) — dessen registry_id zeigt hierher. Die WMS-Variante desselben Datensatzes steht separat unter ffm_wms_layers.trinkbrunnen; diese hier ist die WFS-Vektorquelle, die scripts/generate_fountains.py tatsächlich einliest."
     },
     {
@@ -734,7 +731,7 @@
       "license": "Open Database License (ODbL) 1.0",
       "attribution": "© OpenStreetMap-Mitwirkende",
       "cadence": "yearly",
-      "verified_at": "2026-09-04",
+      "verified_at": "2026-09-26",
       "note": "Registriert als Gegenstück zu data/ATTRIBUTION.json's 'fountains-osm' (BEM-B06, #70). Share-alike: abgeleitete Zeilen bleiben über osm_id identifizierbar."
     },
     {
@@ -748,7 +745,7 @@
       "auth": "none",
       "license": "Open Database License (ODbL) 1.0",
       "attribution": "bembel-data-Mitwirkende",
-      "verified_at": "2026-09-04",
+      "verified_at": "2026-09-26",
       "note": "scripts/sync_bembel_data.py liest genau diese URL, hatte aber nie einen Registereintrag (BEM-B06, #70). Bundled statt live: die App liest die mitgelieferte Momentaufnahme, nicht diese URL direkt."
     }
   ],
@@ -774,6 +771,24 @@
       "url": "https://hessen-mobil.eco-counter.com/api/v1/counters",
       "status": "HTTP 401 'API route is not allowed'. Public map only, no API.",
       "verified_at": "2026-08-16"
+    },
+    {
+      "id": "ivm_datex_gip",
+      "url": "https://ivm.traff-x.de/gip-service/rest/xb/export/TrafficMessages_IVM",
+      "status": "Whole host down since at least 2026-09-07: HTTPS resets the connection, plain HTTP answers 503 on every path, TrafficMessages_IVM and StrategicRouting_IVM alike. Three weekly sweeps in a row (#117). It never carried much — 5 situations at verify, metadata claimed Friedrichsdorf and Wiesbaden only. The sibling host ivm-rad.traff-x.de still serves cycling_messages.",
+      "verified_at": "2026-09-26",
+      "replacement": [
+        "ffm_baustellen"
+      ]
+    },
+    {
+      "id": "dott_rheinmain",
+      "url": "https://gbfs.api.ridedott.com/public/v2/darmstadt/gbfs.json",
+      "status": "Dott withdrew from Darmstadt and Wiesbaden: both GBFS discovery URLs answer 404 ERR_REGION_NOT_FOUND (Darmstadt in the 2026-09-14 sweep, Wiesbaden by 2026-09-26) and neither city is in Dott's 113-region aggregate. No Dott city is left in the Rhein-Main ring. Lime serves Frankfurt only; nextbike_wn (a lime_frankfurt sibling) still covers Wiesbaden.",
+      "verified_at": "2026-09-26",
+      "replacement": [
+        "lime_frankfurt"
+      ]
     }
   ]
 }
