@@ -14,7 +14,7 @@
     "cadence": "How often BEMBEL should poll, not how often upstream changes.",
     "verified_at": "Date a live request confirmed this entry. Re-run the verifier past ~90 days.",
     "searched_at": "Tier 5 only: date the search for an API came up empty.",
-    "observed": "Values read at verification. The verifier compares live readings against these and reports drift.",
+    "observed": "Values a human read at verification and wrote down by hand — the verifier compares live readings against them and reports drift, and never rewrites them. A count below a fifth of the recorded one (for layers of 20+) or at zero fails the run. \"volatile\": true marks a count that moves by nature (Baustellen): only the collapse is reported, not the weekly movement.",
     "license": "dl-de/by-2-0 = Datenlizenz Deutschland Namensnennung 2.0, attribution required.",
     "tier": "Tier 1-2 failures are actionable and alert; tier 4 is vendored at build time and is only reported.",
     "consumption": "'live' or 'bundled' means the running app or its build pipeline actually reaches this upstream — absent means registered but not (yet) called. Only tagged entries appear in data/datasources.json and Settings > Quellen (BEM-B06, #70). Requires license + attribution to be set."
@@ -36,7 +36,8 @@
         {
           "typename": "opendata_verkehr:Baustellen",
           "observed": {
-            "count": 270
+            "count": 304,
+            "volatile": true
           },
           "geometry": "MultiPolygon",
           "fields": [
@@ -50,7 +51,8 @@
         {
           "typename": "opendata_verkehr:Verkehrsmeldungen",
           "observed": {
-            "count": 11
+            "count": 9,
+            "volatile": true
           },
           "note": "includes event closures (e.g. Frankfurt Marathon); has *_en translations",
           "fields": [
@@ -75,7 +77,7 @@
         {
           "typename": "opendata_verkehr:BlindenLSA",
           "observed": {
-            "count": 168
+            "count": 167
           },
           "note": "signals with acoustic aid — accessibility layer, nobody has built this"
         }
@@ -199,7 +201,7 @@
         {
           "typename": "opendata:Behindertenparkplaetze",
           "observed": {
-            "count": 448
+            "count": 458
           }
         },
         {
@@ -230,13 +232,13 @@
         {
           "typename": "opendata_rad:Fahrradboxen",
           "observed": {
-            "count": 41
+            "count": 42
           }
         },
         {
           "typename": "opendata_rad:Radinformation",
           "observed": {
-            "count": 22
+            "count": 25
           }
         }
       ],

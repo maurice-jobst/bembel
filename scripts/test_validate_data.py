@@ -308,6 +308,24 @@ class SourceRegistryTests(unittest.TestCase):
         doc["deprecated"][0].pop("status")
         self.assertRejected(self.check(doc), "must say why it is dead")
 
+    # --- observed -----------------------------------------------------------
+
+    def test_volatile_must_be_literally_true(self):
+        """A flag spelled "yes" reads as set to a human and as set to Python,
+        and then silences drift on a layer nobody decided was volatile."""
+        self.assertRejected(
+            self.broken(0, lambda s: s["layers"][0]["observed"].update(volatile="yes")),
+            "'volatile' must be true",
+        )
+
+    def test_volatile_without_a_count_is_rejected(self):
+        """volatile only changes how a count is judged. On a byte reading it
+        would be a flag that does nothing and looks like it does something."""
+        self.assertRejected(
+            self.broken(0, lambda s: s["layers"][0].update(observed={"bytes": 7092, "volatile": True})),
+            "only means something next to a count",
+        )
+
 
 class SourceVerifierCoverageTests(unittest.TestCase):
     """Offline half of the liveness check. Reaching the network is a weekly
@@ -336,7 +354,10 @@ class SourceVerifierCoverageTests(unittest.TestCase):
         checks = list(verify_sources.plan(source))
         self.assertEqual(len(checks), 4)
         self.assertTrue(all(c.url.endswith("resultType=hits") for c in checks))
-        self.assertEqual(checks[0].observed, {"count": 270})
+        # The layer's own block reaches the check — the number itself is a
+        # human's record and moves when somebody refreshes it.
+        self.assertEqual(checks[0].observed, source["layers"][0]["observed"])
+        self.assertIn("count", checks[0].observed)
 
     def test_a_rest_source_plans_its_extra_services_too(self):
         """A second path on a REST source is still a path that can 404.
@@ -379,6 +400,30 @@ class SourceVerifierCoverageTests(unittest.TestCase):
         message, fatal = verify_sources.drift(check, {"count": 265})
         self.assertFalse(fatal)
         self.assertIn("270 -> 265", message)
+
+    def test_a_collapse_short_of_zero_is_a_failure_too(self):
+        """270 -> 3 is the same dead layer as 270 -> 0, with a few stragglers.
+        Before BEM-B07 it went out as a note and the run exited 0."""
+        check = verify_sources.Check("x", "https://example.invalid", "hits", {"count": 270})
+        self.assertEqual(verify_sources.drift(check, {"count": 3}), ("was 270 features, now 3", True))
+
+    def test_a_small_layer_thinning_out_is_news_not_a_collapse(self):
+        """Eleven traffic notices down to two is a quiet week on the roads.
+        A share of a handful is noise; zero stays a failure at any size."""
+        check = verify_sources.Check("x", "https://example.invalid", "hits", {"count": 11})
+        self.assertEqual(verify_sources.drift(check, {"count": 2}), ("11 -> 2 features", False))
+        self.assertEqual(verify_sources.drift(check, {"count": 0}), ("was 11 features, now 0", True))
+
+    def test_a_volatile_count_that_moves_is_not_news(self):
+        """Baustellen moves every week by nature. Reporting it every Monday is
+        the line everyone learns to skip, and the real one hides behind it."""
+        check = verify_sources.Check("x", "https://example.invalid", "hits", {"count": 270, "volatile": True})
+        self.assertEqual(verify_sources.drift(check, {"count": 304}), (None, False))
+        self.assertEqual(verify_sources.drift(check, {"count": 240}), (None, False))
+
+    def test_a_volatile_count_that_collapses_still_fails(self):
+        check = verify_sources.Check("x", "https://example.invalid", "hits", {"count": 270, "volatile": True})
+        self.assertEqual(verify_sources.drift(check, {"count": 3}), ("was 270 features, now 3", True))
 
     def test_an_unrecorded_count_does_not_invent_drift(self):
         check = verify_sources.Check("x", "https://example.invalid", "hits", {})

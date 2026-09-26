@@ -36,7 +36,7 @@ departures do not ship on sample data.
 | Epic | Done | Open |
 |---|---|---|
 | A Foundation | #1 #2 #3 #4 #5 #6 | — |
-| B Data pipeline | #7 schema + validator · #70 DataSourcesView from the registry | #8 attribution registry · #9 publish workflow · #10 operator harness |
+| B Data pipeline | #7 schema + validator · #70 DataSourcesView from the registry | #8 attribution registry · #9 publish workflow · #10 operator harness · #122 drift check: collapse short of zero, volatile layers |
 | C Departures (RMV) | — | #11 key + client (`blocked`) · #12 nearby stops · #13 pinned stops · #14 Home Screen widget · #15 Lock Screen · #16 failure states |
 | D Sonnenstand / LoD2 | #19 solar position · #21 time controls · #22 accuracy disclosure · #92 Schatten → Sonnenstand | #17 LoD2 acquisition · #18 building dataset · #20 shadow rendering (v1.2) |
 | E Drinking water | #23 dataset · #24 seasonal engine · #25 map, list, detail | — |
@@ -45,7 +45,7 @@ departures do not ship on sample data.
 | H Ship | #90 AI-NATIVE.md | #31 App Store presence · #32 localisation audit · #33 tip jar (`needs-decision`) · #34 privacy + TestFlight · #35 outreach |
 | S Side quests | #39 Wasserhäuschen-Register · #40 Ebbelwei · #46 bundle loader (hero, pulled into v1.0) | #36 #37 #38 #41 #42 #43 #44 #45 #72 #73 #74 #75 (all M4) |
 
-Unlabelled operations: #102 source liveness, #105 kiosk-stamp auth,
+Unlabelled operations: #102 #117 source liveness, #105 kiosk-stamp auth,
 #106 branch protection `enforce_admins`.
 
 ## Releases after 1.0

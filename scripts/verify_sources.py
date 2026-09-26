@@ -4,14 +4,20 @@ rule as the rest of scripts/, so CI runs it without an install step.
 
     python3 scripts/verify_sources.py            # check every reachable source
     python3 scripts/verify_sources.py --tier 1   # only the load-bearing ones
-    python3 scripts/verify_sources.py --stamp    # rewrite verified_at + observed on a clean run
+    python3 scripts/verify_sources.py --stamp    # rewrite verified_at on a clean run
 
 A registry entry rots in two ways. The endpoint dies, which HTTP tells you, and
 the endpoint quietly empties out, which it does not — a WFS layer that drops
 from 270 features to 0 still answers 200. So every check compares its reading
 against the `observed` block recorded when the entry was last verified, and a
-collapse to nothing is a failure, not a note (LESSONS §E6: drift nobody sweeps
-for is invisible by definition).
+collapse — to nothing, or for a layer of 20+ to under a fifth — is a failure,
+not a note (LESSONS §E6: drift nobody sweeps for is invisible by definition).
+
+`observed` is written by a human, never by this script. When a drift line is
+real (the city added 10 disabled parking bays), write the new count into the
+entry by hand, in the same PR that stamps verified_at. A layer whose count
+moves by nature (Baustellen) carries "volatile": true instead, which keeps the
+collapse check and drops the weekly note nobody would read anyway.
 
 Coverage is enforced rather than assumed. plan() must produce a check for every
 source that is not exempt-by-tier, and an entry it cannot plan for is reported
@@ -50,6 +56,15 @@ JSONP_WRAPPER = re.compile(rb"^[^(]*\(|\);?\s*$")
 
 # Below this a 200 is almost always an error page or an empty envelope.
 MIN_BODY = 200
+
+# A count below this share of the recorded one is a collapse, not drift: 270 ->
+# 3 is the same dead layer as 270 -> 0, answering with a few stragglers. Real
+# layers move by a few percent between sweeps, Baustellen by a tenth at most in
+# a week, so four fifths gone is never the city doing its job (BEM-B07).
+COLLAPSE_SHARE = 0.2
+# ...but only for a layer big enough for a share to mean anything. Eleven
+# Verkehrsmeldungen dropping to two is a quiet week; zero is still a failure.
+COLLAPSE_FLOOR = 20
 
 
 class Check:
@@ -186,15 +201,18 @@ def read(check, body):
 
 
 def drift(check, reading):
-    """(message, is_failure). A count that collapsed to zero is a dead source
-    wearing a 200; anything else that moved is just news."""
+    """(message, is_failure). A count that collapsed is a dead source wearing a
+    200; anything else that moved is just news — unless the layer is marked
+    volatile, where moving is what it does and only the collapse is news."""
     was, now = check.observed.get("count"), reading.get("count")
     if was is None or now is None:
         return None, False
     if now == was:
         return None, False
-    if now == 0:
-        return f"was {was} features, now 0", True
+    if now == 0 or (was >= COLLAPSE_FLOOR and now < was * COLLAPSE_SHARE):
+        return f"was {was} features, now {now}", True
+    if check.observed.get("volatile"):
+        return None, False
     return f"{was} -> {now} features", False
 
 
