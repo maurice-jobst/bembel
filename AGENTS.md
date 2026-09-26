@@ -10,7 +10,7 @@ No backend, no third-party dependencies, no analytics, German-first strings.
 
 ## Locked decisions — do not relitigate
 
-See docs/superpowers/specs/2026-08-13-hero-repositioning-design.md for the
+See docs/specs/2026-08-13-hero-repositioning-design.md for the
 current scope (the original kickoff prompt is archived at
 docs/history/2026-06-kickoff-prompt.md). Highlights: the hero is the
 bembel-data community layer (Wasserhäuschen + Ebbelwei registers, rating
@@ -23,7 +23,10 @@ value wins (ADR 0010); ship 22 March 2027; datasets bundled + refreshed via cond
 `de.mauricejobst`; MIT code licence; selection principles are data readiness
 first and AI-native development (ADR 0008).
 Decisions with rationale live in docs/adr/ — read before proposing changes to
-anything they cover.
+anything they cover. Roles, tie-breakers and the change process are in
+GOVERNANCE.md; the product's principles, scope of record and gates are in
+docs/PRODUCT.md; neighbouring projects we coordinate with are in
+docs/PARTNERS.md.
 
 ## Conventions
 

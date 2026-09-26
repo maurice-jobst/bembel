@@ -8,6 +8,21 @@ All notable changes to BEMBEL. Format follows
 
 ### Added
 
+- **Projekt- und Produkt-Governance, aufgeschrieben.** `GOVERNANCE.md` (Rollen,
+  Entscheidungsstufen, Tie-Breaker, Änderungskontrolle auf `main`, bekannte
+  Lücken wie den Bus-Faktor eins), `docs/PRODUCT.md` (Positionierung,
+  Prinzipien, Scope of Record mit Status je Feature, Gates und Termine,
+  Definition of Ready/Done, Roadmap, ADR-Index), `CODE_OF_CONDUCT.md` und
+  `docs/PARTNERS.md` — 30 geprüfte Nachbarprojekte, Communities und
+  Datenhalter mit konkretem Kooperationsansatz, allen voran Transitous als
+  schlüsselloser Weg zu echten Abfahrten vor dem 1.-Dezember-Gate (#11).
+- `data/sources.json` kennt Transitous (`transitous_motis`, Tier 2): MOTIS-API
+  auf DELFI-GTFS + GTFS-RT, live gegen Hauptwache geprüft, Echtzeit inklusive.
+  Registriert, nicht verdrahtet — der Epic-S-Deckel gilt.
+- Pollenflug im Stadtzustand (BEM-G04, #71): DWD-Gefahrenindex für die Region
+  Rhein-Main, gebündelt und per Conditional GET nachgeladen; die fünfte Karte
+  mit eigenem Ladezustand.
+
 - Wasserhäuschen- und Ebbelwei-Register aus bembel-data: Karte, Merkmale-Navigation,
   Detailkarte mit Provenienz-Zeile (geprüft am, letzte Bearbeitung, Link in die
   Git-Historie).
@@ -68,6 +83,30 @@ All notable changes to BEMBEL. Format follows
 
 ### Changed
 
+- **README neu geschrieben** als Schaufenster: was die App ist, was in v1.0
+  drin ist und was nicht, wie die Daten fließen, was CI nachrechnet, wer
+  entscheidet. Die drei Registry-Zahlen bleiben prüfbar (`make validate`).
+- **Docs-Baum entschlackt.** `docs/superpowers/` heißt jetzt `docs/specs/`,
+  der Cold-Start-Brainstorm liegt unter `docs/history/`; die drei
+  abgearbeiteten Plan-Transkripte vom 13. August (4.400 Zeilen, nichts
+  verwies darauf, lokale Pfade drin — #119) sind gelöscht. Verweise auf den
+  aufgelösten Regel-Index einer früheren Repo-Familie (`LESSONS §…`) nennen
+  die Regel jetzt an Ort und Stelle.
+- **Stale Stellen bereinigt:** Onboarding versprach noch die Schattenkarte
+  und kannte Orte nicht; ein Dutzend Kommentare beschrieben vier statt fünf
+  Stadtzustand-Quellen oder „das Schatten-Screen“; Issue-Formulare boten
+  „Schattenkarte“ und „Drinking water“ als Bereiche an; CONTRIBUTING wartete
+  noch auf den Public-Flip; AI-NATIVE §6 hielt `enforce_admins` für aus.
+  `SampleRadarProvider` (null Referenzen) ist raus. Der gebündelte
+  bembel-data-Snapshot ist auf den Stand des dist-Branches (2026-09-02).
+- Einstellungen › Quellen liest aus `data/sources.json` (BEM-B06, #70) statt
+  aus einem hartkodierten Array; `data/ATTRIBUTION.json` verweist je Zeile
+  per `registry_id` zurück in die Registry.
+- Drift-Check der Quellen (BEM-B07, #122): ein Einbruch auf knapp über null
+  gilt als Ausfall; Baustellen-Zähler sind als `volatile` markiert und
+  melden nur noch den Kollaps, nicht die Wochenbewegung.
+- Kiosk-Stempel-Text nennt die tatsächliche Reichweite (When-In-Use, #105);
+  `enforce_admins` auf `main` ist an (#106).
 - **Die drei Zahlen, die der README über `data/sources.json` behauptet, werden
   jetzt nachgerechnet.** Alle drei waren falsch — 30 Einträge statt 32, 39
   Endpunkte statt 48, „nine" Tier-5-Funde statt sechs. Keine davon war je

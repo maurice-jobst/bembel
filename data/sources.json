@@ -161,6 +161,33 @@
       "note": "Rebuilt daily. Covers RMV area. No realtime delays — see rmv_hapi (tier 3) for that. For a portfolio app, the zero-dependency offline story is arguably the better demo than live delays."
     },
     {
+      "id": "transitous_motis",
+      "name": "Transitous — community-run MOTIS routing (DELFI GTFS + GTFS-RT)",
+      "tier": 2,
+      "feature": "Abfahrten (Epic C) ohne RMV-Schlüssel — der zweite Weg durch das BEM-C01-Gate am 1. Dezember 2026 (#11)",
+      "protocol": "rest_json",
+      "base": "https://api.transitous.org/api/v1",
+      "example": "/stoptimes?stopId=de-DELFI_de:06412:1&n=3",
+      "auth": "none",
+      "license": "data per feed: DELFI GTFS CC BY 4.0 / GTFS-RT per operator; attribution page https://transitous.org/sources",
+      "attribution": "Transitous · DELFI e.V. · Rhein-Main-Verkehrsverbund (RMV)",
+      "cadence": "60s while the screen is open; widgets 15m",
+      "verified_at": "2026-09-26",
+      "services": {
+        "geocode": "https://api.transitous.org/api/v1/geocode?text=Frankfurt%20Hauptwache&language=de"
+      },
+      "observed": {
+        "realtime": true,
+        "note": "stoptimes at Hauptwache (de-DELFI_de:06412:1) answered with realTime=true departures within 25 s from a cloud runner; geocode returned 10 hits, the first two RMV stops."
+      },
+      "note": "Keyless, but with a usage policy (https://transitous.org/api/): open-source, non-commercial, light load, identifying User-Agent with a contact — BEMBEL satisfies all four. Registered 2026-09-26 during the partner sweep (docs/PARTNERS.md), not wired: the Epic S cap and the C01 gate decide whether epic C goes via rmv_hapi (key) or here (no key). RMV area is covered through the DELFI nationwide feed, so there is no dedicated RMV feed in feeds/de.json — a candidate contribution back. Precedent for a Swift client: github.com/unequalsine/OVwijzer.",
+      "gotchas": [
+        "Stop ids are feed-prefixed (de-DELFI_de:06412:1); child platforms carry a suffix (…:24:6) and a parentId back to the station.",
+        "Numbers arrive in scientific notation (5.0114E1) — a strict decoder must accept exponent floats.",
+        "Community infrastructure with a usage policy, not an SLA: cache, back off, and keep gtfs_de_regional as the offline story."
+      ]
+    },
+    {
       "id": "ffm_hochhaeuser",
       "name": "Frankfurt Hochhäuser (Gebäudehöhen)",
       "tier": 2,
@@ -520,7 +547,7 @@
         "landkreis-main-taunus",
         "stadt-hanau"
       ],
-      "note": "Use for periodic re-discovery. See rheinmain-endpoints-raw.csv for the 637-endpoint harvest across 14 publishers."
+      "note": "Use for periodic re-discovery. See docs/research/rheinmain-endpoints-2026-08-16.csv for the 637-endpoint harvest across 14 publishers."
     },
     {
       "id": "ffm_dcat",
@@ -599,7 +626,7 @@
       ],
       "auth": "free API key, requested by form, arrives by email after a few days",
       "verified_at": "2026-08-16",
-      "note": "Returns HTTP 503 unauthenticated — that's expected, not an outage. Abwägung: Key gets live delays. gtfs_de_regional gets offline + zero dependency. Open decision — see decisions.md."
+      "note": "Returns HTTP 503 unauthenticated — that's expected, not an outage. Abwägung: Key gets live delays. gtfs_de_regional gets offline + zero dependency. Open decision, gated 1 Dec 2026 — see docs/PRODUCT.md §5; transitous_motis is the keyless alternative."
     },
     {
       "id": "fraport",

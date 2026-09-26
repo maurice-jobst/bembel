@@ -24,12 +24,15 @@ body:
     attributes:
       label: Area
       options:
-        - Departures
-        - Schattenkarte
-        - Drinking water
-        - Rain radar
-        - Stadtzustand
-        - Data / attribution
+        - Orte — Wasserhäuschen / Ebbelwei (register content belongs in bembel-data)
+        - Orte — Trinkbrunnen
+        - Abfahrten (RMV)
+        - Sonnenstand
+        - Regenradar
+        - Stadtzustand (Pegel, Luft, Temperatur, Pollen, Warnungen)
+        - Widgets
+        - Sticker / Kiosk-Stempel
+        - Data / sources / attribution
         - Other / not sure
     validations:
       required: true

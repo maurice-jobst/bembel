@@ -666,7 +666,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "RMV, Pegel, Luft und Warnungen an einer Stelle."
+            "value": "Sonnenstand, RMV, Pegel, Luft, Pollen und Warnungen an einer Stelle."
           }
         }
       }
@@ -676,7 +676,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Abfahrten und Stadtzustand"
+            "value": "Sonne, Abfahrten und Stadtzustand"
           }
         }
       }
@@ -686,7 +686,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Stadtgebiet. Die Schattenkarte gibt's nur hier."
+            "value": "Stadtgebiet. Wasserhäuschen und Brunnen gibt's nur hier."
           }
         }
       }
@@ -716,7 +716,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Jeder Brunnen der Stadt, mit Saison und Uhrzeit."
+            "value": "Wasserhäuschen, Ebbelwei und jeder Brunnen der Stadt — mit Herkunft und Saison."
           }
         }
       }
@@ -726,7 +726,7 @@
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Trinkwasser"
+            "value": "Orte"
           }
         }
       }

@@ -2,8 +2,9 @@ import CoreLocation
 import Foundation
 
 // The seam between the app shell (frontend lane) and data sources (backend
-// lane). Views only ever see these protocols; live implementations replace
-// the Sample… ones ticket by ticket (epics C–G) without touching App/.
+// lane). Views only ever see these protocols. Every live implementation
+// replaced its Sample… one on its own ticket without touching App/; the one
+// still on fixtures is departures, gated on the RMV key (#11).
 
 public protocol DeparturesProviding: Sendable {
     /// Stops near the user, nearest first.
@@ -28,10 +29,11 @@ public protocol RadarProviding: Sendable {
     func nowcast() async throws -> RadarNowcast
 }
 
-// The Stadtzustand screen reads four unrelated upstreams: Bright Sky for the
-// temperature, PEGELONLINE for the Main level (BEM-G01), HLNUG for air quality
-// (BEM-G02) and NINA for warnings (BEM-G03). One protocol per upstream, because
-// they fail independently and the screen has to keep saying so.
+// The Stadtzustand screen reads five unrelated upstreams: DWD station reports
+// for the temperature (BEM-G06), PEGELONLINE for the Main level (BEM-G01), the
+// UBA network for air quality (BEM-G02), NINA for warnings (BEM-G03) and DWD
+// pollen (BEM-G04, below). One protocol per upstream, because they fail
+// independently and the screen has to keep saying so.
 //
 // It used to be a single `CityStatusProviding` returning one aggregate value,
 // which meant a PEGELONLINE outage blanked the whole screen — the warning card

@@ -11,7 +11,7 @@ the endpoint quietly empties out, which it does not — a WFS layer that drops
 from 270 features to 0 still answers 200. So every check compares its reading
 against the `observed` block recorded when the entry was last verified, and a
 collapse — to nothing, or for a layer of 20+ to under a fifth — is a failure,
-not a note (LESSONS §E6: drift nobody sweeps for is invisible by definition).
+not a note. Drift nobody sweeps for is invisible by definition.
 
 `observed` is written by a human, never by this script. When a drift line is
 real (the city added 10 disabled parking bays), write the new count into the
@@ -44,9 +44,10 @@ EXEMPT_TIERS = {3, 5}
 # Which failures are worth waking someone for. Tier 1 is load-bearing and tier 2
 # is live, so both are. Tier 4 is static reference data vendored at build time —
 # nothing calls it at runtime, and the Frankfurt WFS hosts are intermittently
-# slow enough that alerting on them would train everyone to ignore the alert
-# (LESSONS §E1). Tier 0 is the sentinel for a source the verifier cannot reach
-# at all, which is always actionable. Non-actionable failures are still printed.
+# slow enough that alerting on them would train everyone to ignore the alert,
+# and an alert people learn to ignore is worse than none. Tier 0 is the sentinel
+# for a source the verifier cannot reach at all, which is always actionable.
+# Non-actionable failures are still printed.
 ACTIONABLE_TIERS = {0, 1, 2}
 
 WFS_HITS = "{base}?service=WFS&version=2.0.0&request=GetFeature&typeNames={typename}&resultType=hits"

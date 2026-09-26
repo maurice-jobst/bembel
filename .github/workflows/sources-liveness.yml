@@ -3,7 +3,8 @@ name: Source liveness
 # The registry in data/sources.json records a verification date per upstream.
 # Without a sweep, that date is a claim about the past that quietly becomes
 # false — a city rebuilds a WFS, a layer empties out, and nobody finds out
-# until the feature that depends on it ships (LESSONS §E6).
+# until the feature that depends on it ships. Drift nobody sweeps for is
+# invisible by definition.
 #
 # Deliberately NOT a required check and NOT run on pull_request: it reaches
 # eight public sector hosts, so it is slow and it fails for reasons that have
@@ -46,7 +47,7 @@ jobs:
       # alert people learn to ignore.
       #
       # One issue, commented rather than a fresh one every Monday, for the same
-      # reason (LESSONS §E1).
+      # reason: an alert people learn to ignore is worse than no alert.
       - name: Report a broken source
         if: steps.verify.outputs.status != '0'
         env:

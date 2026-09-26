@@ -1,10 +1,10 @@
 import CoreLocation
 import Foundation
 
-/// Fabricated Stadtzustand sources for previews. All four upstreams are live
+/// Fabricated Stadtzustand sources for previews. All five upstreams are live
 /// now — the temperature (`DWDPoiTemperatureProvider`), the Main level
-/// (`PegelOnlineProvider`), the air (`UBAAirQualityProvider`) and the
-/// warnings (`NinaWarningProvider`).
+/// (`PegelOnlineProvider`), the air (`UBAAirQualityProvider`), the
+/// warnings (`NinaWarningProvider`) and pollen (`PollenDatasetProvider`).
 ///
 /// One type per upstream, matching the protocols. A single sample aggregate
 /// would make it impossible to preview "air failed, warnings fine", which is

@@ -1,6 +1,10 @@
 # Contributing
 
-Small team, strict habits. This file is the working agreement.
+Small team, strict habits. This file is the working agreement: how work
+flows and what a change must satisfy. Who decides what, and how decisions are
+recorded, is in [GOVERNANCE.md](GOVERNANCE.md); what the product is and is
+not is in [docs/PRODUCT.md](docs/PRODUCT.md). By participating you accept the
+[Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Workflow
 
@@ -16,16 +20,19 @@ Small team, strict habits. This file is the working agreement.
   (`area:app` / `area:data`), and a milestone (M0–M3 for v1.0, M4 for
   post-1.0 side quests). `needs-decision`, `blocked`, and `learning-goal`
   mark the exceptions. Pick an issue from your lane, assign yourself, start.
-- Locked product decisions are in
-  [the hero-repositioning spec](docs/superpowers/specs/2026-08-13-hero-repositioning-design.md)
+- Locked product decisions are in [docs/PRODUCT.md](docs/PRODUCT.md), the
+  ADRs it cites and
+  [the hero-repositioning spec](docs/specs/2026-08-13-hero-repositioning-design.md)
   (the original kickoff prompt is archived under `docs/history/`) — don't
-  relitigate them in PRs or issues.
+  relitigate them in PRs or issues; open a superseding ADR instead.
 - Any decision that would be expensive to reverse gets an ADR in `docs/adr/`
   before or with the PR that implements it.
-- `main` requires the three CI checks green before merge (once the repo is
-  public — GitHub Free doesn't support branch protection on private repos;
-  run `scripts/apply_branch_protection.sh` right after flipping visibility).
-  Force-pushes and deletions on `main` are blocked once that's on.
+- `main` is protected: the three CI checks must be green and the branch up
+  to date, `enforce_admins` is on (#106), force-pushes and deletions are
+  blocked. `scripts/apply_branch_protection.sh` is the source of truth for
+  those settings; change the script, then run it. Required approvals are
+  zero until a second person merges regularly — see
+  [GOVERNANCE.md](GOVERNANCE.md).
 
 ## Rules
 

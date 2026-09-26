@@ -55,7 +55,7 @@ struct GlassCircleButton: View {
     }
 }
 
-/// Capsule filter/selection chip used on Abfahrten and Trinkwasser.
+/// Capsule filter/selection chip used on Abfahrten and Orte.
 struct SelectionChip: View {
     let title: Text
     let isSelected: Bool
@@ -166,7 +166,7 @@ struct SquareActionButton: View {
 
 /// Frosted panel floating over a map: `ultraThinMaterial` behind it, a hairline
 /// of `glazeLine` around it. Every surface that sits *on* the map wears this —
-/// radar readout and legend, the Schatten controls, the round map buttons — so
+/// radar readout and legend, the Sonnenstand controls, the round map buttons — so
 /// it is one modifier, not a pair of lines copied per call site. Copying is how
 /// the legend ended up on a corner radius that matches no token.
 struct GlassChrome<S: InsettableShape>: ViewModifier {

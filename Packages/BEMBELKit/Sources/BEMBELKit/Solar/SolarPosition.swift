@@ -8,7 +8,7 @@ import Foundation
 ///
 /// Accurate to well under 0.1° for the years this app will plausibly run in.
 /// NOAA states its own approximations hold to about ±0.5 minutes of sunrise
-/// time between 1800 and 2100; the shadow map needs far less than that.
+/// time between 1800 and 2100; the Sonnenstand screen needs far less than that.
 public struct SolarPosition: Sendable, Equatable {
     /// Degrees above the horizon, corrected for atmospheric refraction — the
     /// sun you would see. Negative when it is below the horizon; the value

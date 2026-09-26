@@ -5,10 +5,11 @@ body:
   - type: markdown
     attributes:
       value: |
-        Check the locked scope in `docs/BACKLOG.md` (ADR 0010) first — if it
-        is not a v1.0 feature it is probably a milestone-M4 side quest or out
-        of scope; epic S is capped until v1.0 ships. Once accepted, this gets
-        a `BEM-XXX` id, the labels, and a row in the BACKLOG.md epic index.
+        Check the scope of record in `docs/PRODUCT.md` first (ADR 0010): if it
+        is not a v1.0 feature it is a milestone-M4 side quest or out of scope,
+        and epic S is capped until v1.0 ships — a new data source needs an
+        entry in `data/sources.json` before any ticket. Once accepted, this
+        gets a `BEM-XXX` id, the labels, and a row in the BACKLOG.md epic index.
   - type: textarea
     id: what
     attributes:
@@ -28,11 +29,12 @@ body:
         - "A — Foundation"
         - "B — Data pipeline"
         - "C — Departures"
-        - "D — Schattenkarte"
+        - "D — Sonnenstand / LoD2 geometry"
         - "E — Free drinking water"
         - "F — Rain radar"
         - "G — Stadtzustand"
         - "H — Ship"
+        - "S — Side quests (M4, capped until v1.0)"
         - New epic / v1.1+
   - type: dropdown
     id: size

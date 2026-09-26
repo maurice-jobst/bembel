@@ -1,9 +1,10 @@
 import BEMBELKit
 import SwiftUI
 
-/// The app's provider wiring, injected through the environment. Sample
-/// providers until the live ones land (epics C–G); previews and tests
-/// override individual providers as needed.
+/// The app's provider wiring, injected through the environment. Everything
+/// is live except departures, which stay on the sample provider until the
+/// RMV key exists (#11); previews and tests override individual providers as
+/// needed.
 struct AppDependencies {
     /// One instance for the whole app. The `@Entry` default expression is
     /// re-evaluated on environment reads, so it must hand out this shared

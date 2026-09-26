@@ -1,7 +1,7 @@
 # BEMBEL — hero repositioning + pre-flip build (design)
 
 Interviewed and approved 2026-08-13. Follows the bembel-data cold-start
-brainstorm (docs/superpowers/brainstorms/2026-08-13-bembel-data-cold-start.md).
+brainstorm (docs/history/2026-08-13-bembel-data-cold-start-brainstorm.md).
 Supersedes the v1.0 scope section of the 2026-08-13 collaboration design and
 the "five features, nothing else" lock where they conflict.
 
