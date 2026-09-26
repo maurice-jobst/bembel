@@ -3,7 +3,8 @@
 the validator itself, so CI runs it in the same job.
 
 These exist because a validation rule nobody has watched fail is a comment
-(LESSONS §E4). Each test takes a valid dataset and breaks exactly one thing.
+— a rule lands with the test that watches it fail. Each test takes a valid
+dataset and breaks exactly one thing.
 """
 
 import copy
@@ -333,7 +334,7 @@ class SourceVerifierCoverageTests(unittest.TestCase):
     is a pure question, so it is answered on every PR. Without this a new
     entry can be added in a shape plan() does not understand and be skipped in
     silence — which is how the incoming registry shipped three unchecked
-    entries (LESSONS §E6)."""
+    entries. A check that has never failed once is not known to work."""
 
     def setUp(self) -> None:
         self.registry = v.load(v.DATA / "sources.json")
@@ -433,7 +434,8 @@ class SourceVerifierCoverageTests(unittest.TestCase):
         """The weekly job's exit code is its alerting decision. Tier 4 is
         vendored at build time and the Frankfurt WFS hosts time out often
         enough that paging on them would train everyone to ignore the page
-        (LESSONS §E1). Tier 0 is the uncovered-source sentinel."""
+        — an alert people learn to ignore is worse than none. Tier 0 is the
+        uncovered-source sentinel."""
         self.assertEqual(verify_sources.ACTIONABLE_TIERS, {0, 1, 2})
         self.assertNotIn(4, verify_sources.ACTIONABLE_TIERS)
 

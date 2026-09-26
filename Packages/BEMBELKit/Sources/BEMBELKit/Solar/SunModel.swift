@@ -1,15 +1,16 @@
 import CoreLocation
 import Foundation
 
-/// One instant of sun, in the shape the Schatten screen consumes.
+/// One instant of sun, in the shape the Sonnenstand screen consumes.
 public struct SunSample: Sendable {
     /// Degrees above the horizon, **floored at zero**: below the horizon there
-    /// is no sunlight and therefore no shadow, and every consumer of this
-    /// value divides by `SunModel.peakElevation` to get a 0…1 weight. The
+    /// is no sunlight, and every consumer of this value divides by
+    /// `SunModel.peakElevation` to get a 0…1 weight for the day curve. The
     /// unclamped truth is one field down, so nothing is lost.
     public let elevation: Int
-    /// Whether shadows fall towards the west — that is, whether the sun is in
-    /// the eastern half of the sky.
+    /// Whether the sun is in the eastern half of the sky (morning). The name
+    /// dates from the shadow map, where it meant "shadows fall west"; the
+    /// screen maps it to the direction label.
     public let westward: Bool
     /// The real position this sample was reduced from.
     public let position: SolarPosition
@@ -20,7 +21,7 @@ public struct SunSample: Sendable {
         self.position = position
     }
 
-    /// Convenience for the screen: no sun, no shadow map worth drawing.
+    /// Convenience for the screen: is the sun above the horizon at all.
     public var isUp: Bool { position.isUp }
 }
 
@@ -30,10 +31,10 @@ public struct SunSample: Sendable {
 /// fixed day of 05:30–21:30. That is roughly right for one week in May and
 /// wrong every other week of the year: the real peak ranges from 16.4° at the
 /// winter solstice to 63.3° at the summer one, and Frankfurt's sunrise moves
-/// by more than three hours across the year. A shadow map drawn on the
+/// by more than three hours across the year. A sun screen drawn on the
 /// parabola would have been confidently wrong every day it was used.
 public enum SunModel {
-    /// Römerberg. The shadow map is a Frankfurt feature (ADR 0003), and the
+    /// Römerberg. The sun screen is a Frankfurt feature (ADR 0003), and the
     /// sun moves too little across the Rhein-Main region to be worth a
     /// per-user coordinate here — under a tenth of a degree of elevation
     /// between Wiesbaden and Hanau.

@@ -62,7 +62,7 @@ individual tickets:
    in this repo is not a feature: it is the set of constraints adopted so
    that agent-authored changes stay verifiable — byte-deterministic
    generators, mirrored files under byte-equality gates, one provider
-   protocol per upstream, required checks, `LESSONS.md`. A reader currently
+   protocol per upstream, required checks, written rules. A reader currently
    learns none of that unless they infer it.
 
 The 22 March 2027 ship date is **not** traded against scope. It is World

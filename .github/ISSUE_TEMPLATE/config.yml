@@ -1,5 +1,14 @@
 blank_issues_enabled: true
 contact_links:
+  - name: Scope of record and gates
+    url: https://github.com/maurice-jobst/bembel/blob/main/docs/PRODUCT.md
+    about: What v1.0 is and is not, and the gates that decide it — read before proposing a feature
   - name: Backlog index
     url: https://github.com/maurice-jobst/bembel/blob/main/docs/BACKLOG.md
     about: Epic → issue map; every BEM-XXX issue body carries its own scope and acceptance criteria
+  - name: Wrong or missing Wasserhäuschen / Ebbelwei entry
+    url: https://github.com/maurice-jobst/bembel-data/issues/new/choose
+    about: Register content lives in bembel-data — entries, ratings and corrections go there, not here
+  - name: Security vulnerability
+    url: https://github.com/maurice-jobst/bembel/security/advisories/new
+    about: Private reporting, see SECURITY.md — please don't open a public issue for anything exploitable

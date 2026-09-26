@@ -3,10 +3,12 @@
 One GitHub Issue per `BEM-XXX` ticket is the spec **and** the status: every
 body is a self-contained brief with scope, acceptance criteria and lane. This
 file is only the map from epic to issue; nothing here outranks an issue.
-Decisions with rationale: [adr/](adr/). Why the features were chosen:
+Decisions with rationale: [adr/](adr/); who decides and how:
+[../GOVERNANCE.md](../GOVERNANCE.md); scope of record and gates:
+[PRODUCT.md](PRODUCT.md). Why the features were chosen:
 [FEATURE-CATALOG.md](FEATURE-CATALOG.md); what the Hamburg comp has that we could
 reuse: [research/2026-09-franzbroetchen.md](research/2026-09-franzbroetchen.md). Hero framing:
-[hero-repositioning spec](superpowers/specs/2026-08-13-hero-repositioning-design.md).
+[hero-repositioning spec](specs/2026-08-13-hero-repositioning-design.md).
 
 ## Locked (ADR 0008, 0009, 0010)
 
@@ -41,13 +43,16 @@ departures do not ship on sample data.
 | C Departures (RMV) | — | #11 key + client (`blocked`) · #12 nearby stops · #13 pinned stops · #14 Home Screen widget · #15 Lock Screen · #16 failure states |
 | D Sonnenstand / LoD2 | #19 solar position · #21 time controls · #22 accuracy disclosure · #92 Schatten → Sonnenstand | #17 LoD2 acquisition · #18 building dataset · #20 shadow rendering (v1.2) |
 | E Drinking water | #23 dataset · #24 seasonal engine · #25 map, list, detail | — |
-| F Rain radar | #26 RADOLAN client · #27 overlay · #99 RY past hour | #123 rain widget (M2, hedge for the C01 gate) |
+| F Rain radar | #26 RADOLAN client · #27 overlay · #99 RY past hour | #123 rain widget (M2, hedge for the C01 gate; PR #127 in review) |
 | G Stadtzustand | #28 Main-Pegel · #29 air quality · #30 NINA · #71 Pollen · #77 per-source state · #91 live temperature | #76 Wasser & Hitze (M4, scope entschieden — Unterbildschirm vom Stadtzustand, Pegel + sensor_community, Klimaplanatlas/Starkregen vorerst raus) |
 | H Ship | #90 AI-NATIVE.md | #31 App Store presence · #32 localisation audit · #33 tip jar (`needs-decision`) · #34 privacy + TestFlight · #35 outreach · #124 Siri & Kurzbefehle (M3, first to cut) |
 | S Side quests | #39 Wasserhäuschen-Register · #40 Ebbelwei · #46 bundle loader (hero, pulled into v1.0) | #36 #37 #38 #41 #42 #43 #44 #45 #72 #73 #74 #75 #125 #126 (all M4) |
 
-Unlabelled operations: #102 #117 source liveness, #105 kiosk-stamp auth,
-#106 branch protection `enforce_admins`.
+Operations issues (source-liveness reports, branch protection, repo hygiene)
+carry no epic and are not indexed here; the weekly sweep files and closes its
+own. Open ones are listed under the
+[`area:data`](https://github.com/maurice-jobst/bembel/issues?q=is%3Aopen+label%3Aarea%3Adata+-label%3Aepic%3AS)
+filter or have no label at all.
 
 ## Releases after 1.0
 
@@ -57,6 +62,10 @@ v1.5+ one Tier-D feature from FEATURE-CATALOG.md per release.
 
 ## Open decisions
 
-1. #33 tip jar — yes or no, decided by M2.
-2. Sonnenstand tab symbol — `building.2.fill` described the shadow-casting
-   buildings; the replacement is verified in SF Symbols before it is committed.
+1. #33 tip jar — yes or no, decided by M2 (`needs-decision`).
+2. #45, #73, #75 side quests marked `needs-decision` — ToS or onboarding
+   questions that stay parked until after v1.0 (Epic S cap, ADR 0010).
+
+Decided since the last revision: the Sonnenstand tab symbol is
+`sun.max.fill` (verified in SF Symbols, `App/RootView.swift`); Kiosk-Stempel
+stay When-In-Use (#105); `enforce_admins` is on (#106).

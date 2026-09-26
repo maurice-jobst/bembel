@@ -93,8 +93,12 @@ test on every PR.
 ## 6. Rules without teeth, listed rather than hidden
 
 - **No gate on "a human reviewed this."** Branch protection on `main` requires
-  three checks and `strict: true`, **zero** approvals, and `enforce_admins` is
-  off (#106). Human review is practice, not mechanism.
+  three checks and `strict: true`, and since #110 `enforce_admins` is on, so
+  the maintainer cannot merge past a red check without visibly switching the
+  protection off. Required approvals are still **zero**: with one active
+  committer, a review requirement would only be satisfied by that same
+  person. Human review is practice, not mechanism, and
+  [GOVERNANCE.md](../GOVERNANCE.md) says when that changes.
 - **`Co-Authored-By: Claude` is a convention, not a check.** Most commits carry
   it; several do not — [count it yourself](#checking-any-of-this).
 - **"No third-party dependencies"** is a property of

@@ -4,7 +4,8 @@ import WidgetKit
 
 /// Home-Screen departures: small (next departure large, two follow-ups) and
 /// medium (three-row board). Entries come from the kit's sample fixtures
-/// until BEM-C04 wires the shared RMV provider through the App Group.
+/// until the RMV key exists (#11) and BEM-C04 wires the shared provider
+/// through the App Group.
 struct DeparturesWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(

@@ -40,7 +40,7 @@ struct OnboardingView: View {
 
                 VStack(alignment: .leading, spacing: 14) {
                     featureRow(
-                        icon: "drop.fill", title: "onboarding.water.title", body: "onboarding.water.body")
+                        icon: "mappin.and.ellipse", title: "onboarding.water.title", body: "onboarding.water.body")
                     featureRow(icon: "cloud.rain.fill", title: "onboarding.radar.title", body: "onboarding.radar.body")
                     featureRow(icon: "tram.fill", title: "onboarding.rest.title", body: "onboarding.rest.body")
                 }

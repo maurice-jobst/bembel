@@ -163,8 +163,8 @@ struct SolarPositionTests {
 struct SunModelTests {
     @Test("The peak constant is a fact about Frankfurt, and nothing exceeds it")
     func peakElevationHoldsAllYear() throws {
-        // Sampled every third day for a year: the normaliser the shadow
-        // overlay divides by must never be overshot, or the wash inverts.
+        // Sampled every third day for a year: the normaliser the day curve
+        // divides by must never be overshot, or the curve inverts.
         let calendar = berlinCalendar()
         let start = try instant("2026-01-01T12:00:00Z")
         var highest = 0.0
