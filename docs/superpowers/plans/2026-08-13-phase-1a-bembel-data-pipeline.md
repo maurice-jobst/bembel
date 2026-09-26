@@ -169,7 +169,7 @@ Create `logins.json` — the only way a commit's author email becomes a GitHub `
 
 ```json
 {
-  "lalebecreations@gmail.com": "maurice-jobst"
+  "you@example.com": "maurice-jobst"
 }
 ```
 
