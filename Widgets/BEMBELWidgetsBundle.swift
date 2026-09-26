@@ -6,5 +6,6 @@ struct BEMBELWidgetsBundle: WidgetBundle {
     var body: some Widget {
         DeparturesWidget()
         NearestCandidateWidget()
+        RainWidget()
     }
 }

@@ -21,6 +21,12 @@ All notable changes to BEMBEL. Format follows
 - 73 Trinkbrunnen aus Frankfurter WFS + OSM auf der Orte-Karte, geprüft vs.
   ungeprüft dreifach unterscheidbar (Form, Farbe, Text), mit Saisonlogik
   (Winterpause, Osterregel für historische Brunnen).
+- Regen-Widget „Regnet's gleich?“ für Home- und Sperrbildschirm: der Satz aus
+  dem Radar-Tab, eine Mini-Kurve für die nächste Stunde und der Stand des
+  DWD-Radars. Das Widget lädt selbst und liest nur den einen Punkt aus dem
+  Archiv, weil die Karte ~90 MB bräuchte und ein Widget ~30 MB hat
+  (ADR 0011). Nach einer Stunde ohne neue Daten sagt es „veraltet“ statt
+  „trocken“.
 - Live-Regenradar: DWD RADOLAN RV direkt auf dem Gerät geparst (2-h-Nowcast
   für Frankfurt), ohne Drittanbieter-Paket.
 - Regenradar zeigt auch die **vergangene Stunde** (DWD RADOLAN RY): die

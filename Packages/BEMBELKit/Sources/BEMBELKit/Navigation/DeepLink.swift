@@ -93,6 +93,9 @@ public enum DeepLink: Hashable, Sendable {
         return components.url
     }
 
+    /// The Radar tab — where the rain widget lands (BEM-F04).
+    public static let radarURL = URL(string: "bembel://radar")!
+
     /// ISO 8601; a timestamp without zone designator is local Frankfurt time.
     /// Unparseable input degrades to `nil` (the screen opens at "now").
     static func parseTimestamp(_ raw: String) -> Date? {
