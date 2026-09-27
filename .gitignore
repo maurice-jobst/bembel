@@ -16,3 +16,6 @@ __pycache__/
 
 # Secrets — never committed; copy Config/Secrets.xcconfig.template
 Config/Secrets.xcconfig
+
+# Local agent artifacts & agency personas
+.claude/
