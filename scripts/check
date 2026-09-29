@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Fast pre-PR check: the three make targets that need no Xcode and no simulator.
+# `make test` and `make build` stay in CI. Exits with make's status.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+exec make validate test-data format-check
