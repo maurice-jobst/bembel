@@ -136,6 +136,7 @@ make build         # xcodebuild, iOS Simulator, no signing
 make test          # BEMBELKit unit tests via swift test
 make validate      # data schema validation
 make format        # swift-format (bundled with Xcode); run before pushing
+scripts/check      # fast pre-PR gates: validate, test-data, format-check
 ```
 
 ## 👥 Team and licences
