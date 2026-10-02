@@ -39,6 +39,9 @@ Small team, strict habits. This file is the working agreement.
   `Packages/BEMBELKit` ([ADR 0007](docs/adr/0007-provider-seam.md)); live
   implementations replace the `Sample…Provider`s behind the same protocol.
   Changing a protocol is a cross-lane API change — both lanes review.
+- Run `scripts/check` before opening a PR: a thin wrapper around `make validate
+  test-data format-check`, the fast gates that need no Xcode build and no
+  simulator. `make test` and `make build` stay with CI.
 - `make format` before pushing; CI runs `make format-check` (swift-format is
   bundled with Xcode, nothing to install).
 - Tests where they earn their keep: data layer, region filter, decoders,
