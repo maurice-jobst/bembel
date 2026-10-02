@@ -7,4 +7,5 @@ import Foundation
 public enum WidgetKind {
     public static let departures = "de.mauricejobst.bembel.departures"
     public static let nearestCandidate = "de.mauricejobst.bembel.nearestCandidate"
+    public static let rain = "de.mauricejobst.bembel.rain"
 }

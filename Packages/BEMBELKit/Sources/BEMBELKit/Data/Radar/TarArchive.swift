@@ -50,14 +50,14 @@ public enum TarArchive {
         return entries
     }
 
-    private static func string(_ block: Data, at index: Int, length: Int) -> String? {
+    static func string(_ block: Data, at index: Int, length: Int) -> String? {
         let start = block.startIndex + index
         let slice = block[start..<start + length]
         let trimmed = slice.prefix { $0 != 0 }
         return String(data: Data(trimmed), encoding: .utf8)?.trimmingCharacters(in: .whitespaces)
     }
 
-    private static func octal(_ block: Data, at index: Int, length: Int) -> Int? {
+    static func octal(_ block: Data, at index: Int, length: Int) -> Int? {
         guard let raw = string(block, at: index, length: length) else { return nil }
         let digits = raw.prefix { $0.isNumber }
         return Int(digits, radix: 8)
