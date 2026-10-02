@@ -262,6 +262,9 @@ def check_sources(doc, label: str) -> None:
                 if isinstance(value, str) and not value.startswith("https://"):
                     err(f"{where}: {field}['{name}'] must be an https URL, got {value!r}")
 
+        for block in [row] + [layer for layer in row.get("layers") or [] if isinstance(layer, dict)]:
+            check_observed(block.get("observed"), where)
+
         gotchas = row.get("gotchas")
         if gotchas is not None and (
             not isinstance(gotchas, list) or not all(is_fact_scalar(g) and g for g in gotchas)
@@ -290,6 +293,18 @@ def check_sources(doc, label: str) -> None:
         for replacement in row.get("replacement") or []:
             if replacement not in seen:
                 err(f"{where}: replacement {replacement!r} is not a source id in this registry")
+
+
+def check_observed(observed, where: str) -> None:
+    """Only the one key the verifier acts on is policed. The rest of an
+    observed block is a free-form record of what somebody read (bytes, frames,
+    datasets), and the verifier compares only `count`."""
+    if not isinstance(observed, dict) or "volatile" not in observed:
+        return
+    if observed["volatile"] is not True:
+        err(f"{where}: observed 'volatile' must be true or absent, got {observed['volatile']!r}")
+    if "count" not in observed:
+        err(f"{where}: observed 'volatile' only means something next to a count — the verifier ignores it otherwise")
 
 
 def planned_check_count(rows) -> int:

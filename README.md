@@ -95,7 +95,7 @@ most registries leave out: six things Frankfurt does *not* publish, written
 down so nobody spends another afternoon looking.
 
 ```bash
-make verify-sources   # calls all 54 endpoints, reports dead ones and collapsed feature counts
+make verify-sources   # calls all 50 endpoints, reports dead ones and collapsed feature counts
 ```
 
 A [weekly job](.github/workflows/sources-liveness.yml) runs the same sweep and
@@ -136,6 +136,7 @@ make build         # xcodebuild, iOS Simulator, no signing
 make test          # BEMBELKit unit tests via swift test
 make validate      # data schema validation
 make format        # swift-format (bundled with Xcode); run before pushing
+scripts/check      # fast pre-PR gates: validate, test-data, format-check
 ```
 
 ## 👥 Team and licences

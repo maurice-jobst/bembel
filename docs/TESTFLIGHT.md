@@ -15,7 +15,7 @@ den Apple-Account und passieren genau einmal.
 3. **(Maurice)** Team-ID (10 Zeichen, unter developer.apple.com → Membership)
    in `Config/Secrets.xcconfig` eintragen:
    `BEMBEL_TEAM_ID = XXXXXXXXXX`. Die Datei ist gitignored; die Team-ID am
-   besten zusätzlich als 1Password-Item ablegen (sie ist nicht geheim, aber
+   besten zusätzlich in einem Passwortmanager ablegen (sie ist nicht geheim, aber
    so übersteht sie den nächsten Mac-Reset).
 4. **(Maurice)** In App Store Connect → Apps → „+“ eine neue App anlegen:
    - Bundle ID `de.mauricejobst.bembel` (explicit; Xcode legt die App-ID
