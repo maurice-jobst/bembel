@@ -36,6 +36,10 @@ anything they cover.
   the slow gates below.
 - Verification: `make test` (BEMBELKit, runs on macOS — no simulator),
   `make build` (needs Xcode 16.4+), `make validate` (data schemas).
+- Cloud sessions (`CLAUDE_CODE_REMOTE=true`) run on Linux without Xcode, so
+  `scripts/check` stops at `format-check`. Run `make validate test-data`
+  there and treat CI (`ci.yml`) as the gate for format, `make test` and
+  `make build`: the work is done when CI is green on the PR.
 - The .pbxproj uses filesystem-synchronized groups (objectVersion 77): adding
   a file to App/ or Widgets/ adds it to the target — do not hand-edit target
   membership.
