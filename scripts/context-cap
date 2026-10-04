@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# context-cap — fail when a context file is over its line cap. The one counter meant to be
+# called from every repo's scripts/check (AGENTS.md 100, the rules file 120) and by the session-close
+# skill (a Desk body 40); dotfiles' scripts/check and session-close call it today.
+# usage: context-cap <path> <cap>       (a last line without a newline counts)
+# exit:  0 within the cap, 1 over it, 2 bad usage or an unreadable path
+set -uo pipefail
+(( $# == 2 )) && [[ $2 =~ ^[0-9]+$ ]] || { echo "usage: context-cap <path> <cap>" >&2; exit 2; }
+[[ -f $1 && -r $1 ]] || { echo "context-cap: no such readable file: $1" >&2; exit 2; }
+n=$(grep -c '' < "$1")
+(( n <= 10#$2 )) || { echo "$1 is $n lines (cap $2)" >&2; exit 1; }
