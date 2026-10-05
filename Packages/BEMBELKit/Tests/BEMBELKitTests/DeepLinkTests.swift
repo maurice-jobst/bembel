@@ -81,6 +81,11 @@ struct DeepLinkTests {
         #expect(DeepLink.parse(unicode) == .entry(register: .ebbelwei, id: "café-nizza"))
     }
 
+    @Test("The rain widget's link opens the Radar tab")
+    func radarURL() {
+        #expect(DeepLink.parse(DeepLink.radarURL) == .tab(.radar))
+    }
+
     @Test("An id the grammar would reject never becomes a URL")
     func urlRefusesBadIDs() {
         #expect(DeepLink.url(register: .wasserhaeuschen, entryID: "") == nil)

@@ -36,49 +36,78 @@ public struct RadolanComposite: Sendable {
 
     public init(data: Data) throws {
         guard let etx = data.firstIndex(of: 0x03) else { throw Failure.noHeader }
-        let headerData = data[data.startIndex..<etx]
-        guard let header = String(data: Data(headerData), encoding: .isoLatin1) else {
-            throw Failure.noHeader
-        }
-
-        product = String(header.prefix(2))
-
-        guard let geometry = Self.field(header, "GP"), let size = Self.geometry(geometry) else {
-            throw Failure.malformedHeader("GP")
-        }
-        rows = size.rows
-        columns = size.columns
-
-        // `PR E-02` → ×0.01. Reading the exponent rather than assuming it means
-        // a product published at another scale cannot silently be off by 100.
-        let scale: Double
-        if let precision = Self.field(header, "PR"), let exponent = Self.exponent(precision) {
-            scale = pow(10.0, Double(exponent))
-        } else {
-            scale = 0.01
-        }
-
-        forecastMinute = Self.field(header, "VV").flatMap { Int($0.trimmingCharacters(in: .whitespaces)) } ?? 0
-        measuredAt = Self.timestamp(header)
+        let header = try Header(Data(data[data.startIndex..<etx]))
+        product = header.product
+        rows = header.rows
+        columns = header.columns
+        forecastMinute = header.forecastMinute
+        measuredAt = header.measuredAt
 
         let body = data[data.index(after: etx)...]
-        let expected = rows * columns * 2
+        let expected = header.bodyLength
         guard body.count >= expected else {
             throw Failure.truncated(expected: expected, got: body.count)
         }
 
         let count = rows * columns
-        values = body.withUnsafeBytes { raw -> [Double?] in
+        values = body.withUnsafeBytes { (raw: UnsafeRawBufferPointer) -> [Double?] in
             var readings = [Double?](repeating: nil, count: count)
             for index in 0..<count {
-                let low = UInt16(raw[index * 2])
-                let high = UInt16(raw[index * 2 + 1])
-                let word = low | (high << 8)
-                guard word != Self.noDataMarker, word & Self.secondaryFlag == 0 else { continue }
-                readings[index] = Double(word & Self.valueMask) * scale
+                readings[index] = Self.reading(low: raw[index * 2], high: raw[index * 2 + 1], scale: header.scale)
             }
             return readings
         }
+    }
+
+    /// Everything before ETX: what the grid is, how to scale it, and when.
+    /// Its own type so `RadolanPointReader` can read a frame's header without
+    /// building the frame (ADR 0011).
+    struct Header: Sendable {
+        let product: String
+        let rows: Int
+        let columns: Int
+        /// Multiplier from the raw twelve bits to millimetres.
+        let scale: Double
+        let forecastMinute: Int
+        let measuredAt: Date?
+
+        /// Bytes of grid after ETX: one little-endian `UInt16` per cell.
+        var bodyLength: Int { rows * columns * 2 }
+
+        init(_ bytes: Data) throws {
+            guard let header = String(data: bytes, encoding: .isoLatin1) else { throw Failure.noHeader }
+
+            product = String(header.prefix(2))
+
+            guard let geometry = RadolanComposite.field(header, "GP"),
+                let size = RadolanComposite.geometry(geometry)
+            else {
+                throw Failure.malformedHeader("GP")
+            }
+            rows = size.rows
+            columns = size.columns
+
+            // `PR E-02` → ×0.01. Reading the exponent rather than assuming it means
+            // a product published at another scale cannot silently be off by 100.
+            if let precision = RadolanComposite.field(header, "PR"),
+                let exponent = RadolanComposite.exponent(precision)
+            {
+                scale = pow(10.0, Double(exponent))
+            } else {
+                scale = 0.01
+            }
+
+            forecastMinute =
+                RadolanComposite.field(header, "VV").flatMap { Int($0.trimmingCharacters(in: .whitespaces)) } ?? 0
+            measuredAt = RadolanComposite.timestamp(header)
+        }
+    }
+
+    /// One cell's two bytes as millimetres, or `nil` where the radar cannot see.
+    static func reading(low: UInt8, high: UInt8, scale: Double) -> Double? {
+        let word = UInt16(low) | (UInt16(high) << 8)
+        guard word != noDataMarker, word & secondaryFlag == 0 else { return nil }
+        return Double(word & valueMask) * scale
     }
 
     public func value(row: Int, column: Int) -> Double? {
