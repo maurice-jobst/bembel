@@ -41,7 +41,7 @@ departures do not ship on sample data.
 | C Departures (RMV) | — | #11 key + client (`blocked`) · #12 nearby stops · #13 pinned stops · #14 Home Screen widget · #15 Lock Screen · #16 failure states |
 | D Sonnenstand / LoD2 | #19 solar position · #21 time controls · #22 accuracy disclosure · #92 Schatten → Sonnenstand | #17 LoD2 acquisition · #18 building dataset · #20 shadow rendering (v1.2) |
 | E Drinking water | #23 dataset · #24 seasonal engine · #25 map, list, detail | — |
-| F Rain radar | #26 RADOLAN client · #27 overlay · #99 RY past hour | #123 rain widget (M2, hedge for the C01 gate) |
+| F Rain radar | #26 RADOLAN client · #27 overlay · #99 RY past hour · #123 rain widget (ADR 0011) | — |
 | G Stadtzustand | #28 Main-Pegel · #29 air quality · #30 NINA · #71 Pollen · #77 per-source state · #91 live temperature | #76 Wasser & Hitze (M4, scope entschieden — Unterbildschirm vom Stadtzustand, Pegel + sensor_community, Klimaplanatlas/Starkregen vorerst raus) |
 | H Ship | #90 AI-NATIVE.md | #31 App Store presence · #32 localisation audit · #33 tip jar (`needs-decision`) · #34 privacy + TestFlight · #35 outreach · #124 Siri & Kurzbefehle (M3, first to cut) |
 | S Side quests | #39 Wasserhäuschen-Register · #40 Ebbelwei · #46 bundle loader (hero, pulled into v1.0) | #36 #37 #38 #41 #42 #43 #44 #45 #72 #73 #74 #75 #125 #126 (all M4) |
