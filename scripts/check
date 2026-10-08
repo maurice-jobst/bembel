@@ -3,5 +3,5 @@
 # `make test` and `make build` stay in CI. Exits with make's status.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-scripts/context-cap AGENTS.md 100 || { echo "check: AGENTS.md over its 100-line cap" >&2; exit 1; }
+scripts/estate-check . || { echo "check: estate-check failed" >&2; exit 1; }
 exec make validate test-data format-check
