@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# estate-check — the shared lints this repo's scripts/check runs: the context-file line caps.
+# usage: estate-check <repo-root>
+# steps: AGENTS.md at most 100 lines; CLAUDE.md at most 20 unless it is a bare `@AGENTS.md`.
+# exit:  0 clean, 1 any finding or a missing tool (never a silent skip), 2 bad usage.
+# A vendored copy of the maintainer's shared runner, kept here because this repo cannot depend
+# on a machine-local install. It calls the context-cap beside it. Change both by re-copying.
+set -uo pipefail
+(( $# == 1 )) && [[ -d $1 ]] || { echo "usage: estate-check <repo-root>" >&2; exit 2; }
+root=$(cd "$1" && pwd -P) || exit 2
+here=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
+rc=0
+
+cap=$here/context-cap
+[[ -x $cap ]] || { echo "✗ estate-check: context-cap not found beside it" >&2; exit 1; }
+
+echo "→ context cap"
+"$cap" "$root/AGENTS.md" 100 || { echo "✗ AGENTS.md over its 100-line cap" >&2; rc=1; }
+if [[ -f $root/CLAUDE.md && "$(tr -d '[:space:]' < "$root/CLAUDE.md")" != "@AGENTS.md" ]]; then
+  "$cap" "$root/CLAUDE.md" 20 || { echo "✗ CLAUDE.md over its 20-line cap" >&2; rc=1; }
+fi
+
+# The shared runner also checks the content files a site.toml names; that step is not vendored.
+# A repo that grows a site.toml fails here instead of skipping the step.
+if [[ -f $root/site.toml ]]; then
+  echo "✗ estate-check: site.toml present, the content-files step is not vendored here" >&2; rc=1
+fi
+exit $rc

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# context-cap — fail when a context file is over its line cap. The one counter meant to be
-# called from every repo's scripts/check (AGENTS.md 100, the rules file 120) and by the session-close
-# skill (a Desk body 40); dotfiles' scripts/check and session-close call it today.
+# context-cap — fail when a context file is over its line cap. estate-check calls it for
+# AGENTS.md and CLAUDE.md.
 # usage: context-cap <path> <cap>       (a last line without a newline counts)
 # exit:  0 within the cap, 1 over it, 2 bad usage or an unreadable path
 set -uo pipefail
